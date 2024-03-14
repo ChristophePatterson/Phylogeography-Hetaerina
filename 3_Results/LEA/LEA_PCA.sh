@@ -5,7 +5,7 @@
 #SBATCH --gres=tmp:10G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 72:00:00         # time limit in format dd-hh:mm:ss
 
-#SBATCH --array=1,3,4,5,6   # Create 32 tasks, numbers 1 to 32
+#SBATCH --array=1-6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/slurm-%x.%j.out
 
 # Commands to execute start here

@@ -11,7 +11,7 @@ library(tidyverse)
 args <- commandArgs(trailingOnly = TRUE)
 
 SNP.library.name <- args[1]
-# SNP.library.name <- "Hetaerina_titia_ddRAD_titia_dg"
+# SNP.library.name <- "Hetaerina_americana_ddRAD_americana_dg"
 SNP.library.location <- args[2]
 # SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/"
 dir.path <- paste0(SNP.library.location,SNP.library.name,"/")
@@ -74,13 +74,24 @@ top.N.samples <- unlist(c(top.cov.samples[2:(select_N+1)]))
 vcf.SNPs.N <- vcf.SNPs[samples = top.N.samples]
 
 SNP.miss <- apply(extract.gt(vcf.SNPs.N), MARGIN=1, function(x) sum(is.na(x)))
-vcf.SNPs.N <- vcf.SNPs.N[which(SNP.miss!=length(vcf.SNPs.N))]
+vcf.SNPs.N <- vcf.SNPs.N[which(SNP.miss!=length(top.N.samples))]
+
+if(grepl(SNP.library.name, pattern="titia_dg")){
+  X_chrom <- "HetTit1.0.p.scaff-12-96647824"
+}
+# For H. americana lots of small X chromosomes
+if(grepl(SNP.library.name, pattern="americana_dg")){
+  X_chrom <- c("JAKTNV010000016.1","JAKTNV010000031.1","JAKTNV010000013.1","JAKTNV010000060.1","JAKTNV010000023.1","JAKTNV010000051.1","JAKTNV010000012.1")
+}
+# Remove X chrom
+vcf.SNPs.N <- vcf.SNPs.N[!vcf.SNPs.N@fix[,1]%in%X_chrom,]
 
 ############################
 ## G-phocs file creation
 ############################
 loci.distance <- 1000
 min.loci.length <- 100
+max.loci <- 3000
 vcf.list <- list()
 
 # Identifying individual loci
@@ -123,11 +134,20 @@ length(vcf.SNPs.N@fix[,"POS"])==length(loci.list)
 # Investage how new loci have been called in relation to the position of each bp
 # Difference requires NA in last postion because there is now "next" bp to calculate distance from
 loci.df <- data.frame(postion = vcf.SNPs.N@fix[,"POS"], bp.name = loci.list, difference = c(diff(as.numeric(vcf.SNPs.N@fix[,"POS"])), NA))
-temp.loci.name <- do.call(rbind, strsplit(loci.df$bp.name, "-"))
-# Add loci name
-loci.df$loci.name <- do.call("c", lapply(1:dim(temp.loci.name)[1], function(x) paste(temp.loci.name[x,1:3] ,collapse="-")))
-#Add loci position
-loci.df$loci.position <- do.call("c", lapply(1:dim(temp.loci.name)[1], function(x) paste(temp.loci.name[x,4] ,collapse="-")))
+
+# Extract loci name and position within loci for each SNP for H. titia scaf names
+if(grepl(SNP.library.name, pattern="titia_dg")){
+  temp.loci.name <- do.call(rbind, strsplit(loci.df$bp.name, "-"))
+  # Add loci name
+  loci.df$loci.name <- do.call("c", lapply(1:dim(temp.loci.name)[1], function(x) paste(temp.loci.name[x,1:3] ,collapse="-")))
+}
+# Extract loci name and position within loci for each SNP for H. americana scaf names
+if(grepl(SNP.library.name, pattern="americana_dg")){
+  temp.loci.name <- do.call(rbind, strsplit(loci.df$bp.name, "-"))
+  loci.df$loci.name <- do.call("c", lapply(1:dim(temp.loci.name)[1], function(x) paste(temp.loci.name[x,1] ,collapse="-")))
+  loci.df$loci.name <- gsub(loci.df$loci.name, pattern = ":", replacement = "-")
+  loci.df$loci.position <- do.call("c", lapply(1:dim(temp.loci.name)[1], function(x) paste(temp.loci.name[x,2] ,collapse="-")))
+}
 
 # Number of loci identified
 length(unique(loci.df$loci.name))
@@ -155,15 +175,24 @@ summary(loci.stats$loci.called.bp/loci.stats$loci.length)
 table(loci.stats$loci.length>min.loci.length)
 # Number of loci with above X percentage bases called
 table((loci.stats$loci.called.bp/loci.stats$loci.length)>0.5)
-#Number of loci with both criterea
+# Number of loci with both criterea
 table((loci.stats$loci.called.bp/loci.stats$loci.length)>0.5&loci.stats$loci.length>min.loci.length)
 
-
+print("Printed loci stats")
 # Update ID column
-vcf.SNPs.N@fix[,"ID"] <- loci.list
+# Extract loci name and position within loci for each SNP for H. titia scaf names
+if(grepl(SNP.library.name, pattern="titia_dg")){
+  vcf.SNPs.N@fix[,"ID"] <- loci.list
+  loci.table <- do.call(rbind, strsplit(vcf.SNPs.N@fix[,"ID"], "-"))
+  loci.table <- cbind(do.call("c", lapply(1:dim(loci.table)[1], function(x) paste(loci.table[x,1:3],collapse="-"))), loci.table[,4])
+}
+# Extract loci name and position within loci for each SNP for H. americana scaf names
+if(grepl(SNP.library.name, pattern="americana_dg")){
+  vcf.SNPs.N@fix[,"ID"] <- loci.list
+  loci.table <- do.call(rbind, strsplit(vcf.SNPs.N@fix[,"ID"], "-"))
+  loci.table[,1] <- gsub(loci.table[,1], pattern = ":", replacement="-")
+}
 
-loci.table <- do.call(rbind, strsplit(vcf.SNPs.N@fix[,"ID"], "-"))
-loci.table <- cbind(do.call("c", lapply(1:dim(loci.table)[1], function(x) paste(loci.table[x,1:3],collapse="-"))), loci.table[,4])
 #Check length of loci
 loci.length <- table(paste(loci.table[,1]))
 
@@ -171,15 +200,29 @@ loci.length <- table(paste(loci.table[,1]))
 short.loci <- names(loci.length)[!loci.length>min.loci.length]
 vcf.loci <- vcf.SNPs.N[!loci.table[,1]%in%short.loci,]
 
-loci.table.short <- do.call(rbind, strsplit(vcf.loci@fix[,"ID"], "-"))
-loci.table.short <- cbind(do.call("c", lapply(1:dim(loci.table.short)[1], function(x) paste(loci.table.short[x,1:3],collapse="-"))), loci.table.short[,4])
+# Extract loci name and position within loci for each SNP for H. titia scaf names
+if(grepl(SNP.library.name, pattern="titia_dg")){
+  loci.table.short <- do.call(rbind, strsplit(vcf.loci@fix[,"ID"], "-"))
+  loci.table.short <- cbind(do.call("c", lapply(1:dim(loci.table.short)[1], function(x) paste(loci.table.short[x,1:3],collapse="-"))), loci.table.short[,4])
+}
+# Extract loci name and position within loci for each SNP for H. americana scaf names
+if(grepl(SNP.library.name, pattern="americana_dg")){
+  loci.table.short <- do.call(rbind, strsplit(vcf.loci@fix[,"ID"], "-"))
+  loci.table.short[,1] <- gsub(loci.table.short[,1], pattern = ":", replacement="-")
+}
 
-p <- ggplot(data.frame(position = vcf.loci@fix[1:1000,"POS"], loci = loci.table[1:1000,1])) +
-  geom_point(aes(as.numeric(position), as.numeric(position), col = loci))
+
+p <- ggplot(data.frame(position = vcf.loci@fix[1:10000,"POS"], loci = loci.table[1:10000,1])) +
+  geom_point(aes(as.numeric(position), as.numeric(position), col = loci), show.legend = F)
 
 ggsave(p, filename=paste0(dir.path.GPhocs,"g-phocs-loci-check.png"))
-
+# Get names of all loci
 unique.loci <- unique(loci.table.short[,1])
+
+if(length(unique.loci) > max.loci){
+  print("More than max number of loci randomly selecting loci to reduce number")
+  unique.loci <- sample(unique.loci, max.loci)
+}
 
 for(loci in unique.loci){
   loci.temp <- vcf.loci[loci.table.short[,1]==loci]

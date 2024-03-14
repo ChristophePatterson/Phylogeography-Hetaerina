@@ -50,7 +50,6 @@ BZ4905 titia-SAtl
 BZ5001 titia-SAtl
 BZ5005 titia-SAtl
 BZ5206 titia-SAtl
-CA0101 titia-Pac
 CA0103 titia-Pac
 CA0104 titia-Pac
 CVa02 titia-NAtl
@@ -132,7 +131,6 @@ MO0351 titia-NAtl
 MS0108 titia-NAtl
 MS0114 titia-NAtl
 MS0116 titia-NAtl
-NA0101 titia-Pac
 NA0103 titia-Pac
 NCRRb04 titia-NAtl
 NCRRb05 titia-NAtl
@@ -161,7 +159,6 @@ RCJRa04 titia-NAtl
 RCJRa05 titia-NAtl
 RCJRb02 titia-NAtl
 RCJRb04 titia-NAtl
-RLPEa05 titia-Pac
 RLPEa06 titia-Pac
 RLPEa08 titia-Pac
 RLPEa09 titia-Pac

@@ -5,7 +5,7 @@
 #SBATCH --gres=tmp:1G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
 
-#SBATCH --array=3,4   # Create 32 tasks, numbers 1 to 32
+#SBATCH --array=1-6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
 # Commands to execute start here
@@ -25,7 +25,7 @@ SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demu
 input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/)
 
 # Run SVDquartet
-# paup $input_dir/$SNP_library/SVDQuartets/Paup_excute_file.nex -n
+paup $input_dir/$SNP_library/SVDQuartets/Paup_excute_file.nex -n
 
 cd ~
 

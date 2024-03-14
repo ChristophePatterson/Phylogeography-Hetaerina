@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -c 24 
+#SBATCH -c 64 
 #SBATCH --mem=10G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:10G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 64:00:00         # time limit in format dd-hh:mm:ss
@@ -12,7 +12,6 @@ module load r/4.2.1
 module load bioinformatics
 #Name of output SNP library
 
-# Get library and genome names
 # Get library name
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 echo "$line_num"
@@ -27,8 +26,8 @@ echo $SNP_library
 out_dir=($library_version/$SNP_library/SNAPP)
 mkdir -p $out_dir
 
-select_K=(8)
-select_N=(2)
+# select number of samples to use - Can be no more than 4
+select_N=(4)
 
 model_name=(${SNP_library}_ind_${select_N})
 
@@ -42,9 +41,9 @@ cd SNAPP
 # Uses https://github.com/mmatschiner/tutorials/blob/master/divergence_time_estimation_with_snp_data/README.md
 
 ruby /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield/SNAPP/snapp_prep.rb -p $model_name.phy -t $model_name.txt \
--c $model_name.txt -l 10000000 -x $model_name.xml -o $model_name
+-c $model_name.con.txt -l 1000000 -x $model_name.xml -o $model_name
 
-/nobackup/tmjj24/apps/beast/bin/beast -threads 24 -overwrite $model_name.xml > $model_name.screen.log
+/nobackup/tmjj24/apps/beast/bin/beast -threads $SLURM_CPUS_PER_TASK -overwrite $model_name.xml > $model_name.screen.log
 
 /nobackup/tmjj24/apps/beast/bin/treeannotator -burnin 10 $model_name.trees $model_name.trees.Anon
 

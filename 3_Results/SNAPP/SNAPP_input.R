@@ -44,6 +44,9 @@ pop_assign <- pop_assign[match(colnames(vcf.SNPs@gt[,-1]), pop_assign$sample),]
 # Check order
 pop_assign$sample==colnames(vcf.SNPs@gt[,-1])
 
+# Removing dots from SNP names because genind doesn't like this
+vcf.SNPs@fix[,1] <- gsub(vcf.SNPs@fix[,1], pattern = "\\.", replacement = "_")
+
 # Get Genind
 my_genind_ti_SNPs <- vcfR2genind(vcf.SNPs, sep = "/", return.alleles = TRUE)
 # Proporation of samples with missing data
@@ -119,7 +122,6 @@ write.table(species.df, file = paste0(dir.path.SNAPP, SNP.library.name,"_ind_",s
 contrant.df <- data.frame(x = "normal(0,33.08,5.53)", y = "crown", 
                           z = paste0(unique(pop_assign_N$pop), sep = ",",collapse = ""))
 # Americana/calverti
-
 contrant.df[2,] <- data.frame(x = "normal(0,3.76,1.87)", y = "crown", 
                               z = paste0(unique(pop_assign_N$pop[grepl(pop_assign_N$pop, pattern = "americana|calverti")]), sep = ",",collapse = ""))
 #remove trailing comma
