@@ -1,0 +1,2 @@
+normal(0,33.08,5.53)	crown	americana-Mex,americana-USA,calverti-Mex,titia-NAtl,titia-Pac,titia-SAtl
+normal(0,3.76,1.87)	crown	americana-Mex,americana-USA,calverti-Mex

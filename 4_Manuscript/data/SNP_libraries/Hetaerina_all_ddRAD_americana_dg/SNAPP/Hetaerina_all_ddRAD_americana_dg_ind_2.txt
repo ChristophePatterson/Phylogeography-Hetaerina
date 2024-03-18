@@ -1,0 +1,13 @@
+species	sample
+americana-Mex	STDMaAM01
+americana-USA	IA0506
+calverti-Mex	RG0101
+titia-NAtl	MI0239
+titia-Pac	HtiCn7
+titia-SAtl	MIXTa10
+americana-Mex	05LT11
+americana-USA	TN0119
+calverti-Mex	RG0103
+titia-NAtl	ACSFc01
+titia-Pac	ARa05
+titia-SAtl	BZ2105

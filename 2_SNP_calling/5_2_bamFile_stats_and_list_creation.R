@@ -1,7 +1,7 @@
 # Given x number of files within a directory that contain sequences names and nothing else
 # create x number of new files that contain the full directory path for all bam files
 # The directory cannot contain any other files
-
+.libPaths("/nobackup/tmjj24/apps/R/x86_64-pc-linux-gnu-library/4.2/")
 library(ggplot2)
 library(tidyverse)
 #install.packages("tidyverse")
@@ -12,6 +12,12 @@ library(tidyverse)
 # Location of bamfile basic names
 directory <- "C:/Users/tmjj24/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
 directory <- "C:/Users/chris/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
+directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/"
+
+#OUtput directory
+dir_out <- "/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/bamfiles_v2/"
+dir.create(dir_out)
+
 americana_dg <- read.table(paste0(directory,"Allsamples_HetAmer1.0_dg.bamstats"))
 titia_dg <- read.table(paste0(directory,"Allsamples_HetTit1.0_dg.bamstats"))
 head(titia_dg)
@@ -90,7 +96,7 @@ americana_directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_
 titia_directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetTit1.0_dg"
 
 # Hetaerina sample data
-hetaerina_data <- read.csv(paste0(directory,"All samples held in Durham_v15_titia_correct.csv"), check.names = F)
+hetaerina_data <- read.csv(paste0("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/All samples held in Durham_v17.csv"), check.names = F)
 hetaerina_data <- hetaerina_data[,c("Unique.ID", "species")]
 #Adding in new names for samples that were sequenced in pool X
 hetaerina_data$Unique.ID[hetaerina_data$Unique.ID%in%c(dodgy, "CUAJa02")] <- paste0(hetaerina_data$Unique.ID[hetaerina_data$Unique.ID%in%c(dodgy, "CUAJa02")],"_X")
@@ -100,9 +106,6 @@ df <- merge(df,hetaerina_data, by.x = "sample", by.y = "Unique.ID")
 dim(df)/2
 df$sample[grep(df$sample, pattern = "_X")]
 
-#OUtput directory
-dir_out <- directory
-dir.create(dir_out)
 p <- ggplot(df) +
   geom_point(aes(coverage, num.reads, col = species, shape = cov10_NoR2sd), size = 3) +
   #geom_label(aes(coverage, num.reads, col = species, label = sample), size = 3)
@@ -121,6 +124,26 @@ p <- ggplot(df) +
 p
 
 ggsave(p, filename = paste0(directory, "/Number of Mapped reads and mean percentage coverage HetTit1.0_and_HetAmer1.0 June 2023 with spp.jpeg"), height = 6, width = 12)
+
+# Plot with pdf with sample names to identify outliers
+p <- ggplot(df) +
+  geom_label(aes(coverage, num.reads, label = sample), size = 3) +
+  #geom_label(aes(coverage, num.reads, col = species, label = sample), size = 3)
+  #geom_vline(xintercept = 10) +
+  #geom_hline(yintercept = sd.2.inter) +
+  #geom_label(aes(60, sd.2.inter, label = round(sd.2.inter))) +
+  xlab("Mean coverage of mapped reads") +
+  ylab("Total number of mapped reads") +
+  geom_hline(data = bamstats, aes(yintercept = sd.2), col = "#F8766D") +
+  geom_vline(xintercept = 5, col = "#F8766D") +
+  geom_label(data = bamstats, aes(60, sd.2, label = round(sd.2)), col = "#F8766D") +
+  geom_label(data = bamstats, aes(5, max(df$num.reads), label = "5x"), col = "#F8766D") +
+  facet_wrap(~library) +
+  ylim(0, max(df$num.reads)) +
+  theme_bw()
+p
+
+ggsave(p, filename = paste0(directory, "/Number of Mapped reads and mean percentage coverage HetTit1.0_and_HetAmer1.0 June 2023 with sample names.pdf"), height = 6, width = 12)
 
 
 #Creates sumset of data for each draft genome bamfiles

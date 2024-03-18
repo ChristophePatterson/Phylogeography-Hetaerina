@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beast namespace="beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.alignment:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" version="2.0">
+
+<!-- Data -->
+<!--
+The SNP data matrix, converted to binary format from file Hetaerina_all_ddRAD_americana_dg_ind_4.phy.
+-->
+<data id="snps" dataType="integer" name="rawdata">
+    <sequence id="seq_STDMaAM01" taxon="STDMaAM01" totalcount="3" value="10020021022022221000020010201222220202122202-20212101021-00220010010-121220-2210-22--20220-102200222---00000000002122002222020202000200002020200-02201200-2002120220200-2200-22010-121020012020120222220-200-102222200021-1002220002000222-00021002010212-02201022220-20--22012021-00--002201212-22022022101-20-22-22211-0-0120-00102220202010-000022202221102222000002-100200012-0120221002220-02012122002012-0200222122-0-210-0-0-221021200222220202-02-2200-20"/>
+    <sequence id="seq_IA0506" taxon="IA0506" totalcount="3" value="0-020-22002022202200020000-022-2-202220-22022202222000-22002-0--0020-02222-22100-22002022-2002200-221-000000-2-002-200-22220201021002000020-022-202202-00-200-22022-22000200022000-0200200020202222-22-002002202222200020000021202-20-120200002-012020222-0220212-220200-122--2222202001002-0222120022-22202210222-22220-1-002-2002-22202020200000022202220002-02022002022-222-22100202000022200000-20220-20020010020222-00122000000200-02200222200202-02-22-0020"/>
+    <sequence id="seq_RG0101" taxon="RG0101" totalcount="3" value="000200220100122200000-00002020-2000-2222-2-222022220002220022--2200000202000200020102200202-022002220002-202002202020000222020202-0020-01202022010220200002-0-2-0200220-0200020200-22022200200022021222-01002222220-020202--0222020-000-220002-00022201222021-2002-20202022202202220-0001-20022202022102022--20020-20-202000020220200-20202020002002202222-002202020000-2202000000002000000222000202202200200200200202202002220000-0220022222222120202000-22-2020"/>
+    <sequence id="seq_MI0239" taxon="MI0239" totalcount="3" value="22-0220022202222--2-2002--2--2000-20-020200-00-00002020-20200200002200000200-0---2-20222220222-0212-0020202-0000200-020220000202-02-22220222-02-22--22202102-20-0020-202000-000--22212002-202-002002-22222000000-020200-2--2002--222-00002200-022-2002-00022200-2-002--022000-20022-220--2012002220-222220--1222022-2--2-022-002020--22--222220-0-0-22220200000000202022-2220-2000202--02-2010222-200---00-0-1200-0200022-20022202200--0-002-2-20221-02220-02-20-"/>
+    <sequence id="seq_HtiCn7" taxon="HtiCn7" totalcount="3" value="22---2-0222022220-2-20122-022-0002202-2-100-00-202020-0-2-20021000220020--20000202200222-00-120-2020002020200000-000-2-22000-202-0--222-022200222-022-2--0-2-20000-0-2020-020000-222220----0020020022202222020002020200-2-0--02-222122000202000220200200-0202020200020-022-000200220222002--200122-01-22202-2222022-22-200220022-002-20222022202020-2222020-00-0-0200022022000200--02-002220--2-2-20020-00-0-202-20-000220---2220220-2-000220--00222002-200000-0-"/>
+    <sequence id="seq_MIXTa10" taxon="MIXTa10" totalcount="3" value="--2222002-20212200202002---22-000-202020200000200202020011200200002200-00-00002202200222220222202120002020202000200002-220-00202202222210222002-22--22202022-2000022-2020-0200002222220222200--01--212222-0-0000-020200020020-2022122000020020-2-02002-00022201020002--022000020022122000201200222--2222202222220222220200222-020102222-2222-2000202222201000000002020-20-22--2000212-00222-22222-2002--1020220-020200022020022202200221002202020221002220000-201"/>
+    <sequence id="seq_05LT11" taxon="05LT11" totalcount="3" value="00020022022022222000020000200222-20-020122022202222020-220022001001000222-002100222--20220200120022200000000020002222002222020-020002--00202020020220220002002220-202-0-22000220-0002002000202022222222002-02-022222000200-0122200020002220000200020202222022-20222202200222022022000--0-22002221220-202220222022202-220-0000-02002022-02020000000022202221202212020002020020002200-2022--02220-020220220021020-20022222100-2100000-2200222-0222220-02-0222210020"/>
+    <sequence id="seq_TN0119" taxon="TN0119" totalcount="3" value="0002002200202220220002-000--22-2220-220222022202222000222002--0200-00-2-2202200022-0-20200200-200222-0000000020-020200-2222020-020002--00202022-202202-0002-0-220220220202000220000-200200020202202-20200-002202122200020000021202--0-020200002000202022220220-022220200-222022222-020000020-222020022022-022-0222-2222021---2-2002-22202020200000020202220012202222002-220210-22000002000022200020220220100020020020222-002---0000-210-0220022220020220212200020"/>
+    <sequence id="seq_RG0103" taxon="RG0103" totalcount="3" value="000200220200122200000-00002020-200022222-202220222200-2-200220-22000002020002000200022002020022002220002-2020022020200002220202020002000220202201022020000200-2-020022020200020200022022200200022021222-01002222220-0202020-02220202000-220002-00022201222021-2002-202020222022022200-002-2002220202-10-0222220020-20-20200002022020-0202020200010022022221002202020000-2202000000002000--0222000202202200200200-00202202002220000-0220022222222120202-00-2202020"/>
+    <sequence id="seq_MO0311" taxon="MO0311" totalcount="3" value="22--22002-2022220-2-2002-02-220002202020200--0200202020-20--02-0002200-00200002-0222022222022220212000202020000020000202200-0202-0--222-022210-222--222020-2-2000020-2020-020-00-222220-2-202-002-022-2222000000-020200-200-002--222200002100002-02002-0-0222000200020-022-000--022--2000201200222-02-22202-1222022-2--20022-002000---2-0222220-0200222-02000000-02021-2022200200-202--0222-2-2222200-0-0020-020-202000220-00-2202200--0000202-20222-022200000200"/>
+    <sequence id="seq_ARa05" taxon="ARa05" totalcount="3" value="222-22002-2022020-2-200220022-0---20--2-101200-2020202002020-20000220020--20000202-00222-0022200-02--02-20200000-00-02-2200002022022222-0222002-20--2-202022-20000200202-0020-0022-2220222-00-00200222022--02000202020-22002002-2-22220000020-02202002-0-02-2-20-0--200022-0002-02202220020220022200222220-2-22-02202-02-0220-22-002220-220222-2020-2222-20-00-0-02000220-20002000-022-022-0222222200----0202202-20000022-20-222022-02200022-2-00222002220-000200"/>
+    <sequence id="seq_BZ2105" taxon="BZ2105" totalcount="3" value="22-222002221-0220-2020022022220002202020200-00200202020011--020000-210001200002202200222220222-021200020-02-20002000020-100-02022-22222202220022220112202022-100-022-2020002000022222202222012-0--022-1222010000-020200-200200202-222000020010-2-01-02-0-022202020002-0022-00020022-2200020120022--02222202222220222220200222002000-22222222-2100212222202000000-02020220222-0-0002120-022202-2222200200102--20002-2000220200-220220022100220-0202210022200000200"/>
+    <sequence id="seq_TXRSbAM03" taxon="TXRSbAM03" totalcount="3" value="00020022022022222000020000200222220202022202-20222202022-002-0020000012-22-02200222-020220200220022200-000000-001222200222202020000010000202020020220020002-02220-20200022-0-220-000200201020202202222200200-202222200020-2012220002000222-000200-20202-2-0-2-2022220-200-220-0020000000022002222-2022022201220-2202-2202000020-00202220202020-0000222022212-2212-100-20200200-22-0-202200022200020-20220021020020022222200221-00000220022200222220202-0222200-20"/>
+    <sequence id="seq_TN0413" taxon="TN0413" totalcount="3" value="000-0022002-2220220002000-20-222220222022202-2022220002-20022-0200-0002122-2200022-0--021020022002220-0000000200-2222002222020202000200000--0200202-0222002-02220220220202000220000020020002020221222020020022021222000200-00222020-000202000020002020222202202022-2-200--2202222-2000020020-2221200220222022-022202222--10002020020-220202020000002020-2200022-222-002-220210022000202000022200020-20220-00020020020222-002220-000022000-2002222002-2202022-0020"/>
+    <sequence id="seq_05SI24" taxon="05SI24" totalcount="3" value="0-02002202001222000002000-202-22-00-222222-222022220002220022-0-1000002021002000201-02002020022002220002020200220-02000122202020-00020002202022020220--00020022202002-0202000-0200022022200-0-0220222220010022-2220-0212020002220202000-2200020000-2201222022-200222020202220220022000002-2002220202210202-22202200202-0200002022020-020202020002002202222000220202000002202-0000--0200000022200020220220020020020020220220222001000220012222222220-02-0222202020"/>
+    <sequence id="seq_ACSFc01" taxon="ACSFc01" totalcount="3" value="22-022-0-220-22200202002-22-2-000220202-2-0-0020000202002020-20-0-220010020000-2-2220222220222202120002-202-000-200002-22000020-202-222-0222102-2----2-02002220000200202000-0000222-0-012-20220020--2-22220000002-2020012002--20222-200--22000-22020020000222-0-200020-0220000-002-02200-20120022200222220-2222202-22-0200222-0200022-2-0222220-0-0-2-2102-00000002021-202220-200-202-0022202-22222002-0-0202120021200022--0022202200-2-000202-20221002220001020-"/>
+    <sequence id="seq_HtiPo10" taxon="HtiPo10" totalcount="3" value="22-222-022202222002-2002200--2-0--202-2-10020022020202002020021000220020--20000-02200222-0020-02202-002-20200000-0000202200-020220--22220222002220022-20202222000020-2020-020-0022222202-22002002-02220222202-0020202-0-200--0202222220002020--2202002-0-0202-20200020--2200002-02202220-20-200222002-21202-2222022-2202-0220022000-220-22022-0-02022222020000-0-020002202200-2000202--02220-22-222002--0020-202020-000220-0-22202200220-0220--00222-02220-00--00"/>
+    <sequence id="seq_BZ1513" taxon="BZ1513" totalcount="3" value="22-222002220-22200202002-022220002202020200100200202020-002-0200002200000200002-02200122220222-022200120202-1000200-020-200-0202-02-2222022200-22-01222020-2-200002202020-02000022222202-22002-01-02221222020000-02020002002--202222200-020020-2-02-0200-022202020002-002200002-022022000201200222002222202212220222200200222002000222222222220-02022222020000000020-122022200-0002120-0222-22222220020-102022000202000220-002220221-2-00022020202210022200000200"/>
+    <sequence id="seq_HXRCcAM01" taxon="HXRCcAM01" totalcount="3" value="00020022022022222000020000200222220202022202220222201022-0022-0200-00122220-2200-220020220200220022200-000000-001222200222202020000010000202020020220120002002220220200022-0-220-00020020---0202202222200200-202222200020--0022200020002220000200020202-22022--022220-2002-2021021000000022002222-2022022202220-22-2-22020-002020020-220202020-0000222022212-2--2020002-220200-1200-20220002220002022022002002002002222220022200000022002-200222220202202222000-0"/>
+    <sequence id="seq_EAFB014146" taxon="EAFB014146" totalcount="3" value="0-0-00220020222022010200002022222202220222022202222000222002200200-0002222022000-2200202002002200222200000000200020200-22220202020002-000202022-202202-000200-220220220202020220-000200200020202212-2020020-2202022200020000022202-200020200002000202022220220202222020002220222222020000020-2220200220222022-0222022220200002-200202220-020200000022202220002202222002022022002200010200002220002022022021002002002222210022200000022000-20022220020220222200020"/>
+    <sequence id="seq_TULIaAM02" taxon="TULIaAM02" totalcount="3" value="000200220200122200000-0000202-2-000222222202220222200022200220--1000002020002000202002002020022002220002020200220-0200022220202020002000220202202022020001200222020022020200020200022022200-000220212-2000002222221202020200022202020002220002000022200-2202022002-202010222022002200000202002220202210202222200200202-020000202202000202020200020022022221002202020001-22020000000020000002220002022022002002002002022021022200200022001222222212020200022202020"/>
+    <sequence id="seq_CYa10" taxon="CYa10" totalcount="3" value="-22022-0-2-022220020200220-2----022-2-202000012002-2020-202-020001220-100200002202--02222202222-21200-2020200-002000021-20-002-220222222-2200-222202-220-00222000020020-0022100022-22202222022002002222222000-002020200220020020222---00020000022-200-00002220-02000200-2-000-20022-220-0-01-0-2220022-22022-222022222020022-00200022-2222-2220002002222020000000--0212202220-200-2021-0--2020222220-20000202220022200-2-020-2----20022000-200020--100--2-0000200"/>
+    <sequence id="seq_RLPEa05" taxon="RLPEa05" totalcount="3" value="222222002220--220-202002--022-00022020202-020022-20202-0202002-00-2200-002200002-22002-221-22200202000202020000-200002022--0020220222222-222002220---2202022220000200202000-000022222-022-200-0020--2202222020002020200220-20-202222220--202000-2020020000202-202-002--0-20010-00--0-220--022002210-02222022222202202202-02200200002220-22022202-202222-020000000-2000-20-20--200-202200222022222-2002-0-02--20202000002--2001220-20---0002202000-220022-00000-0-"/>
+    <sequence id="seq_MACM02" taxon="MACM02" totalcount="3" value="2222220-222-21220020200220222200022020202000-020020-0200-020020000220000120-00220220022222-222202110012020201000200002121001020-20222-22-22200222202222020222200112202120002000022-22-02222002201002222-220000002020200020020020222--0000200100-20200-000022202020002000-200002002-02200020120-2-2-0-2-220222222-222220200-2-0020002222222-2-2000-022222020000000020-0220222002000202000222-22222220-200102022-002020002202002-20-2002210022020202211022200000-00"/>
+</data>
+
+<!-- Maps -->
+<map name="Uniform" >beast.base.inference.distribution.Uniform</map>
+<map name="Exponential" >beast.base.inference.distribution.Exponential</map>
+<map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
+<map name="Normal" >beast.base.inference.distribution.Normal</map>
+<map name="Gamma" >beast.base.inference.distribution.Gamma</map>
+<map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
+<map name="prior" >beast.base.inference.distribution.Prior</map>
+
+<run id="mcmc" spec="MCMC" chainLength="1000000" storeEvery="500">
+
+    <!-- State -->
+    <state id="state" storeEvery="500">
+        <stateNode id="tree" spec="beast.base.evolution.tree.ClusterTree" clusterType="upgma" nodetype="snap.NodeData">
+            <taxa id="data" spec="snap.Data" dataType="integerdata">
+                <rawdata idref="snps"/>
+                <taxonset id="americana-Mex" spec="TaxonSet">
+                    <taxon id="STDMaAM01" spec="Taxon"/>
+                    <taxon id="05LT11" spec="Taxon"/>
+                    <taxon id="TXRSbAM03" spec="Taxon"/>
+                    <taxon id="HXRCcAM01" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="americana-USA" spec="TaxonSet">
+                    <taxon id="IA0506" spec="Taxon"/>
+                    <taxon id="TN0119" spec="Taxon"/>
+                    <taxon id="TN0413" spec="Taxon"/>
+                    <taxon id="EAFB014146" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="calverti-Mex" spec="TaxonSet">
+                    <taxon id="RG0101" spec="Taxon"/>
+                    <taxon id="RG0103" spec="Taxon"/>
+                    <taxon id="05SI24" spec="Taxon"/>
+                    <taxon id="TULIaAM02" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="titia-NAtl" spec="TaxonSet">
+                    <taxon id="MI0239" spec="Taxon"/>
+                    <taxon id="MO0311" spec="Taxon"/>
+                    <taxon id="ACSFc01" spec="Taxon"/>
+                    <taxon id="CYa10" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="titia-Pac" spec="TaxonSet">
+                    <taxon id="HtiCn7" spec="Taxon"/>
+                    <taxon id="ARa05" spec="Taxon"/>
+                    <taxon id="HtiPo10" spec="Taxon"/>
+                    <taxon id="RLPEa05" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="titia-SAtl" spec="TaxonSet">
+                    <taxon id="MIXTa10" spec="Taxon"/>
+                    <taxon id="BZ2105" spec="Taxon"/>
+                    <taxon id="BZ1513" spec="Taxon"/>
+                    <taxon id="MACM02" spec="Taxon"/>
+                </taxonset>
+            </taxa>
+        </stateNode>
+        <!-- Parameter starting values -->
+        <parameter id="lambda" lower="0.0" name="stateNode">0.1</parameter>
+        <parameter id="coalescenceRate" lower="0.0" name="stateNode">200.0</parameter>
+        <parameter id="clockRate" lower="0.0" name="stateNode">0.01</parameter>
+    </state>
+
+    <!-- Posterior -->
+    <distribution id="posterior" spec="beast.base.inference.CompoundDistribution">
+        <distribution id="prior" spec="beast.base.inference.CompoundDistribution">
+
+            <!-- Divergence age priors -->
+            <distribution id="Clade0001" spec="beast.base.evolution.tree.MRCAPrior" useOriginate="false" monophyletic="true"  tree="@tree">
+                <taxonset id="Constraint0001" spec="TaxonSet">
+                    <taxon idref="americana-Mex"/>
+                    <taxon idref="americana-USA"/>
+                    <taxon idref="calverti-Mex"/>
+                    <taxon idref="titia-NAtl"/>
+                    <taxon idref="titia-Pac"/>
+                    <taxon idref="titia-SAtl"/>
+                </taxonset>
+                <Normal name="distr" offset="0">
+                    <parameter estimate="false" lower="0.0" name="mean">33.08</parameter>
+                    <parameter estimate="false" lower="0.0" name="sigma">5.53</parameter>
+                </Normal>
+            </distribution>
+            <distribution id="Clade0002" spec="beast.base.evolution.tree.MRCAPrior" useOriginate="false" monophyletic="true"  tree="@tree">
+                <taxonset id="Constraint0002" spec="TaxonSet">
+                    <taxon idref="americana-Mex"/>
+                    <taxon idref="americana-USA"/>
+                    <taxon idref="calverti-Mex"/>
+                </taxonset>
+                <Normal name="distr" offset="0">
+                    <parameter estimate="false" lower="0.0" name="mean">3.76</parameter>
+                    <parameter estimate="false" lower="0.0" name="sigma">1.87</parameter>
+                </Normal>
+            </distribution>
+            <!--
+            The clock rate affects the model only by scaling branches before likelihood calculations.
+            A one-on-x prior distribution is used, which has the advantage that the shape of its
+            distribution is independent of the time scales used, and can therefore equally be applied
+            in phylogenetic analyses of very recent or old groups. However, note that the one-on-x
+            prior distribution is not a proper probability distribution as its total probability mass
+            does not sum to 1. For this reason, this prior distribution can not be used for Bayes Factor
+            comparison based on Path Sampling or Stepping Stone analyses. If such analyses are to be
+            performed, a different type of prior distribution (uniform, lognormal, gamma,...) will need
+            to be chosen.
+            -->
+            <prior name="distribution" x="@clockRate">
+                <OneOnX name="distr"/>
+            </prior>
+            <!--
+            The scaling of branch lengths based on the clock rate does not affect the evaluation of the
+            likelihood of the species tree given the speciation rate lambda. Thus, lambda is measured in
+            the same time units as the unscaled species tree. As for the clock rate, a one-on-x prior
+            distribution is used, and an alternative prior distribution will need to be chosen if Bayes
+            Factor comparisons are to be performed.
+            -->
+            <prior name="distribution" x="@lambda">
+                <OneOnX name="distr"/>
+            </prior>
+            <!--
+            The below distribution defines the prior probability for the population mutation rate Theta.
+            In standard SNAPP analyses, a gamma distribution is commonly used to define this probability,
+            with a mean according to expectations based on the assumed mean effective population size
+            (across all branches) and the assumed mutation rate per site and generation. However, with
+            SNP matrices, the mutation rate of selected SNPs usually differs strongly from the genome-wide
+            mutation rate, and the degree of this difference depends on the way in which SNPs were selected
+            for the analysis. The SNP matrices used for this analysis are assumed to all be bi-allelic,
+            excluding invariable sites, and are thus subject to ascertainment bias that will affect the
+            mutation rate estimate. If only a single species would be considered, this ascertainment bias
+            could be accounted for (Kuhner et al. 2000; Genetics 156: 439–447). However, with multiple
+            species, the proportion of SNPs that are variable among individuals of the same species,
+            compared to the overall number of SNPs variable among all species, depends on relationships
+            between species and the age of the phylogeny, parameters that are to be inferred in the analysis.
+            Thus, SNP ascertainment bias can not be accounted for before the analysis, and the prior
+            expectation of Theta is extremely vague. Therefore, a uniform prior probability distribution
+            is here used for this parameter, instead of the commonly used gamma distribution. By default,
+            SNAPP uses a lower boundary of 0 and an upper boundary of 10000 when a uniform prior probability
+            distribution is chosen for Theta, and these lower and upper boundaries can not be changed without
+            editing the SNAPP source code. Regardless of the wide boundaries, the uniform distribution works
+            well in practice, at least when the Theta parameter is constrained to be identical on all branches
+            (see below).
+            -->
+            <distribution spec="snap.likelihood.SnAPPrior" coalescenceRate="@coalescenceRate" lambda="@lambda" rateprior="uniform" tree="@tree">
+                <!--
+                SNAPP requires input for parameters alpha and beta regardless of the chosen type of prior,
+                however, the values of these two parameters are ignored when a uniform prior is selected.
+                Thus, they are both set arbitrarily to 1.0.
+                -->
+                <parameter estimate="false" lower="0.0" name="alpha">1.0</parameter>
+                <parameter estimate="false" lower="0.0" name="beta">1.0</parameter>
+            </distribution>
+        </distribution>
+        <distribution id="likelihood" spec="beast.base.inference.CompoundDistribution">
+            <distribution spec="snap.likelihood.SnAPTreeLikelihood" id="SnAPTreeLikelihood" data="@data" non-polymorphic="false" pattern="coalescenceRate" tree="@tree">
+                <siteModel spec="SiteModel">
+                    <substModel spec="snap.likelihood.SnapSubstitutionModel" coalescenceRate="@coalescenceRate">
+                        <!--
+                        The forward and backward mutation rates are fixed so that the number of expected mutations
+                        per time unit (after scaling branch lengths with the clock rate) is 1.0. This is done to
+                        avoid non-identifability of rates, given that the clock rate is estimated. Both parameters
+                        are fixed at the same values, since it is assumed that alleles were translated to binary
+                        code by random assignment of '0' and '2' to homozygous alleles, at each site individually.
+                        Thus, the probabilities for '0' and '2' are identical and the resulting frequencies of '0'
+                        and '2' in the data matrix should be very similar.
+                        -->
+                        <parameter estimate="false" lower="0.0" name="mutationRateU">1.0</parameter>
+                        <parameter estimate="false" lower="0.0" name="mutationRateV">1.0</parameter>
+                    </substModel>
+                </siteModel>
+                <!--
+                A strict clock rate is used, assuming that only closely related species are used in SNAPP
+                analyses and that branch rate variation among closely related species is negligible.
+                The use of a relaxed clock is not supported in SNAPP.
+                -->
+                <branchRateModel spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate"/>
+            </distribution>
+        </distribution>
+    </distribution>
+
+    <!-- Operators -->
+    <!--
+    The treeNodeSwapper operator is the only operator on the tree topology. Thus if the tree topology
+    should be fixed, simply remove this operator by deleting the second-next line.
+    -->
+    <operator id="treeNodeSwapper" spec="snap.operators.NodeSwapper" tree="@tree" weight="1.0"/>
+    <!--
+    The treeNodeBudger and treeScaler operators modify node heights of the tree.
+    -->
+    <operator id="treeNodeBudger" spec="snap.operators.NodeBudger" size="0.75" tree="@tree" weight="1.0"/>
+    <operator id="treeScaler" spec="snap.operators.ScaleOperator" scaleFactor="0.75" tree="@tree" weight="1.0"/>
+    <!--
+    To constrain the Theta parameter so that all branches always share the same value (and thus
+    the same population size estimates), a single operator is used to modify Theta values by scaling
+    the Thetas of all branches up or down by the same factor. Instead, SNAPP's default Theta operator
+    types 'GammaMover' and 'RateMixer' are not not used.
+    -->
+    <operator id="thetaScaler" spec="snap.operators.ScaleOperator" parameter="@coalescenceRate" scaleFactor="0.75" scaleAll="true" weight="1.0"/>
+    <!--
+    The lamdaScaler and clockScaler operators modify the speciation and clock rates.
+    -->
+    <operator id="lamdaScaler" spec="snap.operators.ScaleOperator" parameter="@lambda" scaleFactor="0.75" weight="1.0"/>
+    <operator id="clockScaler" spec="snap.operators.ScaleOperator" parameter="@clockRate" scaleFactor="0.75" weight="1.0"/>
+
+    <!-- Loggers -->
+    <logger fileName="Hetaerina_all_ddRAD_americana_dg_ind_4.log" logEvery="500">
+        <log idref="posterior"/>
+        <log idref="likelihood"/>
+        <log idref="prior"/>
+        <log idref="lambda"/>
+        <log id="treeHeightLogger" spec="beast.base.evolution.tree.TreeHeightLogger" tree="@tree"/>
+        <log idref="clockRate"/>
+    </logger>
+    <logger logEvery="50">
+        <log idref="posterior"/>
+        <log spec="util.ESS" arg="@posterior"/>
+        <log idref="likelihood"/>
+        <log idref="prior"/>
+        <log idref="treeHeightLogger"/>
+        <log idref="clockRate"/>
+    </logger>
+    <logger fileName="Hetaerina_all_ddRAD_americana_dg_ind_4.trees" logEvery="500" mode="tree">
+        <log spec="beast.base.evolution.TreeWithMetaDataLogger" tree="@tree">
+            <metadata id="theta" spec="snap.RateToTheta" coalescenceRate="@coalescenceRate"/>
+        </log>
+    </logger>
+
+</run>
+
+</beast>

@@ -1,0 +1,784 @@
+Unique.ID,sex,species,Site.ID,Lat,Long,Site.Name,Country,Province,Ocean.drainage
+NPKBa01,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa02,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa03,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa14,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+GOa01,F,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+PSa01,B,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+PSa02,B,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+ARa01,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+ARa02,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+ARa03,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+CYa01,M,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa02,M,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+GOa07,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+GOa02,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+NPKBa04,F,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa05,F,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa06,F,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+ARa04,F,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+CVa02,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa03,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa04,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa05,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa06,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa12,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+PSa03,M,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+PSa04,M,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+ARa05,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+CYa03,M,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa04,M,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa05,M,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+ESRBa01,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa02,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa03,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa04,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa05,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa19,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+NPKBa07,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa08,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa09,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa10,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+CVa07,F,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+ESRBa06,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa07,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa08,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa09,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa20,F,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+PAa01,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+GOa03,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+GOa04,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+ESRBa10,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa11,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa12,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa13,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa21,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ARa06,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+ARa07,M,titia,AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+GOa05,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+GOa06,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+PAa02,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+CVa08,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa09,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa10,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+CVa13,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+PAa03,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+PAa05,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+PAa06,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+ESRBa14,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+CVa11,M,titia,CV,29.33,-98.87,Castroville,United States,Texas,Gulf
+PAa07,F,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+PSa05,B,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+PSa06,B,titia,ps01,9.54,-84.28,Palo Seco,Costa Rica,Puntarenas,Pacific
+ESRBa16,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa17,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa18,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa22,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+ESRBa23,M,titia,ESRB1,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+PAa08,M,titia,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+GCJRa01,M,titia,GCJR01,37.67,-77.89,Goochland County James River,United States,Virginia,Atlantic
+NPKBa11,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa12,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa13,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NPKBa15,M,titia,NPKB1,31.52,-93.14,Natchitoches Paris Kisatchie Bayou,United States,Louisiana,Gulf
+NCRRb01,M,titia,NCRR02,37.84,-78.81,Nelson County Rockfish River,United States,Virginia,Atlantic
+NCRRb02,M,titia,NCRR02,37.84,-78.81,Nelson County Rockfish River,United States,Virginia,Atlantic
+NCRRb03,M,titia,NCRR02,37.84,-78.81,Nelson County Rockfish River,United States,Virginia,Atlantic
+NCRRb04,M,titia,NCRR02,37.84,-78.81,Nelson County Rockfish River,United States,Virginia,Atlantic
+NCRRb05,M,titia,NCRR02,37.84,-78.81,Nelson County Rockfish River,United States,Virginia,Atlantic
+CYa06,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa07,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa08,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa09,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa10,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+CYa11,F,titia,CY,21.75,-98.96,Rio Coy,Mexico,San Luis Potosí,Gulf
+GCJRa02,M,titia,GCJR01,37.67,-77.89,Goochland County James River,United States,Virginia,Atlantic
+GCJRa03,M,titia,GCJR01,37.67,-77.89,Goochland County James River,United States,Virginia,Atlantic
+GCJRa04,M,titia,GCJR01,37.67,-77.89,Goochland County James River,United States,Virginia,Atlantic
+GCJRa05,M,titia,GCJR01,37.67,-77.89,Goochland County James River,United States,Virginia,Atlantic
+RCJRb01,M,titia,RCJR02,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+RCJRb02,M,titia,RCJR02,37.55,-77.52,Richmond City James River,United States,Virginia,Atlantic
+RCJRb03,M,titia,RCJR02,37.55,-77.52,Richmond City James River,United States,Virginia,Atlantic
+RCJRb04,M,titia,RCJR02,37.55,-77.52,Richmond City James River,United States,Virginia,Atlantic
+HCARa01,M,titia,HCAR01,27.88,-82.17,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARa02,M,titia,HCAR01,27.88,-82.17,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARa03,F,titia,HCAR01,27.88,-82.17,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARa04,M,titia,HCAR01,27.88,-82.17,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARa05,M,titia,HCAR01,27.88,-82.17,Hillsborough County Alafia River,United States,Florida,Gulf
+HCICa01,M,titia,HCIC01,28.09,-82.09,Hillsborough County Itchepackesassa Creek,United States,Florida,Gulf
+HCICa02,M,titia,HCIC01,28.09,-82.09,Hillsborough County Itchepackesassa Creek,United States,Florida,Gulf
+HCICa03,F,titia,HCIC01,28.09,-82.09,Hillsborough County Itchepackesassa Creek,United States,Florida,Gulf
+ACSFc01,M,titia,ACSF03,29.83,-82.68,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFc02,M,titia,ACSF03,29.83,-82.68,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFc03,M,titia,ACSF03,29.83,-82.68,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFc04,M,titia,ACSF03,29.83,-82.68,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFa01,M,titia,ACSF01,29.83,-82.65,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFa02,M,titia,ACSF01,29.83,-82.65,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFa03,M,titia,ACSF01,29.83,-82.65,Alachua County Santa Fe River,United States,Florida,Gulf
+ACSFa04,M,titia,ACSF01,29.83,-82.68,Alachua County Santa Fe River,United States,Florida,Gulf
+SCSCa01,F,titia,SCSC01,28.72,-81.31,Seminole County Soldier Creek,United States,Florida,Atlantic
+SCSCa02,F,titia,SCSC01,28.72,-81.31,Seminole County Soldier Creek,United States,Florida,Atlantic
+SCSCa03,F,titia,SCSC01,28.72,-81.31,Seminole County Soldier Creek,United States,Florida,Atlantic
+SCSCa04,M,titia,SCSC01,28.72,-81.31,Seminole County Soldier Creek,United States,Florida,Atlantic
+HCARb01,M,titia,HCAR02,27.87,-82.14,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARb02,F,titia,HCAR02,27.87,-82.14,Hillsborough County Alafia River,United States,Florida,Gulf
+HCARb03,F,titia,HCAR02,27.87,-82.14,Hillsborough County Alafia River,United States,Florida,Gulf
+RCJRa01,M,titia,RCJR01,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+RCJRa02,M,titia,RCJR01,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+RCJRa03,M,titia,RCJR01,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+RCJRa04,M,titia,RCJR01,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+RCJRa05,M,titia,RCJR01,37.52,-77.47,Richmond City James River,United States,Virginia,Atlantic
+,M,C_maculata,HCAR02,27.87,-82.14,Hillsborough County Alafia River,United States,Florida,Gulf
+,M,C_maculata,HCAR02,27.87,-82.14,Hillsborough County Alafia River,United States,Florida,Gulf
+PAa10,M,,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+PAa11,M,,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+ESRBa15,B,,NA,9.72,-82.97,Rio Bitey,Costa Rica,Limón,Carribbean
+CVa01,B,,NA,29.33,-98.87,Castroville,United States,Texas,Gulf
+PAa04,M,,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+PAa09,M,,PA,18.55,-95.07,La Palma,Mexico,Veracruz,Gulf
+BZ0201,M,titia,BZ02,16.27,-88.89,Rio Grande in Big Falls,Belize,,Carribbean
+BZ0202,M,titia,BZ02,16.27,-88.89,Rio Grande in Big Falls,Belize,,Carribbean
+BZ0403,M,titia,BZ04,16.78,-88.46,Tributary of South Stann Creek in Cockscomb Basin,Belize,,Carribbean
+BZ0404,M,titia,BZ04,16.78,-88.46,Tributary of South Stann Creek in Cockscomb Basin,Belize,,Carribbean
+BZ1509,M,titia,BZ15,17.01,-88.48,North Stann Creek from Hummingbird Highway,Belize,,Carribbean
+BZ1513,M,titia,BZ15,17.01,-88.48,North Stann Creek from Hummingbird Highway,Belize,,Carribbean
+BZ2105,M,titia,BZ21,17.17,-89.11,Mopan River in Bullet Trees Falls,Belize,,Carribbean
+BZ2106,M,titia,BZ21,17.17,-89.11,Mopan River in Bullet Trees Falls,Belize,,Carribbean
+BZ2303,M,titia,BZ23,17.15,-88.71,Caves Branch from Hummingbird Highway,Belize,,Carribbean
+BZ2305,M,titia,BZ23,17.15,-88.71,Caves Branch from Hummingbird Highway,Belize,,Carribbean
+BZ2601,M,titia,BZ26,17.26,-88.79,Roaring Creek in Guanacaste National Park,Belize,,Carribbean
+BZ2604,M,titia,BZ26,17.26,-88.79,Roaring Creek in Guanacaste National Park,Belize,,Carribbean
+BZ3004,M,titia,BZ30,17.56,-88.52,Belize River near Bermudian Landing,Belize,,Carribbean
+BZ3005,M,titia,BZ30,17.56,-88.52,Belize River near Bermudian Landing,Belize,,Carribbean
+BZ3201,M,titia,BZ32,17.9,-88.85,Rio Hondo at Booths River,Belize,,Carribbean
+BZ3204,M,titia,BZ32,17.9,-88.85,Rio Hondo at Booths River,Belize,,Carribbean
+BZ3205,M,titia,BZ32,17.9,-88.85,Rio Hondo at Booths River,Belize,,Carribbean
+BZ3209,F,titia,BZ32,17.9,-88.85,Rio Hondo at Booths River,Belize,,Carribbean
+BZ3213,M,titia,BZ32,17.9,-88.85,Rio Hondo at Booths River,Belize,,Carribbean
+BZ4001,M,titia,BZ40,17.11,-88.66,Sibon River from Hummingbird Highway,Belize,,Carribbean
+BZ4002,M,titia,BZ40,17.11,-88.66,Sibon River from Hummingbird Highway,Belize,,Carribbean
+BZ4602,M,titia,BZ46,16.86,-89.04,Macal River at Guacamallo Bridge,Belize,,Carribbean
+BZ4603,M,titia,BZ46,16.86,-89.04,Macal River at Guacamallo Bridge,Belize,,Carribbean
+BZ4801,M,titia,BZ48,16.67,-88.45,Tributary of Silver Creek in Santa Rosa,Belize,,Carribbean
+BZ4802,M,titia,BZ48,16.67,-88.45,Tributary of Silver Creek in Santa Rosa,Belize,,Carribbean
+BZ4901,M,titia,BZ49,16.51,-88.48,"Big Creek, border of Toledo and Stan Creek districts",Belize,,Carribbean
+BZ4905,M,titia,BZ49,16.51,-88.48,"Big Creek, border of Toledo and Stan Creek districts",Belize,,Carribbean
+BZ5001,M,titia,BZ50,16.45,-88.74,Deep River from Thomas Vincente Ramos Highway near Medina Bank,Belize,,Carribbean
+BZ5005,M,titia,BZ50,16.45,-88.74,Deep River from Thomas Vincente Ramos Highway near Medina Bank,Belize,,Carribbean
+BZ5105,M,titia,BZ51,16.2,-89.05,Blue Creek in Blue Creek,Belize,,Carribbean
+BZ5201,M,titia,BZ52,16.15,-89.01,Moho River from Santa Teresa Road,Belize,,Carribbean
+BZ5204,M,titia,BZ52,16.15,-89.01,Moho River from Santa Teresa Road,Belize,,Carribbean
+BZ5205,M,titia,BZ52,16.15,-89.01,Moho River from Santa Teresa Road,Belize,,Carribbean
+BZ5206,M,titia,BZ52,16.15,-89.01,Moho River from Santa Teresa Road,Belize,,Carribbean
+CA0101,M,titia,CA01_CR,9.76,-84.62,Tarcolitos,Costa Rica,Puntarenas,Pacific
+CA0102,M,titia,CA01_CR,9.76,-84.62,Tarcolitos,Costa Rica,Puntarenas,Pacific
+CA0103,M,titia,CA01_CR,9.76,-84.62,Tarcolitos,Costa Rica,Puntarenas,Pacific
+CA0104,M,titia,CA01_CR,9.76,-84.62,Tarcolitos,Costa Rica,Puntarenas,Pacific
+NA0101,M,titia,NA01,9.74,-84.63,Pita,Costa Rica,,Pacific
+NA0102,M,titia,NA01,9.74,-84.63,Pita,Costa Rica,,Pacific
+NA0103,M,titia,NA01,9.74,-84.63,Pita,Costa Rica,,Pacific
+PO0102,M,titia,PO01,9.35,-83.98,Portalón,Costa Rica,Puntarenas,Pacific
+PO0103,M,titia,PO01,9.35,-83.98,Portalón,Costa Rica,Puntarenas,Pacific
+PQ0101,M,titia,PQ01,9.49,-84.16,Paquita,Costa Rica,Puntarenas,Pacific
+PQ0102,M,titia,PQ01,9.49,-84.16,Paquita,Costa Rica,Puntarenas,Pacific
+ST0101,M,titia,ST01,9.38,-84.02,Savegre Trib,Costa Rica,Puntarenas,Pacific
+ST0102,M,titia,ST01,9.38,-84.02,Savegre Trib,Costa Rica,Puntarenas,Pacific
+ST0103,M,titia,ST01,9.38,-84.02,Savegre Trib,Costa Rica,Puntarenas,Pacific
+AR0101,M,titia,AR01,33.9,-92.23,,United States,Arkansas,Gulf
+AR0102,M,titia,AR01,33.9,-92.23,,United States,Arkansas,Gulf
+AR0104,M,titia,AR01,33.9,-92.23,,United States,Arkansas,Gulf
+AR0207,M,titia,AR02,33.7,-92.03,,United States,Arkansas,Gulf
+AR0209,M,titia,AR02,33.7,-92.03,,United States,Arkansas,Gulf
+IA0102,M,titia,IA01,41.29,-94.15,Middle River1,United States,Iowa,Gulf
+IA0105,M,titia,IA01,41.29,-94.15,Middle River2,United States,Iowa,Gulf
+IA0406,M,titia,IA04,41.3,-94.07,Middle River2,United States,Iowa,Gulf
+IA0408,M,titia,IA04,41.3,-94.07,Middle River3,United States,Iowa,Gulf
+IA0409,M,titia,IA04,41.3,-94.07,Middle River5,United States,Iowa,Gulf
+IA0413,M,titia,IA04,41.3,-94.07,Middle River6,United States,Iowa,Gulf
+IA0414,M,titia,IA04,41.3,-94.07,Middle River4,United States,Iowa,Gulf
+IL0121,M,titia,IL01,42.32,-89.36,Pecatonica River,United States,Illinois,Gulf
+IL0123,M,titia,IL01,42.32,-89.36,Pecatonica River,United States,Illinois,Gulf
+IL0125,F,titia,IL01,42.32,-89.36,Pecatonica River,United States,Illinois,Gulf
+IL0135,M,titia,IL01,42.32,-89.36,Pecatonica River,United States,Illinois,Gulf
+IL0140,F,titia,IL01,42.32,-89.36,Pecatonica River,United States,Illinois,Gulf
+Il0408,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+Il0409,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+Il0410,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+Il0411,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+Il0412,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+IL0509,M,titia,IL05,42.02,-89.33,Rock River,United States,Illinois,Gulf
+MI0111,M,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0112,M,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0113,M,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0118,M,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0125,F,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0225,F,titia,MI02,42.5,-83.74,Huron River,United States,Michigan,Atlantic
+MI0230,F,titia,MI02,42.5,-83.74,Huron River,United States,Michigan,Atlantic
+MI0226,M,titia,MI02,42.5,-83.74,Huron River,United States,Michigan,Atlantic
+MI0238,M,titia,MI02,42.5,-83.74,Huron River,United States,Michigan,Atlantic
+MI0239,M,titia,MI02,42.5,-83.74,Huron River,United States,Michigan,Atlantic
+MO0208,M,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0209,M,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0210,M,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0211,M,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0212,M,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0309,M,titia,MO03,36.56,-90.35,Black River2,United States,Missouri,Gulf
+MO0310,M,titia,MO03,36.56,-90.35,Black River5,United States,Missouri,Gulf
+MO0311,M,titia,MO03,36.56,-90.35,Black River3,United States,Missouri,Gulf
+MO0312,M,titia,MO03,36.56,-90.35,Black River6,United States,Missouri,Gulf
+MO0313,M,titia,MO03,36.56,-90.35,Black River4,United States,Missouri,Gulf
+MS0108,M,titia,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0110,M,titia,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0113,M,titia,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0114,M,titia,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0116,M,titia,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+OK0101,M,titia,OK01,35.24,-98.55,Cobb Creek,United States,Oklahoma,Gulf
+TN0101,M,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0102,M,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0103,M,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0105,M,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0106,M,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0411,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0421,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0423,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0425,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0427,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+LSSE05,M,titia,LSSE,10.42,-84,Sabalo-Esquina,Costa Rica,Heredia,Carribbean
+LSSE06,M,titia,LSSE,10.42,-84,Sabalo-Esquina,Costa Rica,Heredia,Carribbean
+LSSE07,M,titia,LSSE,10.42,-84,Sabalo-Esquina,Costa Rica,Heredia,Carribbean
+LSRP01,M,titia,LSRP,10.43,-84.04,Peje,Costa Rica,Heredia,Carribbean
+LSRP02,M,titia,LSRP,10.43,-84.04,Peje,Costa Rica,Heredia,Carribbean
+BALB01,M,titia,BALB,10.05,-83.33,Lower Barbilla,Costa Rica,Limón,Carribbean
+BALB02,M,titia,BALB,10.05,-83.33,Lower Barbilla,Costa Rica,Limón,Carribbean
+BALB05,M,titia,BALB,10.05,-83.33,Lower Barbilla,Costa Rica,Limón,Carribbean
+BALB06,M,titia,BALB,10.05,-83.33,Lower Barbilla,Costa Rica,Limón,Carribbean
+BAMB03,M,titia,BAMB,10.06,-83.37,Middle Barbilla,Costa Rica,Limón,Carribbean
+BAMB04,M,titia,BAMB,10.06,-83.37,,Costa Rica,Limón,Carribbean
+BAMB05,M,titia,BAMB,10.06,-83.37,,Costa Rica,Limón,Carribbean
+BAMB06,M,titia,BAMB,10.06,-83.37,,Costa Rica,Limón,Carribbean
+MACM01,M,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+MACM02,F,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+SMAA03,M,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+SMAA04,M,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+MC02.003,M,titia,MC02,30.49,-94.83,Menard Creek,United States,Texas,Gulf
+MC02.001,M,titia,MC02,30.49,-94.83,Menard Creek,United States,Texas,Gulf
+MC02.002,M,titia,MC02,30.49,-94.83,Menard Creek,United States,Texas,Gulf
+TT01.001,M,titia,TT01,30.49,-94.84,Trinity River,United States,Texas,Gulf
+TT01.002,M,titia,TT01,30.49,-94.84,Trinity River,United States,Texas,Gulf
+SJ01.21,M,titia,SJ01_US,30.21,-95.4,San Jacinto River,United States,Texas,Gulf
+SP01.01,M,americana,SP01,30.11,-95.45,Spring Creek,United States,Texas,Gulf
+SP01.02,F,americana,SP01,30.11,-95.45,Spring Creek,United States,Texas,Gulf
+SP01.06,M,americana,SP01,30.11,-95.45,Spring Creek,United States,Texas,Gulf
+SP01.07,F,americana,SP01,30.11,-95.45,Spring Creek,United States,Texas,Gulf
+NR02.01,M,titia,NR02,30.68,-94.09,Neches River,United States,Texas,Gulf
+NR02.02,M,titia,NR02,30.68,-94.09,Neches River,United States,Texas,Gulf
+NR02.06,M,titia,NR02,30.68,-94.09,Neches River,United States,Texas,Gulf
+NR02.10,M,titia,NR02,30.68,-94.09,Neches River,United States,Texas,Gulf
+NR01.01,M,titia,NR01,30.36,-94.09,Neches River,United States,Texas,Gulf
+NR01.03,M,titia,NR01,30.36,-94.09,Neches River,United States,Texas,Gulf
+11CT04,M,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT05,M,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT06,M,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT07,M,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT10,M,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT12,,titia,11CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+10OT09,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT10,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT20,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT21,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT22,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT22,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+10OT23,,titia,10OT,18.68,-96.38,Rio Otapa,Mexico,Veracruz,Gulf
+LCPCa01,M,titia,LCPC1,31.14,-89.64,Pitman Creek,United States,Mississippi,Gulf
+LCPCa02,M,titia,LCPC1,31.14,-89.64,Pitman Creek,United States,Mississippi,Gulf
+LCPCa03,M,titia,LCPC1,31.14,-89.64,Pitman Creek,United States,Mississippi,Gulf
+WCKCa01,M,titia,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+WCKCa02,M,titia,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+WCKCa03,M,titia,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+LCSBc01,M,titia,LCSB3,31.16,-89.61,Sandy Branch,United States,Mississippi,Gulf
+,,titia,BF/PC 2012,,,,,,
+,,titia,BF/PC 2012,,,,,,
+PCa01,M,titia,PC01,31.08,-93.49,Pearl Creek,United States,Louisiana,Gulf
+BFa01,M,titia,BF,31.08,-93.49,Pearl Creek,United States,Louisiana,Gulf
+BFa02,M,titia,BF,31.08,-93.49,Pearl Creek,United States,Louisiana,Gulf
+HtiAA2,M,titia,HtiAA,17.26,-92.1,Agua Azul,Mexico,Chiapas,Gulf
+HtiJS9,M,titia,HtiJS,18.51,-88.47,Juan Sarabia,Mexico,Quitanta Roo,Carribbean
+HtiJS7,M,titia,HtiJS,18.51,-88.47,Juan Sarabia,Mexico,Quitanta Roo,Carribbean
+HtiJS5,M,titia,HtiJS,18.51,-88.47,Juan Sarabia,Mexico,Quitanta Roo,Carribbean
+HtiJS6,M,titia,HtiJS,18.51,-88.47,Juan Sarabia,Mexico,Quitanta Roo,Carribbean
+HtiJS8,M,titia,HtiJS,18.51,-88.47,Juan Sarabia,Mexico,Quitanta Roo,Carribbean
+HtiNR1,M,titia,HtiNR,15.9,-91.99,Nuevo Recuerdo,Mexico,Chiapas,Gulf
+HtiNR2,M,titia,HtiNR,15.9,-91.99,Nuevo Recuerdo,Mexico,Chiapas,Gulf
+HtiPa5,M,titia,HtiPa,17.48,-91.97,Palenque,Mexico,Chiapas,Gulf
+HtiPa2,M,titia,HtiPa,17.48,-91.97,Palenque,Mexico,Chiapas,Gulf
+HtiTi11,M,titia,HtiTi,18.67,-103.69,El Ticuiz,Mexico,Michoacán,Pacific
+HtiTi12,M,titia,HtiTi,18.67,-103.69,El Ticuiz,Mexico,Michoacán,Pacific
+HtiTi13,M,titia,HtiTi,18.67,-103.69,El Ticuiz,Mexico,Michoacán,Pacific
+HtiTi14,M,titia,HtiTi,18.67,-103.69,El Ticuiz,Mexico,Michoacán,Pacific
+HtiTi15,M,titia,HtiTi,18.67,-103.69,El Ticuiz,Mexico,Michoacán,Pacific
+HtiCn2,M,titia,HtiCn,18.25,-103.23,Cachán,Mexico,Michoacán,Pacific
+HtiCn7,M,titia,HtiCn,18.25,-103.23,Cachán,Mexico,Michoacán,Pacific
+HtiCn13,M,titia,HtiCn,18.25,-103.23,Cachán,Mexico,Michoacán,Pacific
+HtiCn12,M,titia,HtiCn,18.25,-103.23,Cachán,Mexico,Michoacán,Pacific
+HtiCn17,M,titia,HtiCn,18.25,-103.23,Cachán,Mexico,Michoacán,Pacific
+HtiPo6,M,titia,HtiPo,18.04,-103.54,Popoyuta,Mexico,Michoacán,Pacific
+HtiPo15,M,titia,HtiPo,18.04,-103.54,Popoyuta,Mexico,Michoacán,Pacific
+HtiPo2,M,titia,HtiPo,18.04,-103.54,Popoyuta,Mexico,Michoacán,Pacific
+HtiPo10,M,titia,HtiPo,18.04,-103.54,Popoyuta,Mexico,Michoacán,Pacific
+RLPEa09,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa05,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEb03,M,titia,RLPE02,16.56,-95.1,,Mexico,Oaxaca,Pacific
+RLPEa08,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa06,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa07,F,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa07,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa03,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa01,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEa10,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+RLPEb02,M,titia,RLPE02,16.56,-95.1,,Mexico,Oaxaca,Pacific
+RLPEb01,F,titia,RLPE02,16.56,-95.1,,Mexico,Oaxaca,Pacific
+RLPEa02,M,titia,RLPE01,16.52,-95.07,,Mexico,Oaxaca,Pacific
+ZANAaAM01,M,americana,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa05,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa02,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa01,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+,MMM,occisa,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa07,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAaOC01,M,occisa,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa03,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa06,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+ZANAa04,M,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+HXRCcOc01,F,occisa,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+HXRCcOc02,F,occisa,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+STDMaAM1,M,americana,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMaAM2,M,americana,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa06,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMaAM01,M,americana,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMaAM02,M,americana,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa04,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa05,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+,MF,occisa,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa07,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa01,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa03,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+STDMa02,M,titia,STDM01,15.82,-96.69,,Mexico,Oaxaca,Pacific
+HXRCb04,M,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+,MM,occisa,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+HXRCaAM02,M,americana,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+HXRCaAM03,M,americana,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+HXRCb07,F,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCaAM01,M,americana,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+,M,americana,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+,M,americana,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+HXRCb08,M,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCb05,F,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCb10,F,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+,MMM,occisa,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+HXRCcAM01,M,americana,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+,M,americana,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+,M,americana,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+HXRCb09,M,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCb06,F,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCb03,F,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCb02,M,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+,MMM,occisa,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+,FFF,occisa,HXRC01,15.84,-96.33,,Mexico,Oaxaca,Pacific
+HXRCb01,M,titia,HXRC02,15.75,-96.3,,Mexico,Oaxaca,Pacific
+HXRCcAM02,F,americana,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+HXRCcAM03,F,americana,HXRC03,15.86,-96.31,,Mexico,Oaxaca,Pacific
+PUMAa01,F,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa04,F,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa03,F,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa02,M,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+,MF,occisa,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa08,M,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa05,F,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa07,M,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa09,M,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa10,F,occisa,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+PUMAa06,F,titia,PUMA01,15.77,-93.33,,Mexico,Chiapas,Pacific
+TULIaAM04,M,americana,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIaOC02,M,occisa,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa08,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa09,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa02,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa01,M,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa04,M,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa11,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIaAM01,M,americana,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIaAM02,F,americana,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIaAM03,M,americana,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa06,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa03,M,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa10,F,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa07,M,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIaOc01,MF,occisa,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+TULIa05,M,titia,TULI01,15.89,-93.5,,Mexico,Chiapas,Pacific
+,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCaAM01,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCaAM02,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,FF,occisa,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCa04,M,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,MMM,occisa,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,MM,occisa,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCa02,M,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCa03,M,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCaAM04,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCa05,M,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCaAM03,F,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,M,americana,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+NMSCa01,M,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,MMMM,occisa,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+ACTPa08,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa03,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa02,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa01,F,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa04,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa07,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa06,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa05,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa10,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+ACTPa09,M,titia,ACTP01,15.29,-92.67,,Mexico,Chiapas,Pacific
+CUAJbOC01,F,occisa,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJa04,M,titia,CUAJ01,16.79,-95.01,,Mexico,Oaxaca,Gulf
+CUAJb06,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJa01,M,titia,CUAJ01,16.79,-95.01,,Mexico,Oaxaca,Gulf
+CUAJa03,F,titia,CUAJ01,16.79,-95.01,,Mexico,Oaxaca,Gulf
+CUAJb03,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb07,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb08,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,MMM,occisa,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb05,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb01,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb02,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJa02,M,titia,CUAJ01,16.79,-95.01,,Mexico,Oaxaca,Gulf
+CUAJb04,M,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+MIXTa08,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa07,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+,FF,occisa,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa09,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa05,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa10,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa02,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa04,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa06,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa11,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa01,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+MIXTa03,M,titia,MIXT01,17.2,-95.21,,Mexico,Oaxaca,Gulf
+,M,occisa,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSaAM04,M,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSaAM01,F,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSaAM02,M,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa04,M,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa06,M,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa05,M,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,M,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSbAM01,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa03,F,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb02,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb05,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,MMM,occisa,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb07,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,MM,occisa,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa02,M,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb04,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSaOC01,M,occisa,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,M,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSbAM02,M,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSbAM03,M,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSa01,M,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSbAM04,F,americana,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSaAM03,F,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,M,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb03,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+,MF,occisa,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+TXRSb01,M,titia,TXRS02,16.65,-93.16,,Mexico,Chiapas,Gulf
+TM0101,,titia,TM01,21.94,-99.4,,Mexico,San Luis Potosí,Gulf
+TM0102,,titia,TM01,21.94,-99.4,,Mexico,San Luis Potosí,Gulf
+LD01,,titia,LO01,18.66,-95.15,Los Organos,Mexico,Veracruz,Gulf
+05AR27,F,titia,AR,18.96,-103.95,,Mexico,Colima,Pacific
+CT02,M,cruentata,CT02,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+TL01,M,cruentata,TL01,19.16,-96.93,Tlavictepan,Mexico,Veracruz,Gulf
+SO01,M,cruentata,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+05AR14,M,titia,AR,18.96,-103.95,,Mexico,Colima,Pacific
+05AR12,M,titia,AR,18.96,-103.95,,Mexico,Colima,Pacific
+05AR15,M,titia,AR,18.96,-103.95,,Mexico,Colima,Pacific
+FL04,F,titia,GA02,8.7,-83.19,Gamba 2,Costa Rica,Puntarenas,Pacific
+05ARTMA02,M,americana,,,,,,,
+05LT08,M,americana,05lt,20.73,-103.62,,Mexico,,
+05LT06,F,americana,05lt,20.73,-103.62,,Mexico,,
+05GU01,M,americana,05gu,21.7,-103.8,,Mexico,,Pacific
+05SI82,M,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SI11,F,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SA10,M,americana,05saa,19.19,-103.69,,Mexico,Colima,Pacific
+05SA09,M,americana,05saa,19.19,-103.69,,Mexico,Colima,Pacific
+05SA03,M,americana,05saa,19.19,-103.69,,Mexico,Colima,Pacific
+05CBCA07,M,americana,,,,,,,
+05TMA03,M,americana,,,,,,,
+05CBCA06,M,americana,,,,,,,
+05CBCA05,M,americana,,,,,,,
+05CBCA02,M,americana,,,,,,,
+05RL09,F,cruentata,05rl,21.37,-104.62,,Mexico,Nayarit,Pacific
+05RL02,M,cruentata,05rl,21.37,-104.62,,Mexico,Nayarit,Pacific
+05TM14,M,occisa,TM01,21.94,-99.4,Cascadas de Tulma,Mexico,San Luis Potosí,Gulf
+05AR05,M,occisa,05AR,18.95,-103.95,Armería,Mexico,Colima,Pacific
+05TM12,M,occisa,TM01,21.94,-99.4,Cascadas de Tulma,Mexico,San Luis Potosí,Gulf
+05PU01,M,americana,05pu,19.5,-104.67,,Mexico,Jalisco,Pacific
+05LT09,M,americana,05lt,20.73,-103.62,,Mexico,Jalisco,Pacific
+05LT10,M,americana,05lt,20.73,-103.62,,Mexico,Jalisco,Pacific
+05LT11,M,americana,05lt,20.73,-103.62,,Mexico,Jalisco,Pacific
+05LT02,F,americana,05lt,20.73,-103.62,,Mexico,Jalisco,Pacific
+05SI17,M,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SI13,F,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SI23,M,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SI24,F,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+05SI05,M,americana,05si,19.56,-104.79,,Mexico,Jalisco,Pacific
+06CT0521,M,cruentata,CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+06OT0178,M,occisa,OT,18.69,-96.39,Rio Otapa,Mexico,Veracruz,Gulf
+06OT0174,M,occisa,OT,18.69,-96.39,Rio Otapa,Mexico,Veracruz,Gulf
+07AR11,M,titia,AR,18.96,-103.95,Rio Armeria,Mexico,Colima,Pacific
+07AR05,M,titia,AR,18.96,-103.95,Rio Armeria,Mexico,Colima,Pacific
+07OT11,F,titia,OT,18.69,-96.39,Rio Otapa,Mexico,Veracruz,Gulf
+07OT09,M,titia,OT,18.69,-96.39,Rio Otapa,Mexico,Veracruz,Gulf
+08TM05,M,titia,TM01,21.94,-99.4,Cascadas de Tulma,Mexico,San Luis Potosí,Gulf
+08EL01,M,cruentata,08el,21.37,-104.62,Rio Limon,Mexico,Nayarit,Pacific
+07EL02,M,cruentata,07el,21.37,-104.62,Rio Limon,Mexico,Nayarit,Pacific
+07EL04,M,cruentata,07el,21.37,-104.62,Rio Limon,Mexico,Nayarit,Pacific
+08CV,M,titia,CV,29.34,-98.88,Castroville,United States,Texas,Gulf
+08CV,M,titia,CV,29.34,-98.88,Castroville,United States,Texas,Gulf
+08CU01,M,titia,CU01,"18.76741667,",-99.24,Balneario in Xochitepec,Mexico,Morelos,Pacific
+11CT21,F,titia,CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT25,F,titia,CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11CT18,M,titia,CT,18.37,-95,Cuetzalapan,Mexico,Veracruz,Gulf
+11PX01,M,cruentata,PX,19.47,-96.95,Rio Pixciac,Mexico,Veracruz,Gulf
+11PX02,M,cruentata,PX,19.47,-96.95,Rio Pixciac,Mexico,Veracruz,Gulf
+11PA77,M,occisa,PA,18.56,-95.07,La Palma,Mexico,Veracruz,Gulf
+PC01.024,M,titia,PC01,31.08,-93.49,Pearl Creek,United States,Louisiana,Gulf
+SJ01.24,M,americana,SJ01_US,30.21,-95.4,San Jacinto River,United States,Texas,Gulf
+SJ01.25,F,americana,SJ01_US,30.21,-95.4,San Jacinto River,United States,Texas,Gulf
+SJ01.19,F,americana,SJ01_US,30.21,-95.4,San Jacinto River,United States,Texas,Gulf
+SJ01.20,M,americana,SJ01_US,30.21,-95.4,San Jacinto River,United States,Texas,Gulf
+LO13,F,cruentata,LO01,18.66,-95.15,Los Organos,Mexico,Veracruz,Gulf
+13BJ06,M,cruentata,bj,18.36,-95,Benito Juarez,Mexico,Veracruz,Gulf
+13BJ23,M,occisa,bj,18.36,-95,Benito Juarez,Mexico,Veracruz,Gulf
+13BJ24,M,occisa,bj,18.36,-95,Benito Juarez,Mexico,Veracruz,Gulf
+MV0104,M,cruentata,MV01,10.31,-84.8,Machina,Costa Rica,Puntarenas,Pacific
+GO0101,F,unknown,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+GO0102,M,titia,GO01,8.64,-83.2,Golfito,Costa Rica,Puntarenas,Pacific
+MV0102,M,cruentata,MV01,10.31,-84.8,Machina,Costa Rica,Puntarenas,Pacific
+NB0103,M,titia,NB01,9.58,-84.57,Hermosa,Costa Rica,Puntarenas,Pacific
+NB0104,F,titia,NB01,9.58,-84.57,Hermosa,Costa Rica,Puntarenas,Pacific
+NB0101,M,occisa,NB01,9.58,-84.57,Hermosa,Costa Rica,Puntarenas,Pacific
+NB0102,M,occisa,NB01,9.58,-84.57,Hermosa,Costa Rica,Puntarenas,Pacific
+RT0107,F,occisa,RT01,10.93,-85.53,Rio Tempisquito 1,Costa Rica,Guanacaste,Pacific
+NA0104,M,occisa,NA01,9.74,-84.63,Pita,Costa Rica,,Pacific
+NA0105,M,occisa,NA01,9.74,-84.63,Pita,Costa Rica,,Pacific
+QB0105,M,occisa,QB01,9.77,-84.6,Bonita,Costa Rica,Puntarenas,Pacific
+RB0102,M,fuscoguttata,RB01,8.7,-83.21,Rio Bonito,Costa Rica,Puntarenas,Pacific
+RB0103,F,unknown,RB01,8.7,-83.21,Rio Bonito,Costa Rica,Puntarenas,Pacific
+GA0204,M,titia,GA02,8.7,-83.19,Gamba 2,Costa Rica,Puntarenas,Pacific
+GA0202,F,titia,GA02,8.7,-83.19,Gamba 2,Costa Rica,Puntarenas,Pacific
+GA0203,M,titia,GA02,8.7,-83.19,Gamba 2,Costa Rica,Puntarenas,Pacific
+EC0305,M,cruentata,EC02,10.92,-85.47,Temisquito Trib 2,Costa Rica,Guanacaste,Pacific
+EC0306,F,cruentata,EC02,10.92,-85.47,Temisquito Trib 2,Costa Rica,Guanacaste,Pacific
+EC0203,M,cruentata,EC02,10.92,-85.47,Temisquito Trib 2,Costa Rica,Guanacaste,Pacific
+PCCC1,M,titia,PCCC1,30.99,-89.01,Cypress Creek,United States,Mississippi,Gulf
+LSRP11,F,occisa,LSRP,10.43,-84.04,Peje,Costa Rica,Heredia,Carribbean
+LSRP12,F,occisa,LSRP,10.43,-84.04,Peje,Costa Rica,Heredia,Carribbean
+MDAA03,M,occisa,MDAA,10.08,-83.41,Madre de Dios,Costa Rica,Limón,Carribbean
+MACM09,M,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+MACM10,F,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+SMAA09,F,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+SMAA10,F,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+SMAA01,M,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+SMAA02,M,titia,SMAA,10.04,-83.33,La Esperanza,Costa Rica,Limón,Carribbean
+MACM07,M,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+MACM11,M,titia,MACM,10.1,-83.25,Cuatro Millas,Costa Rica,Limón,Carribbean
+TN0302,F,americana,TN03,35.87,-87.71,Duck River,United States,Tennessee,Gulf
+TN0301,M,americana,TN03,35.87,-87.71,Duck River,United States,Tennessee,Gulf
+TN0413,F,americana,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0414,M,americana,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0119,M,americana,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0120,M,americana,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+TN0407,M,titia,TN04,36.55,-87.14,Red River and Sulfur Fork,United States,Tennessee,Gulf
+TN0104,F,titia,TN01,35.03,-89.35,Wolf River,United States,Tennessee,Gulf
+OK0203,F,americana,OK02,34.78,-98.61,Medicine Creek1,United States,Oklahoma,Gulf
+OK0204,M,americana,OK02,34.78,-98.61,Medicine Creek1,United States,Oklahoma,Gulf
+OK0104,F,americana,OK01,35.24,-98.55,Cobb Creek,United States,Oklahoma,Gulf
+OK0105,M,americana,OK01,35.24,-98.55,Cobb Creek,United States,Oklahoma,Gulf
+OK0102,F,americana,OK01,35.24,-98.55,Cobb Creek,United States,Oklahoma,Gulf
+OK0103,M,americana,OK01,35.24,-98.55,Cobb Creek,United States,Oklahoma,Gulf
+MS0121,F,americana,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0222,M,americana,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0118,F,americana,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0119,M,americana,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MS0120,M,americana,MS01,32.52,-90.74,Ballground Creek,United States,Mississippi,Gulf
+MO0109,F,americana,MO01,37.44,-90.96,West Fork Black R,United States,Missouri,Gulf
+MO0110,M,americana,MO01,37.44,-90.96,West Fork Black R,United States,Missouri,Gulf
+MO0111,F,americana,MO01,37.44,-90.96,West Fork Black R,United States,Missouri,Gulf
+MO0112,M,americana,MO01,37.44,-90.96,West Fork Black R,United States,Missouri,Gulf
+MO0213,F,americana,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0214,M,americana,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+MO0102,M,titia,MO01,37.44,-90.96,West Fork Black R,United States,Missouri,Gulf
+MI0115,F,titia,MI03,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0114,F,titia,MI02,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+IL0413,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+IL0501,F,americana,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+IL0502,M,americana,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+IL0301,F,americana,IL03,42.46,-89.24,Sugar River,United States,Illinois,Gulf
+IL0302,M,americana,IL03,42.46,-89.24,Sugar River,United States,Illinois,Gulf
+IL0203,F,americana,IL02,41.64,-88.07,Des Plaines River,United States,Illinois,Gulf
+IL0204,M,americana,IL02,41.64,-88.07,Des Plaines River,United States,Illinois,Gulf
+IA0415,M,titia,IA04,41.3,-94.07,Middle River2,United States,Iowa,Gulf
+IA0411,F,titia,IA04,41.3,-94.07,Middle River7,United States,Iowa,Gulf
+IA0421,M,titia,IA04,41.3,-94.07,Middle River6,United States,Iowa,Gulf
+IA0416,F,titia,IA04,41.3,-94.07,Middle River0,United States,Iowa,Gulf
+IA0418,M,titia,IA04,41.3,-94.07,Middle River4,United States,Iowa,Gulf
+IA0417,M,titia,IA04,41.3,-94.07,Middle River2,United States,Iowa,Gulf
+IA0505,F,americana,IA05,42.3,-92.02,Middle River2,United States,Iowa,Gulf
+IA0506,M,americana,IA05,42.3,-92.02,Middle River2,United States,Iowa,Gulf
+IA0607,F,americana,IA05,42.3,-92.02,Middle River2,United States,Iowa,Gulf
+IA0608,M,americana,IA05,42.3,-92.02,Middle River2,United States,Iowa,Gulf
+IA0202,F,americana,IA02,41.82,-94.64,Middle River3,United States,Iowa,Gulf
+IA0201,M,americana,IA02,41.82,-94.64,Middle River3,United States,Iowa,Gulf
+IA0103,F,americana,IA01,41.29,-94.15,Middle River1,United States,Iowa,Gulf
+IA0101,M,americana,IA01,41.29,-94.15,Middle River1,United States,Iowa,Gulf
+AR0210,M,titia,AR02,33.7,-92.03,,United States,Arkansas,Gulf
+AR0208,M,titia,AR02,33.7,-92.03,,United States,Arkansas,Gulf
+AR0103,M,titia,AR01,33.9,-92.23,,United States,Arkansas,Gulf
+EAFB014150,M,titia,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014148,F,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014142,M,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014147,F,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014144,M,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014149,F,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014143,M,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+EAFB014146,M,americana,EAFB01,30.54,-86.86,Little Boiling Creek in Eglin Air Force Base,United States,Florida,Gulf
+GL23893,F,americana,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23889,F,titia,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23908,M,titia,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23895,F,americana,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23909,F,titia,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23891,M,americana,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23892,M,americana,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+GL23898,F,americana,GL2,30.07,-99.24,Guadalupe R in Ingram,United States,Texas,Gulf
+IL0459,M,titia,IL04,42.02,-89.33,Rock River,United States,Illinois,Gulf
+LCBC04,F,titia,LCPC4,31.17,-89.58,Bay Creek,United States,Mississippi,Gulf
+MO0351,F,titia,MO03,36.56,-90.35,Black River4,United States,Missouri,Gulf
+MEBA014007,M,americana,MEBA01,29.72,-99.08,Medina River in Bandera,United States,Texas,Gulf
+MEBA014005,M,americana,MEBA01,29.72,-99.08,Medina River in Bandera,United States,Texas,Gulf
+MEBA014006,M,americana,MEBA01,29.72,-99.08,Medina River in Bandera,United States,Texas,Gulf
+MEBA014004,F,americana,MEBA01,29.72,-99.08,Medina River in Bandera,United States,Texas,Gulf
+MEBA013928,F,titia,MEBA01,29.72,-99.08,Medina River in Bandera,United States,Texas,Gulf
+MI0160,M,americana,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0161,F,americana,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0162,F,titia,MI01,42.23,-84.49,Sandstone Creek,United States,Michigan,Atlantic
+MI0407,M,americana,MI04,42.38,-83.92,Huron R in Hudson Mills Metropark,United States,Michigan,Atlantic
+MI0409,F,americana,MI04,42.38,-83.92,Huron R in Hudson Mills Metropark,United States,Michigan,Atlantic
+MI0504,M,americana,MI05,43.46,-84.08,Tittabawassee R in Imerman Memorial Park,United States,Michigan,Atlantic
+MI0505,M,americana,MI05,43.46,-84.08,Tittabawassee R in Imerman Memorial Park,United States,Michigan,Atlantic
+MO024248,F,titia,MO02,36.95,-90.99,Current River,United States,Missouri,Gulf
+WCKC14171,M,americana,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+WCKC14176,M,americana,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+WCKC14174,F,americana,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+WCKC14173,M,americana,WCKC1,31.05,-90.17,Kirklin Creek,United States,Mississippi,Gulf
+SMAA05,M,titia,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+SMAA06,M,titia,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+SMAA07,MM,titia,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+,M,occisa,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+,M,occisa,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+,M,titia,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+,M,occisa,SMAA2,10.04,-83.33,,Costa Rica,Limón,Carribbean
+BZ1705,F,occisa,,17.06,-88.58,,Belize,,Carribbean
+BZ0416,M,occisa,,16.77,-88.46,,Belize,,Carribbean
+BZ2312,M,occisa,,17.15,-88.71,,Belize,,Carribbean
+BZ4201,M,cruentata,,17.01,-88.98,,Belize,,Carribbean
+BZ4204,M,occisa,,17.01,-88.98,,Belize,,Carribbean
+BZ4505,M,cruentata,,17.05,-88.95,,Belize,,Carribbean
+BZ4708,F,cruentata,,16.9,-89.01,,Belize,,Carribbean
+BZ4906,M,occisa,,16.51,-88.48,,Belize,,Carribbean
+BZ5209,F,occisa,,16.15,-89.01,,Belize,,Carribbean
+HocLH1,,occisa,,19.6000701,-104.8904409,"La Huerta, camino Chamela-Villa Purificación",Mexico,Jalisco,
+HocLH2,,occisa,,19.6000701,-104.8904409,"La Huerta, camino Chamela-Villa Purificación",Mexico,Jalisco,
+HocLH3,,occisa,,19.6000701,-104.8904409,"La Huerta, camino Chamela-Villa Purificación",Mexico,Jalisco,
+HamEF2,,americana,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HamEF3,,americana,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HamEF10,,americana,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HclEF4,,calverti,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HclEF8,,calverti,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HclEF3 (I think HclEF7),,calverti,,26.424746,-108.621821,"El Fuerte, Sinaloa",Mexico,Sinaloa,
+HamSN4,,americana,,28.429343,-109.191303,"San Nicolás, Sonora",Mexico,Sonora,
+HamSN5,,americana,,28.429343,-109.191303,"San Nicolás, Sonora",Mexico,Sonora,
+HamSN10,,americana,,28.429343,-109.191303,"San Nicolás, Sonora",Mexico,Sonora,
+HcrAB4,,cruentata,,19.4788833,-100.4945639,"Agua Blanca, Jungapeo, Michoacán",Mexico,Michoacan,
+HcrAB5,,cruentata,,19.4788833,-100.4945639,"Agua Blanca, Jungapeo, Michoacán",Mexico,Michoacan,
+HcrAB6,,cruentata,,19.4788833,-100.4945639,"Agua Blanca, Jungapeo, Michoacán",Mexico,Michoacan,
+HcrSR2,,cruentata,,16.1056,-92.1333,"Santa Rita, Chiapas",Mexico,Chiapas,
+HcrSR7,,cruentata,,16.1056,-92.1333,"Santa Rita, Chiapas",Mexico,Chiapas,
+HcrSR9,,cruentata,,16.1056,-92.1333,"Santa Rita, Chiapas",Mexico,Chiapas,
+05AR05_01,m,occisa,AR,18.96,-103.95,Rio Armeria,Mexico,Colima,
+05AR48,m,occisa,AR,18.96,-103.95,Rio Armeria,Mexico,Colima,
+LJ0101,m,cruentata,LJ01,19.65966667,-104.3220167,Las Joyas,Mexico,Jalisco,
+LJ0102,m,cruentata,LJ01,19.65966667,-104.3220167,Las Joyas,Mexico,Jalisco,
+LJ0201,m,cruentata,LJ02,19.65966667,-104.3220167,Las Joyas,Mexico,Jalisco,
+05CB23,m,americana,CB,19.63723333,-104.4879,Rio Cebadilla,Mexico,Jalisco,
+05TM11,m,americana,tm,19.98145,-105.1458833,Rio Tomatlan,Mexico,Jalisco,
+08AM01,m,americana,08AM,20.8255,-105.0896,Ameca,Mexico,Nayarit,
+07EL15,m,americana,07EL,21.37101667,-104.6206667,Rio Limon,Mexico,Nayarit,
+07EL16,m,americana,07EL,21.37101667,-104.6206667,Rio Limon,Mexico,Nayarit,
+TC0101,f,americana,TC01,21.80696667,-99.18425,Cascadas de Tamasopa,Mexico,San Luis Potosí,
+TM01am01,m,americana,TM01,21.94,-99.4,Cascadas de Tulma,Mexico,San Luis Potosí,
+CA_MX0101,f,americana,CA_MX,22.05956667,-100.4922833,near km 196 on road from San Luis to Rio Verde,Mexico,San Luis Potosí,
+EC0101,m,americana,EC01,23.1403,-99.11575,El Encino,Mexico,Tamaulipas,
+EC0102,m,occisa,EC01,23.1403,-99.11575,El Encino,Mexico,Tamaulipas,
+CD0101,f,americana,CD01,21.92228333,-98.95113333,Puente Covadonga off of 85 N of Cuidad Victoria,Mexico,Tamaulipas,
+GY0101,f,americana,GY01,22.84096667,-99.02138333,Rio Gualalejo (near Rio frio,Mexico,Tamaulipas,
+AP0101,m,americana,AP,19.45608611,-96.47929444,Arroyo de Piedra,Mexico,Veracruz,
+"10AP32, 10AP53, unreadable",,americana,AP,19.45608611,-96.47929444,Arroyo de Piedra,Mexico,Veracruz,
+10AP36,f,americana,AP,19.45608611,-96.47929444,Arroyo de Piedra,Mexico,Veracruz,
+"10AP37, 10AP38, 10AP39",,americana,AP,19.45608611,-96.47929444,Arroyo de Piedra,Mexico,Veracruz,
+EA0101,m,americana,EA01,19.41933333,-96.6167,El Aguaje,Mexico,Veracruz,
+EP0101,m,americana,EP01,19.36316667,-96.82535,Los Pescados Rio,Mexico,Veracruz,
+EP0201,m,americana,EP02,19.3196,-96.63195,Los Pescados Rio,Mexico,Veracruz,
+HU0101,m,americana,HU01,19.12883333,-97.01078333,Quarry south of Huatusco,Mexico,Veracruz,
+06CT05,m,americana,CT,18.36973333,-95.00181667,Rio Cuetzalapan,Mexico,Veracruz,
+06CT17,m,americana,CT,18.36973333,-95.00181667,Rio Cuetzalapan,Mexico,Veracruz,
+RG0101,m,americana,RG01,18.4116,-95.1719,Rio Grande Catemaco,Mexico,Veracruz,
+RG0102,m,americana,RG01,18.4116,-95.1719,Rio Grande Catemaco,Mexico,Veracruz,
+RG0103,f,americana,RG01,18.4116,-95.1719,Rio Grande Catemaco,Mexico,Veracruz,
+RJ0101,m,americana,RJ01,19.0416,-96.66376667,Rio Jamapa,Mexico,Veracruz,
+RJ0102,m,americana,RJ01,19.0416,-96.66376667,Rio Jamapa,Mexico,Veracruz,
+08LM01_6263,m,americana,LM,31.065,-98.174,Lampasas,United States,Texas,
+08LM01_6265,m,americana,LM,31.065,-98.174,Lampasas,United States,Texas,
+"SF01.027 (male), SF01.028 (female)",both,americana,SF01,33.13293,-109.28191,San Francisco River,United States,Arizona,
+SF01.027 (male),m,americana,SF01,33.13293,-109.28191,San Francisco River,United States,Arizona,
+SF01.028 (female),both,americana,SF01,33.13293,-109.28191,San Francisco River,United States,Arizona,
+CUAJb09,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,m,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+CUAJb10,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,m,calverti,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,m,americana,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+CUAJb11,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb12,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb13,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb14,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb15,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb16,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,m,calverti,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,m,occisa,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+CUAJb17,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,m,occisa,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+CUAJb18,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb19,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb20,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+CUAJb21,m,titia,CUAJ02,16.83,-95,,Mexico,Oaxaca,Gulf
+,f,titia,ZANA01,16.45,-94.34,,Mexico,Oaxaca,Pacific
+,m,calverti,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,f,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
+,m,titia,NMSC01,15.77,-93.3,,Mexico,Chiapas,Pacific
+,m,titia,TXRS01,16.65,-93.16,,Mexico,Chiapas,Gulf
