@@ -49,7 +49,7 @@ tree.plot$data$support <- as.numeric(tree.plot$data$label)
 # Create binary 100 percent bootstrap tree
 tree.plot$data$support.100 <- tree.plot$data$support
 tree.plot$data$support.100[tree.plot$data$support<95] <- NA
-tree.plot$data$support.100[tree.plot$data$support>=90] <- "*"
+tree.plot$data$support.100[tree.plot$data$support>=95] <- "*"
 # tree.plot$data$support.100[tree.plot$data$support>=100] <- "*"
 
 
@@ -115,7 +115,7 @@ tree.plot$data$support <- as.numeric(tree.plot$data$label)
 # Create binary 100 percent bootstrap tree
 tree.plot$data$support.100 <- tree.plot$data$support
 tree.plot$data$support.100[tree.plot$data$support<95] <- NA
-tree.plot$data$support.100[tree.plot$data$support>=90] <- "*"
+tree.plot$data$support.100[tree.plot$data$support>=95] <- "*"
 # tree.plot$data$support.100[tree.plot$data$support>=100] <- "*"
 
 
@@ -176,62 +176,9 @@ b <- ggplot() +
     facet_wrap(~species.fig, drop = T, nrow = 2) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         strip.text.x = element_text(size = 20))
-
+b
 RAxML_plot <-b+(tree.plot.4/tree.plot.3) + plot_layout(width = c(1,2)) + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 # plot.tree.insert <- tree.plot.2 + inset_element(b, left = 0.05, bottom = 0.6, right = 0.6, top = 0.95) 
 ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 10, width = 15)
 ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 10, width = 15)
-
-
-# Expanding on regions
-# BROKEN
-
-library(LEA)
-#Load in LEA anaylis
-titia.snmf <- load.snmfProject(file = "data/SNP_libraries_Pool_X_HetTit1.0_HetAmer1.0/Hetaerina_titia_ddRAD_titia_dg/H_titia_complete_snp0_20.snmfProject")
-# Sample information
-titia.snmf.data <- read.table("data/SNP_libraries_Pool_X_HetTit1.0_HetAmer1.0/Hetaerina_titia_ddRAD_titia_dg/coorrd_all_complete.txt")
-
-
-region <- "titia-3"
-# Extract Q matrix
-K <- 3
-best <- which.min(cross.entropy(titia.snmf, K = K))
-qmatrix.titia = Q(titia.snmf, K = 3, run = best)
-
-#Combine data with q matrix
-for(i in 1:length(sites$samples)){
-  titia.snmf.data$Q[i] <- paste0("titia-",which.max(qmatrix.titia[i,]))
-}
-
-# Check geographical positions of Q assignment are logical
-plot(titia.snmf.data$Long, titia.snmf.data$Lat, col = as.factor(titia.snmf.data$Q))
-
-
-sites <- merge(sites, titia.snmf.data[,c("samples", "Q")], by = "samples")
-
-tre.midroot.sub <- tre.midroot
-sites.sub <- sites
-row.names(sites.sub) <- sites$samples
-sites.sub <- sites.sub[tre.midroot.sub$tip.label,]
-tre.midroot.sub$tip.label==sites.sub$samples
-sites.sub$root.dist <- adephylo::distRoot(tre.midroot.sub)
-
-tre.midroot$Nnode
-
-node <- vector()
-num.tips <- vector()
-for(i in 1:tre.midroot$Nnode){
-  tre.midroot.sub <- tree_subset(tre.midroot, node = i, levels_back = 1)
-  if(all(sites.sub[tre.midroot.sub$tip.label,]$Q==region)) {print(paste("USE", i))
-    node[length(node)+1] <- i
-    num.tips[length(num.tips)+1] <- length(tre.midroot.sub$tip.label)
-  }
-}
-
-compat.subsets <- cbind.data.frame(node, num.tips)
-op.node <- compat.subsets$node[which.max(compat.subsets$num.tip)]
-plot(tree_subset(tre.midroot, node = op.node, levels_back = 1))
-
-
