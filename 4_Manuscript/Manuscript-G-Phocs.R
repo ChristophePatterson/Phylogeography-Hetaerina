@@ -33,6 +33,7 @@ p <- list()
 effect.size <- list()
 run.df <- list()
 p.map <- list()
+HPD.trace.list <- list()
 trace.df <- data.frame("tau_amer" = NA, "tau_amer.calv" = NA, "tau_titia.Atl" = NA,"tau_titia" = NA)
 
 # Loop through every model
@@ -98,7 +99,12 @@ for(run in model.names){
   # facet_wrap(~variable, scales = "free")
   
   # calculate HPD for all tau traces
-  HPD.trace <-HPDinterval(as.mcmc(trace[,grep(names(trace), pattern = "tau")]))
+  HPD.trace <- HPDinterval(as.mcmc(trace[,grep(names(trace), pattern = "tau")]))
+  HPD.trace.list[[trace.name]] <- matrix(c(row.names(HPD.trace)[1:2],
+                                         c(paste(HPD.trace[1,1:2], collapse = " - "), paste(HPD.trace[2,1:2], collapse = " - "))),
+                                         nrow=2, byrow = T)
+  # Add to trace.df
+  trace.df
   
   trace.means <- colMeans(trace[,-1], na.rm = T)
   names(trace.means)
@@ -203,8 +209,16 @@ trace.df$mig.type <- sapply(strsplit(trace.df$model, "-"), "[", 6)
 trace.df$beta <- sapply(strsplit(trace.df$model, "-"), "[", 4)
 names(trace.df)
 
-write.table(trace.df, paste0("4_Manuscript/data/G-Phocs/","G-Phocs_results_",draft_genome,"_", gsub(u, replacement = "-", pattern ="\\."),"txt"),
+for(i in 1:length(trace.df$model)){
+  HPD.temp <- HPD.trace.list[[trace.df$model[i]]]
+  trace.df$HPD[i] <- paste0(paste(HPD.temp[1,],"=", HPD.temp[2,]), collapse = " : ")
+}
+
+
+write.table(trace.df, paste0("4_Manuscript/data/G-Phocs/","G-Phocs_results_",draft_genome,"_", gsub(u, replacement = "-", pattern ="\\."),".txt"),
             row.names = F, quote=F)
+
+effect.size
 
 # Mean and range of divergence estiamtes across models
 group_by(trace.df[trace.df$species=="titia",], mig.type) %>%

@@ -83,8 +83,9 @@ ti.am <- ggplot() +
   theme_bw() +
   xlab("mya") +
   ylab("freq") +
-  theme(legend.position = "none") +
-  scale_x_reverse()
+  labs(fill = "") +
+  theme(legend.position = "bottom") +
+  scale_x_reverse(limits = c(max(split.post.ti.am),0))
 
 #  Extract node height for split between H. am and H. cal
 split.post.cal.am <- list()
@@ -102,16 +103,18 @@ am.cal <- ggplot() +
   geom_histogram(aes(split.post.ti.am-split.post.cal.am, fill = "posterior", y = after_stat(density)), alpha = 0.6) +
   ggtitle(expression(italic("H. americana & H. calverti"))) +
   theme_bw() +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "none") +
   scale_fill_manual(values = c("deepskyblue", "grey50")) +
   xlab("mya") +
   ylab("freq") +
   labs(fill = "") +
-  scale_x_reverse(limits =c(12,0))
+  scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
 
 # Get divergence times for Pac and atlantic titia
-
+plot(SNAPP.tree.nex[i][[1]])
+tiplabels()
+nodelabels()
 split.post.tit.tit <- list()
 for(i in 1:length(SNAPP.tree.nex)){
   split.post.tit.tit[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 10)
@@ -128,7 +131,6 @@ median(split.post.ti.am-split.post.tit.tit)
 sd(split.post.ti.am-split.post.tit.tit)
 
 #plot
-summary(split.post.ti.am)
 tit.tit <- ggplot() +
   #geom_histogram(aes(rnorm(length(split.post.ti.am), mean = 3.76, sd = 1.87), fill = "prior"), alpha = 0.5, ) +
   geom_histogram(aes(split.post.ti.am-split.post.tit.tit, fill = "posterior"), alpha = 0.5, show.legend = F) +
@@ -139,11 +141,45 @@ tit.tit <- ggplot() +
   xlab("mya") +
   ylab("freq") +
   labs(fill = "") +
-  scale_x_reverse()
+  scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
 # Merge into one plot with tree
-SNAPP.plot <- p + (tit.tit/ti.am/am.cal) +plot_layout(widths = c(2,1)) + 
+SNAPP.plot <- p + (tit.tit/am.cal/ti.am) + plot_layout(widths = c(2,1)) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model,".png"), width = 11, height = 8)
 ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model, ".pdf"), width = 11, height = 8)
+
+
+### Calculate ESS
+library(coda)
+# Create trace file, need to minus tree height to get node age
+trace <- mcmc(cbind(split.post.ti.am = split.post.ti.am, 
+                    split.post.cal.am=split.post.ti.am-split.post.cal.am, 
+                    split.post.tit.tit=split.post.ti.am-split.post.tit.tit))
+              
+coda::effectiveSize(trace)
+coda::traceplot(trace)
+coda::crosscorr.plot(trace)
+
+coda::HPDinterval(trace)
+colMeans(trace)
+
+trace.df <- as.data.frame(trace)
+
+plot((split.post.ti.am-split.post.tit.tit),(split.post.ti.am-split.post.cal.am), 
+     col = as.numeric((split.post.ti.am-split.post.cal.am)-(split.post.ti.am-split.post.tit.tit)))
+abline(1,1)
+ggplot(trace.df) +
+  geom_point(aes(split.post.tit.tit, split.post.cal.am, col = split.post.cal.am<split.post.tit.tit)) +
+  geom_abline(slope = 1, intercept = 0)
+
+ggplot(trace.df) +
+  geom_histogram(aes(split.post.cal.am-split.post.tit.tit, fill = split.post.cal.am<split.post.tit.tit))
+
+summary(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
+
+HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
+
+
+     
