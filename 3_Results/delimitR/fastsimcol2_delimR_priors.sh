@@ -3,7 +3,7 @@
 #SBATCH -c 12 
 #SBATCH --mem=100G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:100G       # $TMPDIR space required on each compute node, up to 400G.
-#SBATCH -t 72:00:00         # time limit in format dd-hh:mm:ss
+#SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
@@ -50,6 +50,11 @@ pop_file=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3
 # Select directory that delimitR has inputed files into
 cd $output_dir
 
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimR_inputfile.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+echo "Running Rscript"
+
+# Rscript that produces reduced priors
+## Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+#  Once this has been created results plotted using this script
+Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
 cd ~

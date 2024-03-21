@@ -1,0 +1,14 @@
+"Hetaerina_americana_ddRAD_titia_dg_1_MSFS" "Hetaerina_americana_ddRAD_titia_dg_2_MSFS" "Hetaerina_americana_ddRAD_titia_dg_3_MSFS" "Hetaerina_americana_ddRAD_titia_dg_4_MSFS" "Hetaerina_americana_ddRAD_titia_dg_5_MSFS" "Hetaerina_americana_ddRAD_titia_dg_6_MSFS" "Hetaerina_americana_ddRAD_titia_dg_7_MSFS" "Hetaerina_americana_ddRAD_titia_dg_8_MSFS" "Hetaerina_americana_ddRAD_titia_dg_9_MSFS" "Hetaerina_americana_ddRAD_titia_dg_10_MSFS" "Hetaerina_americana_ddRAD_titia_dg_11_MSFS" "Hetaerina_americana_ddRAD_titia_dg_12_MSFS" "Hetaerina_americana_ddRAD_titia_dg_13_MSFS" "class.error"
+"Hetaerina_americana_ddRAD_titia_dg_1_MSFS" 7370 0 2048 0 0 0 0 0 85 79 199 219 0 0.263
+"Hetaerina_americana_ddRAD_titia_dg_2_MSFS" 0 4868 0 2232 0 2900 0 0 0 0 0 0 0 0.5132
+"Hetaerina_americana_ddRAD_titia_dg_3_MSFS" 4075 0 4390 5 0 0 0 0 377 401 307 445 0 0.561
+"Hetaerina_americana_ddRAD_titia_dg_4_MSFS" 0 1826 0 6102 0 2072 0 0 0 0 0 0 0 0.3898
+"Hetaerina_americana_ddRAD_titia_dg_5_MSFS" 0 0 0 0 7162 0 0 0 0 0 0 0 2838 0.2838
+"Hetaerina_americana_ddRAD_titia_dg_6_MSFS" 0 2722 0 1335 0 5941 0 0 0 0 0 0 2 0.4059
+"Hetaerina_americana_ddRAD_titia_dg_7_MSFS" 0 0 0 0 0 0 10000 0 0 0 0 0 0 0
+"Hetaerina_americana_ddRAD_titia_dg_8_MSFS" 0 0 0 0 0 0 0 10000 0 0 0 0 0 0
+"Hetaerina_americana_ddRAD_titia_dg_9_MSFS" 1152 0 1546 0 0 0 0 0 2765 1286 1372 1879 0 0.7235
+"Hetaerina_americana_ddRAD_titia_dg_10_MSFS" 1084 0 1549 0 0 0 0 0 1289 2835 1370 1873 0 0.7165
+"Hetaerina_americana_ddRAD_titia_dg_11_MSFS" 1423 0 1085 0 0 0 0 1 1351 1368 2672 2100 0 0.7328
+"Hetaerina_americana_ddRAD_titia_dg_12_MSFS" 1622 0 1328 0 0 0 0 0 1309 1318 1621 2802 0 0.7198
+"Hetaerina_americana_ddRAD_titia_dg_13_MSFS" 0 0 0 0 1294 2 0 0 0 0 0 0 8704 0.1296

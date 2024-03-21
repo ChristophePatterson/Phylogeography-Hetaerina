@@ -1,6 +1,7 @@
 .libPaths("/nobackup/tmjj24/apps/R/x86_64-pc-linux-gnu-library/4.2/")
 library(delimitR)
 library(vcfR)
+library(ggplot2)
 
 # Change python path
 Sys.setenv(PATH = paste("/nobackup/tmjj24/apps/miniconda3/envs/delimR/bin", Sys.getenv("PATH"), sep=":"))
@@ -10,12 +11,15 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # Set output and working directory
 
-# dir_output <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_Pool_X_HetTit1.0_HetAmer1.0/Hetaerina_titia_ddRAD_titia_dg/delimitR"
+
 upper_dir <- args[1]
 lower_dir <- args[2]
-cores <- as.numeric(args[3])
+ncores <- args[3]
+str(ncores)
+print(paste("Using",ncores, "cores"))
+ncores <- as.numeric(ncores)
 # dir_output <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_Pool_X_HetTit1.0_HetAmer1.0/Hetaerina_titia_ddRAD_titia_dg/delimitR"
-dir_output <- paste0(upper_dir, "/delimitR/", lower_dir)
+dir_output <- paste0(upper_dir, lower_dir)
 
 #Change working directory
 print(dir_output)
@@ -35,7 +39,7 @@ FullPrior <- makeprior(prefix=obsprefix,
                        traitsfile = traitsfile,
                        threshold=100, 
                        thefolder = 'Prior',
-                       ncores = cores)
+                       ncores = ncores)
 
 
 # We want to remove rows that have zero variance. 
@@ -70,9 +74,9 @@ prediction <- RF_predict_abcrf(myRF, myobserved, ReducedPrior, FullPrior, 1000)
 prediction
 
 #write results to file
-write.csv(as.matrix(prediction), file="prediction.csv")
+write.csv(as.matrix(prediction), file=paste0(SNP.library,"_prediction.csv"))
 # Save out of bag error rate
-write.table(myRF$model.rf$confusion.matrix, file = "out_of_bag_error.txt")
+write.table(myRF$model.rf$confusion.matrix, file = paste0(SNP.library,"_out_of_bag_error.txt"))
 
 
 pca <- prcomp(ReducedPrior, scale. = T)

@@ -1,0 +1,14 @@
+"Hetaerina_titia_ddRAD_titia_dg_1_MSFS" "Hetaerina_titia_ddRAD_titia_dg_2_MSFS" "Hetaerina_titia_ddRAD_titia_dg_3_MSFS" "Hetaerina_titia_ddRAD_titia_dg_4_MSFS" "Hetaerina_titia_ddRAD_titia_dg_5_MSFS" "Hetaerina_titia_ddRAD_titia_dg_6_MSFS" "Hetaerina_titia_ddRAD_titia_dg_7_MSFS" "Hetaerina_titia_ddRAD_titia_dg_8_MSFS" "Hetaerina_titia_ddRAD_titia_dg_9_MSFS" "Hetaerina_titia_ddRAD_titia_dg_10_MSFS" "Hetaerina_titia_ddRAD_titia_dg_11_MSFS" "Hetaerina_titia_ddRAD_titia_dg_12_MSFS" "Hetaerina_titia_ddRAD_titia_dg_13_MSFS" "class.error"
+"Hetaerina_titia_ddRAD_titia_dg_1_MSFS" 8232 0 1463 0 0 0 0 0 25 62 76 142 0 0.1768
+"Hetaerina_titia_ddRAD_titia_dg_2_MSFS" 0 6037 0 2224 0 1739 0 0 0 0 0 0 0 0.3963
+"Hetaerina_titia_ddRAD_titia_dg_3_MSFS" 2646 0 6050 5 0 0 0 0 328 379 109 483 0 0.395
+"Hetaerina_titia_ddRAD_titia_dg_4_MSFS" 0 2177 0 6500 0 1323 0 0 0 0 0 0 0 0.35
+"Hetaerina_titia_ddRAD_titia_dg_5_MSFS" 0 0 0 0 7974 0 0 0 0 0 0 0 2026 0.2026
+"Hetaerina_titia_ddRAD_titia_dg_6_MSFS" 0 1975 0 1017 0 7004 0 0 0 0 0 0 4 0.2996
+"Hetaerina_titia_ddRAD_titia_dg_7_MSFS" 0 0 0 0 0 0 10000 0 0 0 0 0 0 0
+"Hetaerina_titia_ddRAD_titia_dg_8_MSFS" 0 0 0 0 0 0 0 10000 0 0 0 0 0 0
+"Hetaerina_titia_ddRAD_titia_dg_9_MSFS" 411 0 1059 4 0 0 0 0 4790 872 1119 1745 0 0.521
+"Hetaerina_titia_ddRAD_titia_dg_10_MSFS" 421 0 1090 2 0 0 0 0 987 4611 1063 1826 0 0.5389
+"Hetaerina_titia_ddRAD_titia_dg_11_MSFS" 522 0 343 0 0 0 0 0 1087 992 5306 1750 0 0.4694
+"Hetaerina_titia_ddRAD_titia_dg_12_MSFS" 819 0 1115 0 0 0 0 0 1472 1501 1524 3569 0 0.6431
+"Hetaerina_titia_ddRAD_titia_dg_13_MSFS" 0 0 0 0 960 1 0 0 0 0 0 0 9039 0.0961
