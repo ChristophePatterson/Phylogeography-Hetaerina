@@ -143,6 +143,9 @@ tit.tit <- ggplot() +
   labs(fill = "") +
   scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
+split.post.ti.am
+
+
 # Merge into one plot with tree
 SNAPP.plot <- p + (tit.tit/am.cal/ti.am) + plot_layout(widths = c(2,1)) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
@@ -150,13 +153,24 @@ SNAPP.plot <- p + (tit.tit/am.cal/ti.am) + plot_layout(widths = c(2,1)) +
 ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model,".png"), width = 11, height = 8)
 ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model, ".pdf"), width = 11, height = 8)
 
+## Final split between titia NA and titia SA
+split.post.titN.titS <- list()
+for(i in 1:length(SNAPP.tree.nex)){
+  split.post.titN.titS[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 11)
+}
+
+#  Merge into one
+split.post.titN.titS <- do.call("c", split.post.titN.titS)
+plot(split.post.ti.am-split.post.titN.titS)
+
 
 ### Calculate ESS
 library(coda)
 # Create trace file, need to minus tree height to get node age
-trace <- mcmc(cbind(split.post.ti.am = split.post.ti.am, 
-                    split.post.cal.am=split.post.ti.am-split.post.cal.am, 
-                    split.post.tit.tit=split.post.ti.am-split.post.tit.tit))
+trace <- mcmc(cbind(split.post.ti.am  = split.post.ti.am, 
+                    split.post.cal.am = split.post.ti.am-split.post.cal.am, 
+                    split.post.tit.tit= split.post.ti.am-split.post.tit.tit,
+                    split.post.titN.titS= split.post.ti.am-split.post.titN.titS))
               
 coda::effectiveSize(trace)
 coda::traceplot(trace)
@@ -167,8 +181,6 @@ colMeans(trace)
 
 trace.df <- as.data.frame(trace)
 
-plot((split.post.ti.am-split.post.tit.tit),(split.post.ti.am-split.post.cal.am), 
-     col = as.numeric((split.post.ti.am-split.post.cal.am)-(split.post.ti.am-split.post.tit.tit)))
 abline(1,1)
 ggplot(trace.df) +
   geom_point(aes(split.post.tit.tit, split.post.cal.am, col = split.post.cal.am<split.post.tit.tit)) +

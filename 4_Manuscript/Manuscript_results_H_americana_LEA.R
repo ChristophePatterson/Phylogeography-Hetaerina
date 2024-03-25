@@ -123,8 +123,8 @@ sites <- read.table(paste0(dir.path, "coorrd_", species,"_complete_",analysis.na
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-#             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+##obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+##             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -247,7 +247,8 @@ library(ggnewscale)
 cbPalette <- c("#F0E442","#D55E00" , "#0072B2", "#999999","#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 # Colour scheme
 
-het.cols <- c("#848A39","#AA9599","#920E02","#726230")
+het.cols <- c("#726230","#AA9599","#548A39","#920E02")
+
 #het.cols <- c("#3E3C3A","#AF0F09","#E5D9BA", "#694438")
 #amer.cols <- c("#948A39","#326230","#AA9599","#120E02")
 
@@ -356,6 +357,7 @@ p <- ggplot() +
   ggtitle(paste("K = ", K))
 
 p
+
 q <- ggplot() +
   geom_raster(data = hill.df.Mex, aes(lon, lat, fill = hill), alpha = 1) +
   #geom_polygon(data = worldmap, aes(long, lat, group = group), col = "black", fill = rgb(0,0,0,alpha = 0.3)) +
@@ -403,7 +405,8 @@ v <- ggplot(qtable)+
   scale_fill_manual(values = het.cols) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm")) +
   ylab(label = paste("K =", K)) 
 # theme(axis.text.x = element_text(size=6))
@@ -434,9 +437,6 @@ write.table(pca.q.df[sites$site.sub!="CUAJ",], file = paste0(dir.path, "LEA_qass
 LEA_popfile <- pca.q.df[,c("samples", "assign")]
 # Convert to charater as factors do not work with assigning text
 LEA_popfile$assign <- as.character(LEA_popfile$assign)
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ZANA"][1]] <- "titia-Pac"
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ESRB"][1]] <- "titia-SAtl"
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="HCAR"][1]] <- "titia-NAtl"
 
 write.table(LEA_popfile, paste0(dir.path, "popfile_", species,".txt"),
             quote = F,row.names = F, col.names = F)

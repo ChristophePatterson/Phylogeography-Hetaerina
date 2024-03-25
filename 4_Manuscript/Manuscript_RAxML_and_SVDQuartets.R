@@ -10,7 +10,7 @@ library(phytools)
 library(phangorn)
 # Get colour pallettes
 het.cols <- data.frame(assign = c(paste0("americana_",1:3),paste0("titia_",1:3)),
-                       cols = c("#848A39","#AA9599","#920E02","#AF0F09","#E5D9BA","#3E3C3A"))
+                       cols = c("#726230","#AA9599","#548A39","#AF0F09","#E5D9BA","#3E3C3A"))
 plot.dir <- "4_Manuscript/plots/Hetaerina_all_ddRAD_titia_dg/"
 # Read in titia RAxML tree
 SNP.library.name <- "Hetaerina_titia_ddRAD_titia_dg"
@@ -42,6 +42,13 @@ sites <- merge(sites, qtable, by.x = "samples", by.y = "samples")
 table(sites$assign_spp)
 any(is.na(sites$assign_spp))
 
+# Order hetr cols correctly
+het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="ZANA"][1])] <- "#AF0F09"
+het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="ESRB"][1])] <- "#E5D9BA"
+het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="HCAR"][1])] <- "#3E3C3A"
+
+
+
 # Merge tree data with sample data
 tree.plot <- ggtree(tre.midroot,size = 1.5) %<+% sites
 # Create support value
@@ -61,12 +68,12 @@ tree.plot$data$assign_spp.col <- het.cols$cols[match(tree.plot$data$assign_spp, 
 tree.plot.3 <- tree.plot +
   geom_segment(aes(x = x, xend = max(x)+0.01, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
   geom_tippoint(aes(x = max(x)+0.01, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
-                shape =15, size = 1) +
+                shape =15, size = 2) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
-  geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 10) +
+  geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -78,6 +85,8 @@ tree.plot.3 <- tree.plot +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         plot.margin = unit(c(0,0,0,0), "cm"))
 
+
+tree.plot.3
 # Read in americana tree
 SNP.library.name <- "Hetaerina_americana_ddRAD_titia_dg"
 species <- "americana"
@@ -108,6 +117,10 @@ sites <- merge(sites, qtable, by.x = "samples", by.y = "samples")
 table(sites$assign_spp)
 any(is.na(sites$assign_spp))
 
+het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="RG"][1])] <- "#AA9599"
+het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="STDM"][1])] <- "#548A39"
+het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="TN"][1])] <- "#726230"
+
 # Merge tree data with sample data
 tree.plot <- ggtree(tre.midroot,size = 1.5) %<+% sites
 # Create support value
@@ -127,12 +140,12 @@ tree.plot$data$assign_spp.col <- het.cols$cols[match(tree.plot$data$assign_spp, 
 tree.plot.4 <- tree.plot +
   geom_segment(aes(x = x, xend = max(x)+0.01, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
   geom_tippoint(aes(x = max(x)+0.01, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
-                shape =15, size = 1) +
+                shape =15, size = 2) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
-  geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 10) +
+  geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -180,5 +193,5 @@ b
 RAxML_plot <-b+(tree.plot.4/tree.plot.3) + plot_layout(width = c(1,2)) + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 # plot.tree.insert <- tree.plot.2 + inset_element(b, left = 0.05, bottom = 0.6, right = 0.6, top = 0.95) 
-ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 10, width = 15)
-ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 10, width = 15)
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 12, width = 15)
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 12, width = 15)

@@ -1,8 +1,8 @@
-log  file=/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg_T20.log;
-cd /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/;
+log  file=/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg_T20.log;
+cd /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/;
 set hashcomment=y;
-execute /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg.noX.noCUAJ.nex;
+execute /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg.noX.noCUAJ.nex;
 
 svdQuartets bootstrap=standard nthreads=20;
-saveTrees file = /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg_T20.tre supportValues = nodeLabels;
+saveTrees file = /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_americana_ddRAD_titia_dg/SVDQuartets/Hetaerina_americana_ddRAD_titia_dg_T20.tre supportValues = nodeLabels;
 quit;
