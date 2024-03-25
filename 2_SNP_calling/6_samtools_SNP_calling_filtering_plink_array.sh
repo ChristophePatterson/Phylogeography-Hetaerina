@@ -3,10 +3,10 @@
 #SBATCH -c 1 
 #SBATCH --mem=50G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:50G       # $TMPDIR space required on each compute node, up to 400G.
-#SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
+#SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 
 # Specify the tasks to run:
-#SBATCH --array=1-6   # Create 6 tasks, numbers 1 to 6
+#SBATCH --array=1,3,5   # Create 6 tasks, numbers 1 to 6
 #SBATCH --output=slurm-%x.%j.out
 
 # Commands to execute start here
@@ -32,16 +32,16 @@ echo "$line_num"
 
 # Get library and genome names
 
-Library_name=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/library_combinations/library_name)
-genome=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/library_combinations/genome)
+Library_name=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
+genome=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/genome)
 
 echo "Processing database $Library_name using $genome"
 
 # List of BamFiles to use
-bamFiles=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/library_combinations/bamfiles/$Library_name.direct_path.txt)
+bamFiles=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/bamfiles/$Library_name.direct_path.txt)
 
 #Output directory
-output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC/$Library_name)
+output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$Library_name)
 
 #Make output directories
 mkdir -p $output_dir
@@ -59,10 +59,10 @@ cd $output_dir
 
 bcftools mpileup -Ou \
 --max-depth 10000 -q 20 -Q 20 \
- -P ILLUMINA -a FORMAT/DP,FORMAT/AD \
+ -P ILLUMINA --annotate FORMAT/DP,FORMAT/AD \
 -f $genome \
 -b $bamFiles | \
-bcftools call -m -P 1e-6 -f GQ \
+bcftools call -m -P 1e-6 -f GQ -G - \
 -O b -o $Library_name.all.bcf
 
 
@@ -145,12 +145,11 @@ plink --vcf $output_dir/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz --doub
 --make-bed --out $BCF_FILE.LD
 
 # Calculate the cororlation over distance 
-
-/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield/6_LD_dist_calc_python3.py -i $BCF_FILE.LD.ld.gz -o $BCF_FILE.LD
+/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/6_LD_dist_calc_python3.py -i $BCF_FILE.LD.ld.gz -o $BCF_FILE.LD
 
 # Plot results using R
 
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/6_LD_dist_calc_plot.R
+Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/6_LD_dist_calc_plot.R
 
 cd $output_dir
 

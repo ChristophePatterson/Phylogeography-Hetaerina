@@ -23,26 +23,31 @@ line_num=$(expr $SLURM_ARRAY_TASK_ID)
 # Get library name
 SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
 #Output directory
-input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/)
+input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/)
+output_dir=($input_dir/$SNP_library/G-Phocs/model_runs/)
+
+rm -r $input_dir/$SNP_library/G-Phocs/
 mkdir -p $input_dir/$SNP_library/G-Phocs
 mkdir -p $input_dir/$SNP_library/G-Phocs/gphocs-loci
+mkdir -p $output_dir
 # Convert bcf into vcf.gz
-bcftools view -O z $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf > $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.vcf.gz
+bcftools view -O z $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.bcf > $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz
 
 # Number of samples to select from
-select_N=(2)
+select_N=(3)
 
 # Remove any previous gphocs files
 rm $input_dir/$SNP_library/G-Phocs/gphocs-loci/*
 # Create g-phocs input file
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/G-Phocs/vcfR2g-phocs.R $SNP_library $input_dir $select_N
+Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/G-Phocs/vcfR2g-phocs.R $SNP_library $input_dir $select_N $output_dir
 
 cd $input_dir/$SNP_library/G-Phocs/
 # Concat all files into one
-cat gphocs-loci/Gphocs_header.txt gphocs-loci/*.gphocs > $SNP_library.gphocs
+cat gphocs-loci/Gphocs_header.txt gphocs-loci/*.gphocs > $SNP_library.N${select_N}.gphocs
 
 ## Gerenation input files for gphocs
-## Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/G-Phocs/g-phocs-config-generation.R $SNP_library $input_dir $select_N
+rm $output_dir/*
+Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/G-Phocs/g-phocs-config-generation.R $SNP_library $input_dir $select_N $output_dir
 
 
 

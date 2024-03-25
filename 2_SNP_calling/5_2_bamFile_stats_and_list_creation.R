@@ -24,13 +24,6 @@ head(titia_dg)
 colnames(americana_dg) <- c("sample", "num.reads", "coverage", "coverage.SD", "unknown", "prop.mapped")
 colnames(titia_dg) <- c("sample", "num.reads", "coverage", "coverage.SD", "unknown", "prop.mapped")
 
-###### Comparison between old and new (hirise) mapping
-#titia_old_dg <- read.table(paste0(directory,"/BamFiles/Allsamples_titia_dg.bamstats"))
-#colnames(titia_old_dg) <- c("sample", "coverage", "coverage.SD", "num.reads", "prop.mapped")
-#boxplot(titia_dg$num.reads, titia_old_dg$num.reads)
-#rbind(summary(titia_dg$num.reads), summary(titia_old_dg$num.reads))
-#######################################################
-
 #Calculating 2sd of map reads
 sd.2.americana <- mean(americana_dg$num.reads)-sd(americana_dg$num.reads)*2
 americana_dg$cov10_NoR2sd <- americana_dg$coverage>=5&americana_dg$num.reads>=sd.2.americana

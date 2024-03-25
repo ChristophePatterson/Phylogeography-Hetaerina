@@ -3,7 +3,7 @@
 #SBATCH -c 1 
 #SBATCH --mem=30G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:30G       # $TMPDIR space required on each compute node, up to 400G.
-#SBATCH -t 72:00:00         # time limit in format dd-hh:mm:ss
+#SBATCH -t 70:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
@@ -21,7 +21,7 @@ conda activate easySFS
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 echo "$line_num"
 library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
-dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/$library/)
+dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$library/)
 species=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/species)
 cd $dir_path
 # Make output for SFS
@@ -40,14 +40,14 @@ easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file -a -f --preview > $dir_path
 # Assign values to sp1, sp2, and sp3 based on the value of library
 case "$library" in
     "Hetaerina_americana_ddRAD_titia_dg")
-        sp_0=16
-        sp_1=16
-        sp_2=58
+        sp_0=10
+        sp_1=11
+        sp_2=18
         ;;
     "Hetaerina_titia_ddRAD_titia_dg")
-        sp_0=82
-        sp_1=174
-        sp_2=76
+        sp_0=26
+        sp_1=50
+        sp_2=20
         ;;
     *)  # Default case if library doesn't match any expected value
         echo "Unknown library"

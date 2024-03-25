@@ -7,10 +7,10 @@ library(tidyverse)
 
 
 input.dir.top <- paste0("4_Manuscript/data/G-Phocs/")
-draft_genome <- "americana_dg"
+draft_genome <- "titia_dg"
 input.dir <- paste0(input.dir.top, draft_genome, "/")
 model.names <- list.files(input.dir)
-model.names <- model.names[grep(model.names, pattern = "trace")]
+model.names <- model.names[grep(model.names, pattern = ".N3.trace")]
 model.names <- gsub(x = model.names, pattern = ".trace",replacement =  "")
 
 trace.files <- paste0(model.names,".trace")
@@ -194,9 +194,9 @@ for(run in model.names){
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
                                                                  labels = abs(seq(20, 0, -1)))
   
-  ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
-                                              gsub(u, replacement = "-", pattern ="\\."),".png"),
-         width =12, height = 6)
+  #ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
+  #                                            gsub(u, replacement = "-", pattern ="\\."),".png"),
+  #       width =12, height = 6)
   
 }
 
@@ -229,10 +229,10 @@ group_by(trace.df[trace.df$species=="americana",], mig.type) %>%
   summarise(mn.tau_amer.calv = mean(tau_amer.calv), min.tau_amer.calv = min(tau_amer.calv), max.tau_amer.calv = max(tau_amer.calv),
             mn.tau_amer = mean(tau_amer), min.tau_amer = min(tau_amer), max.tau_amer = max(tau_amer))
 
-man.plot <- (p[["G-Phocs-a1-b20-titia-Iso-run0"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
-               p[["G-Phocs-a1-b20-americana-Iso-run0"]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
-  (p[["G-Phocs-a1-b20-titia-migR-run0"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
-     p[["G-Phocs-a1-b20-americana-migR-run0"]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
+man.plot <- (p[["G-Phocs-a1-b20-titia-Iso-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
+               p[["G-Phocs-a1-b20-americana-Iso-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
+  (p[["G-Phocs-a1-b20-titia-migR-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
+     p[["G-Phocs-a1-b20-americana-migR-N3"]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots","-u-",

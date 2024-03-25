@@ -7,6 +7,7 @@ args <- commandArgs(trailingOnly = TRUE)
 SNP.library.name <- args[1]
 # SNP.library.name <- "Hetaerina_titia_ddRAD_titia_dg"
 SNP.library.location <- args[2]
+output_dir <- args[4]
 # SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/"
 dir.path <- paste0(SNP.library.location,SNP.library.name,"/")
 dir.path.GPhocs <- paste0(dir.path, "G-Phocs/")
@@ -36,7 +37,7 @@ colnames(pop_assign) <- c("sample", "pop")
 
 
 # Creat name for each model
-model.names <- paste0("G-Phocs-a", model.df$alpha, "-b",model.df$beta, "-", model.df$species, "-", model.df$model, "-run0")
+model.names <- paste0("G-Phocs-a", model.df$alpha, "-b",model.df$beta, "-", model.df$species, "-", model.df$model, "-N", sample.num)
 # Write file that has the names of each unique model name
 write.table(x = model.names, file = paste0(dir.path.GPhocs,"/","G-Phocs-model-names.txt"),
               row.names = F, col.names = F, quote = F, sep = "\t")
@@ -44,7 +45,7 @@ write.table(x = model.names, file = paste0(dir.path.GPhocs,"/","G-Phocs-model-na
 
 set.seed(28)
 i <- 1
-dir.create(paste0(dir.path.GPhocs,"model_runs/"))
+dir.create(output_dir)
 
 for(i in 1:dim(model.df)[1]){
     #print(model.df[i,])
@@ -58,9 +59,9 @@ for(i in 1:dim(model.df)[1]){
 
     # Start replacing lines in config file
     # Input sequence
-    config.file[3]  <- paste0("\t\tseq-file\t\t",dir.path.GPhocs,SNP.library.name,".gphocs")
+    config.file[3]  <- paste0("\t\tseq-file\t\t",dir.path.GPhocs,SNP.library.name,".N",sample.num, ".gphocs")
     # Output trace file
-    config.file[4]  <- paste0("\t\ttrace-file\t\t",dir.path.GPhocs,"model_runs/",model.name,".trace")
+    config.file[4]  <- paste0("\t\ttrace-file\t\t",output_dir,"/",model.name,".trace")
     # Replace alpha and beta
     config.file[13]  <- paste0("\t\ttau-theta-alpha\t\t",model.df$alpha[i])
     config.file[14]  <- paste0("\t\ttau-theta-beta\t\t",model.df$beta[i])
@@ -78,7 +79,7 @@ for(i in 1:dim(model.df)[1]){
     }
     
     # Write code output
-    writeLines(config.file, con = paste0(dir.path.GPhocs,"model_runs/",model.name,".config"),sep = "\n")
+    writeLines(config.file, con = paste0(output_dir,"/",model.name,".config"),sep = "\n")
 
     # Create slurm script
     
@@ -98,9 +99,10 @@ slurm_submit_gphocs <- function(prefix,models,pathtogphocs,ncores){
                       print(paste(pathtogphocs, " ",prefix,model,".config -n ",ncores, " > ",prefix,model,".log", sep = "")))
   writeLines(sbatch_file, paste(prefix, model,"_run.sh", sep = ""))
   system(paste("sbatch ", paste(prefix, model,"_run.sh", sep = "")), wait = F)
+  Sys.sleep(5)
   }
 }
 
-slurm_submit_gphocs(prefix = paste0(dir.path.GPhocs, "model_runs/"), models = model.names, pathtogphocs = "/nobackup/tmjj24/apps/G-PhoCS/bin/G-PhoCS", ncores = 24)
+slurm_submit_gphocs(prefix = paste0(output_dir,"/"), models = model.names, pathtogphocs = "/nobackup/tmjj24/apps/G-PhoCS/bin/G-PhoCS", ncores = 24)
 
 

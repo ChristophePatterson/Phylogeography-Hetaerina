@@ -113,6 +113,7 @@ fastsimcoalsim_sbatch <- function(prefix,pathtofsc,nreps){
                       print(paste(pathtofsc, " -t ", prefix, "_", count, ".tpl",  " -e ", prefix, "_", count, ".est -n 1 --msfs -q --multiSFS -x -E" ,nreps, sep = "")))
   writeLines(sbatch_file, paste(prefix, "_", count , "_run.sh", sep = ""))
   system(paste(paste("sbatch ", prefix, "_", count , "_run.sh", sep = "")), wait = F)
+  Sys.sleep(5)
 count <- count + 1
   }
 }
