@@ -30,3 +30,11 @@ library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_librari
 echo "Processing database $Library_name using $genome"
 
 Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/7_SNP_filtering_vcfR.R $Library_name $library_version
+
+## Get the most highest quality samples
+cd $library_version/$Library_name/
+
+bcftools stats -s - $Library_name.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.vcf.gz > ${Library_name}_bcfstats_snps.txt
+
+plot-vcfstats -p bcfstats ${Library_name}_bcfstats_snps.txt
+

@@ -1,0 +1,20 @@
+
+  Processing 3 populations - ['americana-Mex', 'calverti-Mex', 'americana-USA']
+
+    Running preview mode. We will print out the results for # of segregating sites
+    for multiple values of projecting down for each population. The dadi
+    manual recommends maximizing the # of seg sites for projections, but also
+    a balance must be struck between # of seg sites and sample size.
+
+    For each population you should choose the value of the projection that looks
+    best and then rerun easySFS with the `--proj` flag.
+    
+americana-Mex
+(2, 129)	(3, 194)	(4, 238)	(5, 271)	(6, 298)	(7, 319)	(8, 338)	(9, 353)	(10, 367)	(11, 378)	(12, 389)	(13, 396)	(14, 404)	(15, 403)	(16, 409)	(17, 400)	(18, 405)	(19, 366)	(20, 370)	(21, 277)	(22, 279)	
+
+calverti-Mex
+(2, 200)	(3, 300)	(4, 366)	(5, 414)	(6, 453)	(7, 484)	(8, 510)	(9, 529)	(10, 547)	(11, 552)	(12, 564)	(13, 559)	(14, 568)	(15, 542)	(16, 547)	(17, 497)	(18, 501)	(19, 366)	(20, 367)	
+
+americana-USA
+(2, 112)	(3, 168)	(4, 207)	(5, 237)	(6, 262)	(7, 283)	(8, 301)	(9, 318)	(10, 332)	(11, 346)	(12, 358)	(13, 369)	(14, 379)	(15, 389)	(16, 398)	(17, 406)	(18, 414)	(19, 421)	(20, 428)	(21, 435)	(22, 441)	(23, 447)	(24, 453)	(25, 458)	(26, 463)	(27, 468)	(28, 472)	(29, 477)	(30, 481)	(31, 485)	(32, 489)	(33, 493)	(34, 496)	(35, 500)	(36, 503)	(37, 506)	(38, 509)	(39, 512)	(40, 515)	(41, 517)	(42, 520)	(43, 522)	(44, 525)	(45, 527)	(46, 529)	(47, 531)	(48, 533)	(49, 535)	(50, 537)	(51, 538)	(52, 539)	(53, 541)	(54, 542)	(55, 544)	(56, 545)	(57, 546)	(58, 547)	(59, 547)	(60, 548)	(61, 544)	(62, 545)	(63, 543)	(64, 544)	(65, 535)	(66, 536)	(67, 516)	(68, 517)	(69, 482)	(70, 482)	(71, 374)	(72, 374)	
+
