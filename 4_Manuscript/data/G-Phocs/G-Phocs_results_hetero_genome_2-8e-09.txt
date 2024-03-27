@@ -1,0 +1,5 @@
+tau_amer tau_amer.calv tau_titia.Atl tau_titia model species mig.type beta HPD
+NA NA 0.88259158959028 3.00085222573096 G-Phocs-a1-b20-titia-Iso-N3 titia Iso b20 tau_titia.Atl = 0.8226 - 0.939017857142857 : tau_titia = 2.89601428571429 - 3.10983928571429
+1.57711044739036 4.02431080445306 NA NA G-Phocs-a1-b20-americana-Iso-N3 americana Iso b20 tau_amer = 1.51025 - 1.64345 : tau_amer.calv = 3.89148928571429 - 4.14667142857143
+NA NA 1.6909754640613 2.88754982367274 G-Phocs-a1-b20-titia-migR-N3 titia migR b20 tau_titia.Atl = 1.43126071428571 - 1.92903571428571 : tau_titia = 2.77886785714286 - 2.994875
+1.85852166340728 3.99812757798474 NA NA G-Phocs-a1-b20-americana-migR-N3 americana migR b20 tau_amer = 1.74861785714286 - 1.96654642857143 : tau_amer.calv = 3.8739 - 4.13177857142857

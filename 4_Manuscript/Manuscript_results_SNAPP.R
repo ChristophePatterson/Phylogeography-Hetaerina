@@ -191,6 +191,7 @@ ggplot(trace.df) +
 
 summary(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
 
+sum(trace.df$split.post.cal.am>=trace.df$split.post.tit.tit)/length(trace.df$split.post.tit.tit)
 HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
 
 

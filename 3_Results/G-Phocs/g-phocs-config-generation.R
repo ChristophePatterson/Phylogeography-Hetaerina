@@ -93,7 +93,7 @@ slurm_submit_gphocs <- function(prefix,models,pathtogphocs,ncores){
                       paste0("#SBATCH -c ", ncores),
                       "#SBATCH --mem=10G",
                       "#SBATCH --gres=tmp:10G",
-                      "#SBATCH -t 72:00:00",
+                      "#SBATCH -t 42:00:00",
                       paste0("#SBATCH --output=slurm-%x.%j.out"),
                       "",
                       print(paste(pathtogphocs, " ",prefix,model,".config -n ",ncores, " > ",prefix,model,".log", sep = "")))
