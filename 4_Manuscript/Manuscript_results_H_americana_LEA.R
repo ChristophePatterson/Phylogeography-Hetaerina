@@ -183,6 +183,11 @@ colnames(q.coord.pop) <- c("site", "lat", "long", LETTERS[1:K])
 q.coord.pop$lat <- as.numeric(q.coord.pop$lat)
 q.coord.pop$long <- as.numeric(q.coord.pop$long)
 
+# Figure out what number each region has been assigned to (As it varies between sNMF runs)
+Namer.clust <- which.max(q.coord.pop[q.coord.pop$site=="TN_United States_Gulf",LETTERS[1:K]])
+SAmer.clust <- which.max(q.coord.pop[q.coord.pop$site=="STDM_Mexico_Pacific",LETTERS[1:K]])
+cal.clust <- which.max(q.coord.pop[q.coord.pop$site=="RG_Mexico_",LETTERS[1:K]])
+
 #Conduct PCA
 geno2lfmm(paste0(dir.path, analysis.name,snp_sub_text,".geno"), 
           paste0(dir.path, analysis.name,snp_sub_text,".lfmm"), force = TRUE)
@@ -247,7 +252,10 @@ library(ggnewscale)
 cbPalette <- c("#F0E442","#D55E00" , "#0072B2", "#999999","#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 # Colour scheme
 
-het.cols <- c("#726230","#AA9599","#548A39","#920E02")
+het.cols <- c("#726230","#AA9599","#548A39")
+het.cols[cal.clust] <- "#AA9599"
+het.cols[Namer.clust] <- "#726230"
+het.cols[SAmer.clust] <- "#548A39"
 
 #het.cols <- c("#3E3C3A","#AF0F09","#E5D9BA", "#694438")
 #amer.cols <- c("#948A39","#326230","#AA9599","#120E02")
@@ -448,7 +456,10 @@ write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", s
 # PCA plots
 y <- ggplot(pca.q.df) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols, name = "Ancestory assignment") +
+  scale_fill_manual(values = het.cols, name = "Ancestory assignment", 
+                    c(expression(paste(italic("H. americana"), " north")), 
+                      expression(paste(italic("H. americana"), " south")), 
+                      expression(paste(italic("H. calverti"))))) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.8, 0.2))
@@ -481,7 +492,7 @@ plot2 <- y + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")"
 ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork.png"), plot=plot1, height=7, width=15)
 ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork.pdf"), plot=plot1, height=7, width=15)
 
-vcf.SNPs
+
 ############################################
 ####### Fst and population structure  ######
 ############################################
