@@ -185,6 +185,12 @@ colnames(q.coord.pop) <- c("site", "lat", "long", LETTERS[1:K])
 q.coord.pop$lat <- as.numeric(q.coord.pop$lat)
 q.coord.pop$long <- as.numeric(q.coord.pop$long)
 
+# Figure out what number each region has been assigned to (As it varies between sNMF runs)
+Pac.clust <- which.max(q.coord.pop[q.coord.pop$site=="ZANA_Mexico_Pacific",LETTERS[1:K]])
+SAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="ESRB_Costa Rica_Carribbean",LETTERS[1:K]])
+NAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="HCAR_United States_Gulf",LETTERS[1:K]])
+
+
 #Conduct PCA
 geno2lfmm(paste0(dir.path, analysis.name,snp_sub_text,".geno"), 
           paste0(dir.path, analysis.name,snp_sub_text,".lfmm"), force = TRUE)
@@ -248,8 +254,8 @@ library(ggnewscale)
 
 cbPalette <- c("#F0E442","#D55E00" , "#0072B2", "#999999","#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 # Colour scheme
-
-het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")
+# Order Het cols based on what regions where assign in sNMF
+het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")[c(Pac.clust,SAtl.clust,NAtl.clust)]
 #het.cols <- c("#3E3C3A","#AF0F09","#E5D9BA", "#694438")
 #amer.cols <- c("#848A39","#726230","#920E02","#AA9599")
 
@@ -505,6 +511,7 @@ qtable <- cbind(rep(sites$samples,K), rep(sites$Lat,K), rep(1:K, each = length(s
 qtable <-  data.frame(qtable)
 colnames(qtable) <- c("sample","lat","Qid", "Q")
 
+
 # New ocean drainage 
 sites$Ocean.drainage.new <- sites$Ocean.drainage
 sites$Ocean.drainage.new[sites$Ocean.drainage=="Atlantic"] <- "Gulf"
@@ -556,22 +563,24 @@ LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ZANA"][1
 LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ESRB"][1]] <- "titia-SAtl"
 LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="HCAR"][1]] <- "titia-NAtl"
 
+
 write.table(LEA_popfile, paste0(dir.path, "popfile_", species,".txt"),
             quote = F,row.names = F, col.names = F)
 
 write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", species,"_noCUAJ.txt"),
             quote = F,row.names = F, col.names = F)
 
-
+# Names rather than number in PCA plot
+pca.q.df$assign_name <- LEA_popfile$assign
 # PCA plots
 y <- ggplot(pca.q.df) +
-  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols, name = "Ancestory assignment") +
+  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign_name), size = 6, shape = 21, color = "black") +
+  scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.2, 0.8))
 
-
+y
 a <- ggplot() +
   geom_sf(data = worldmap, fill = "#FFE6D4", col = "black") +
   geom_point(data = pca.q.df, aes(Long, Lat, fill = assign), shape = 21, size = 6) +
@@ -927,7 +936,7 @@ q <- ggplot(hybrid.sites) +
 
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_v2.png"), q, width = 6.5, height = 6)
 
-# What is the hybrid index of samples CUAJa02 and CUAJa03
+# Are there any samples that have a hybrid index suggested of introgression
 hybrid.sites[hybrid.sites$hybrid.index>0.2&hybrid.sites$hybrid.index<0.8,]
 
 #load in depth river shapefile
@@ -985,15 +994,9 @@ table(gen.mat[,"CUAJa02"])/(dim(gen.mat)[1]-table(gen.mat[,"CUAJa02"])["NA/NA"])
 #Without X
 table(hybrid.sites$Site.ID)
 table(gen.mat[locus.info$lg!="X","CUAJa02"])/(dim(gen.mat[locus.info$lg!="X",])[1]-table(gen.mat[locus.info$lg!="X","CUAJa02"])["NA/NA"])*100
-table(gen.mat[locus.info$lg!="X","CUAJa03"])/(dim(gen.mat[locus.info$lg!="X",])[1]-table(gen.mat[locus.info$lg!="X","CUAJa03"])["NA/NA"])*100
-
 
 hybrid.sites$het.fst[hybrid.sites$samples=="CUAJa02"]
 hybrid.sites$hybrid.index[hybrid.sites$samples=="CUAJa02"]
-
-hybrid.sites$het.fst[hybrid.sites$samples=="CUAJa03"]
-hybrid.sites$hybrid.index[hybrid.sites$samples=="CUAJa03"]
-
 
 plot.hybrid <- p.h / (r+q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")")
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_with_genotype_horizontal_v2.png"), plot.hybrid, width = 12, height = 11)

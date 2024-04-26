@@ -31,7 +31,9 @@ qtitia <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titi
 qtitia$assign_spp <- paste0(qtitia$species,"_", qtitia$assign)
 qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
 qameri$assign_spp <- paste0(qameri$species,"_", qameri$assign)
-qtable <- rbind(qtitia, qameri)
+names(qtitia)
+names(qameri$sample)
+qtable <- rbind(qtitia, qameri[,names(qtitia)])
 
 # Merge with LEA assignment data
 samples <- tre.midroot$tip.label
@@ -46,8 +48,9 @@ any(is.na(sites$assign_spp))
 het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="ZANA"][1])] <- "#AF0F09"
 het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="ESRB"][1])] <- "#E5D9BA"
 het.cols$cols[het.cols$assign==paste0("titia_",sites$assign[sites$site.sub=="HCAR"][1])] <- "#3E3C3A"
-
-
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="ZANA")][1])] <- "Pacific"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="ESRB")][1])] <- "South Atlantic"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="HCAR")][1])] <- "North Atlantic"
 
 # Merge tree data with sample data
 tree.plot <- ggtree(tre.midroot,size = 1.5) %<+% sites
@@ -59,21 +62,26 @@ tree.plot$data$support.100[tree.plot$data$support<95] <- NA
 tree.plot$data$support.100[tree.plot$data$support>=95] <- "*"
 # tree.plot$data$support.100[tree.plot$data$support>=100] <- "*"
 
-
 tree.plot$data[tree.plot$data$isTip&is.na(tree.plot$data$assign_spp),]
 
 tree.plot$data$assign_spp <- as.factor(tree.plot$data$assign_spp)
 tree.plot$data$assign_spp.col <- het.cols$cols[match(tree.plot$data$assign_spp, het.cols$assign)]
 
+titia_cluster_label <- group_by(tree.plot$data, assign_spp_name) %>%
+  summarise(mn.y = median(y), mn.x = max(tree.plot$data$x)+(max(tree.plot$data$x)*0.07))
+max(tree.plot$data$x)
+min(tree.plot$data$x)  
 tree.plot.3 <- tree.plot +
-  geom_segment(aes(x = x, xend = max(x)+0.01, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
-  geom_tippoint(aes(x = max(x)+0.01, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
+  geom_segment(aes(x = x, xend = max(x)+max(x*0.02), y=y, yend=y), col = tree.plot$data$assign_spp.col) +
+  geom_tippoint(aes(x = max(x)+max(x*0.02), col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
                 shape =15, size = 2) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
   geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
+  geom_text(data = titia_cluster_label, aes(x = mn.x, y = mn.y, label = assign_spp_name),
+            angle= -90, size = 10) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -83,7 +91,8 @@ tree.plot.3 <- tree.plot +
          alpha="none") +
   geom_treescale() +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
-        plot.margin = unit(c(0,0,0,0), "cm"))
+        plot.margin = unit(c(0,0,0,0), "cm")) +
+  ggtitle(label = expression(paste("(a) ", italic("H. titia"))))
 
 
 tree.plot.3
@@ -106,7 +115,7 @@ qtitia <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titi
 qtitia$assign_spp <- paste0(qtitia$species,"_", qtitia$assign)
 qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
 qameri$assign_spp <- paste0(qameri$species,"_", qameri$assign)
-qtable <- rbind(qtitia, qameri)
+qtable <- rbind(qtitia, qameri[,names(qtitia)])
 
 # Merge with LEA assignment data
 samples <- tre.midroot$tip.label
@@ -120,6 +129,11 @@ any(is.na(sites$assign_spp))
 het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="RG"][1])] <- "#AA9599"
 het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="STDM"][1])] <- "#548A39"
 het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="TN"][1])] <- "#726230"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="RG")][1])] <- "italic(H.~calverti)"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="STDM")][1])] <- "South~italic(H.~americana)"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="TN")][1])] <- "North~italic(H.~americana)"
+
+
 
 # Merge tree data with sample data
 tree.plot <- ggtree(tre.midroot,size = 1.5) %<+% sites
@@ -137,15 +151,21 @@ tree.plot$data[tree.plot$data$isTip&is.na(tree.plot$data$assign_spp),]
 tree.plot$data$assign_spp <- as.factor(tree.plot$data$assign_spp)
 tree.plot$data$assign_spp.col <- het.cols$cols[match(tree.plot$data$assign_spp, het.cols$assign)]
 
+
+americana_cluster_label <- group_by(tree.plot$data, assign_spp_name) %>%
+  summarise(mn.y = median(y), mn.x = max(tree.plot$data$x)+(max(tree.plot$data$x)*0.07))
+
 tree.plot.4 <- tree.plot +
-  geom_segment(aes(x = x, xend = max(x)+0.01, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
-  geom_tippoint(aes(x = max(x)+0.01, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
+  geom_segment(aes(x = x, xend = max(x)+max(x)*0.02, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
+  geom_tippoint(aes(x = max(x)+max(x)*0.02, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
                 shape =15, size = 2) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
   geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
+  geom_text(data = americana_cluster_label, aes(x = mn.x, y = mn.y, label = assign_spp_name),
+            angle= -90, size = 10, parse = T) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -155,9 +175,16 @@ tree.plot.4 <- tree.plot +
          alpha="none") +
   geom_treescale() +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
-        plot.margin = unit(c(0,0,0,0), "cm"))
+        plot.margin = unit(c(0,0,0,0), "cm")) +
+  ggtitle(label = expression(paste("(b) ", italic("H. americana & H. calverti"))))
 
 tree.plot.4
+
+
+RAxML_plot <- tree.plot.3+tree.plot.4
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment_no_map.png"), height = 20, width = 15)
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment_no_map.pdf"), height = 20, width = 15)
+
 
 # MAP of samples
 world.e <- data.frame(Long = c(-120,-60), Lat = c(8,38))
