@@ -41,9 +41,8 @@ dir.create(plot.dir)
 analysis.name <- "H_titia_complete_snp_noX"
 
 vcf <- read.vcfR(paste0(dir.path,SNP.library.name,filter_para,".vcf.gz"))
-# Remove sample CUAJa03
-vcf <- vcf[sample = ((colnames(vcf@gt)[-1])[colnames(vcf@gt)[-1]!="CUAJa03"])]
 
+colnames(vcf@gt)
 # Removes . from varient names as genind does like that
 vcf@fix[,1] <- gsub(vcf@fix[,1], pattern = "\\.", replacement = "_")
 
@@ -51,14 +50,14 @@ vcf@fix[,1] <- gsub(vcf@fix[,1], pattern = "\\.", replacement = "_")
 X_chrom <- "HetTit1_0_p_scaff-12-96647824"
 table(vcf@fix[,1]!=X_chrom)
 vcf.SNPs <- vcf[vcf@fix[,1]!=X_chrom,]
-colnames(vcf.SNPs@gt)
+
 # Stats
 myMiss <- apply(extract.gt(vcf.SNPs), MARGIN = 2, function(x){ sum(is.na(x)) })
 myMiss <- data.frame(sample = names(myMiss), per.gt = myMiss/nrow(vcf)*100)
 
 summary(myMiss)
 ggplot(myMiss) +
-  geom_violin(aes(x = "X", y = per.gt)) +
+  geom_violin(aes(x = "X", y = per.gt), outlier.colour = NA) +
   geom_jitter(aes(x = "X", y = per.gt), height = 0, width = 0.2)
 
 # Creaete genind object
@@ -126,8 +125,8 @@ sites <- read.table(paste0(dir.path, "coorrd_Titia_complete",analysis.name ,".tx
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-##obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-##             CPU = 3, project = "new", repetitions = 20, alpha = 100)
+#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+#             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -214,7 +213,6 @@ pca.data$Country_Ocean <- factor(pca.data$Country_Ocean,
                                             "Carribbean_Costa Rica", "Carribbean_Belize", "Gulf_Mexico", 
                                             "Carribbean_Mexico", "Atlantic_United States", "occisa","americana"))
 names(pca.data)
-grep(pca.data$samples, pattern="CUAJa02")
 
 # Plot basic PCA data
 ggplot(pca.data) +
@@ -252,67 +250,6 @@ cbPalette <- c("#F0E442","#D55E00" , "#0072B2", "#999999","#E69F00" , "#56B4E9",
 # Colour scheme
 
 het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")
-
-# Create data set of assignments
-best <- which.min(cross.entropy(titia.snmf, K = K))
-qmatrix = Q(titia.snmf, K = K, run = best)
-qtable <- cbind(rep(sites$samples,K), rep(sites$Lat,K), rep(1:K, each = length(sites$samples)), c(qmatrix[,1:K]))
-qtable <-  data.frame(qtable)
-colnames(qtable) <- c("sample","lat","Qid", "Q")
-
-# New ocean drainage 
-sites$Ocean.drainage.new <- sites$Ocean.drainage
-sites$Ocean.drainage.new[sites$Ocean.drainage=="Atlantic"] <- "Gulf"
-qtable$sample <-  factor(qtable$sample, levels = sites$sample[order(paste(sites$species,sites$Ocean.drainage.new, sites$Country, sites$Long, sites$site.name))])
-qtable$Q <- as.numeric(qtable$Q)
-qtable$sample_lat <- paste(qtable$lat, qtable$sample)
-
-qtable$[grep(qtable$sample, pattern = "HXRC")[1],]
-
-# Are there any sample that have odd Q assigns
-qtable[qtable$Q>0.2&qtable$Q<0.8,]
-
-# Assign PCA colour based off LEA anaylsis
-qdf <- cbind(sites[,c("samples","Lat","Long")],Q(titia.snmf, K = K, run = best))
-barchart(titia.snmf, K = 3, run = best)
-for(i in 1:length(qdf$samples)){
-  qdf$assign[i] <- which.max(qdf[i,c(4:(3+K))])
-}
-
-qdf$assign
-pca.q.df <- merge(pca.data, qdf[,c("samples","assign")], by = "samples")
-pca.q.df$site.sub[is.na(pca.q.df$site.sub)] <- "NA01"
-
-pca.q.df$assign <- as.factor(pca.q.df$assign)
-
-# Write out dataframe of sample and qassign
-write.table(pca.q.df, file = paste0(dir.path, "LEA_qassign_pca_samples.txt"))
-# Without CUAJ
-write.table(pca.q.df[sites$site.sub!="CUAJ",], file = paste0(dir.path, "LEA_qassign_pca_samples_noCUAJ.txt"))
-
-# Create simple LEA_pop_file
-# Which q assign is Pacfic
-LEA_popfile <- pca.q.df[,c("samples", "assign")]
-# Convert to charater as factors do not work with assigning text
-LEA_popfile$assign <- as.character(LEA_popfile$assign)
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ZANA"][1]] <- "titia-Pac"
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ESRB"][1]] <- "titia-SAtl"
-LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="HCAR"][1]] <- "titia-NAtl"
-
-# Order hetr cols correctly
-het.cols[pca.q.df$assign[sites$site.sub=="ZANA"][1]] <- "#AF0F09"
-het.cols[pca.q.df$assign[sites$site.sub=="ESRB"][1]] <- "#E5D9BA"
-het.cols[pca.q.df$assign[sites$site.sub=="HCAR"][1]] <- "#3E3C3A"
-
-write.table(LEA_popfile, paste0(dir.path, "popfile_", species,".txt"),
-            quote = F,row.names = F, col.names = F)
-
-write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", species,"_noCUAJ.txt"),
-            quote = F,row.names = F, col.names = F)
-
-
-
-
 #het.cols <- c("#3E3C3A","#AF0F09","#E5D9BA", "#694438")
 #amer.cols <- c("#848A39","#726230","#920E02","#AA9599")
 
@@ -483,7 +420,7 @@ q <- ggplot() +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
-  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.3, label = "(Fig.3b)"), size = 5) +
+  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.1, label = "(Fig.3b)"), size = 5) +
   geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = 0.2 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
@@ -560,6 +497,21 @@ r <- ggplot() +
   coord_sf(xlim = CR.e$Long, ylim = CR.e$Lat) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm"))
 
+
+
+best <- which.min(cross.entropy(titia.snmf, K = K))
+qmatrix = Q(titia.snmf, K = K, run = best)
+qtable <- cbind(rep(sites$samples,K), rep(sites$Lat,K), rep(1:K, each = length(sites$samples)), c(qmatrix[,1:K]))
+qtable <-  data.frame(qtable)
+colnames(qtable) <- c("sample","lat","Qid", "Q")
+
+# New ocean drainage 
+sites$Ocean.drainage.new <- sites$Ocean.drainage
+sites$Ocean.drainage.new[sites$Ocean.drainage=="Atlantic"] <- "Gulf"
+qtable$sample <-  factor(qtable$sample, levels = sites$sample[order(paste(sites$species,sites$Ocean.drainage.new, sites$Country, sites$Long, sites$site.name))])
+qtable$Q <- as.numeric(qtable$Q)
+qtable$sample_lat <- paste(qtable$lat, qtable$sample)
+
 cbPalette <- c("#F0E442","#D55E00","#0072B2","#999999", "#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 plot(1:length(cbPalette), col = cbPalette, pch = 19, cex = 10)
 v <- ggplot(qtable)+
@@ -567,17 +519,53 @@ v <- ggplot(qtable)+
   scale_fill_manual(values = het.cols) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-        axis.title.x = element_blank()) +
+  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm")) +
   ylab(label = paste("K =", K)) 
 # theme(axis.text.x = element_text(size=6))
 
 v
 
+# Are there any sample that have odd Q assigns
+qtable[qtable$Q>0.2&qtable$Q<0.8,]
+
+# Assign PCA colour based off LEA anaylsis
+qdf <- cbind(sites[,c("samples","Lat","Long")],Q(titia.snmf, K = K, run = best))
+barchart(titia.snmf, K = 3, run = best)
+for(i in 1:length(qdf$samples)){
+  qdf$assign[i] <- which.max(qdf[i,c(4:(3+K))])
+}
+
+qdf$assign
+pca.q.df <- merge(pca.data, qdf[,c("samples","assign")], by = "samples")
+pca.q.df$site.sub[is.na(pca.q.df$site.sub)] <- "NA01"
+
+pca.q.df$assign <- as.factor(pca.q.df$assign)
+
+# Write out dataframe of sample and qassign
+write.table(pca.q.df, file = paste0(dir.path, "LEA_qassign_pca_samples.txt"))
+# Without CUAJ
+write.table(pca.q.df[sites$site.sub!="CUAJ",], file = paste0(dir.path, "LEA_qassign_pca_samples_noCUAJ.txt"))
+
+# Create simple LEA_pop_file
+# Which q assign is Pacfic
+LEA_popfile <- pca.q.df[,c("samples", "assign")]
+# Convert to charater as factors do not work with assigning text
+LEA_popfile$assign <- as.character(LEA_popfile$assign)
+LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ZANA"][1]] <- "titia-Pac"
+LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="ESRB"][1]] <- "titia-SAtl"
+LEA_popfile$assign[LEA_popfile$assign==pca.q.df$assign[sites$site.sub=="HCAR"][1]] <- "titia-NAtl"
+
+write.table(LEA_popfile, paste0(dir.path, "popfile_", species,".txt"),
+            quote = F,row.names = F, col.names = F)
+
+write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", species,"_noCUAJ.txt"),
+            quote = F,row.names = F, col.names = F)
+
+
 # PCA plots
 y <- ggplot(pca.q.df) +
-  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = as.factor(assign)), size = 6, shape = 21, color = "black") +
+  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
   scale_fill_manual(values = het.cols, name = "Ancestory assignment") +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
@@ -608,10 +596,10 @@ plot1 <- (p+q+r)/v + plot_layout(heights = c(4, 2)) + theme(plot.background = el
   plot_layout(heights = c(1,0.8))
 plot2 <- y + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
-ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,".pdf"), plot=plot1, height=7, width=15)
-ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,".png"), plot=plot1, height=7, width=15)
-ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,".pdf"), plot=plot2, height=6, width=6)
-ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,".png"), plot=plot2, height=6, width=6)
+ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot1, height=7, width=15)
+ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot1, height=7, width=15)
+ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot2, height=6, width=6)
+ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot2, height=6, width=6)
 
 
 ############################################
@@ -999,8 +987,12 @@ table(hybrid.sites$Site.ID)
 table(gen.mat[locus.info$lg!="X","CUAJa02"])/(dim(gen.mat[locus.info$lg!="X",])[1]-table(gen.mat[locus.info$lg!="X","CUAJa02"])["NA/NA"])*100
 table(gen.mat[locus.info$lg!="X","CUAJa03"])/(dim(gen.mat[locus.info$lg!="X",])[1]-table(gen.mat[locus.info$lg!="X","CUAJa03"])["NA/NA"])*100
 
+
 hybrid.sites$het.fst[hybrid.sites$samples=="CUAJa02"]
 hybrid.sites$hybrid.index[hybrid.sites$samples=="CUAJa02"]
+
+hybrid.sites$het.fst[hybrid.sites$samples=="CUAJa03"]
+hybrid.sites$hybrid.index[hybrid.sites$samples=="CUAJa03"]
 
 
 plot.hybrid <- p.h / (r+q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")")

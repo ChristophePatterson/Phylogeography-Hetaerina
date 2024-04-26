@@ -13,6 +13,8 @@
 
 #Modules
 module load r/4.2.1
+module load bioinformatics
+module load bcftools
 
 #Name of output SNP library
 

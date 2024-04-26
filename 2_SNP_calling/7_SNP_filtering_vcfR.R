@@ -47,7 +47,7 @@ vcf.bi <- vcf[is.polymorphic(vcf, na.omit = T),]
 vcf.bi <- vcf.bi[is.biallelic(vcf.bi),]
 
 # Removes potentially containminated samples
-dodgy <- c("HtiTi12", "NA0101","CA0101","CUAJa02.Dur","CUAJa02.Shef","HXRCaAM03")
+dodgy <- c("HtiTi12", "NA0101","CA0101","CUAJa02.Dur","CUAJa02.Shef","HXRCaAM03", "CUAJa03")
 vcf.bi <- vcf.bi[,!colnames(vcf.bi@gt)%in%dodgy]
 
 my_genind_ti <- vcfR2genind(vcf.bi, sep = "/", return.alleles = TRUE)
