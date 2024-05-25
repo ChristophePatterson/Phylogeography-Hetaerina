@@ -122,6 +122,7 @@ cbPalette <- c("#999999", "#009E73", "#0072B2", "#E69F00", "#F0E442", "#56B4E9",
 write.table(sites, file = paste0(dir.path, "coorrd_Titia_complete",analysis.name ,".txt"))
 sites <- read.table(paste0(dir.path, "coorrd_Titia_complete",analysis.name ,".txt"))
 
+sites[sites$Site.ID=="CUAJ01",]
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
@@ -223,7 +224,6 @@ names(pca.data)
 # Plot basic PCA data
 ggplot(pca.data) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), colour = Country_Ocean), size = 2)
-
 
 ## Number of SNP and samples
 
@@ -575,7 +575,7 @@ pca.q.df$assign_name <- LEA_popfile$assign
 # PCA plots
 y <- ggplot(pca.q.df) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign_name), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
+  scale_fill_manual(values = het.cols[c(1,3,2)], name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.2, 0.8))
@@ -676,6 +676,7 @@ plot_popkin(
 ####### Hybrid index ######
 ###########################
 library(tidyverse)
+library(shadowtext)
 ## install.packages("genetics")
 ## url <- "http://cran.nexr.com/src/contrib/introgress_1.2.3.tar.gz"
 ## pkgFile <- "introgress_1.2.3.tar.gz"
@@ -865,12 +866,14 @@ het.cols <- c("#E5D9BA","#3E3C3A","#AF0F09")
 p.h <- ggplot(locus.geno.type[]) +
   geom_raster(aes(x = as.factor(BPcum), y = sample, fill = genotype)) +
   geom_vline(xintercept = vline_chrom$cumsum.chrom+1) +
-  geom_text(data = vline_chrom, aes(x  = text_chrom_pos, y = -1, label = by), ) +
+  geom_text(data = vline_chrom, aes(x  = text_chrom_pos, y = -1, label = by), size = 4) +
   scale_fill_manual(values = c(het.cols[c(3,2,1)],"white")) +
   coord_cartesian(ylim = c(1, length(unique(locus.geno.type$sample))), # This focuses the x-axis on the range of interest
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,1), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
-        axis.text.x = element_blank(), axis.title.x = element_blank()) +
+        text = element_text(size = 15),
+        axis.text.x = element_blank(), axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 6)) +
   theme(legend.key=element_rect(colour="black")) +
   labs(fill = "Genotype")
 p.h
@@ -885,6 +888,7 @@ p.v <- ggplot(locus.geno.type) +
   theme(plot.margin = unit(c(3,1,3,3), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
         axis.text.y = element_blank(), axis.title.y = element_blank()) +
   theme(legend.key=element_rect(colour="black"),
+        text = element_text(size = 10),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   #scale_y_discrete(limits=rev) +
   labs(fill = "Genotype")
@@ -932,7 +936,8 @@ q <- ggplot(hybrid.sites) +
   ylab("Heterozygousity of >0.8 Fst SNPs") +
   labs(fill = "Slope") +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  theme(text = element_text(size = 15))
 
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_v2.png"), q, width = 6.5, height = 6)
 
@@ -964,13 +969,14 @@ r <- ggplot() +
   #                 min.segment.length = 0, show.legend = F, seed = 4, nudge_x = -0.25, col = "black") +
   geom_label_repel(data = hybrid.sites[!duplicated(hybrid.sites$Lat)&hybrid.sites$Lat<17.4&hybrid.sites$Long<(-94.0),], 
                    aes(Long, Lat, label = Site.ID, fill = Ocean.drainage),
-                   force_pull = 1,alpha = 1,force = 50, size = 3,
+                   force_pull = 1,alpha = 1,force = 50, size = 4,
                    min.segment.length = 0, show.legend = F, seed = 12345, nudge_y = hybrid.sites$nudge.dir[!duplicated(hybrid.sites$Lat)&hybrid.sites$Lat<17.4&hybrid.sites$Long<(-94.0)],
-                   nudge_x = -0.2, col = "black") +
+                   nudge_x = -0.2, col =  "black") +
   scale_fill_manual(values = het.cols[c(1,3)]) +
   coord_sf(xlim = mex.e.zoom$Long, ylim = mex.e.zoom$Lat) +
   xlab("Longitude") +
-  ylab("Latitude")
+  ylab("Latitude") +
+  theme(text = element_text(size = 15), axis.text = element_text(size = 8))
 
 # Inset map
 in.map <- ggplot() +
@@ -998,7 +1004,7 @@ table(gen.mat[locus.info$lg!="X","CUAJa02"])/(dim(gen.mat[locus.info$lg!="X",])[
 hybrid.sites$het.fst[hybrid.sites$samples=="CUAJa02"]
 hybrid.sites$hybrid.index[hybrid.sites$samples=="CUAJa02"]
 
-plot.hybrid <- p.h / (r+q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")")
+plot.hybrid <- p.h / (r+q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") 
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_with_genotype_horizontal_v2.png"), plot.hybrid, width = 12, height = 11)
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_with_genotype_horizontal_v2.pdf"), plot.hybrid, width = 12, height = 11)
 

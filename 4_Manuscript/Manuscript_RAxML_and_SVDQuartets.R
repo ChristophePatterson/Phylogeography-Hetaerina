@@ -89,10 +89,11 @@ tree.plot.3 <- tree.plot +
   guides(fill=guide_legend(title="Species and Drainage"), 
          colour=guide_legend(title="Bootstrap (Out of 100 reps)"),
          alpha="none") +
-  geom_treescale() +
+  geom_treescale(width = 0.05, fontsize = 6, linesize = 1) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         plot.margin = unit(c(0,0,0,0), "cm")) +
   ggtitle(label = expression(paste("(a) ", italic("H. titia"))))
+  
 
 
 tree.plot.3
@@ -173,7 +174,7 @@ tree.plot.4 <- tree.plot +
   guides(fill=guide_legend(title="Species and Drainage"), 
          colour=guide_legend(title="Bootstrap (Out of 100 reps)"),
          alpha="none") +
-  geom_treescale() +
+  geom_treescale(width = 0.05, fontsize = 6, linesize = 1, x = 0.05) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         plot.margin = unit(c(0,0,0,0), "cm")) +
   ggtitle(label = expression(paste("(b) ", italic("H. americana & H. calverti"))))
