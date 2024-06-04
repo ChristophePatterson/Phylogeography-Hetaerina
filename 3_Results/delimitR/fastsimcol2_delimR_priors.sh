@@ -18,9 +18,9 @@ conda activate delimR
 # Get library name
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 echo "$line_num"
-library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
+library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
 dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$library/)
-species=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/species)
+species=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/species)
 cd $dir_path
 
 # Assign values to sp1, sp2, and sp3 based on the value of library
@@ -45,7 +45,7 @@ output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps10000_MIG3_divWgene_sbatch)
 
 # Location of popgen file
 # pop_file=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/library_combinations/LEA_populations/popfile_titia_noCUAJ.txt)
-pop_file=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/LEA/LEA_pop_assign/popfile_${species}_noCUAJ.txt)
+pop_file=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/LEA/LEA_pop_assign/popfile_${species}_noCUAJ.txt)
 
 # Select directory that delimitR has inputed files into
 cd $output_dir
@@ -53,8 +53,8 @@ cd $output_dir
 echo "Running Rscript"
 
 # Rscript that produces reduced priors
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
 cd ~

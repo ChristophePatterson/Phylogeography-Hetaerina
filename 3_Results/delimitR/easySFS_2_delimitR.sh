@@ -20,16 +20,16 @@ conda activate easySFS
 # Get library name
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 echo "$line_num"
-library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
+library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
 dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$library/)
-species=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/species)
+species=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/species)
 cd $dir_path
 # Make output for SFS
 mkdir -p $dir_path/SFS
 
 ## Use the VCF that contains only biallic SNPs and excludes samples from CUAJ created within the custom R script 7_SNP_filtering_vcfR.R
 VCF=($library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.biSNP0_20.noX.noCUAJ)
-pop_file=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/LEA/LEA_pop_assign/popfile_${species}_noCUAJ.txt)
+pop_file=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/LEA/LEA_pop_assign/popfile_${species}_noCUAJ.txt)
 
 cp $VCF.vcf.gz $dir_path/SFS/$VCF.vcf.gz
 ## Subset vcf to only contain samples that have LEA assignment
@@ -78,7 +78,7 @@ easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
 bcftools view -H $dir_path/SFS/$VCF.vcf.gz | wc -l > $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt
 #
 ## Create delimR input files
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimR_inputfile.R $sp_0 $sp_1 $sp_2 $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_inputfile.R $sp_0 $sp_1 $sp_2 $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 #
 ## Create directory to run delimitR
 #
@@ -92,6 +92,6 @@ cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt $dir_path/$output_dir/s
 cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/all_traits.txt $dir_path/$output_dir/all_traits.txt
 #
 ## Run delimR - creating a range of fastsimcoal2 config files and then executes them
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
 #
 cd ~

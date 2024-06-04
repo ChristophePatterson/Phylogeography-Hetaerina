@@ -39,7 +39,7 @@ colnames(vcf.SNPs@gt)[1] <- "FORMAT"
 colnames(vcf.SNPs@gt) <- gsub(pattern = "_X", x = colnames(vcf.SNPs@gt), replacement = "")
 
 ## Read in populations assignment
-pop_assign <- read.table("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/LEA/LEA_pop_assign/popfile_all_noCUAJ_tabdelim.txt")
+pop_assign <- read.table("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/LEA/LEA_pop_assign/popfile_all_noCUAJ_tabdelim.txt")
 colnames(pop_assign) <- c("sample", "pop")
 
 # Remove samples from vcf that are not in pop_assign

@@ -78,7 +78,7 @@ write.table(x = geno.df, file = paste0(dir.path,SNP.library.name,"_snp",snp_sub_
 geno <- read.geno(paste0(dir.path,SNP.library.name,"_snp",snp_sub_text,".geno"))
 dim(geno)
 
-sample_map<- read.csv("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/All samples held in Durham_v17.csv", check.names=F)
+sample_map<- read.csv("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/All samples held in Durham_v17.csv", check.names=F)
 names(sample_map)
 
 #Extracting sample information and linking it to tree labels
@@ -223,8 +223,8 @@ mex.e.zoom <- data.frame( Long = c(-96,-94), Lat = c(18,16))
 CR.e <- data.frame(Long = c(-85,-82), Lat = c(8,11))
 
 
-source("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/theme_black.R")
-source("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/World/hydrobasins_extract_code.R")
+source("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/theme_black.R")
+source("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/World/hydrobasins_extract_code.R")
 
 # Colour blind pallette
 # cbPalette <- c("#F0E442","#D55E00","#0072B2","#999999", "#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")

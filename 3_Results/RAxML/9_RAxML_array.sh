@@ -21,7 +21,7 @@ module load raxml/8.2.12
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 
 # Get library name
-SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
+SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
 phy_file=$SNP_library
 
 #Output directory
@@ -41,5 +41,5 @@ ls
 raxmlHPC-PTHREADS -s $phy_file.noX.noCUAJ.phy -f a -m ASC_GTRGAMMA --asc-corr=lewis -n $phy_file.raxmlASC_GTRGAM_HPCaT15_noCUAJ -p 12345 -x 12345 -N 100 -T 24
 
 cd ~
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/RAxML/9_RAxML_plot_tree_array.R $SNP_library $input_dir
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/RAxML/9_RAxML_plot_tree_array.R $SNP_library $input_dir
 

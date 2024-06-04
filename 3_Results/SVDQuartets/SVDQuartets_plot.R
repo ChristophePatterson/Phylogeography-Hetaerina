@@ -31,7 +31,7 @@ print("Rooting tree at midpoint")
 tre.midroot <- midpoint(tre, node.labels = "support")
 
 #Extracting sample information and linking it to tree labels
-sample_map<- read.csv("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/All samples held in Durham_v17.csv", check.names=F)
+sample_map<- read.csv("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/All samples held in Durham_v17.csv", check.names=F)
 
 samples <- tre$tip.label
 sites <- data.frame(samples)

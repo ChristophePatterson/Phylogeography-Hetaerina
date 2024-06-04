@@ -53,7 +53,7 @@ for(i in 1:dim(model.df)[1]){
     model.name <- model.names[i]
     print(model.name)
     # Read in correct default config file
-    config.file <- readLines(paste0("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/G-Phocs/G-phocs-configs/config-defaults/",
+    config.file <- readLines(paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/G-Phocs/G-phocs-configs/config-defaults/",
                         "G-phocs-a1-b200-",model.df$species[i],"_max_",model.df$model[i],".config"))
     # Get data set of samples to be use
 

@@ -4,7 +4,7 @@
 taskid <- Sys.getenv('SLURM_ARRAY_TASK_ID')
 taskid <- as.numeric(taskid)
 
-libraries <- read.table("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name", header = F)$V1
+libraries <- read.table("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name", header = F)$V1
 
 SNP.library.name <- libraries[taskid]
 

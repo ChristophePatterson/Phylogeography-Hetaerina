@@ -10,12 +10,12 @@ library(tidyverse)
 #####################################################
 
 # Location of bamfile basic names
-directory <- "C:/Users/tmjj24/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
-directory <- "C:/Users/chris/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
+# directory <- "C:/Users/tmjj24/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
+# directory <- "C:/Users/chris/OneDrive - Durham University/Christophe/Work/Sequence analysis/Demultiplex_seq_processing_SDC/"
 directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/"
 
 #OUtput directory
-dir_out <- "/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/bamfiles_v2/"
+dir_out <- "/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/bamfiles"
 dir.create(dir_out)
 
 americana_dg <- read.table(paste0(directory,"Allsamples_HetAmer1.0_dg.bamstats"))
@@ -41,7 +41,11 @@ df <- rbind(americana_dg, titia_dg)
 dim(df)/2
 df[df$sample=="CUAJa02.Shef",]
 
-dodgy <- c("HtiTi12", "NA0101","CA0101","CUAJa02.Dur","CUAJa02.Shef","HXRCaAM03")
+dodgy <- c("HtiTi12", "NA0101","CA0101","CUAJa02.Dur","CUAJa02.Shef","HXRCaAM03", 
+            CUAJb19, CUAJb18, CUAJb01, CUAJb06, CUAJb21, CUAJb02, CUAJb07, CUAJb13, 
+            CUAJb15, CUAJa03, CUAJb14, CUAJb12, CUAJb16, CUAJb10, CUAJb08, CUAJb03, 
+            CUAJb20, CUAJb09, CUAJb17, CUAJb11)
+
 df <- df[!df$sample%in%dodgy,]
 
 table(df$library, df$cov10_NoR2sd)
@@ -89,7 +93,7 @@ americana_directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_
 titia_directory <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetTit1.0_dg"
 
 # Hetaerina sample data
-hetaerina_data <- read.csv(paste0("/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/3_Results/All samples held in Durham_v17.csv"), check.names = F)
+hetaerina_data <- read.csv(paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/All samples held in Durham_v17.csv"), check.names = F)
 hetaerina_data <- hetaerina_data[,c("Unique.ID", "species")]
 #Adding in new names for samples that were sequenced in pool X
 hetaerina_data$Unique.ID[hetaerina_data$Unique.ID%in%c(dodgy, "CUAJa02")] <- paste0(hetaerina_data$Unique.ID[hetaerina_data$Unique.ID%in%c(dodgy, "CUAJa02")],"_X")

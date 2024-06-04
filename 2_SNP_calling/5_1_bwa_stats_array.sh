@@ -25,7 +25,7 @@ titia_dir=(bwa_HetTit1.0_dg)
 
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
 
-FILE=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield_CUAJ/library_combinations/samples)
+FILE=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/samples)
 
 # Making directories to output stats
 mkdir -p $bwa_stats_dir/$titia_dir

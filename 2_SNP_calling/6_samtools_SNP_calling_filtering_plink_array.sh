@@ -32,13 +32,13 @@ echo "$line_num"
 
 # Get library and genome names
 
-Library_name=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/library_name)
-genome=$(sed -n "${line_num}p" /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/genome)
+Library_name=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
+genome=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/genome)
 
 echo "Processing database $Library_name using $genome"
 
 # List of BamFiles to use
-bamFiles=(/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/library_combinations/bamfiles/$Library_name.direct_path.txt)
+bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/bamfiles/$Library_name.direct_path.txt)
 
 #Output directory
 output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$Library_name)
@@ -145,11 +145,11 @@ plink --vcf $output_dir/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz --doub
 --make-bed --out $BCF_FILE.LD
 
 # Calculate the cororlation over distance 
-/home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/6_LD_dist_calc_python3.py -i $BCF_FILE.LD.ld.gz -o $BCF_FILE.LD
+/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/6_LD_dist_calc_python3.py -i $BCF_FILE.LD.ld.gz -o $BCF_FILE.LD
 
 # Plot results using R
 
-Rscript /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/Chapter_3/2_SNP_calling/6_LD_dist_calc_plot.R
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/6_LD_dist_calc_plot.R
 
 cd $output_dir
 
