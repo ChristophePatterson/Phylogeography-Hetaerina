@@ -22,7 +22,7 @@ line_num=$(expr $SLURM_ARRAY_TASK_ID)
 
 # Get library name
 SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
-input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/)
+input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/)
 
 # Run SVDquartet
 paup $input_dir/$SNP_library/SVDQuartets/Paup_excute_file.nex -n

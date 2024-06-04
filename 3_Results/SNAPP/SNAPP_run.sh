@@ -17,7 +17,7 @@ line_num=$(expr $SLURM_ARRAY_TASK_ID)
 echo "$line_num"
 SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
 #Output directory
-library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/)
+library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/)
 # module load beast
 # May need to run the code
 # /home/tmjj24/apps/beast/bin/packagemanager -add SNAPP

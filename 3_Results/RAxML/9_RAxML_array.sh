@@ -25,7 +25,7 @@ SNP_library=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeog
 phy_file=$SNP_library
 
 #Output directory
-input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/)
+input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/)
 
 mkdir -p $input_dir/$SNP_library/RAxML/
 
