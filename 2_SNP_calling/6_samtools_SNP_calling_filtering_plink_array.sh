@@ -6,15 +6,15 @@
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 
 # Specify the tasks to run:
-#SBATCH --array=1,3,5   # Create 6 tasks, numbers 1 to 6
+#SBATCH --array=1-6   # Create 6 tasks, numbers 1 to 6
 #SBATCH --output=slurm-%x.%j.out
 
 # Commands to execute start here
 
 module purge
 module load bioinformatics
-module load samtools
-module load bcftools
+module load samtools/1.9
+module load bcftools/1.15
 module load plink
 module load python/3.9.9
 module load r/4.2.1
@@ -32,6 +32,9 @@ echo "$line_num"
 
 # Get library and genome names
 
+# If genomes have been downloaded from NCBI they need to reformatted into default fasta format
+# awk 'BEGIN{FS=" "}{if(!/>/){print toupper($0)}else{print $1}}' in.fna > out.fna
+
 Library_name=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/library_name)
 genome=$(sed -n "${line_num}p" /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/genome)
 
@@ -41,7 +44,7 @@ echo "Processing database $Library_name using $genome"
 bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/library_combinations/bamfiles/$Library_name.direct_path.txt)
 
 #Output directory
-output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/$Library_name)
+output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/$Library_name)
 
 #Make output directories
 mkdir -p $output_dir
@@ -92,7 +95,7 @@ bcftools query -l $BCF_FILE.bcf | grep -v -c '^#'
 bcftools view -V indels $BCF_FILE.bcf -O b > $BCF_FILE.snps.bcf
 
 # All snps
-echo '1. All snps'
+echo '1. All single nucleotides'
 bcftools view -H $BCF_FILE.snps.bcf | grep -v -c '^#'
 
 # SNPs genotyped in more than 

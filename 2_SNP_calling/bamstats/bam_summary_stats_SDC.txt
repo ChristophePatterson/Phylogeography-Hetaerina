@@ -1,0 +1,3 @@
+"library"	"Total.mapped.reads"	"mean.mapped.reads"	"max.mapped.reads"	"min.mapped.reads"	"sd.2"	"mean.perc.mapped"
+"1"	"americana_dg"	836245050	2218156.63129973	11355050	422	-1379294.0563862	88.7084615384615
+"2"	"titia_dg"	892071853	2366238.33687003	13800527	477	-1460613.89015617	94.2166843501326

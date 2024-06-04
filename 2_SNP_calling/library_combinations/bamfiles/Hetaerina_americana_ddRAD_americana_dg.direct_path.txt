@@ -9,7 +9,6 @@
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/05SI17.paired.bam
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/05SI24.paired.bam
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/10AP36.paired.bam
-/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/10AP39.paired.bam
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/EAFB014142.paired.bam
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/EAFB014144.paired.bam
 /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg/EAFB014146.paired.bam

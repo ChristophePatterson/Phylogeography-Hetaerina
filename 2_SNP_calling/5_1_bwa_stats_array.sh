@@ -47,8 +47,3 @@ paste $bwa_stats_dir/$americana_dir/$FILE.samplename.txt $bwa_stats_dir/$america
 
 rm $bwa_stats_dir/$titia_dir/$FILE.*.txt
 rm $bwa_stats_dir/$americana_dir/$FILE.*.txt
-
-# THEN RUN THIS IN THE CONSOLE
-
-# cat /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/bwa_HetTit1.0_dg/*.bamstats > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/Allsamples_HetTit1.0_dg.bamstats
-# cat /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/bwa_HetAmer1.0_dg/*.bamstats > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_SDC/Allsamples_HetAmer1.0_dg.bamstats

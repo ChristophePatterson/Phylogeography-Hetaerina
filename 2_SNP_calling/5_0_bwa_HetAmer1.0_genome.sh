@@ -37,7 +37,10 @@ input_directory=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/demultiplex
 dir_output=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_HetAmer1.0_dg)
 
 # Draft genome to use
-genome=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/draft_genomes/GCA_022747635.1_ioHetAmer1.0.p_genomic.fna)
+genome=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/draft_genomes/GCA_022747635.1_ioHetAmer1.0.p_genomic.fasta)
+
+# index genome only needs doing once
+# samtools faidx $genome
 
 mkdir -p $dir_output
 
