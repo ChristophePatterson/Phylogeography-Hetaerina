@@ -1,0 +1,6 @@
+new("pcaProject", projDir = "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/results/", 
+    pcaDir = "WGS_titia.geno.pca/", n = 6L, L = 119047L, K = 6L, 
+    center = TRUE, scale = TRUE, pcaProject.file = "WGS_titia.geno.pcaProject", 
+    input.file = "WGS_titia.geno.lfmm", eigenvalue.file = "WGS_titia.geno.eigenvalues", 
+    eigenvector.file = "WGS_titia.geno.eigenvectors", sdev.file = "WGS_titia.geno.sdev", 
+    projection.file = "WGS_titia.geno.projections")
