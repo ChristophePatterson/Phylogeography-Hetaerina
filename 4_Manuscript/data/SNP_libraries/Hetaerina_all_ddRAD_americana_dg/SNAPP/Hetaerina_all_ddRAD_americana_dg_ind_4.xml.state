@@ -1,16 +1,16 @@
 <itsabeastystatewerein version='2.0' sample='1000000'>
-<statenode id='tree'>(((0:3.01755552338158,1:3.01755552338158)6:3.535931520235246,2:6.553487043616826)7:25.406089244757588,((3:1.296729241987703,5:1.296729241987703)8:3.9018053154578975,4:5.1985345574456)9:26.761041730928813)10:0.0</statenode>
-<statenode id='lambda'>lambda[1 1] (0.0,Infinity): 0.0672435259440175 </statenode>
-<statenode id='coalescenceRate'>coalescenceRate[11 1] (0.0,Infinity): 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 203.03055470065559 </statenode>
-<statenode id='clockRate'>clockRate[1 1] (0.0,Infinity): 0.0025787258329218734 </statenode>
+<statenode id='tree'>(((0:1.775185740148049,1:1.775185740148049)6:1.3836103137931772,2:3.1587960539412263)7:13.095726559162152,((3:1.0376785659959695,5:1.037678565995969)8:0.740094311141823,4:1.777772877137792)9:14.476749735965587)10:0.0</statenode>
+<statenode id='lambda'>lambda[1 1] (0.0,Infinity): 0.15774006311789376 </statenode>
+<statenode id='coalescenceRate'>coalescenceRate[11 1] (0.0,Infinity): 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 248.6405972275046 </statenode>
+<statenode id='clockRate'>clockRate[1 1] (0.0,Infinity): 0.006095202022635669 </statenode>
 </itsabeastystatewerein>
 <!--
 {"operators":[
-{"id":"treeNodeSwapper","p":"NaN","accept":0,"reject":166659,"acceptFC":0,"rejectFC":164670,"rejectIv":129171,"rejectOp":46181},
-{"id":"treeNodeBudger","p":0.20317814570516984,"accept":22592,"reject":143886,"acceptFC":22329,"rejectFC":142177,"rejectIv":0,"rejectOp":0},
-{"id":"treeScaler","p":0.6323111805636901,"accept":39921,"reject":126987,"acceptFC":39110,"rejectFC":125805,"rejectIv":0,"rejectOp":0},
-{"id":"thetaScaler","p":0.6331505136861062,"accept":39718,"reject":127286,"acceptFC":38924,"rejectFC":126073,"rejectIv":0,"rejectOp":0},
-{"id":"lamdaScaler","p":0.20880268224537019,"accept":52698,"reject":113981,"acceptFC":50988,"rejectFC":113654,"rejectIv":0,"rejectOp":0},
-{"id":"clockScaler","p":0.6132410402903773,"accept":41621,"reject":124652,"acceptFC":40785,"rejectFC":123495,"rejectIv":0,"rejectOp":0}
+{"id":"treeNodeSwapper","p":"NaN","accept":39,"reject":166539,"acceptFC":39,"rejectFC":164579,"rejectIv":129789,"rejectOp":46535},
+{"id":"treeNodeBudger","p":0.2673974488773771,"accept":28679,"reject":138231,"acceptFC":28322,"rejectFC":136596,"rejectIv":0,"rejectOp":0},
+{"id":"treeScaler","p":0.6286327319859549,"accept":43588,"reject":123356,"acceptFC":42732,"rejectFC":122190,"rejectIv":0,"rejectOp":0},
+{"id":"thetaScaler","p":0.6219815016165026,"accept":43131,"reject":123069,"acceptFC":42288,"rejectFC":121886,"rejectIv":0,"rejectOp":0},
+{"id":"lamdaScaler","p":0.19390653992937548,"accept":49067,"reject":117884,"acceptFC":47437,"rejectFC":117555,"rejectIv":0,"rejectOp":0},
+{"id":"clockScaler","p":0.5864882766897378,"accept":42079,"reject":124339,"acceptFC":41187,"rejectFC":123228,"rejectIv":0,"rejectOp":0}
 ]}
 -->

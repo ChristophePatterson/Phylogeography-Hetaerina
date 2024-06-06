@@ -408,9 +408,9 @@ for(run in model.names){
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
                                                                  labels = abs(seq(20, 0, -1)))
   
-  #ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
-  #                                            gsub(u, replacement = "-", pattern ="\\."),".png"),
-  #       width =12, height = 6)
+  ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
+                                              gsub(u, replacement = "-", pattern ="\\."),".png"),
+         width =12, height = 6)
   
 }
 
@@ -625,9 +625,9 @@ for(run in model.names){
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
                                                                  labels = abs(seq(20, 0, -1)))
   
-  #ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
-  #                                            gsub(u, replacement = "-", pattern ="\\."),".png"),
-  #       width =12, height = 6)
+  ggsave(plot = (p[[run]]), filename = paste0(plot.dir,run,"-u-",
+                                              gsub(u, replacement = "-", pattern ="\\."),".png"),
+         width =12, height = 6)
   
 }
 

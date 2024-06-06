@@ -150,8 +150,8 @@ split.post.ti.am
 SNAPP.plot <- p + (tit.tit/am.cal/ti.am) + plot_layout(widths = c(2,1)) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
-ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model,".png"), width = 11, height = 8)
-ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, SNAPP.model, ".pdf"), width = 11, height = 8)
+ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, "SNAPP_", SNAPP.model,".png"), width = 11, height = 8)
+ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, "SNAPP_", SNAPP.model, ".pdf"), width = 11, height = 8)
 
 ## Final split between titia NA and titia SA
 split.post.titN.titS <- list()
