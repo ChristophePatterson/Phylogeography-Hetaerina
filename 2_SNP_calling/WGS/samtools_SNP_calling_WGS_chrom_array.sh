@@ -111,29 +111,29 @@ bcftools filter -S . -e 'FMT/DP<5' $TMPDIR/$BCF_FILE.snps.bcf | \
 bcftools view -e 'AVG(FMT/DP)<5 || AVG(FMT/DP)>200 || QUAL<60' -O b > \
 $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.bcf
 
-bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.bcf | grep -v -c '^#'
+bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.bcf | grep -v -c '^#'
 
-bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz
+bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.vcf.gz
 
 # Removes SNPs that are not present in more than 80% samples
 echo "4. Removing SNPs that arn't genotyped in more than 80% samples"
-bcftools view -e 'AN/2<N_SAMPLES*0.8' -O b $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf
-bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf | grep -v -c '^#'
+bcftools view -e 'AN/2<N_SAMPLES*0.8' -O b $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.bcf
+bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.bcf | grep -v -c '^#'
 
 # Removing SNPs with a minor allele freq less than 0.05
 echo "5. Removing alleles that have a minor allele count of less that 2"
-bcftools view --min-ac 2 -O b $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf
-bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf | grep -v -c '^#'
+bcftools view --min-ac 2 -O b $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf
+bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf | grep -v -c '^#'
 
-bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.vcf.gz
+bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf > $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.vcf.gz
 
 
 ##### Use output from above to determine appropreate filtering step
 
 echo '6. SNPS randomly thinned to one per 10000 bases'
-bcftools +prune -n 1 -N rand -w 10000bp $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand10000.bcf
-bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand10000.bcf | grep -v -c '^#'
-bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand10000.bcf > $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand10000.vcf.gz
+bcftools +prune -n 1 -N rand -w 10000bp $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf
+bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf | grep -v -c '^#'
+bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf > $BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.vcf.gz
 
 ## Then outside of slurm concat all the vcf files using 
 

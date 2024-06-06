@@ -69,7 +69,9 @@ top.cov.samples <- group_by(pop_assign, by = pop) %>%
             thrd.sample = sample[order(cov)[3]],
             Frthsample = sample[order(cov)[4]],
             Fithsample = sample[order(cov)[5]],
-            sixsample = sample[order(cov)[6]])
+            sixsample = sample[order(cov)[6]],
+            svensample = sample[order(cov)[7]],
+            eighsample = sample[order(cov)[8]])
 top.cov.samples
 
 # Get samples to N for each pop
