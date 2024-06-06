@@ -13,7 +13,7 @@
 
 module purge
 module load bioinformatics
-module load samtools
+module load samtools/1.9
 module load bcftools
 module load plink
 module load python/3.9.9
@@ -40,10 +40,13 @@ chromosome=$(sed -n "${line_num}p" chrom_names.txt)
 echo "Processing database $Library_name using $genome"
 
 # List of BamFiles to use
-bamFiles=(/nobackup/tmjj24/ddRAD/WGS_titia/bam_list_WGS.txt)
+
+# ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/*.bam > /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
+# ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/*.bam >> /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
+bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt)
 
 #Output directory
-output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/$Library_name/VCF_chrom_r10000)
+output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/)
 
 #Make output directories
 mkdir -p $output_dir
@@ -61,7 +64,7 @@ cd $output_dir
 
 bcftools mpileup -Ou \
 --max-depth 10000 -q 20 -Q 20 \
- -P ILLUMINA -q-annotate FORMAT/DP,FORMAT/AD \
+ -P ILLUMINA --annotate FORMAT/DP,FORMAT/AD \
  -r $chromosome \
 -f $genome \
 -b $bamFiles | \
