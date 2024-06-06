@@ -26,8 +26,20 @@ echo $SNP_library
 out_dir=($library_version/$SNP_library/SNAPP)
 mkdir -p $out_dir
 
-# select number of samples to use - Can be no more than 4
-select_N=(4)
+# select number of samples to use - Can be no more than 5 in Hetaerina_all_ddRAD_titia_dg and no more than 8 in Hetaerina_all_ddRAD_americana_dg
+case "$SNP_library" in
+    "Hetaerina_all_ddRAD_titia_dg")
+        select_N=(5)
+        ;;
+    "Hetaerina_all_ddRAD_americana_dg")
+        select_N=(8)
+        ;;
+    *)  # Default case if library doesn't match any expected value
+        echo "Unknown library"
+        exit 1
+        ;;
+esac
+
 
 model_name=(${SNP_library}_ind_${select_N})
 

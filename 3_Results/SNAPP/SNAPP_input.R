@@ -58,11 +58,18 @@ names(sample.miss)==pop_assign$sample
 ## Get highest coverage N individuals for each population
 pop_assign$cov <- sample.miss
 
+# Number of samples that are assigned to each group
+print("Number of samples that are assigned to each group")
+table(pop_assign$pop)
+min(table(pop_assign$pop))
+
 top.cov.samples <- group_by(pop_assign, by = pop) %>%
   summarise(fst.sample = sample[order(cov)[1]],
             Snd.sample = sample[order(cov)[2]],
             thrd.sample = sample[order(cov)[3]],
-            Frthsample = sample[order(cov)[4]])
+            Frthsample = sample[order(cov)[4]],
+            Fithsample = sample[order(cov)[5]],
+            sixsample = sample[order(cov)[6]])
 top.cov.samples
 
 # Get samples to N for each pop
