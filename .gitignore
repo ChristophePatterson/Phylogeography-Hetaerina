@@ -6,4 +6,5 @@
 4_Manuscript/data/SNP_libraries/*/*.pca/
 4_Manuscript/data/SNP_libraries/*/*.snmf/
 /4_Manuscript/plots/Supplementary/
+/4_Manuscript/data_old/
 slurm-*.out

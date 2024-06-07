@@ -24,12 +24,11 @@ tre <- read.tree(paste0(libary.dir,"/RAxML/RAxML_bipartitions.",SNP.library.name
 # Rooting tree to the mid point
 tre.midroot <- midpoint(tre, node.labels = "support")
 
-
 #Extracting sample information and linking it to tree labels
 ## Read in LEA assignment
 qtitia <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
 qtitia$assign_spp <- paste0(qtitia$species,"_", qtitia$assign)
-qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
+qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_americana_dg/LEA_qassign_pca_samples.txt")
 qameri$assign_spp <- paste0(qameri$species,"_", qameri$assign)
 names(qtitia)
 names(qameri$sample)
@@ -98,7 +97,7 @@ tree.plot.3 <- tree.plot +
 
 tree.plot.3
 # Read in americana tree
-SNP.library.name <- "Hetaerina_americana_ddRAD_titia_dg"
+SNP.library.name <- "Hetaerina_americana_ddRAD_americana_dg"
 species <- "americana"
 # Create output location
 libary.dir <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name) 
@@ -114,7 +113,7 @@ tre.midroot <- midpoint(tre, node.labels = "support")
 ## Read in LEA assignment
 qtitia <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
 qtitia$assign_spp <- paste0(qtitia$species,"_", qtitia$assign)
-qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_titia_dg/LEA_qassign_pca_samples.txt")
+qameri <- read.table("4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_americana_dg/LEA_qassign_pca_samples.txt")
 qameri$assign_spp <- paste0(qameri$species,"_", qameri$assign)
 qtable <- rbind(qtitia, qameri[,names(qtitia)])
 

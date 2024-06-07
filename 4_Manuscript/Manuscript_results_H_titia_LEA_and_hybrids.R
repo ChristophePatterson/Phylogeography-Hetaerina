@@ -93,7 +93,7 @@ dim(geno)
 
 
 # Read in data on all samples
-sample_map<- read.csv("4_Manuscript/data/Hetaerina_sample_data.csv")
+sample_map <- read.csv("4_Manuscript/data/Hetaerina_sample_data.csv")
 #Extracting sample information and linking it to tree labels
 samples <- rownames(my_genind_ti_SNPs@tab)
 sites <- data.frame(samples)
@@ -126,8 +126,8 @@ sites[sites$Site.ID=="CUAJ01",]
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-#             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -521,14 +521,22 @@ qtable$sample_lat <- paste(qtable$lat, qtable$sample)
 
 cbPalette <- c("#F0E442","#D55E00","#0072B2","#999999", "#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 plot(1:length(cbPalette), col = cbPalette, pch = 19, cex = 10)
+
+CUAJ_sample_position <- range(grep("CUAJ", sites$sample[order(paste(sites$species,sites$Ocean.drainage.new, sites$Country, sites$Long, sites$site.name))]))+c(-0.5,0.5)
+
 v <- ggplot(qtable)+
   geom_bar(stat="identity", aes(sample, Q, fill = Qid,), position = "stack", width = 1, col = "black") +
+  geom_segment(aes(y = -0.02, yend = -0.02, 
+                   x = CUAJ_sample_position[1], xend = CUAJ_sample_position[2]),
+               linewidth =2) +
+  #geom_text(aes(y = -0.04, x = mean(CUAJ_sample_position), label = "CUAJ")) +
   scale_fill_manual(values = het.cols) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm")) +
-  ylab(label = paste("K =", K)) 
+  ylab(label = paste("K =", K))
 # theme(axis.text.x = element_text(size=6))
 
 v
@@ -575,7 +583,7 @@ pca.q.df$assign_name <- LEA_popfile$assign
 # PCA plots
 y <- ggplot(pca.q.df) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign_name), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols[c(1,3,2)], name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
+  scale_fill_manual(values = het.cols[c(3,2,1)], name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.2, 0.8))
@@ -640,7 +648,6 @@ my_stats$overall
 boxplot(my_stats$Ho)
 boxplot(my_stats$Hs)
 boxplot(my_stats$perloc)
-
 
 ###############################
 ####### Kinship analysis ######
@@ -816,9 +823,9 @@ hi.index.sim<-est.h(introgress.data=count.matrix,loci.data=locus.info,
 
 #png(paste0(plot.dir, "hybrid_geno_count_plot.png"), width = 2000, height = 1000, units = "px")
 #mk.image(introgress.data=count.matrix, loci.data=locus.info,
-#         hi.index=hi.index.sim, ylab.image="Individuals",
-#         xlab.h="population of Pacific ancestry", pdf=F,
-#         col.image=c(rgb(1,0,0,alpha=.5),rgb(0,0,0,alpha=.8),rgb(0,0,1,alpha=.5)))
+#        hi.index=hi.index.sim, ylab.image="Individuals",
+#        xlab.h="population of Pacific ancestry", pdf=F,
+#        col.image=c(rgb(1,0,0,alpha=.5),rgb(0,0,0,alpha=.8),rgb(0,0,1,alpha=.5)))
 #dev.off()
 
 # Combine data into tidy format for ploting in ggplot
@@ -1050,6 +1057,7 @@ dp.plot <- ggplot(depth_CUAJ[depth_CUAJ$chrom%in%1:12&!is.na(depth_CUAJ$is_het),
 dp.plot
 
 ggsave(file = paste0(plot.dir,"Raw_read_depth_and heterozgousity for CUAJa02.png"), dp.plot, width = 15, height = 10)
+ggsave(file = paste0(plot.dir,"Raw_read_depth_and heterozgousity for CUAJa02.pdf"), dp.plot, width = 15, height = 10)
 
 
 

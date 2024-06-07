@@ -1,8 +1,0 @@
-log  file=/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_all_ddRAD_americana_dg/SVDQuartets/Hetaerina_all_ddRAD_americana_dg_T20.log;
-cd /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_all_ddRAD_americana_dg/SVDQuartets/;
-set hashcomment=y;
-execute /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_all_ddRAD_americana_dg/SVDQuartets/Hetaerina_all_ddRAD_americana_dg.noX.noCUAJ.nex;
-
-svdQuartets bootstrap=standard nthreads=20;
-saveTrees file = /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v3/Hetaerina_all_ddRAD_americana_dg/SVDQuartets/Hetaerina_all_ddRAD_americana_dg_T20.tre supportValues = nodeLabels;
-quit;
