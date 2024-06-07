@@ -106,15 +106,13 @@ vcf.SNPs <- vcf.SNPs[all_snps%in%poly.snps,]
 
 #### Write and read back in filtered vcf
 # Write all snps
-# Revert SNP names to having "_"
-vcf.SNPs@fix[,1] <- gsub(vcf.SNPs@fix[,1], pattern = "_", replacement = "\\.")
 write.vcf(vcf.SNPs, file = paste0(dir.path,SNP.library.name,filter_para,".biSNP",snp_sub_text,".vcf.gz"),mask = F,APPEND = F)
 
 # Write all snps without X
 # Removes SNPs on the X chromosome
 # For H. tita library
 if(grepl(SNP.library.name, pattern="titia_dg")){
-  X_chrom <- "HetTit1.0.p.scaff-12-96647824"
+  X_chrom <- "HetTit1_0_p_scaff-12-96647824"
 }
 # For H. americana lots of small X chromosomes
 if(grepl(SNP.library.name, pattern="americana_dg")){
