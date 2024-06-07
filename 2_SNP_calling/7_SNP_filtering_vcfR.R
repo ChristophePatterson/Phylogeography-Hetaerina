@@ -107,7 +107,6 @@ vcf.SNPs <- vcf.SNPs[all_snps%in%poly.snps,]
 #### Write and read back in filtered vcf
 # Write all snps
 write.vcf(vcf.SNPs, file = paste0(dir.path,SNP.library.name,filter_para,".biSNP",snp_sub_text,".vcf.gz"),mask = F,APPEND = F)
-
 # Write all snps without X
 # Removes SNPs on the X chromosome
 # For H. tita library
