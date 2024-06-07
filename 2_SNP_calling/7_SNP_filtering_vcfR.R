@@ -107,7 +107,7 @@ vcf.SNPs <- vcf.SNPs[all_snps%in%poly.snps,]
 #### Write and read back in filtered vcf
 # Write all snps
 # Revert SNP names to having "_"
-vcf@fix[,1] <- gsub(vcf@fix[,1], pattern = "_", replacement = "\\.")
+vcf.SNPs@fix[,1] <- gsub(vcf.SNPs@fix[,1], pattern = "_", replacement = "\\.")
 write.vcf(vcf.SNPs, file = paste0(dir.path,SNP.library.name,filter_para,".biSNP",snp_sub_text,".vcf.gz"),mask = F,APPEND = F)
 
 # Write all snps without X
