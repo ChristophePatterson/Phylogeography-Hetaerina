@@ -126,8 +126,8 @@ sites[sites$Site.ID=="CUAJ01",]
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+#             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -185,6 +185,7 @@ q.coord.pop <- data.frame(pop, coord.pop, qpop)
 colnames(q.coord.pop) <- c("site", "lat", "long", LETTERS[1:K])
 q.coord.pop$lat <- as.numeric(q.coord.pop$lat)
 q.coord.pop$long <- as.numeric(q.coord.pop$long)
+q.coord.pop$num_samples <- apply(X = q.coord.pop, MARGIN = 1, function(x) length(which(sites$site.sub.county.drain==x["site"])))
 
 # Figure out what number each region has been assigned to (As it varies between sNMF runs)
 Pac.clust <- which.max(q.coord.pop[q.coord.pop$site=="ZANA_Mexico_Pacific",LETTERS[1:K]])
@@ -255,7 +256,10 @@ library(ggnewscale)
 cbPalette <- c("#F0E442","#D55E00" , "#0072B2", "#999999","#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
 # Colour scheme
 # Order Het cols based on what regions where assign in sNMF
-het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")[c(Pac.clust,SAtl.clust,NAtl.clust)]
+het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")
+het.cols[Pac.clust] <- "#AF0F09"
+het.cols[SAtl.clust] <- "#E5D9BA"
+het.cols[NAtl.clust] <- "#3E3C3A"
 #het.cols <- c("#3E3C3A","#AF0F09","#E5D9BA", "#694438")
 #amer.cols <- c("#848A39","#726230","#920E02","#AA9599")
 
@@ -395,7 +399,7 @@ p <- ggplot() +
   geom_polygon(data = CR.e.e, aes(x = Long, y = Lat), size = 1.2,  fill = NA, colour = "black") +
   #geom_point(data = sites, aes(x = long, y = lat)) +
   #geom_point(data = q.coord.pop, aes(x = long, y = lat)) 
-  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, group = site, r = 1), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, group = site, r = (sqrt(num_samples)/pi)*2), cols = LETTERS[1:K]) +
   geom_text(data = mex.e.e[4,],aes(Long + 3, Lat, label = "(b)"), size = 5) +
   geom_text(data = CR.e.e[3,],aes(Long + 2, Lat, label = "(c)"), size = 5) +
   #theme_bw()  +
@@ -416,6 +420,7 @@ p <- ggplot() +
   ggtitle(paste("K = ", K))
 
 p
+
 q <- ggplot() +
   geom_raster(data = hill.df.Mex, aes(lon, lat, fill = hill), alpha = 1) +
   #geom_polygon(data = worldmap, aes(long, lat, group = group), col = "black", fill = rgb(0,0,0,alpha = 0.3)) +
@@ -427,7 +432,7 @@ q <- ggplot() +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
   geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.1, label = "(Fig.3b)"), size = 5) +
-  geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = 0.2 , group = site), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/3 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
   #xlim(c(-130,-60)) +
@@ -452,7 +457,7 @@ q.zoom <- ggplot() +
   new_scale_fill() +
   geom_sf(data = hydrobasins_geo, col = "black", fill = NA, linewidth = 0.5) +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
-  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, r = 0.08 , group = site), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, r = (sqrt(num_samples)/pi)/6 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
   #xlim(c(-130,-60)) +
@@ -485,7 +490,7 @@ r <- ggplot() +
   #geom_point(data = q.coord.pop, aes(x = long, y = lat)) 
   geom_segment(aes(x = q.coord.pop.CR$long , y = q.coord.pop.CR$lat , xend = q.coord.pop.CR$long.new, yend = q.coord.pop.CR$lat.new)
                , linewidth = 1.2, lineend =  "round") +
-  geom_scatterpie(data = q.coord.pop.CR, aes(x = long.new, y = lat.new, r = 0.12 , group = site), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop.CR, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/3 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
   #xlim(c(-130,-60)) +
@@ -526,7 +531,7 @@ CUAJ_sample_position <- range(grep("CUAJ", sites$sample[order(paste(sites$specie
 
 v <- ggplot(qtable)+
   geom_bar(stat="identity", aes(sample, Q, fill = Qid,), position = "stack", width = 1, col = "black") +
-  geom_segment(aes(y = -0.02, yend = -0.02, 
+  geom_segment(aes(y = -0.03, yend = -0.03, 
                    x = CUAJ_sample_position[1], xend = CUAJ_sample_position[2]),
                linewidth =2) +
   #geom_text(aes(y = -0.04, x = mean(CUAJ_sample_position), label = "CUAJ")) +
@@ -581,9 +586,15 @@ write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", s
 # Names rather than number in PCA plot
 pca.q.df$assign_name <- LEA_popfile$assign
 # PCA plots
+pca.q.df
+pca.label <- c()
+pca.label[NAtl.clust] <- "North Atlantic"
+pca.label[Pac.clust] <- "Pacific"
+pca.label[SAtl.clust] <- "South Atlantic"
+
 y <- ggplot(pca.q.df) +
-  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign_name), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols[c(3,2,1)], name = "Ancestory assignment", labels = c("North Atlantic", "Pacific", "South Atlantic")) +
+  geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
+  scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = pca.label) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.2, 0.8))
@@ -867,14 +878,12 @@ vline_chrom$cumsum.chrom <- cumsum(vline_chrom$max.length)
 vline_chrom$text_chrom_pos <- vline_chrom$cumsum.chrom-(vline_chrom$max.length/2)
 #Remove 14 line
 vline_chrom <- vline_chrom[as.numeric(vline_chrom$by)<=12|vline_chrom$by=="X",]
-
-het.cols <- c("#E5D9BA","#3E3C3A","#AF0F09")
 #horizontal
 p.h <- ggplot(locus.geno.type[]) +
   geom_raster(aes(x = as.factor(BPcum), y = sample, fill = genotype)) +
   geom_vline(xintercept = vline_chrom$cumsum.chrom+1) +
   geom_text(data = vline_chrom, aes(x  = text_chrom_pos, y = -1, label = by), size = 4) +
-  scale_fill_manual(values = c(het.cols[c(3,2,1)],"white")) +
+  scale_fill_manual(values = c("#AF0F09","darkorange","#E5D9BA","white")) +
   coord_cartesian(ylim = c(1, length(unique(locus.geno.type$sample))), # This focuses the x-axis on the range of interest
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,1), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
@@ -889,7 +898,7 @@ p.v <- ggplot(locus.geno.type) +
   geom_raster(aes(y = as.factor(BPcum), x = sample, fill = genotype)) +
   geom_hline(yintercept = vline_chrom$cumsum.chrom+1) +
   geom_text(data = vline_chrom, aes(y  = text_chrom_pos, x = -1, label = by), ) +
-  scale_fill_manual(values = c(het.cols[c(3,2,1)],"white")) +
+  scale_fill_manual(values = c("#AF0F09","darkorange","#E5D9BA","white")) +
   coord_cartesian(xlim = c(1, length(unique(locus.geno.type$sample))), # This focuses the x-axis on the range of interest
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,3), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
@@ -903,7 +912,7 @@ p.v <- ggplot(locus.geno.type) +
 # Just X chromosome
 p.x <- ggplot(locus.geno.type[locus.geno.type$lg=="X",]) +
   geom_raster(aes(x = as.factor(BPcum), y = sample, fill = genotype)) +
-  scale_fill_manual(values = c(het.cols[c(3,2,1)],"white")) +
+  scale_fill_manual(values = c("#AF0F09","darkorange","#E5D9BA","white")) +
   coord_cartesian(ylim = c(1, length(unique(locus.geno.type$sample))), # This focuses the x-axis on the range of interest
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,1), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
@@ -1049,7 +1058,7 @@ depth_CUAJ$is_het <- is.het(extract.gt(vcf_CUAJ, element = "GT"), na_is_false = 
 dp.plot <- ggplot(depth_CUAJ[depth_CUAJ$chrom%in%1:12&!is.na(depth_CUAJ$is_het),]) +
   geom_boxplot(aes(x = chrom, y = depth_var), fill = NA, outlier.alpha = 0, size = 2) +
   geom_jitter(aes(x = chrom, y = depth_var, fill = is_het), shape = 21, height = 0, width = 0.2, size = 3) +
-  scale_fill_manual(values = c("#3E3C3A","#E5D9BA")) +
+  scale_fill_manual(values = c("#E5D9BA","darkorange")) +
   labs(x = "Chromosome", y = "SNP raw read depth", fill = "Is heterozgous") +
   ylim(0,100) +
   theme_bw() +

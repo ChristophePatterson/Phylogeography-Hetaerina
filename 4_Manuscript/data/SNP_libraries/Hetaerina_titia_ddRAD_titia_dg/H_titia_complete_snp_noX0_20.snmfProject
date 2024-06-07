@@ -171,5 +171,5 @@ new("snmfProject", snmfProject.file = "H_titia_complete_snp_noX0_20.snmfProject"
     "K8/run20/H_titia_complete_snp_noX0_20_r20.8.snmfClass", 
     "K9/run20/H_titia_complete_snp_noX0_20_r20.9.snmfClass", 
     "K10/run20/H_titia_complete_snp_noX0_20_r20.10.snmfClass"
-    ), n = 204L, L = 3819L, creationTime = structure(1717584662.69101, class = c("POSIXct", 
+    ), n = 204L, L = 3819L, creationTime = structure(1717774043.31684, class = c("POSIXct", 
     "POSIXt")))
