@@ -79,7 +79,7 @@ top.cov.samples <- lapply(unique(pop_assign$pop), function(x) {
     }
 })
 
-pop_assign_N <- do.call("rbind", top.cov.samples )
+pop_assign_N <- do.call("rbind", top.cov.samples)
 
 # Because older bcf file names have full file path need to match sample names with full file path
 full_file_samples <- readLines(paste0(dir.path,"/samples_temp.txt"))
