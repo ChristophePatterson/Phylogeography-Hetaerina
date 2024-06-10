@@ -1,6 +1,6 @@
 new("pcaProject", projDir = "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/Hetaerina_americana_ddRAD_americana_dg/", 
     pcaDir = "Hetaerina_americana_ddRAD_americana_dg_snp0_20.pca/", 
-    n = 58L, L = 5373L, K = 58L, center = TRUE, scale = TRUE, 
+    n = 58L, L = 5259L, K = 58L, center = TRUE, scale = TRUE, 
     pcaProject.file = "Hetaerina_americana_ddRAD_americana_dg_snp0_20.pcaProject", 
     input.file = "Hetaerina_americana_ddRAD_americana_dg_snp0_20.lfmm", 
     eigenvalue.file = "Hetaerina_americana_ddRAD_americana_dg_snp0_20.eigenvalues", 

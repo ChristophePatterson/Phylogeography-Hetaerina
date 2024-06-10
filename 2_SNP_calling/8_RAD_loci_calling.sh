@@ -19,7 +19,7 @@ module load bcftools
 #Name of output SNP library
 
 line_num=$(expr $SLURM_ARRAY_TASK_ID)
-
+# line_num=$(expr 2)
 echo "$line_num"
 
 # Get library and genome names
@@ -55,6 +55,9 @@ cat $library_version/$Library_name/samples_temp.txt | while read line; do
     bcftools consensus -s $line -e 'FORMAT/AD<5 & FORMAT/AD>200 & QUAL<50' -a "?" --iupac-codes -o $library_version/$Library_name/fasta_files/${filename}.fasta $library_version/$Library_name/$Library_name.all.snps.bcf 
 done 
 
+rm -r $library_version/$Library_name/RAD_loci
+mkdir -p $library_version/$Library_name/RAD_loci
+## NOT CURRENTLY WORKING
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/8_RAD_loci_calling_phylip.R $Library_name $library_version
 
 
