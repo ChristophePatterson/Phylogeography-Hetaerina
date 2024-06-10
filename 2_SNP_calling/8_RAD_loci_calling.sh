@@ -6,7 +6,7 @@
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 
 # Specify the tasks to run:
-#SBATCH --array=1-6  # Create 6 tasks, numbers 1 to 6
+#SBATCH --array=1-2  # Create 6 tasks, numbers 1 to 6
 #SBATCH --output=slurm-%x.%j.out
 
 # Commands to execute start here
@@ -31,20 +31,24 @@ library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_librari
 
 echo "Processing database $Library_name using $genome"
 
+## Max number of samples to use from each lineage
+select_N=(5)
+
 ## SNP library to use
 SNP_file=($Library_name.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.biSNP0_20.noX.vcf.gz)
 
+bcftools query -l $library_version/$Library_name/$Library_name.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf > $library_version/$Library_name/samples_temp.txt
+
 # Get list of position for each SNP file
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/8_RAD_loci_calling.R $Library_name $library_version
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/8_RAD_loci_calling.R $Library_name $library_version $select_N
 
 # index  bcf
 bcftools index $library_version/$Library_name/$Library_name.all.snps.bcf
-#Create 
-bcftools query -l $library_version/$Library_name/$Library_name.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.bcf > $library_version/$Library_name/samples_temp.txt
 
+rm -r $library_version/$Library_name/fasta_files
 mkdir $library_version/$Library_name/fasta_files
 
-cat $library_version/$Library_name/samples_temp.txt | while read line; do
+cat $library_version/$Library_name/${Library_name}_PHYLIP_subsample.txt | while read line; do
     #echo $library_version/$Library_name/fasta_files/$line.fa
     # Get sample name
     filename=$(basename "$line")

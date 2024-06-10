@@ -3,7 +3,7 @@
 #SBATCH -c 64 
 #SBATCH --mem=10G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:10G       # $TMPDIR space required on each compute node, up to 400G.
-#SBATCH -t 64:00:00         # time limit in format dd-hh:mm:ss
+#SBATCH -t 70:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --array=1,2   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
@@ -29,10 +29,10 @@ mkdir -p $out_dir
 # select number of samples to use - Can be no more than 5 in Hetaerina_all_ddRAD_titia_dg and no more than 8 in Hetaerina_all_ddRAD_americana_dg
 case "$SNP_library" in
     "Hetaerina_all_ddRAD_titia_dg")
-        select_N=(5)
+        select_N=(20)
         ;;
     "Hetaerina_all_ddRAD_americana_dg")
-        select_N=(8)
+        select_N=(20)
         ;;
     *)  # Default case if library doesn't match any expected value
         echo "Unknown library"

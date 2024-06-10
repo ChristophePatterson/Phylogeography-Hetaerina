@@ -1,7 +1,7 @@
 RunRaxml_v2 <- function(raxmlPath=paste(getwd(),"/",sep=""),raxmlVersion="raxmlHPC",
-	inputPath=paste(getwd(),"/",sep=""),mutationModel,iterations,
+	inputPath=paste(getwd(),"/",sep=""),mutationModel,iterations,Threads,
 	seed=sample(1:10000000,1),outputSeeds=FALSE,discard=FALSE){
-	phylipFilesList <- list.files(inputPath,pattern="*.phylip",full.names=FALSE)
+	phylipFilesList <- list.files(inputPath,pattern="*.phylip$",full.names=FALSE)
 	seed.vec <- array()
 	for(numb in 1:length(phylipFilesList)){
 		inputFile=phylipFilesList[numb]
@@ -18,7 +18,7 @@ RunRaxml_v2 <- function(raxmlPath=paste(getwd(),"/",sep=""),raxmlVersion="raxmlH
 
  		systemCall2 <- system(paste(raxmlPath,raxmlVersion," -w ",inputPath," -s ",inputPath,inputFile," -n ",
  			outputFile," -m ",thisMutationModel," -f d -N ",iterations," -p ",
- 			currentSeed,sep=""))
+ 			currentSeed, "-T ",Threads,sep=""))
 
 		#Dicard inessential RAxML output
 		if(discard==TRUE){
@@ -47,19 +47,3 @@ RunRaxml_v2 <- function(raxmlPath=paste(getwd(),"/",sep=""),raxmlVersion="raxmlH
 	return(systemCall2)
 }
 
-#This takes a path to .tre files and merges all trees into a single file called trees.tre
-MergeTrees <- function(treesPath){
-	filenames <- list.files(treesPath,pattern="*.tre",full.names=FALSE)
-	vecotr <- lapply(paste(treesPath,filenames,sep=""),utils::read.table)
-	for (treeRep in 1:length(vecotr)){
-		write.table(vecotr[[treeRep]],file=paste(treesPath,"trees.tre",sep=""),append=TRUE,
-			row.names=FALSE,col.names=FALSE,quote=FALSE)
-	}
-}
-
-#If only using a subset of models, this partitions migrationArrayMap to match the chosen model range
-GenerateMigrationArrayMapTrunc<-function(migrationArrayMap,modelRange){
-	migrationArrayMapTrunc=cbind(1:length(modelRange),migrationArrayMap[modelRange,-1])
-	colnames(migrationArrayMapTrunc)<-colnames(migrationArrayMap)
-	return(migrationArrayMapTrunc)
-}

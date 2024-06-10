@@ -75,14 +75,15 @@ top.cov.samples <- lapply(unique(pop_assign$pop), function(x) {
 })
 
 pop_assign_N <- do.call("rbind", top.cov.samples )
+vcf.SNPs <- vcf.SNPs[samples = pop_assign_N$sample]
 
-pop_assign_N$sample%in%colnames(vcf.SNPs.N@gt[,-1])
+pop_assign_N$sample%in%colnames(vcf.SNPs@gt[,-1])
 
 # Check if SNPs are polymorphic
-vcf.SNPs.N <- vcf.SNPs.N[(which(is.polymorphic(vcf.SNPs.N, na.omit = T))),]
+vcf.SNPs <- vcf.SNPs[(which(is.polymorphic(vcf.SNPs, na.omit = T))),]
 
 # Extract genotype
-gt <- extract.gt(vcf.SNPs.N, return.alleles = TRUE, convertNA = TRUE)
+gt <- extract.gt(vcf.SNPs, return.alleles = TRUE, convertNA = TRUE)
 
 colnames(gt)==pop_assign_N$sample
 # Overwrite data with Ambiguity codes
