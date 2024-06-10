@@ -17,6 +17,7 @@ SNP.library.location <- args[2]
 select_N <- as.numeric(args[3])
 # select_N <- 2
 
+
 # Read in vcf
 dir.path <- paste0(SNP.library.location,"/",SNP.library.name,"/")
 dir.path.SNAPP <- paste0(dir.path, "SNAPP/")
@@ -63,24 +64,18 @@ print("Number of samples that are assigned to each group")
 table(pop_assign$pop)
 min(table(pop_assign$pop))
 
-top.cov.samples <- group_by(pop_assign, by = pop) %>%
-  summarise(fst.sample = sample[order(cov)[1]],
-            Snd.sample = sample[order(cov)[2]],
-            thrd.sample = sample[order(cov)[3]],
-            Frthsample = sample[order(cov)[4]],
-            Fithsample = sample[order(cov)[5]],
-            sixsample = sample[order(cov)[6]],
-            svensample = sample[order(cov)[7]],
-            eighsample = sample[order(cov)[8]])
-top.cov.samples
+top.cov.samples <- lapply(unique(pop_assign$pop), function(x) {
+    pop_assign_temp <- pop_assign[pop_assign$pop==x,]
+    if(dim(pop_assign_temp)[1]>select_N){
+        return((pop_assign_temp[order(pop_assign_temp$cov, decreasing = T),])[1:select_N,])
+    }
+    if(dim(pop_assign_temp)[1]<=select_N){
+        return((pop_assign_temp[order(pop_assign_temp$cov, decreasing = T),])[1:dim(pop_assign_temp)[1],])
+    }
+})
 
-# Get samples to N for each pop
-top_N_samples <- unlist(c(top.cov.samples[,2:(select_N+1)]))
-# pop_assign
-pop_assign_N <- pop_assign[pop_assign$sample%in%top_N_samples,]
-vcf.SNPs.N <- vcf.SNPs[samples = top_N_samples]
-# Ensure order is correct
-pop_assign_N <- pop_assign_N[match(colnames(vcf.SNPs.N@gt[,-1]), pop_assign_N$sample),]
+pop_assign_N <- do.call("rbind", top.cov.samples )
+
 pop_assign_N$sample%in%colnames(vcf.SNPs.N@gt[,-1])
 
 # Check if SNPs are polymorphic
