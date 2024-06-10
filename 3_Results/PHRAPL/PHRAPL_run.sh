@@ -33,4 +33,11 @@ echo "Processing database $Library_name using $genome"
 # Remove previous run files
 rm -f $library_version/$Library_name/RAD_loci/*.phylip.*
 
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/PHRAPL/PHRAPL_run.R $Library_name $library_version
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/PHRAPL/PHRAPL_RAxML_run.R $Library_name $library_version
+
+# Create PHRAPL directory
+mkdir -p $library_version/$Library_name/PHRAPL
+## Merge all trees into single file
+cat $library_version/$Library_name/RAD_loci/RAxML_bestTree.*.tre > $library_version/$Library_name/PHRAPL/Hetaerina_all_ddRAD_titia_dg_phrapl.trees
+
+

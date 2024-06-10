@@ -46,4 +46,3 @@ RunRaxml_v2 <- function(raxmlPath=paste(getwd(),"/",sep=""),raxmlVersion="raxmlH
 	}
 	return(systemCall2)
 }
-
