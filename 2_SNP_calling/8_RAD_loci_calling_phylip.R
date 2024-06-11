@@ -21,6 +21,7 @@ sequences <- list.files(paste0(dir.path,"/fasta_files/"))
 # Read in DNA sequences
 alignments <- lapply(paste0(dir.path,"fasta_files/", sequences), read.dna, format = "fasta")
 
+
 # Get loci names
 RAD.loci.names <- rownames(alignments[[1]])
 
@@ -49,4 +50,6 @@ RAD.loci <- lapply(1:Alignment.dims[1], function(x) {
     format="interleaved")
     return(align.tmp)
 })
+
+# Convert to G-Phocs
 

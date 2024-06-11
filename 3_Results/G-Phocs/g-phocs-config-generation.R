@@ -7,14 +7,15 @@ args <- commandArgs(trailingOnly = TRUE)
 SNP.library.name <- args[1]
 # SNP.library.name <- "Hetaerina_titia_ddRAD_titia_dg"
 SNP.library.location <- args[2]
+# output_dir <- paste0(dir.path, "G-Phocs/model_runs/")
 output_dir <- args[4]
-# SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/"
+# SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/"
 dir.path <- paste0(SNP.library.location,SNP.library.name,"/")
 dir.path.GPhocs <- paste0(dir.path, "G-Phocs/")
 
 # Number of samples to use for each population
 sample.num <- as.numeric(args[3])
-# sample.num <- 2
+# sample.num <- 2000
 
 ## List of each species (must be how that is defined within the samples data set species column)
 species <- str_split_1(SNP.library.name, pattern = "_")[2]
@@ -34,7 +35,6 @@ model.df <- expand.grid("model"=model.types,"species"=species, "alpha" = alphas,
 # Samples used in gphocs
 pop_assign <- read.table(paste0(dir.path.GPhocs,"GPhocs_samples_N", sample.num,".txt"))
 colnames(pop_assign) <- c("sample", "pop")
-
 
 # Creat name for each model
 model.names <- paste0("G-Phocs-a", model.df$alpha, "-b",model.df$beta, "-", model.df$species, "-", model.df$model, "-N", sample.num)
@@ -59,7 +59,7 @@ for(i in 1:dim(model.df)[1]){
 
     # Start replacing lines in config file
     # Input sequence
-    config.file[3]  <- paste0("\t\tseq-file\t\t",dir.path.GPhocs,SNP.library.name,".N",sample.num, ".gphocs")
+    config.file[3]  <- paste0("\t\tseq-file\t\t",dir.path.GPhocs,SNP.library.name,"_N",sample.num, ".gphocs")
     # Output trace file
     config.file[4]  <- paste0("\t\ttrace-file\t\t",output_dir,"/",model.name,".trace")
     # Replace alpha and beta
