@@ -81,8 +81,8 @@ pca.data$samples <- colnames(vcf.bi@gt)[2:dim(vcf.bi@gt)[2]]
 
 ## Conduct snmf
 max.K <- 4
-#obj.at <- snmf(paste0(output_dir, "WGS_titia.geno"), K = 1:max.K, ploidy = 2, entropy = T,
-#              CPU = 3, project = "new", repetitions = 20, alpha = 100)
+obj.at <- snmf(paste0(output_dir, "WGS_titia.geno"), K = 1:max.K, ploidy = 2, entropy = T,
+              CPU = 3, project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(output_dir, "WGS_titia.snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -143,9 +143,6 @@ p <- ggplot(pca.data) +
 ggsave(paste0(plot.dir, "PCA_WGS_plot.pdf"), p)
 
 ggsave(paste0(plot.dir, "PCA_sNMF_WGS_plot.pdf"), p / p.bar, width = 10, height = 10)
-
-## What is the coverage of the X chromosome of the hybrid individuals
-X_chrom <- "HetTit1_0_p_scaff-12-96647824"
 
 ##### introgression
 ## install.packages("genetics")
@@ -242,11 +239,11 @@ locus.info$lg[locus.info$lg==12] <- "X"
 locus.info$lg <- fct_relevel(locus.info$lg, c(1:11,"X"))
 
 # Creating column that is equvlent to distance over the whole genonome
-nCHR <- length(unique(locus.info$lg))
+nCHR <- length(levels(locus.info$lg))
 locus.info$BPcum <- NA
 s <- 0
 nbp <- c()
-for (i in unique(locus.info$lg)){
+for (i in levels(locus.info$lg)){
   nbp[i] <- max(locus.info[locus.info$lg == i,]$marker.pos)
   locus.info[locus.info$lg == i,"BPcum"] <- locus.info[locus.info$lg == i,"marker.pos"] + s
   s <- s + nbp[i]
@@ -262,7 +259,7 @@ count.matrix<-prepare.data(admix.gen=gen.mat, loci.data=locus.info,
 
 hi.index.sim<-est.h(introgress.data=count.matrix,loci.data=locus.info,
                     fixed=T, p1.allele="1", p2.allele="0")
-#saveRDS(hi.index.sim, "results/hi.index.sim.rds")
+#saveRDS(hi.index.sim, paste0(output_dir, "hi.index.sim.rds")
 #readRDS("results/hi.index.sim.rds")
 
 png(paste0(plot.dir, "hybrid_geno_count_WGS_plot.png"), width = 2000, height = 1000, units = "px")
@@ -304,19 +301,19 @@ locus.geno.type$BPcum
 p.h <- ggplot(locus.geno.type) +
   geom_raster(aes(x = as.factor(BPcum), y = sample, fill = genotype)) +
   geom_vline(xintercept = vline_chrom$cumsum.chrom+1) +
-  geom_text(data = vline_chrom, aes(x  = text_chrom_pos, y = -1, label = by), ) +
-  scale_fill_manual(values = c(het.cols[c(1,3,2)],"white")) +
+  geom_text(data = vline_chrom, aes(x  = text_chrom_pos, y = -0.2, label = by, size = 5), show.legend = F) +
+  scale_fill_manual(values = c("#AF0F09","darkorange","#E5D9BA","white")) +
   coord_cartesian(ylim = c(1, length(unique(locus.geno.type$sample))), # This focuses the x-axis on the range of interest
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,1), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
         axis.text.x = element_blank(), axis.title.x = element_blank()) +
-  theme(legend.key=element_rect(colour="black")) +
+  theme(legend.key=element_rect(colour="black"), text = element_text(size = 20)) +
   labs(fill = "Genotype")
 
-ggsave(filename = paste0(plot.dir,"WGS_introgress_grid_titia_chr1-12_r10000.png"), plot = p.h)
+ggsave(filename = paste0(plot.dir,"WGS_introgress_grid_titia_chr1-12_r10000.png"), plot = p.h, width = 10, height = 6)
+ggsave(filename = paste0(plot.dir,"WGS_introgress_grid_titia_chr1-12_r10000.pdf"), plot = p.h, width = 10, height = 6)
 
 #p.h
-
 # Just X chromosome
 p.x <- ggplot(locus.geno.type[locus.geno.type$lg=="X",]) +
   geom_raster(aes(x = as.factor(BPcum), y = sample, fill = genotype)) +
@@ -325,7 +322,7 @@ p.x <- ggplot(locus.geno.type[locus.geno.type$lg=="X",]) +
                   clip = 'off') +
   theme(plot.margin = unit(c(3,1,3,1), "lines"),legend.position = c(0.5,1.05),legend.direction = "horizontal",
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  theme(legend.key=element_rect(colour="black")) +
+  theme(legend.key=element_rect(colour="black"), text = element_text(size = 20)) +
   labs(fill = "Genotype",x = "X") 
 
 ggsave(file = paste0(plot.dir,"introgress_X_chrom.png"), p.x, width = 6.5, height = 6)
@@ -342,27 +339,34 @@ count.matrix.noX <- prepare.data(admix.gen=gen.mat[locus.info$lg!="X",], loci.da
 het<-calc.intersp.het(introgress.data=count.matrix.noX)
 
 # Inbuilt hybrid plot that used base R plotting
-introgress::triangle.plot(hi.index=hi.index.sim, int.het=het, pdf = F)
+# introgress::triangle.plot(hi.index=hi.index.sim, int.het=het, pdf = F)
 
 # attach het and hybrid to sample dataframe
 hybrid.sites$het.fst <- het
 hybrid.sites$hybrid.index <- hi.index.sim[,2]
-
+hybrid.sites$Qassign <- qtable$Qid[match(hybrid.sites$samples, qtable$sample)]
+hybrid.sites$assign <- as.factor(apply(hybrid.sites,MARGIN=1, function(x) which.max(qtable$Q[which(qtable$sample==x["samples"])])))
 # Create triangle for hydrid index plot
 tri <- cbind.data.frame(x = c(seq(0,0.5,length.out=10),seq(0.5,1,length.out=10)), y = c(seq(0,1,length.out=10), seq(1,0,length.out=10)))
 
 q <- ggplot(hybrid.sites) +
   geom_line(data = tri, aes(x = x, y = y)) +
-  geom_point(aes(x = hybrid.index, y = het.fst, fill = Ocean.drainage), shape = 21, size = 4) +
-  scale_fill_manual(values = het.cols[c(1,3)]) +
+  geom_point(aes(x = hybrid.index, y = het.fst, fill = assign), shape = 21, size = 4) +
+  geom_label_repel(aes(hybrid.index, het.fst, label = samples), size = 4, min.segment.length = 0, force = 2) +
+  scale_fill_manual(values = het.cols[c(2,1)]) +
+  xlim(c(0,1)) + ylim(c(0,1)) + 
   xlab("Hybrid Index") +
   ylab("Heterozygousity of >0.8 Fst SNPs") +
   labs(fill = "Slope") +
   theme_bw() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "none", text = element_text(size = 20))
 
 ggsave(file = paste0(plot.dir,"introgress_tri_plot_v2.png"), q, width = 6.5, height = 6)
 
+# Merge into single figure
+plot1 <- (p.h) / (p.bar + p + q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") 
+ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.png"), plot1, width = 25, height = 15)
+ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.pdf"), plot1, width = 21, height = 15)
 
 #### CONVERTED CODE NOT TESTED FROM HERE
 

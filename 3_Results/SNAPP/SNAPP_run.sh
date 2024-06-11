@@ -29,10 +29,10 @@ mkdir -p $out_dir
 # select number of samples to use - Can be no more than 5 in Hetaerina_all_ddRAD_titia_dg and no more than 8 in Hetaerina_all_ddRAD_americana_dg
 case "$SNP_library" in
     "Hetaerina_all_ddRAD_titia_dg")
-        select_N=(20)
+        select_N=(3)
         ;;
     "Hetaerina_all_ddRAD_americana_dg")
-        select_N=(20)
+        select_N=(3)
         ;;
     *)  # Default case if library doesn't match any expected value
         echo "Unknown library"
