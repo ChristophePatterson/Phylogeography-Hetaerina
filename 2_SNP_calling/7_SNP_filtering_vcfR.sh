@@ -31,6 +31,13 @@ library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_librari
 
 echo "Processing database $Library_name using $genome"
 
+##### Radomly sample one SNP per 1000bp window
+echo '6. SNPS randomly thinned to one per 1000 bases'
+bcftools +prune -n 1 -N rand -w 1000bp $BCF_FILE.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $BCF_FILE.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf
+bcftools view -H $BCF_FILE.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf | grep -v -c '^#'
+bcftools view -O z $BCF_FILE.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf > $BCF_FILE.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.vcf.gz
+
+
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/7_SNP_filtering_vcfR.R $Library_name $library_version
 
 ## Get the most highest quality samples

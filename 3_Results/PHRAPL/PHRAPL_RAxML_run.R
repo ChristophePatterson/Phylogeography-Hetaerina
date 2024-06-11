@@ -25,6 +25,3 @@ source("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/P
 RunRaxml_v2(raxmlPath=RAXML_filepath, raxmlVersion="raxmlHPC-PTHREADS",inputPath=paste0(dir.path, "RAD_loci/"), mutationModel="GTRGAMMA", 
          iterations=2, seed=sample(1:10000000,1), outputSeeds=FALSE,Threads=24, discard=TRUE)
 
-
-## Merge all trees into one
-Mer

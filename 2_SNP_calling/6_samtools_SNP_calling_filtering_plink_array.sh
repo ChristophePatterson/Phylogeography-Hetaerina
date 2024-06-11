@@ -156,14 +156,6 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calli
 
 cd $output_dir
 
-
-##### Use output from above to determine appropreate filtering step
-
-echo '6. SNPS randomly thinned to one per 1000 bases'
-bcftools +prune -n 1 -N rand -w 1000bp $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf
-bcftools view -H $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf | grep -v -c '^#'
-bcftools view -O z $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.bcf > $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.vcf.gz
-
 #convert to Plink
 
 # Extracts and edits sample names
