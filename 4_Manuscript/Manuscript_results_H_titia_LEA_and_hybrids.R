@@ -285,7 +285,7 @@ CR.e.e[4,] <- c(CR.e[2,1],CR.e[1,2])
 
 # Shifts all the Costa Rica points so that they do not overlap
 # Min dist in decimal degrees that populations whould be assigned 
-min.dist <- 0.3
+min.dist <- 0.35
 # Subset population to only those in costa rica
 set.seed(3)
 q.coord.pop.CR <- q.coord.pop[grep(q.coord.pop$site, pattern = "Costa Rica"),]
@@ -338,7 +338,7 @@ ggplot(q.coord.pop.CR) +
 
 # Shifts all the Mexico points so that they do not overlap
 # Min dist in decimal degrees that populations whould be assigned 
-min.dist <- 0.4
+min.dist <- 0.41
 # Subset population to only those in costa rica
 q.coord.pop.Mx <- q.coord.pop[grepl(q.coord.pop$site, pattern = paste(c("Mexico", "Belize"), collapse = "|")),]
 # Assigned new location col
