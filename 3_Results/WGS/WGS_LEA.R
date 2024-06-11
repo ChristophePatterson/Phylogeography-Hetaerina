@@ -117,7 +117,10 @@ Pac.clust <- which.max(qtable$Q[qtable$sample=="ZANAa05"])
 SAtl.clust <- which.min(qtable$Q[qtable$sample=="ZANAa05"])
 NAtl.clust <- 3
 # Cols
-het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")[c(Pac.clust,SAtl.clust,NAtl.clust)]
+het.cols <- c("#AF0F09","#E5D9BA","#3E3C3A")
+het.cols[Pac.clust] <- "#AF0F09"
+het.cols[SAtl.clust] <- "#E5D9BA"
+het.cols[NAtl.clust] <- "#3E3C3A"
 
 p.bar <- ggplot(qtable)+
   geom_bar(stat="identity", aes(sample, as.numeric(Q), fill = Qid,), position = "stack", width = 1, col = "black", show.legend = F) +
@@ -353,7 +356,7 @@ q <- ggplot(hybrid.sites) +
   geom_line(data = tri, aes(x = x, y = y)) +
   geom_point(aes(x = hybrid.index, y = het.fst, fill = assign), shape = 21, size = 4) +
   geom_label_repel(aes(hybrid.index, het.fst, label = samples), size = 4, min.segment.length = 0, force = 2, nudge_y = 0.1, nudge_x = (0.5-hybrid.sites$hybrid.index)/2) +
-  scale_fill_manual(values = het.cols[c(2,1)]) +
+  scale_fill_manual(values = het.cols) +
   xlim(c(0,1)) + ylim(c(0,1)) + 
   xlab("Hybrid Index") +
   ylab("Heterozygousity of >0.8 Fst SNPs") +
@@ -369,7 +372,6 @@ ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.png"), plot1, width = 2
 ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.pdf"), plot1, width = 21, height = 15)
 
 #### CONVERTED CODE NOT TESTED FROM HERE
-
 
 # Get depth of reads
 
