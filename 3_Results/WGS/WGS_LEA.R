@@ -352,7 +352,7 @@ tri <- cbind.data.frame(x = c(seq(0,0.5,length.out=10),seq(0.5,1,length.out=10))
 q <- ggplot(hybrid.sites) +
   geom_line(data = tri, aes(x = x, y = y)) +
   geom_point(aes(x = hybrid.index, y = het.fst, fill = assign), shape = 21, size = 4) +
-  geom_label_repel(aes(hybrid.index, het.fst, label = samples), size = 4, min.segment.length = 0, force = 2) +
+  geom_label_repel(aes(hybrid.index, het.fst, label = samples), size = 4, min.segment.length = 0, force = 2, nudge_y = 0.1, nudge_x = (0.5-hybrid.sites$hybrid.index)/2) +
   scale_fill_manual(values = het.cols[c(2,1)]) +
   xlim(c(0,1)) + ylim(c(0,1)) + 
   xlab("Hybrid Index") +
