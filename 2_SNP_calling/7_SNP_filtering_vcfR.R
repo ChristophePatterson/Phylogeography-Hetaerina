@@ -115,7 +115,7 @@ if(grepl(SNP.library.name, pattern="titia_dg")){
 }
 # For H. americana lots of small X chromosomes
 if(grepl(SNP.library.name, pattern="americana_dg")){
-  X_chrom <- c("JAKTNV010000016.1","JAKTNV010000031.1","JAKTNV010000013.1","JAKTNV010000060.1","JAKTNV010000023.1","JAKTNV010000051.1","JAKTNV010000012.1")
+  X_chrom <- c("JAKTNV010000016_1","JAKTNV010000031_1","JAKTNV010000013_1","JAKTNV010000060_1","JAKTNV010000023_1","JAKTNV010000051_1","JAKTNV010000012_1")
 }
 vcf.SNPs@fix[1:5,]
 
