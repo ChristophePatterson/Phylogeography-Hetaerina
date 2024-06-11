@@ -45,9 +45,10 @@ vcf <- read.vcfR(paste0(dir.path,SNP.library.name,filter_para,".vcf.gz"))
 vcf@fix[,1] <- gsub(vcf@fix[,1], pattern = "\\.", replacement = "_")
 
 # Removes SNPs on the X chromosome
-X_chrom <- "HetTit1_0_p_scaff-12-96647824"
-table(vcf@fix[,1]!=X_chrom)
-vcf.SNPs <- vcf[vcf@fix[,1]!=X_chrom,]
+X_chrom <- c("JAKTNV010000016_1","JAKTNV010000031_1","JAKTNV010000013_1","JAKTNV010000060_1","JAKTNV010000023_1","JAKTNV010000051_1","JAKTNV010000012_1")
+
+table(vcf@fix[,1]%in%X_chrom)
+vcf.SNPs <- vcf[!vcf@fix[,1]%in%X_chrom,]
 
 # Stats
 myMiss <- apply(extract.gt(vcf.SNPs), MARGIN = 2, function(x){ sum(is.na(x)) })
