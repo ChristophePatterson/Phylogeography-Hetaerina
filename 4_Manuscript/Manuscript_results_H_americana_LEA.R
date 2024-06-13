@@ -27,7 +27,7 @@ library(tidyverse)
 
 
 # Output file location
-SNP.library.name <- "Hetaerina_americana_ddRAD_titia_dg"
+SNP.library.name <- "Hetaerina_americana_ddRAD_americana_dg"
 species <- "americana"
 dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/")
 filter_para <- ".all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.biSNP0_20"
@@ -45,9 +45,10 @@ vcf <- read.vcfR(paste0(dir.path,SNP.library.name,filter_para,".vcf.gz"))
 vcf@fix[,1] <- gsub(vcf@fix[,1], pattern = "\\.", replacement = "_")
 
 # Removes SNPs on the X chromosome
-X_chrom <- "HetTit1_0_p_scaff-12-96647824"
-table(vcf@fix[,1]!=X_chrom)
-vcf.SNPs <- vcf[vcf@fix[,1]!=X_chrom,]
+X_chrom <- c("JAKTNV010000016_1","JAKTNV010000031_1","JAKTNV010000013_1","JAKTNV010000060_1","JAKTNV010000023_1","JAKTNV010000051_1","JAKTNV010000012_1")
+
+table(vcf@fix[,1]%in%X_chrom)
+vcf.SNPs <- vcf[!vcf@fix[,1]%in%X_chrom,]
 
 # Stats
 myMiss <- apply(extract.gt(vcf.SNPs), MARGIN = 2, function(x){ sum(is.na(x)) })
@@ -123,20 +124,20 @@ sites <- read.table(paste0(dir.path, "coorrd_", species,"_complete_",analysis.na
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-##obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-##             CPU = 2, project = "new", repetitions = 20, alpha = 100)
-titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
-titia.snmf.sum <- summary(titia.snmf)
+obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+amer.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
+amer.snmf.sum <- summary(amer.snmf)
 
-plot(titia.snmf, col = "blue4", cex = 1.4, pch = 19)
+plot(amer.snmf, col = "blue4", cex = 1.4, pch = 19)
 
-# cross.entropy(titia.snmf, K = 6)
+# cross.entropy(amer.snmf, K = 6)
 
-ce <- cbind(1:max.K, t(titia.snmf.sum$crossEntropy))
+ce <- cbind(1:max.K, t(amer.snmf.sum$crossEntropy))
 colnames(ce) <- c("K", "min","mean","max")
 ce <- data.frame(ce)
 
-summary(titia.snmf)
+summary(amer.snmf)
 
 which.min(ce$mean)
 ce.plot <- ggplot(ce) +
@@ -153,8 +154,8 @@ ggsave(paste0(plot.dir,"H_", species,"_LEA_complete_snp_K1-8",snp_sub_text,"cros
 #Choose K
 K <- which.min(ce$mean)
 K <- 3
-best <- which.min(cross.entropy(titia.snmf, K = K))
-qmatrix = Q(titia.snmf, K = K, run = best)
+best <- which.min(cross.entropy(amer.snmf, K = K))
+qmatrix = Q(amer.snmf, K = K, run = best)
 # Get list of unique populations
 pop <- unique(sites$site.sub.county.drain)
 length(unique(sites$Lat))
@@ -393,8 +394,8 @@ q <- ggplot() +
   coord_sf(xlim = mex.e$Long, ylim = mex.e$Lat) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm"))
 
-best <- which.min(cross.entropy(titia.snmf, K = K))
-qmatrix = Q(titia.snmf, K = K, run = best)
+best <- which.min(cross.entropy(amer.snmf, K = K))
+qmatrix = Q(amer.snmf, K = K, run = best)
 qtable <- cbind(rep(sites$samples,K), rep(sites$Lat,K), rep(1:K, each = length(sites$samples)), c(qmatrix[,1:K]))
 qtable <-  data.frame(qtable)
 colnames(qtable) <- c("sample","lat","Qid", "Q")
@@ -423,8 +424,8 @@ v
 # hybrid triangle plot
 
 # Assign PCA colour based off LEA anaylsis
-qdf <- cbind(sites[,c("samples","Lat","Long")],Q(titia.snmf, K = K, run = best))
-barchart(titia.snmf, K = 3, run = best)
+qdf <- cbind(sites[,c("samples","Lat","Long")],Q(amer.snmf, K = K, run = best))
+barchart(amer.snmf, K = 3, run = best)
 for(i in 1:length(qdf$samples)){
   qdf$assign[i] <- which.max(qdf[i,c(4:(3+K))])
 }
@@ -462,7 +463,7 @@ y <- ggplot(pca.q.df) +
                       expression(paste(italic("H. calverti"))))) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
-  theme(legend.position = c(0.8, 0.2))
+  theme(legend.position = c(0.8, 0.8))
 y
 
 a <- ggplot() +

@@ -138,4 +138,4 @@ bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2
 ## Then outside of slurm concat all the vcf files using 
 
 # bcftools concat $output_dir/*vcf > $output_dir/WGS_titia_chr1-12.vcf
-# bcftools concat `ls /nobackup/tmjj24/ddRAD/WGS_titia/VCF_chrom_r10000/*.vcf.gz` > /nobackup/tmjj24/ddRAD/WGS_titia/VCF_chrom_r10000/WGS_titia_chr1-12.vcf
+# bcftools concat `ls /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/*.vcf.gz` > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/WGS_titia_chr1-12.vcf

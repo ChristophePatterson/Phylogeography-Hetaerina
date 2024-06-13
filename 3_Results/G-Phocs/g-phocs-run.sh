@@ -28,22 +28,15 @@ output_dir=($input_dir/$SNP_library/G-Phocs/model_runs/)
 
 rm -r $input_dir/$SNP_library/G-Phocs/
 mkdir -p $input_dir/$SNP_library/G-Phocs
-mkdir -p $input_dir/$SNP_library/G-Phocs/gphocs-loci
 mkdir -p $output_dir
-# Convert bcf into vcf.gz
-bcftools view -O z $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.bcf > $input_dir/$SNP_library/$SNP_library.all.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz
 
-# Number of samples to select from
-select_N=(3)
+# Number of loci to subsample
+select_N=(2000)
 
-# Remove any previous gphocs files
-rm $input_dir/$SNP_library/G-Phocs/gphocs-loci/*
 # Create g-phocs input file
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/G-Phocs/vcfR2g-phocs.R $SNP_library $input_dir $select_N $output_dir
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/G-Phocs/RAD_loci_2_g-phocs.R $SNP_library $input_dir $select_N
 
 cd $input_dir/$SNP_library/G-Phocs/
-# Concat all files into one
-cat gphocs-loci/Gphocs_header.txt gphocs-loci/*.gphocs > $SNP_library.N${select_N}.gphocs
 
 ## Gerenation input files for gphocs
 rm $output_dir/*
