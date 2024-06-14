@@ -39,7 +39,11 @@ samples <- do.call("c", lapply(trees, function(x) x$tip.label))
 samples <- samples[!duplicated(samples)]
 
 # Remove samples from assignFile that are not in trees
+# Any tree tips that are not in the assignfile
+any(!(samples%in%assignFile$indiv))
 assignFile <- assignFile[assignFile$indiv %in% samples,]
+
+# Convert assign pop to alpha
 assignFile$popLabel_alpha <- LETTERS[match(as.factor(assignFile$popLabel), levels(as.factor(assignFile$popLabel)))]
 assignFile <- assignFile[order(assignFile$popLabel_alpha),]
 # Create pop vector (recommend subsampling in a way that keeps the sum of popAssignments at 16 or less)
@@ -48,35 +52,34 @@ popN <- length(unique(assignFile$popLabel))
 popVector <- rep(subsample_N, length(unique(assignFile$popLabel)))
 sum(popVector)
 
+lapply(trees, function(x) {
+    tree <- as.phylo(x)
+    assigntips <- assignFile$popLabel_alpha[na.omit(match(assignFile$indiv, tree$tip.label))]
+    return(table(assigntips))
+}
+)
+
+assignFile$indiv[is.na(match(assignFile$indiv, trees[[38]]$tip.label))]
+trees[[605]]$tip.label
+
 # Check each tree has a least N samples per populations
-missing_data_tree <- unlist(lapply(trees, function(x) {
-    tip.assign.per.tree <- table(assignFile$popLabel_alpha[match(assignFile$indiv, x$tip.label)])
-    return(!(any(tip.assign.per.tree<subsample_N) | length(tip.assign.per.tree)<popN))
+missing_data_tree <- do.call("c",lapply(trees, function(x) {
+    tree <- as.phylo(x)
+    tip.assign.per.tree <- table(assignFile$popLabel_alpha[assignFile$indiv %in% tree$tip.label])
+    return(any(as.numeric(tip.assign.per.tree) < subsample_N) | length(tip.assign.per.tree)<popN)
 }
 ))
-
-trees <- trees[missing_data_tree]
+# Subset trees
+trees <- trees[which(!missing_data_tree)]
 
 assignmentsGlobal<-assignFile[,c(1,3)]
+colnames(assignmentsGlobal) <- c("indiv","popLabel")
 observedTrees <- trees  
 popAssignments<-list(popVector) 
-subsamplesPerGene<- 5
+subsamplesPerGene<- 2
 outgroup=FALSE
 outgroupPrune=FALSE  
 
-# Building subset of trees (cannot be run twice - remove observedTrees first)
-observedTrees<-PrepSubsampling(assignmentsGlobal=assignmentsGlobal,observedTrees=observedTrees,
+observedTrees <- PrepSubsampling(assignmentsGlobal=assignmentsGlobal,observedTrees=observedTrees,
     popAssignments=popAssignments,subsamplesPerGene=subsamplesPerGene,outgroup=outgroup,
     outgroupPrune=outgroupPrune)
-
-## Root all trees by the midpoint
-observedTreesMidpoint<-lapply(observedTrees[[1]],midpoint)  
-class(observedTreesMidpoint)<-"multiPhylo"  
-observedTreesMidpoint<-list(observedTreesMidpoint) 
-
-###  pdf(paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/PHRAPL/", SNP.library.name, "_phrapl_trees.pdf"))
-###  for(i in 1:9){
-###      plot(observedTreesMidpoint[[1]][i])
-###  }
-###  dev.off()
-###  par(mfrow = c(1, 1))
