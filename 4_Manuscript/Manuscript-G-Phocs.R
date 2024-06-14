@@ -9,8 +9,9 @@ library(tidyverse)
 
 ### Produce plots that use hetero specific SNPs for g-phocs
 input.dir.top <- "4_Manuscript/data/G-Phocs/"
-model.names <- c("americana_dg/G-Phocs-a1-b20-titia-Iso-N3","titia_dg/G-Phocs-a1-b20-americana-Iso-N3",
-                 "americana_dg/G-Phocs-a1-b20-titia-migR-N3","titia_dg/G-Phocs-a1-b20-americana-migR-N3")
+N_select <- 2000
+model.names <- paste0(c("americana_dg/G-Phocs-a1-b20-titia-Iso-N","titia_dg/G-Phocs-a1-b20-americana-Iso-N",
+                 "americana_dg/G-Phocs-a1-b20-titia-migR-N","titia_dg/G-Phocs-a1-b20-americana-migR-N"),N_select) 
 u = 2.8*10^-9 
 plot.dir <- "4_Manuscript/plots/G-Phocs/"
 run <- "americana_dg/G-Phocs-a1-b20-titia-Iso-N3"
@@ -443,10 +444,10 @@ group_by(trace.df[trace.df$species=="americana",], mig.type) %>%
   summarise(mn.tau_amer.calv = mean(tau_amer.calv), min.tau_amer.calv = min(tau_amer.calv), max.tau_amer.calv = max(tau_amer.calv),
             mn.tau_amer = mean(tau_amer), min.tau_amer = min(tau_amer), max.tau_amer = max(tau_amer))
 
-man.plot <- (p[["G-Phocs-a1-b20-titia-Iso-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
-               p[["G-Phocs-a1-b20-americana-Iso-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
-  (p[["G-Phocs-a1-b20-titia-migR-N3"]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
-     p[["G-Phocs-a1-b20-americana-migR-N3"]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
+man.plot <- (p[[paste0("G-Phocs-a1-b20-titia-Iso-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
+               p[[paste0("G-Phocs-a1-b20-americana-Iso-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
+  (p[[paste0("G-Phocs-a1-b20-titia-migR-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
+     p[[paste0("G-Phocs-a1-b20-americana-migR-N", N_select)]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots","-u-",
@@ -456,7 +457,9 @@ ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots","-u-",
 
 ### Produce plots that use hetero specific SNPs for g-phocs
 input.dir.top <- "4_Manuscript/data/G-Phocs/"
-model.names <- c("titia_dg/G-Phocs-a1-b20-titia-Iso-N3","americana_dg/G-Phocs-a1-b20-americana-Iso-N3","titia_dg/G-Phocs-a1-b20-titia-migR-N3","americana_dg/G-Phocs-a1-b20-americana-migR-N3")
+model.names <- paste0(c("titia_dg/G-Phocs-a1-b20-titia-Iso-N","americana_dg/G-Phocs-a1-b20-americana-Iso-N",
+                        "titia_dg/G-Phocs-a1-b20-titia-migR-N","americana_dg/G-Phocs-a1-b20-americana-migR-N"),
+                      N_select)
 u = 2.8*10^-9 
 plot.dir <- "4_Manuscript/plots/G-Phocs/"
 run <- "americana_dg/G-Phocs-a1-b20-titia-Iso-N3"
