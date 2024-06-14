@@ -52,15 +52,6 @@ popN <- length(unique(assignFile$popLabel))
 popVector <- rep(subsample_N, length(unique(assignFile$popLabel)))
 sum(popVector)
 
-lapply(trees, function(x) {
-    tree <- as.phylo(x)
-    assigntips <- assignFile$popLabel_alpha[na.omit(match(assignFile$indiv, tree$tip.label))]
-    return(table(assigntips))
-}
-)
-
-assignFile$indiv[is.na(match(assignFile$indiv, trees[[38]]$tip.label))]
-trees[[605]]$tip.label
 
 # Check each tree has a least N samples per populations
 missing_data_tree <- do.call("c",lapply(trees, function(x) {
@@ -83,3 +74,31 @@ outgroupPrune=FALSE
 observedTrees <- PrepSubsampling(assignmentsGlobal=assignmentsGlobal,observedTrees=observedTrees,
     popAssignments=popAssignments,subsamplesPerGene=subsamplesPerGene,outgroup=outgroup,
     outgroupPrune=outgroupPrune)
+
+# Root trees by mid point
+observedTreesMidpoint<-lapply(observedTrees[[1]],midpoint)  
+class(observedTreesMidpoint)<-"multiPhylo"  
+observedTreesMidpoint<-list(observedTreesMidpoint)  
+
+
+subsampleWeights.df<-GetPermutationWeightsAcrossSubsamples(popAssignments=popAssignments,
+  observedTrees=observedTreesMidpoint)
+
+
+# Generate models
+popVector<-popAssignments[[1]]  # how many population/species/groups do you have? If you have 2, 
+                                # then type c(2,2) or c(3,3) [the number of individuals doesn't matter here]. 
+maxK<-3  # maximum number of parameters in total (considering migration rates and coalescent events)
+maxMigrationK=1  # maximum number of parameters that will be assigned to migration rates
+maxN0K=1  # maximum number of parameters that will be assigned to population sizes
+maxGrowthK=0  # maximum number of growth parameters that will be incorporated into the model set
+forceTree=TRUE  # Do you want to force all population to collapse? (if TRUE only fully-resolved trees will be included in the set of models)
+forceSymmetricalMigration=TRUE  # Do you want to generate a set of models with symmetric migration among all populations? (TRUE/FALSE)
+
+
+migrationArray<-GenerateMigrationIndividuals(popVector=popVector,maxK=maxK,  
+    maxMigrationK=maxMigrationK,maxN0K=maxN0K,maxGrowthK=maxGrowthK,
+    forceTree=forceTree,forceSymmetricalMigration=forceSymmetricalMigration)
+
+migrationArrayMap<-GenerateMigrationArrayMap(migrationArray) 
+save(migrationArray,migrationArrayMap, file="MigrationArray_3Pop_4K.rda")
