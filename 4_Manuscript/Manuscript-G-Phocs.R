@@ -212,7 +212,7 @@ for(i in 1:length(trace.df$model)){
 }
 
 trace.df
-write.table(trace.df, paste0("4_Manuscript/data/G-Phocs/","G-Phocs_results_hetero_genome_", gsub(u, replacement = "-", pattern ="\\."),".txt"),
+write.table(trace.df, paste0("4_Manuscript/data/G-Phocs/","G-Phocs_results_heterospecific_genome_", gsub(u, replacement = "-", pattern ="\\."),".txt"),
             row.names = F, quote=F)
 
 
@@ -879,4 +879,20 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
 ggsave(file = paste0(plot.dir, "conspecific_g-phocs-plots.png"), all_plot, height = 10, width = 12) 
 ggsave(file = paste0(plot.dir, "conspecific_g-phocs-plots.pdf"), all_plot, height = 10, width = 12) 
 
+# Merge all tau
+trace.df <- trace.df[row.names(trace.df)!=1,]
+trace.df$model <- row.names(trace.df)
 
+trace.df$species <- sapply(strsplit(trace.df$model, "-"), "[", 5)
+trace.df$mig.type <- sapply(strsplit(trace.df$model, "-"), "[", 6)
+trace.df$beta <- sapply(strsplit(trace.df$model, "-"), "[", 4)
+names(trace.df)
+
+for(i in 1:length(trace.df$model)){
+  HPD.temp <- HPD.trace.list[[i]]
+  trace.df$HPD[i] <- paste0(paste(HPD.temp[1,],"=", HPD.temp[2,]), collapse = " : ")
+}
+
+trace.df
+write.table(trace.df, paste0("4_Manuscript/data/G-Phocs/","G-Phocs_results_conspecific_genome_", gsub(u, replacement = "-", pattern ="\\."),".txt"),
+            row.names = F, quote=F)
