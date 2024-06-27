@@ -194,6 +194,7 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   plot_layout(ncol = 2)
 
 ggsave(file = paste0(plot.dir, "Hetero_g-phocs-plots.png"), all_plot, height = 10, width = 12) 
+ggsave(file = paste0(plot.dir, "Hetero_g-phocs-plots.pdf"), all_plot, height = 10, width = 12) 
 
 
 # Merge all tau
@@ -456,7 +457,7 @@ ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots","-u-",
 
 
 #####
-## ALL titia draft genome runs
+## ALL americana draft genome runs
 ####
 
 input.dir.top <- paste0("4_Manuscript/data/G-Phocs/")
@@ -692,6 +693,8 @@ ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots","-u-",
                                           gsub(u, replacement = "-", pattern ="\\."),".png"),
        width =12, height = 10)
 
+
+####################################################
 ### Produce plots that use conspecific specific SNPs for g-phocs
 input.dir.top <- "4_Manuscript/data/G-Phocs/"
 model.names <- paste0(c("titia_dg/G-Phocs-a1-b20-titia-Iso-N","americana_dg/G-Phocs-a1-b20-americana-Iso-N",
@@ -874,5 +877,6 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   plot_layout(ncol = 2)
 
 ggsave(file = paste0(plot.dir, "conspecific_g-phocs-plots.png"), all_plot, height = 10, width = 12) 
+ggsave(file = paste0(plot.dir, "conspecific_g-phocs-plots.pdf"), all_plot, height = 10, width = 12) 
 
 
