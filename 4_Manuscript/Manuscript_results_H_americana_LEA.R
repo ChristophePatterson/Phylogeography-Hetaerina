@@ -74,7 +74,7 @@ my_genind_ti_SNPs <- vcfR2genind(vcf.SNPs, sep = "/", return.alleles = TRUE)
 # Create geno object
 geno <- vcfR2loci(vcf.SNPs, return.alleles = F)
 geno.mat <- as.matrix(geno)
-
+dim(geno.mat)
 
 # Convert into geno format 2 for alternative homozygous, 1 for he
 # 2 for alternative homozygous
@@ -133,8 +133,8 @@ sites <- read.table(paste0(dir.path, "coorrd_", species,"_complete_",analysis.na
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+#             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 amer.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 amer.snmf.sum <- summary(amer.snmf)
 
@@ -192,6 +192,7 @@ q.coord.pop <- data.frame(pop, coord.pop, qpop)
 colnames(q.coord.pop) <- c("site", "lat", "long", LETTERS[1:K])
 q.coord.pop$lat <- as.numeric(q.coord.pop$lat)
 q.coord.pop$long <- as.numeric(q.coord.pop$long)
+q.coord.pop$num_samples <- apply(X = q.coord.pop, MARGIN = 1, function(x) length(which(sites$site.sub.county.drain==x["site"])))
 
 # Figure out what number each region has been assigned to (As it varies between sNMF runs)
 Namer.clust <- which.max(q.coord.pop[q.coord.pop$site=="TN_United States_Gulf",LETTERS[1:K]])
@@ -354,7 +355,7 @@ p <- ggplot() +
   geom_polygon(data = CR.e.e, aes(x = Long, y = Lat), size = 1.2,  fill = NA, colour = "black") +
   #geom_point(data = sites, aes(x = long, y = lat)) +
   #geom_point(data = q.coord.pop, aes(x = long, y = lat)) 
-  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, group = site, r = 1), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, group = site, r = (sqrt(num_samples)/pi)*2), cols = LETTERS[1:K]) +
   geom_text(data = mex.e.e[4,],aes(Long + 3, Lat, label = "(b)"), size = 5) +
   geom_text(data = CR.e.e[3,],aes(Long + 2, Lat, label = "(c)"), size = 5) +
   #theme_bw()  +
@@ -385,7 +386,7 @@ q <- ggplot() +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
-  geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = 0.4 , group = site), cols = LETTERS[1:K]) +
+  geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/1.5, group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
   #xlim(c(-130,-60)) +
@@ -463,13 +464,16 @@ write.table(LEA_popfile[sites$site.sub!="CUAJ",], paste0(dir.path, "popfile_", s
             quote = F,row.names = F, col.names = F)
 
 
+pca.label <- c()
+pca.label[Namer.clust] <- expression(paste(italic("H. americana"), " north"))
+pca.label[cal.clust] <- expression(paste(italic("H. calverti")))
+pca.label[SAmer.clust] <- expression(paste(italic("H. americana"), " south"))
+
 # PCA plots
 y <- ggplot(pca.q.df) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
   scale_fill_manual(values = het.cols, name = "Ancestory assignment", 
-                    c(expression(paste(italic("H. americana"), " north")), 
-                      expression(paste(italic("H. americana"), " south")), 
-                      expression(paste(italic("H. calverti"))))) +
+                    pca.label) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.8, 0.8))
