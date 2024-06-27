@@ -7,5 +7,7 @@
 4_Manuscript/data/SNP_libraries/*/*.snmf/
 /4_Manuscript/plots/Supplementary/
 /4_Manuscript/data_old/
+/4_Manuscript/data/G-Phocs/titia_dg/
+/4_Manuscript/data/G-Phocs/americana_dg/
 slurm-*.out
 *.trace
