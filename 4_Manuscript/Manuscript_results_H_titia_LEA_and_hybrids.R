@@ -249,6 +249,7 @@ min(ce$mean)
 # Outlines for each plot
 world.e <- data.frame(Long = c(-120,-60), Lat = c(8,38))
 mex.e <- data.frame( Long = c(-97.5,-86.3), Lat = c(19.5,14.3))
+#mex.e <- data.frame( Long = c(-100,-91), Lat = c(22,14.4))
 mex.e.zoom <- data.frame( Long = c(-95.5,-94.2), Lat = c(17.5,16.1))
 CR.e <- data.frame(Long = c(-85.25,-82.5), Lat = c(8,11))
 
@@ -606,7 +607,7 @@ y <- ggplot(pca.q.df) +
   scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = pca.label) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
-  theme(legend.position = c(0.2, 0.8), text = element_text(size = 25))
+  theme(legend.position = c(0.3, 0.85), text = element_text(size = 15), axis.title = element_text(size = 25))
 
 y
 a <- ggplot() +
