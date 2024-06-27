@@ -14,8 +14,11 @@ SNP.library.name <- "Hetaerina_all_ddRAD_titia_dg"
 # SNAPP.model <- "snap_Am_ti_default_div_est_N3"
 dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/SNAPP/")
 plot.dir <- paste0("4_Manuscript/plots/",SNP.library.name, "/")
+num_samples <- 20
 dir.create(plot.dir)
 SNAPP.model <- list.files(dir.path)[grep(pattern = "Anon",list.files(dir.path))]
+SNAPP.model <- SNAPP.model[grep(pattern = paste0("ind_", num_samples),SNAPP.model)]
+
 SNAPP.model <- gsub(SNAPP.model, pattern = ".trees.Anon",replacement = "")
 SNAPP.tree <- read.mega(paste0(dir.path,SNAPP.model, ".trees.Anon"))
 
