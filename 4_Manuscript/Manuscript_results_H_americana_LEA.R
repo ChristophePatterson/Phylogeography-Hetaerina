@@ -59,6 +59,15 @@ ggplot(myMiss) +
   geom_violin(aes(x = "X", y = per.gt), outlier.colour = NA) +
   geom_jitter(aes(x = "X", y = per.gt), height = 0, width = 0.2)
 
+# Get coverage statistics 
+DP.mat <- extract.gt(vcf.SNPs, element = "DP")
+Samp.DP <- apply(DP.mat, MARGIN = 2, function(x) mean(as.numeric(x), na.rm = T))
+SNP.DP <- apply(DP.mat, MARGIN = 1, function(x) mean(as.numeric(x), na.rm = T))
+
+c(mean(Samp.DP,na.rm =T), median(Samp.DP,na.rm =T), range(Samp.DP,na.rm = T))
+c(mean(SNP.DP,na.rm =T), median(SNP.DP,na.rm =T), range(SNP.DP,na.rm = T))
+
+
 # Creaete genind object
 my_genind_ti_SNPs <- vcfR2genind(vcf.SNPs, sep = "/", return.alleles = TRUE)
 

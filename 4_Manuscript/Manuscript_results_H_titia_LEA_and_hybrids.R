@@ -60,6 +60,14 @@ ggplot(myMiss) +
   geom_violin(aes(x = "X", y = per.gt), outlier.colour = NA) +
   geom_jitter(aes(x = "X", y = per.gt), height = 0, width = 0.2)
 
+# Get coverage statistics 
+DP.mat <- extract.gt(vcf.SNPs, element = "DP")
+Samp.DP <- apply(DP.mat, MARGIN = 2, function(x) mean(as.numeric(x), na.rm = T))
+SNP.DP <- apply(DP.mat, MARGIN = 1, function(x) mean(as.numeric(x), na.rm = T))
+
+c(mean(Samp.DP,na.rm =T), median(Samp.DP,na.rm =T), range(Samp.DP,na.rm = T))
+c(mean(SNP.DP,na.rm =T), median(SNP.DP,na.rm =T), range(SNP.DP,na.rm = T))
+
 # Creaete genind object
 my_genind_ti_SNPs <- vcfR2genind(vcf.SNPs, sep = "/", return.alleles = TRUE)
 
@@ -128,6 +136,7 @@ max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
 #obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
 #             CPU = 2, project = "new", repetitions = 20, alpha = 100)
+# If swapping between home and work computer need to change the .smfproject file to \\homeblue02\tmjj24\My_Documents\Github\
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -597,7 +606,7 @@ y <- ggplot(pca.q.df) +
   scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = pca.label) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
-  theme(legend.position = c(0.2, 0.8))
+  theme(legend.position = c(0.2, 0.8), text = element_text(size = 25))
 
 y
 a <- ggplot() +
