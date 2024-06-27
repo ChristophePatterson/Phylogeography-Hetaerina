@@ -1,4 +1,4 @@
-new("pcaProject", projDir = "C:/Users/chris/Documents/GitHub/Thesis-Chapter-3/4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_americana_dg/", 
+new("pcaProject", projDir = "\\\\homeblue02/tmjj24/My_Documents/Github/Thesis-Chapter-3/4_Manuscript/data/SNP_libraries/Hetaerina_americana_ddRAD_americana_dg/", 
     pcaDir = "H_americana_complete_snp_noX0_20.pca/", n = 58L, 
     L = 5259L, K = 58L, center = TRUE, scale = TRUE, pcaProject.file = "H_americana_complete_snp_noX0_20.pcaProject", 
     input.file = "H_americana_complete_snp_noX0_20.lfmm", eigenvalue.file = "H_americana_complete_snp_noX0_20.eigenvalues", 
