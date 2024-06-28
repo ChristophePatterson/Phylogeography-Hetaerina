@@ -137,6 +137,8 @@ max.K <- 10
 #obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
 #             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 # If swapping between home and work computer need to change the .smfproject file to \\homeblue02\tmjj24\My_Documents\Github\
+#or to 
+getwd()
 titia.snmf <- load.snmfProject(file = paste0(dir.path, analysis.name,snp_sub_text,".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -200,7 +202,6 @@ q.coord.pop$num_samples <- apply(X = q.coord.pop, MARGIN = 1, function(x) length
 Pac.clust <- which.max(q.coord.pop[q.coord.pop$site=="ZANA_Mexico_Pacific",LETTERS[1:K]])
 SAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="ESRB_Costa Rica_Carribbean",LETTERS[1:K]])
 NAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="HCAR_United States_Gulf",LETTERS[1:K]])
-
 
 #Conduct PCA
 geno2lfmm(paste0(dir.path, analysis.name,snp_sub_text,".geno"), 
@@ -944,12 +945,15 @@ count.matrix.noX <- prepare.data(admix.gen=gen.mat[locus.info$lg!="X",], loci.da
 # Calculate heterozgousity of samples
 het<-calc.intersp.het(introgress.data=count.matrix.noX)
 
+hi.index.sim.noX<-est.h(introgress.data=count.matrix.noX,loci.data=locus.info[locus.info$lg!="X",],
+                    fixed=T, p1.allele="1", p2.allele="0")
+
 # Inbuilt hybrid plot that used base R plotting
-introgress::triangle.plot(hi.index=hi.index.sim, int.het=het, pdf = F)
+introgress::triangle.plot(hi.index=hi.index.sim.noX, int.het=het, pdf = F)
 
 # attach het and hybrid to sample dataframe
 hybrid.sites$het.fst <- het
-hybrid.sites$hybrid.index <- hi.index.sim[,2]
+hybrid.sites$hybrid.index <- hi.index.sim.noX[,2]
 
 # Create triangle for hydrid index plot
 tri <- cbind.data.frame(x = c(seq(0,0.5,length.out=10),seq(0.5,1,length.out=10)), y = c(seq(0,1,length.out=10), seq(1,0,length.out=10)))

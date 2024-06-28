@@ -1,5 +1,5 @@
 new("snmfProject", snmfProject.file = "H_titia_complete_snp_noX0_20.snmfProject", 
-    projDir = "\\\\homeblue02/tmjj24/My_Documents/Github/Thesis-Chapter-3/4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titia_dg/", 
+    projDir = "C:/Users/chris/Documents/GitHub/Thesis-Chapter-3/4_Manuscript/data/SNP_libraries/Hetaerina_titia_ddRAD_titia_dg/", 
     snmfDir = "H_titia_complete_snp_noX0_20.snmf/", input.file = "H_titia_complete_snp_noX0_20.geno", 
     runs = list(), K = c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 
     10L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 1L, 2L, 3L, 
