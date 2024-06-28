@@ -50,6 +50,13 @@ table(vcf.ply@fix[,1]!=X_chrom)
 # remove X chrom
 geno <- extract.gt(vcf.ply[vcf.ply@fix[,1]!=X_chrom])
 
+DP.mat <- extract.gt(vcf.ply, element = "DP")
+Samp.DP <- apply(DP.mat, MARGIN = 2, function(x) mean(as.numeric(x), na.rm = T))
+SNP.DP <- apply(DP.mat, MARGIN = 1, function(x) mean(as.numeric(x), na.rm = T))
+
+c(mean(Samp.DP,na.rm =T), median(Samp.DP,na.rm =T), range(Samp.DP,na.rm = T))
+c(mean(SNP.DP,na.rm =T), median(SNP.DP,na.rm =T), range(SNP.DP,na.rm = T))
+
 geno.mat <- as.matrix(geno)
 # table(geno.mat)
 geno.mat[geno.mat=="1/1"] <- 2
@@ -299,6 +306,9 @@ vline_chrom$text_chrom_pos <- vline_chrom$cumsum.chrom-(vline_chrom$max.length/2
 vline_chrom <- vline_chrom[as.numeric(vline_chrom$by)<=12|vline_chrom$by=="X",]
 
 locus.geno.type$BPcum
+
+# Reorder samples
+locus.geno.type$sample <- fct_relevel(locus.geno.type$sample, colnames(gen.mat)[order(as.numeric(hi.index.sim[,2]), decreasing = T)])
 
 #horizontal
 p.h <- ggplot(locus.geno.type) +
