@@ -116,14 +116,14 @@ colnames(gt) <- pop_assign_N$sample
 ape::write.dna(t(gt), file = paste0(dir.path.SNAPP, SNP.library.name,"_ind_",select_N,".phy"),
                format ="interleaved", nbcol = -1, colsep = "")
 ## (2) Species table
-species.df <- data.frame(species = pop_assign_N$pop, sample = pop_assign_N$sample)
+species.df <- data.frame(species = paste0(pop_assign_N$pop, "_", pop_assign_N$sample), sample = pop_assign_N$sample)
 write.table(species.df, file = paste0(dir.path.SNAPP, SNP.library.name,"_ind_",select_N,".txt"),
             row.names = F,quote = F, sep = "\t")
 # (3) Theta priors from Stranding et al 2022
 # All Hetaerina samples
 # normal(offset,mean,sigma)
 contrant.df <- data.frame(x = "normal(0,33.08,5.53)", y = "crown", 
-                          z = paste0(unique(pop_assign_N$pop), sep = ",",collapse = ""))
+                          z = paste0(paste0(pop_assign_N$pop, "_", pop_assign_N$sample), sep = ",",collapse = ""))
 # Americana/calverti
 #contrant.df[2,] <- data.frame(x = "normal(0,3.76,1.87)", y = "crown", 
 #                              z = paste0(unique(pop_assign_N$pop[grepl(pop_assign_N$pop, pattern = "americana|calverti")]), sep = ",",collapse = ""))
