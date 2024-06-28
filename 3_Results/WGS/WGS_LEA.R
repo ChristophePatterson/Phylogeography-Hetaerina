@@ -305,8 +305,6 @@ vline_chrom$text_chrom_pos <- vline_chrom$cumsum.chrom-(vline_chrom$max.length/2
 #Remove 14 line
 vline_chrom <- vline_chrom[as.numeric(vline_chrom$by)<=12|vline_chrom$by=="X",]
 
-locus.geno.type$BPcum
-
 # Reorder samples
 locus.geno.type$sample <- fct_relevel(locus.geno.type$sample, colnames(gen.mat)[order(as.numeric(hi.index.sim[,2]), decreasing = T)])
 
@@ -341,7 +339,7 @@ p.x <- ggplot(locus.geno.type[locus.geno.type$lg=="X",]) +
 ggsave(file = paste0(plot.dir,"introgress_X_chrom.png"), p.x, width = 6.5, height = 6)
 
 # Are any sites from CUAJa02 X chromosome heterozgous
-locus.geno.type$locus.name[locus.geno.type$sample=="CUAJa02"&locus.geno.type$lg=="X"&locus.geno.type$genotype=="0/1"]
+# locus.geno.type$locus.name[locus.geno.type$sample=="CUAJa02"&locus.geno.type$lg=="X"&locus.geno.type$genotype=="0/1"]
 
 # Calculate heterozgousity of sample
 # Recalculates heterozygousity but without the X chromosome which for males will only ever be homozgous
@@ -350,13 +348,15 @@ count.matrix.noX <- prepare.data(admix.gen=gen.mat[locus.info$lg!="X",], loci.da
                                  ind.id=F, fixed=T)
 # Calculate heterozgousity of samples
 het<-calc.intersp.het(introgress.data=count.matrix.noX)
+hi.index.sim.noX<-est.h(introgress.data=count.matrix.noX,loci.data=locus.info[locus.info$lg!="X",],
+                    fixed=T, p1.allele="1", p2.allele="0")
 
 # Inbuilt hybrid plot that used base R plotting
 # introgress::triangle.plot(hi.index=hi.index.sim, int.het=het, pdf = F)
 
 # attach het and hybrid to sample dataframe
 hybrid.sites$het.fst <- het
-hybrid.sites$hybrid.index <- hi.index.sim[,2]
+hybrid.sites$hybrid.index <- hi.index.sim.noX[,2]
 hybrid.sites$Qassign <- qtable$Qid[match(hybrid.sites$samples, qtable$sample)]
 hybrid.sites$assign <- as.factor(apply(hybrid.sites,MARGIN=1, function(x) which.max(qtable$Q[which(qtable$sample==x["samples"])])))
 # Create triangle for hydrid index plot
@@ -380,6 +380,8 @@ ggsave(file = paste0(plot.dir,"introgress_tri_plot_v2.png"), q, width = 6.5, hei
 plot1 <- (p.h) / (p.bar + p + q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") 
 ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.png"), plot1, width = 25, height = 15)
 ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.pdf"), plot1, width = 21, height = 15)
+
+write.table(hybrid.sites, file = paste0(plot.dir,"Hybrid_stats.txt"))
 
 #### CONVERTED CODE NOT TESTED FROM HERE
 
@@ -406,10 +408,10 @@ depth_CUAJ$chrom <- as.factor(depth_CUAJ$chrom)
 depth_CUAJ$chrom <- factor(depth_CUAJ$chrom, levels = sort(as.numeric(as.character(unique(depth_CUAJ$chrom)))))
 
 # Extract SNP genotype for hybrid
-depth_het <- apply(sample_map, MARGIN = 1, function(x){
-  print(x[2])
-  depth_temp <- depth_df[depth_df$Var2==x[2],]
-  vcf_temp <- vcf[sample = x[2]]
+depth_het <- apply(hybrid.sites, MARGIN = 1, function(x){
+  print(x[1])
+  depth_temp <- depth_df[depth_df$SAMPLE==x[1],]
+  vcf_temp <- vcf[sample = x[1]]
   depth_temp$is_het <- is.het(extract.gt(vcf_temp, element = "GT"), na_is_false = F)
   return(depth_temp)
   })
