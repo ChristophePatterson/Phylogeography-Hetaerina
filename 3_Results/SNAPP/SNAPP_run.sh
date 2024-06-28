@@ -23,16 +23,16 @@ library_version=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_librari
 # /home/tmjj24/apps/beast/bin/packagemanager -add SNAPP
 #Name of output SNP library
 echo $SNP_library
-out_dir=($library_version/$SNP_library/SNAPP)
+out_dir=($library_version/$SNP_library/SNAPP_single_prior/)
 mkdir -p $out_dir
 
 # select number of samples to use - Can be no more than 5 in Hetaerina_all_ddRAD_titia_dg and no more than 8 in Hetaerina_all_ddRAD_americana_dg
 case "$SNP_library" in
     "Hetaerina_all_ddRAD_titia_dg")
-        select_N=(3)
+        select_N=(20)
         ;;
     "Hetaerina_all_ddRAD_americana_dg")
-        select_N=(3)
+        select_N=(20)
         ;;
     *)  # Default case if library doesn't match any expected value
         echo "Unknown library"
@@ -43,16 +43,15 @@ esac
 
 model_name=(${SNP_library}_ind_${select_N})
 
-cd $library_version/$SNP_library
+cd $out_dir
 
 # Make input files for ruby script
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/SNAPP/SNAPP_input.R $SNP_library $library_version $select_N
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/SNAPP/SNAPP_input.R $SNP_library $library_version $select_N $out_dir
 
-cd SNAPP
 # Run ruby script for creating xml SNAPP config file
 # Uses https://github.com/mmatschiner/tutorials/blob/master/divergence_time_estimation_with_snp_data/README.md
 
-ruby /home/tmjj24/scripts/job_scripts/Master-demulitiplex-scripts/ddRAD_Durham_and_Sheffield/SNAPP/snapp_prep.rb -p $model_name.phy -t $model_name.txt \
+ruby /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/SNAPP/snapp_prep.rb -p $model_name.phy -t $model_name.txt \
 -c $model_name.con.txt -l 1000000 -x $model_name.xml -o $model_name
 
 /nobackup/tmjj24/apps/beast/bin/beast -threads $SLURM_CPUS_PER_TASK -overwrite $model_name.xml > $model_name.screen.log

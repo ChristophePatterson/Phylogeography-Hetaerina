@@ -16,12 +16,10 @@ SNP.library.location <- args[2]
 # SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/"
 select_N <- as.numeric(args[3])
 # select_N <- 2
-
-
+dir.path.SNAPP <- args[4]
+print(dir.path.SNAPP)
 # Read in vcf
 dir.path <- paste0(SNP.library.location,"/",SNP.library.name,"/")
-dir.path.SNAPP <- paste0(dir.path, "SNAPP/")
-dir.create(dir.path.SNAPP)
 filter_para <- ".all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.biSNP0_20.noX.noCUAJ"
 
 vcf.SNPs <- read.vcfR(paste0(dir.path,SNP.library.name,filter_para,".vcf.gz"),verbose = F)
@@ -127,8 +125,8 @@ write.table(species.df, file = paste0(dir.path.SNAPP, SNP.library.name,"_ind_",s
 contrant.df <- data.frame(x = "normal(0,33.08,5.53)", y = "crown", 
                           z = paste0(unique(pop_assign_N$pop), sep = ",",collapse = ""))
 # Americana/calverti
-contrant.df[2,] <- data.frame(x = "normal(0,3.76,1.87)", y = "crown", 
-                              z = paste0(unique(pop_assign_N$pop[grepl(pop_assign_N$pop, pattern = "americana|calverti")]), sep = ",",collapse = ""))
+#contrant.df[2,] <- data.frame(x = "normal(0,3.76,1.87)", y = "crown", 
+#                              z = paste0(unique(pop_assign_N$pop[grepl(pop_assign_N$pop, pattern = "americana|calverti")]), sep = ",",collapse = ""))
 #remove trailing comma
 contrant.df$z <- substr(contrant.df$z, start = 1 , stop = nchar(contrant.df$z)-1)
 
