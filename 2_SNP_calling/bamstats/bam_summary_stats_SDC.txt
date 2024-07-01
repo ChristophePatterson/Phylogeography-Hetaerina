@@ -1,3 +1,4 @@
-"library"	"Total.mapped.reads"	"mean.mapped.reads"	"max.mapped.reads"	"min.mapped.reads"	"sd.2"	"mean.perc.mapped"
+"by"	"Total.mapped.reads"	"mean.mapped.reads"	"max.mapped.reads"	"min.mapped.reads"	"sd.2"	"mean.perc.mapped"
 "1"	"americana_dg"	836245050	2218156.63129973	11355050	422	-1379294.0563862	88.7084615384615
-"2"	"titia_dg"	892071853	2366238.33687003	13800527	477	-1460613.89015617	94.2166843501326
+"2"	"elegans_dg"	472073666	1252184.79045093	6014647	63	-723199.547869022	50.8094960212202
+"3"	"titia_dg"	892071853	2366238.33687003	13800527	477	-1460613.89015617	94.2166843501326
