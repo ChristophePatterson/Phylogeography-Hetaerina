@@ -119,7 +119,13 @@ if(grepl(SNP.library.name, pattern="americana_dg")){
 }
 vcf.SNPs@fix[1:5,]
 
+# For H. americana lots of small X chromosomes
+if(grepl(SNP.library.name, pattern="elegans_dg")){
+  X_chrom <- "OV121106.1"
+}
+
 vcf.SNPs <- vcf.SNPs[!vcf.SNPs@fix[,1]%in%X_chrom,]
+table(vcf.SNPs@fix[,1]%in%X_chrom)
 
 write.vcf(vcf.SNPs, file = paste0(dir.path,SNP.library.name,filter_para,".biSNP",snp_sub_text,".noX.vcf.gz"),mask = F,APPEND = F)
 
