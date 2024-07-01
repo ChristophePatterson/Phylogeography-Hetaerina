@@ -12,3 +12,4 @@
 slurm-*.out
 *.trace
 /4_Manuscript/data/SNP_libraries/WGS/
+/slurm_out/
