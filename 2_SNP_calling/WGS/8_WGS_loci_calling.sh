@@ -28,7 +28,7 @@ echo "Processing database $Library_name using $genome"
 ## SNP library to use
 SNP_file=(WGS_titia_chr1-12)
 
-bcftools query -l $library_version/$Library_name/$SNP_file > $library_version/$Library_name/samples_temp.txt
+bcftools query -l $library_version/$Library_name/$SNP_file.vcf > $library_version/$Library_name/samples_temp.txt
 
 # Get list of position for each SNP file
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/8_WGS_loci_calling.R $Library_name $library_version $SNP_file
@@ -51,7 +51,6 @@ bcftools mpileup -Ou \
     -O b -o $TMPDIR/$SNP_file.all.bcf
 
 
-
 bcftools view -V indels $TMPDIR/$SNP_file.all.bcf -O b > $TMPDIR/$SNP_file.snps.bcf
 bcftools index $TMPDIR/$SNP_file.snps.bcf
 
@@ -61,7 +60,7 @@ cat $library_version/$Library_name/samples_temp.txt | while read line; do
     # Get sample name
     filename=$(basename "$line")
     # Remove extension
-    filename=${filename:0:-4}
+    filename=${filename:0:-4} 
     echo $filename
     samtools faidx $genome -r $library_version/$Library_name/${Library_name}_RAD_posistions.txt | \
     bcftools consensus -s $line -e 'FORMAT/AD<5 & FORMAT/AD>200 & QUAL<50' -a "?" --iupac-codes -o $library_version/$Library_name/fasta_files/${filename}.fasta $TMPDIR/$SNP_file.snps.bcf 
