@@ -16,5 +16,4 @@ cat /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_manuscri
 cat /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_manuscript/bwa_HetAmer1.0_dg/*.bamstats > /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/bamstats/Allsamples_HetAmer1.0_dg.bamstats
 cat /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/bwa_stats_array_manuscript/bwa_ioIscEleg1.2_dg/*.bamstats > /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/bamstats/Allsamples_ioIscEleg1.2_dg.bamstats
 
-
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/5_2_bamFile_stats_and_list_creation.R

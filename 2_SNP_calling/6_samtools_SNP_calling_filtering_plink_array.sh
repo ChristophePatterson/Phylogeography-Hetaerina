@@ -6,7 +6,7 @@
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 
 # Specify the tasks to run:
-#SBATCH --array=1-7   # Create 6 tasks, numbers 1 to 6
+#SBATCH --array=7   # Create 6 tasks, numbers 1 to 6
 #SBATCH --output=slurm-%x.%j.out
 
 # Commands to execute start here

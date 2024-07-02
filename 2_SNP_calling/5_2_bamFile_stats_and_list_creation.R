@@ -27,11 +27,14 @@ colnames(elegans_dg) <- c("sample", "num.reads", "coverage", "coverage.SD", "unk
 
 #Calculating 2sd of map reads
 sd.2.americana <- mean(americana_dg$num.reads)-sd(americana_dg$num.reads)*2
-americana_dg$cov10_NoR2sd <- americana_dg$coverage>=5&americana_dg$num.reads>=sd.2.americana
+americana.min.cov <- 5
+americana_dg$cov10_NoR2sd <- americana_dg$coverage>=americana.min.cov&americana_dg$num.reads>=sd.2.americana
 sd.2.titia <- mean(titia_dg$num.reads)-sd(titia_dg$num.reads)*2
-titia_dg$cov10_NoR2sd <- titia_dg$coverage>=5&titia_dg$num.reads>=sd.2.titia
-sd.2.elegans <- mean(elegans_dg$num.reads)-sd(elegans_dg$num.reads)*2
-elegans_dg$cov10_NoR2sd <- elegans_dg$coverage>=5&elegans_dg$num.reads>=sd.2.elegans
+titia.min.cov <- 5
+titia_dg$cov10_NoR2sd <- titia_dg$coverage>=titia.min.cov&titia_dg$num.reads>=sd.2.titia
+sd.2.elegans <- mean(elegans_dg$num.reads)-sd(elegans_dg$num.reads)
+elegans.min.cov <- 15
+elegans_dg$cov10_NoR2sd <- elegans_dg$coverage>=elegans.min.cov&elegans_dg$num.reads>=sd.2.elegans
 
 duplicated(titia_dg$sample)
 dim(titia_dg)
