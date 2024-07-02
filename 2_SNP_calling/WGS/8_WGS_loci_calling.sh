@@ -70,7 +70,7 @@ rm -r $library_version/$Library_name/RAD_loci
 mkdir -p $library_version/$Library_name/RAD_loci
 
 # Convert to phylip
-# Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/8_RAD_loci_calling_phylip.R $Library_name $library_version
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/8_RAD_loci_calling_phylip.R $Library_name $library_version
 
 
 

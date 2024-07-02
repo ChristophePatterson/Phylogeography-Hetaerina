@@ -11,6 +11,8 @@ SNP.library.location <- args[2]
 dir.path <- paste0(SNP.library.location,SNP.library.name,"/")
 # Read in vcf
 vcf.SNPs <- read.vcfR(paste0(dir.path, args[3],".vcf"), verbose = F)
+# remove X chrom
+vcf.SNPs <- vcf.SNPs[vcf.SNPs@fix[,"CHROM"]!="HetTit1.0.p.scaff-12-96647824",]
 # vcf.SNPs <- read.vcfR("/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/WGS_titia_chr1-12.vcf")
 #vcf <- read.vcfR("/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/Hetaerina_all_ddRAD_titia_dg/Hetaerina_all_ddRAD_titia_dg.all.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.rand1000.biSNP0_20.noX.vcf.gz")
 ## Get SNP posistions
