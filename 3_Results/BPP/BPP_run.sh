@@ -33,5 +33,5 @@ mkdir -p $output_dir
 # Number of loci to subsample
 select_N=(2000)
 
-# Create g-phocs input file
+# Create BPP input file
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/BPP/BPP_seq_config_generation.R $SNP_library $input_dir $select_N
