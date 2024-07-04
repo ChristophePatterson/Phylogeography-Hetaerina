@@ -35,7 +35,39 @@ colnames(vcf@gt)[(colnames(vcf@gt)%in%Erandi_sample_names[,2])] <- Erandi_sample
 
 # Remove CUAJa03 Erandi sample which is duplicated
 #print(colnames(vcf@gt))
-vcf <- vcf[,!colnames(vcf@gt) %in% c("CUAJa03", "CUAJa02_R")]
+vcf.bi <- vcf[,!colnames(vcf@gt) == "CUAJa03"]
+#colnames(vcf@gt) <- gsub(colnames(vcf@gt), pattern = "_R", replacement = "")
+
+#Remove non-bialletlic alleles
+vcf.bi <- vcf.bi[is.biallelic(vcf.bi),]
+vcf.bi <- vcf.bi[is.polymorphic(vcf.bi,na.omit=T),]
+dim(vcf.bi)
+
+X_chrom <- "HetTit1.0.p.scaff-12-96647824"
+print(table(vcf.bi@fix[,1]!=X_chrom))
+vcf.bi <- vcf.bi[vcf.bi@fix[,1]!=X_chrom,]
+#Write out filtered VCF
+write.vcf(vcf.bi, file = paste0(dir.path.vcf, "/", vcf.name, "_filtered.vcf.gz"))
+# Write table of samples
+sites <- gsub("_R", "",colnames(vcf.bi@gt)[-1])
+sites <- substr(sites,1, nchar(sites)-2)
+write.table(cbind(colnames(vcf.bi@gt)[-1], colnames(vcf.bi@gt)[-1]),
+            file = paste0(dir.path.vcf, "/", vcf.name, "_sites.txt"),
+            col.names = F, row.names = F, quote = F, sep = "\t")
+
+# Chromosome position
+chr.pos <- list()
+for(i in 1:length(unique(vcf.bi@fix[,1]))){
+  chr <- unique(vcf.bi@fix[,1])[i]
+  chr.pos[[i]] <- which(vcf.bi@fix[,1]==chr)[c(1, length(which(vcf.bi@fix[,1]==chr)))]
+}
+
+write.table(do.call("rbind",chr.pos),
+            file = paste0(dir.path.vcf, "/", vcf.name, "_chrom_start_end.txt"),
+            col.names = F, row.names = F, quote = F, sep = ",")
+
+# Remove CUAJa02 for phylogeny analysis
+vcf.bi <- vcf[,!colnames(vcf@gt) %in% c("CUAJa03", "CUAJa02_R")]
 #colnames(vcf@gt) <- gsub(colnames(vcf@gt), pattern = "_R", replacement = "")
 
 #Remove non-bialletlic alleles
@@ -45,9 +77,6 @@ dim(vcf.bi)
 
 X_chrom <- "HetTit1.0.p.scaff-12-96647824"
 print(table(vcf.bi@fix[,1]!=X_chrom))
-
-#Write out filtered VCF
-write.vcf(vcf.bi[vcf.bi@fix[,1]!=X_chrom,], file = paste0(dir.path.vcf, "/", vcf.name, "_filtered.vcf.gz"))
 
 # Extract genotypes
 gt <- extract.gt(vcf.bi[vcf.bi@fix[,1]!=X_chrom,], return.alleles = TRUE, convertNA = TRUE)
