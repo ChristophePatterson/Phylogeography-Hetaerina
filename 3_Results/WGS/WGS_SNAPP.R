@@ -56,7 +56,7 @@ c(mean(Samp.DP,na.rm =T), median(Samp.DP,na.rm =T), range(Samp.DP,na.rm = T))
 c(mean(SNP.DP,na.rm =T), median(SNP.DP,na.rm =T), range(SNP.DP,na.rm = T))
 
 # Extract genotype
-gt <- extract.gt(vcf.ply[vcf.ply@fix[,1]!=X_chrom], return.alleles = TRUE, convertNA = TRUE)
+gt <- extract.gt(vcf.ply[vcf.ply@fix[,1]!=X_chrom,], return.alleles = TRUE, convertNA = TRUE)
 
 # Overwrite data with Ambiguity codes
 gt[gt=="A/A"] <- "A"

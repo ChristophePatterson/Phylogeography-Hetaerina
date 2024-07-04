@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -c 24 
+#SBATCH -c 64 
 #SBATCH --mem=10G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:10G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 70:00:00         # time limit in format dd-hh:mm:ss

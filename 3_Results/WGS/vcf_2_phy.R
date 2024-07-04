@@ -9,14 +9,15 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # Create output location
 libary.dir <- args[2]
-
+vcf.name <- args[3]
 dir.path.vcf <- args[1]
 # dir.path.vcf <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000"
-# library.dir <- paste0(dir.path.vcf, "/results/RAxML")
-vcf.name <- args[3]
+library.dir.RAxML <- paste0(dir.path.vcf, "/results/RAxML/")
+library.dir.SVD <- paste0(dir.path.vcf, "/results/SVDQuartets/")
+
 #vcf.name <- "WGS_titia_chr1-12"
-dir.path.RAxML <- library.dir
-dir.create(dir.path.RAxML)
+dir.create(library.dir.RAxML)
+dir.create(library.dir.SVD)
 
 # REad in vcf file
 vcf <- read.vcfR(paste0(dir.path.vcf, "/", vcf.name, ".vcf"), verbose = F)
@@ -44,7 +45,40 @@ dim(vcf.bi)
 
 X_chrom <- "HetTit1.0.p.scaff-12-96647824"
 print(table(vcf.bi@fix[,1]!=X_chrom))
+
+#Write out filtered VCF
+write.vcf(vcf.bi[vcf.bi@fix[,1]!=X_chrom,], file = paste0(dir.path.vcf, "/", vcf.name, "_filtered.vcf.gz"))
+
 # Extract genotypes
+gt <- extract.gt(vcf.bi[vcf.bi@fix[,1]!=X_chrom,], return.alleles = TRUE, convertNA = TRUE)
+
+# Overwrite data with Ambiguity codes
+gt[gt=="A/A"] <- "A"
+gt[gt=="T/T"] <- "T"
+gt[gt=="G/G"] <- "G"
+gt[gt=="C/C"] <- "C"
+gt[gt=="A/G"] <- "R"
+gt[gt=="G/A"] <- "R"
+gt[gt=="C/T"] <- "Y"
+gt[gt=="T/C"] <- "Y"
+gt[gt=="A/C"] <- "M"
+gt[gt=="C/A"] <- "M"
+gt[gt=="G/T"] <- "K"
+gt[gt=="T/G"] <- "K"
+gt[gt=="C/G"] <- "S"
+gt[gt=="G/C"] <- "S"
+gt[gt=="A/T"] <- "W"
+gt[gt=="T/A"] <- "W"
+gt[gt=="."] <- "?"
+
+## Set up files following https://github.com/mmatschiner/tutorials/blob/master/divergence_time_estimation_with_snp_data/README.md
+## (1) Phylip file
+
+# Write .nexus file for SVD_quartets
+write.nexus.data(t(gt), file = paste0(library.dir.SVD, vcf.name,".nex"), 
+                 format = "DNA", missing = "?", interleaved = FALSE)
+
+# Run without heterozgousity
 gt <- extract.gt(vcf.bi[vcf.bi@fix[,1]!=X_chrom,], return.alleles = TRUE, convertNA = TRUE)
 print("Printing gt")
 gt[1:10,1:8]
@@ -81,4 +115,4 @@ for(i in 1:dim(gt)[1]){
 gt <- gt[SNP.allele.num!=1,]
 
 # Write .phy file for RAxML
-ape::write.dna(t(gt), file = paste0(dir.path.RAxML,"/", vcf.name,".phy"), format ="interleaved")
+ape::write.dna(t(gt), file = paste0(library.dir.RAxML, vcf.name,".phy"), format ="interleaved")
