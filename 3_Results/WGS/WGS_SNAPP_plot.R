@@ -60,3 +60,34 @@ p <- revts(p)
 # Note: Transparent ranges do not always show up in plot preview window
 
 ggsave(paste(dir.plot, "WGS_SNAPP.png"), p)
+
+
+
+# Read in posterior distribution
+SNAPP.tree.nex <- read.nexus(paste0(dir.path.SNAPP, SNAPP.model, ".trees"))
+# Remove burnin
+burn.in <- 0.1
+SNAPP.tree.nex[1:10]
+SNAPP.tree.nex <- SNAPP.tree.nex[round(length(SNAPP.tree.nex)*burn.in):length(SNAPP.tree.nex)]
+SNAPP.tree.nex[1]
+
+# Get divergence times for Pac and atlantic titia
+plot(SNAPP.tree.nex[1][[1]],use.edge.length = F)
+tiplabels()
+nodelabels()
+
+SNAPP.tree.nex[1][[1]]$edge
+SNAPP.tree.nex[1][[1]]$tip.label
+
+CUAJa03_node <- vector()
+CUAJa03_node_height <- vector()
+for(i in 1:length(SNAPP.tree.nex)){
+  tip.num <- which(SNAPP.tree.nex[1][[1]]$tip.label=="titia_CUAJa03")
+  if(length(tip.num)>1){print("ERROR")}
+  CUAJa03_node_temp <- SNAPP.tree.nex[i][[1]]$edge[,2]==tip.num
+  CUAJa03_node[i] <- SNAPP.tree.nex[i][[1]]$edge[CUAJa03_node_temp,1]
+  CUAJa03_node_height[i] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = CUAJa03_node[i])-phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 1)
+}
+hist(CUAJa03_node_height*1000000)
+plot(CUAJa03_node_height*1000000, col = CUAJa03_node)
+lines(CUAJa03_node_height*1000000)
