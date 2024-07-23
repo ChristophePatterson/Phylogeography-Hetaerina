@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -c 24 
+#SBATCH -c 48 
 #SBATCH --mem=200G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:200G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
@@ -13,7 +13,7 @@ input_directory=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/demultiplex
 dir_output=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/ipyrad)
 
 # Number of samples to use per population
-select_N=("20")
+select_N=("3")
 cd $dir_output/ipyrad_N$select_N
 
 # Load ipyrad conda enviroment
@@ -23,9 +23,9 @@ conda activate ipyrad
 
 # MAKE SURE PARAM FILE HAS BEEN FULLING CONFIG
 
-ipyrad -p params-denovo_N$select_N.txt -s 123 -c 20 -d -f
+ipyrad -p params-denovo_N$select_N.txt -s 123 -c $SLURM_CPUS_PER_TASK -d -f
 
-ipyrad -p params-denovo_N$select_N.txt -s 4567 -c 20 -d
+ipyrad -p params-denovo_N$select_N.txt -s 4567 -c $SLURM_CPUS_PER_TASK -d
 
 conda deactivate
 

@@ -15,7 +15,7 @@ input_directory=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/demultiplex
 dir_output=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/ipyrad)
 
 # Number of samples to use per population
-select_N=("20")
+select_N=("3")
 
 mkdir -p $dir_output
 mkdir -p $dir_output/ipyrad_N$select_N

@@ -13,7 +13,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 select_N <- as.numeric(args[1])
 input_directory<-args[2]
-input_directory<-"/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/ipyrad/ipyrad_N2"
+# input_directory<-"/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/ipyrad/ipyrad_N2"
 # select_N <- as.numeric("2")
 
 
