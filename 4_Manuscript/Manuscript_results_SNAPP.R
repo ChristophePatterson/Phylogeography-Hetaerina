@@ -9,15 +9,15 @@ library(patchwork)
 
 # read in anonotated tree
 # Hetaerina_all_ddRAD_americana_dg OR Hetaerina_all_ddRAD_titia_dg
-SNP.library.name <- "Hetaerina_all_ddRAD_titia_dg"
+SNP.library.name <- "ipyrad_denovo"
 # snap_Am_ti_default_div_est_N3 OR snap_Am_ti_Amdg_default_div_est_N3
 # SNAPP.model <- "snap_Am_ti_default_div_est_N3"
 dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/SNAPP/")
 plot.dir <- paste0("4_Manuscript/plots/",SNP.library.name, "/")
-num_samples <- 20
+num_samples <- 3
 dir.create(plot.dir)
 SNAPP.model <- list.files(dir.path)[grep(pattern = "Anon",list.files(dir.path))]
-SNAPP.model <- SNAPP.model[grep(pattern = paste0("ind_", num_samples),SNAPP.model)]
+SNAPP.model <- SNAPP.model[grep(pattern = paste0("N", num_samples),SNAPP.model)]
 
 SNAPP.model <- gsub(SNAPP.model, pattern = ".trees.Anon",replacement = "")
 SNAPP.tree <- read.mega(paste0(dir.path,SNAPP.model, ".trees.Anon"))
@@ -197,5 +197,107 @@ summary(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
 sum(trace.df$split.post.cal.am>=trace.df$split.post.tit.tit)/length(trace.df$split.post.tit.tit)
 HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
 
+#### Ploting divergence times between all three vcf types
+SNAPP.tree.amer.dg <- read.nexus("4_Manuscript/data/SNP_libraries/Hetaerina_all_ddRAD_americana_dg/SNAPP/Hetaerina_all_ddRAD_americana_dg_ind_20.trees")
+SNAPP.tree.titia.dg <- read.nexus("4_Manuscript/data/SNP_libraries/Hetaerina_all_ddRAD_titia_dg/SNAPP/Hetaerina_all_ddRAD_titia_dg_ind_20.trees")
 
-     
+## Remove burn in
+burn.in <- 0.1
+SNAPP.tree.amer.dg <- SNAPP.tree.amer.dg[round(length(SNAPP.tree.amer.dg)*burn.in):length(SNAPP.tree.amer.dg)]
+SNAPP.tree.titia.dg <- SNAPP.tree.titia.dg[round(length(SNAPP.tree.titia.dg)*burn.in):length(SNAPP.tree.titia.dg)]
+
+plot(SNAPP.tree.titia.dg[[100]])
+tiplabels()
+nodelabels()
+
+## Get height of tree
+SNAPP.tree.amer.dg.split.post.ti.am <- do.call("c",lapply(SNAPP.tree.amer.dg, function(x) phytools::nodeheight(x, node = 1)))
+SNAPP.tree.titia.dg.split.post.ti.am <- do.call("c",lapply(SNAPP.tree.titia.dg, function(x) phytools::nodeheight(x, node = 1)))
+## Get americana calverti divergence
+SNAPP.tree.amer.dg.split.post.am.cal <- SNAPP.tree.amer.dg.split.post.ti.am - do.call("c",lapply(SNAPP.tree.amer.dg, function(x) phytools::nodeheight(x, node = 8)))
+SNAPP.tree.titia.dg.split.post.am.cal <- SNAPP.tree.titia.dg.split.post.ti.am - do.call("c",lapply(SNAPP.tree.titia.dg, function(x) phytools::nodeheight(x, node = 8)))
+## Get titia PAc and ATl divergence
+SNAPP.tree.amer.dg.split.post.tit.tit <- SNAPP.tree.amer.dg.split.post.ti.am - do.call("c",lapply(SNAPP.tree.amer.dg, function(x) phytools::nodeheight(x, node = 10)))
+SNAPP.tree.titia.dg.split.post.tit.tit <- SNAPP.tree.titia.dg.split.post.ti.am - do.call("c",lapply(SNAPP.tree.titia.dg, function(x) phytools::nodeheight(x, node = 10)))
+
+# Combine
+SNAPP_amer_dg <- cbind.data.frame(ti.am =  SNAPP.tree.amer.dg.split.post.ti.am, am.cal = SNAPP.tree.amer.dg.split.post.am.cal, tit.tit = SNAPP.tree.amer.dg.split.post.tit.tit, genome = "amer_dg")
+SNAPP_titia_dg <- cbind.data.frame(ti.am = SNAPP.tree.titia.dg.split.post.ti.am, am.cal = SNAPP.tree.titia.dg.split.post.am.cal, tit.tit = SNAPP.tree.titia.dg.split.post.tit.tit, genome = "titia_dg")
+
+# denovo
+SNAPP_denovo <- data.frame(ti.am = split.post.ti.am,
+                           am.cal = split.post.ti.am-split.post.cal.am,
+                           tit.tit = split.post.tit.tit-split.post.cal.am, genome = "x_denovo")
+# Combine all
+SNAPP_data <- rbind(SNAPP_amer_dg, SNAPP_titia_dg, SNAPP_denovo)
+# randomly reorder datset to create random drawing order in ggplot
+SNAPP_data <- SNAPP_data[sample(1:dim(SNAPP_data)[1], size = dim(SNAPP_data)[1]),]
+
+ggplot(SNAPP_data) +
+  geom_point(aes(am.cal, tit.tit, col = genome)) +
+  geom_abline(slope = 1, intercept = 0)
+
+genome_colours <- c("#548A39", "#AF0F09","deepskyblue")
+genome_labels <- c(expression(paste(italic("H. americana"))), expression(paste(italic("H. titia"))), "denovo")
+# Histograms
+# amer and titia splot
+ti.am.hist <- ggplot(SNAPP_data, aes(x = ti.am, fill = genome)) +
+  geom_density(data = data.frame(x = rnorm(1000000, mean = 33.08, sd = 5.53)), aes(x), fill = "grey", alpha = 0.3, show.legend = F) +
+  geom_histogram(aes(y = after_stat(density)), alpha=0.6, position = 'identity') +
+  ggtitle(expression(italic("H. titia & H. americana/calverti"))) +
+  theme_bw() +
+  #theme(legend.position = "none") +
+  scale_fill_manual(labels = genome_labels, values = genome_colours) +
+  xlab("Mya") +
+  ylab("freq") +
+  labs(fill = "") +
+  scale_x_reverse(limits = c(max(SNAPP_data$ti.am),0))
+
+# amer and calverti splot
+am.cal.hist <- ggplot(SNAPP_data, aes(x = am.cal, fill = genome)) +
+  geom_density(data = data.frame(x = rnorm(1000000, mean = 3.76, sd = 1.87)), aes(x), fill = "grey", alpha = 0.3, show.legend = F) +
+  geom_histogram(aes(y = after_stat(density)), alpha=0.6, position = 'identity') +
+  ggtitle(expression(italic("H. americana & H. calverti"))) +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  scale_fill_manual(labels = genome_labels, values = genome_colours) +
+  xlab("Mya") +
+  ylab("freq") +
+  labs(fill = "") +
+  scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
+
+# titia pac and atl
+tit.tit.hist <- ggplot(SNAPP_data, aes(x = tit.tit, fill = genome)) +
+  geom_histogram(aes(y = after_stat(density)), alpha=0.6, position = 'identity') +
+  ggtitle(expression(paste("Pacific & Atlantic ",italic("H. titia")))) +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  scale_fill_manual(labels = genome_labels, values = genome_colours) +
+  xlab("Mya") +
+  ylab("freq") +
+  labs(fill = "") +
+  scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
+
+div.time.comp.plot <- ggplot(SNAPP_data, aes(x = tit.tit, y = am.cal, col = genome)) +
+  geom_point(alpha=0.2, show.legend = F) +
+  ggtitle(expression(paste("Pacific & Atlantic ",italic("H. titia")))) +
+  geom_abline(slope = 1, intercept = 0) +
+  theme_bw() +
+  scale_color_manual(labels = genome_labels, values = genome_colours) +
+  ylab(expression(paste(italic("H. calveri & H. americana "),"split (mya)"))) +
+  xlab(expression(paste("Pacific and Atlantic ", italic("H. titia")," split (mya)"))) +
+  labs(fill = "") +
+  theme(axis.title = element_text(size = 8)) +
+  xlim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)))) +
+  ylim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit))))
+  
+
+hist.plots <- (ti.am.hist + am.cal.hist  + tit.tit.hist + div.time.comp.plot) + 
+  plot_layout(guides = "collect",ncol = 1) & theme(legend.position = "bottom") 
+all.snapp.data.plot <- p + hist.plots + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
+  plot_layout(widths = c(2,1))
+
+ggsave("4_Manuscript/plots/ipyrad_denovo/SNAPP_all_genome_dataset_comparison.png", all.snapp.data.plot, width = 10, height = 10)
+ggsave("4_Manuscript/plots/ipyrad_denovo/SNAPP_all_genome_dataset_comparison.pdf", all.snapp.data.plot, width = 10, height = 10)
+
+
