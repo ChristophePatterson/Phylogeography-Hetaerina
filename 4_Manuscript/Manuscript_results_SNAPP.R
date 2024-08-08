@@ -9,7 +9,7 @@ library(patchwork)
 
 # read in anonotated tree
 # Hetaerina_all_ddRAD_americana_dg OR Hetaerina_all_ddRAD_titia_dg
-SNP.library.name <- "ipyrad_denovo"
+SNP.library.name <- "ipyrad"
 # snap_Am_ti_default_div_est_N3 OR snap_Am_ti_Amdg_default_div_est_N3
 # SNAPP.model <- "snap_Am_ti_default_div_est_N3"
 dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/SNAPP/")
@@ -184,7 +184,6 @@ colMeans(trace)
 
 trace.df <- as.data.frame(trace)
 
-abline(1,1)
 ggplot(trace.df) +
   geom_point(aes(split.post.tit.tit, split.post.cal.am, col = split.post.cal.am<split.post.tit.tit)) +
   geom_abline(slope = 1, intercept = 0)
@@ -297,7 +296,7 @@ hist.plots <- (ti.am.hist + am.cal.hist  + tit.tit.hist + div.time.comp.plot) +
 all.snapp.data.plot <- p + hist.plots + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(widths = c(2,1))
 
-ggsave("4_Manuscript/plots/ipyrad_denovo/SNAPP_all_genome_dataset_comparison.png", all.snapp.data.plot, width = 10, height = 10)
-ggsave("4_Manuscript/plots/ipyrad_denovo/SNAPP_all_genome_dataset_comparison.pdf", all.snapp.data.plot, width = 10, height = 10)
+ggsave("4_Manuscript/plots/ipyrad/SNAPP_all_genome_dataset_comparison.png", all.snapp.data.plot, width = 10, height = 10)
+ggsave("4_Manuscript/plots/ipyrad/SNAPP_all_genome_dataset_comparison.pdf", all.snapp.data.plot, width = 10, height = 10)
 
 
