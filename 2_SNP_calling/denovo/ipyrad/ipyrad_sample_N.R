@@ -55,3 +55,14 @@ pop_assign_N
 # Save popmap
 write.table(pop_assign_N[,c("sample")], paste0(output_folder,"/", "samples_", select_N,".txt"), 
             row.names = F, col.names = F, quote = F, sep = "\t")
+
+## Write popmap for each species
+titia_assign <- c("titia-Pac", "titia-NAtl", "titia-SAtl")
+ameri_assign <- c("calverti-Mex", "americana-Mex", "americana-USA")
+
+# Write out titia
+write.table(pop_assign_N[pop_assign_N$assign%in%titia_assign,c("sample")], paste0(output_folder,"/", "samples_", select_N,"_titia.txt"), 
+            row.names = F, col.names = F, quote = F, sep = "\t")
+
+write.table(pop_assign_N[pop_assign_N$assign%in%ameri_assign,c("sample")], paste0(output_folder,"/", "samples_", select_N,"_ameri.txt"), 
+            row.names = F, col.names = F, quote = F, sep = "\t")
