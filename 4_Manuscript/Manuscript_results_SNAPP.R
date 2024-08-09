@@ -240,7 +240,7 @@ ti.am.hist <- ggplot(SNAPP_data, aes(x = ti.am, fill = genome)) +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "Read mapping method") +
+  labs(fill = "Reference alignment") +
   scale_x_reverse(limits = c(max(SNAPP_data$ti.am),0))
 
 # amer and calverti splot
@@ -253,7 +253,7 @@ am.cal.hist <- ggplot(SNAPP_data, aes(x = am.cal, fill = genome)) +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "Read mapping method") +
+  labs(fill = "Reference alignment") +
   scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
 
 # titia pac and atl
@@ -265,7 +265,7 @@ tit.tit.hist <- ggplot(SNAPP_data, aes(x = tit.tit, fill = genome)) +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "Read mapping method") +
+  labs(fill = "Reference alignment") +
   scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
 
 # Divergence 
@@ -277,7 +277,7 @@ div.time.comp.plot <- ggplot(SNAPP_data, aes(x = tit.tit, y = am.cal, col = geno
   scale_color_manual(labels = genome_labels, values = genome_colours) +
   ylab(expression(paste(italic("H. americana")," & ", italic("H. calverti"), " split (Mya)"))) +
   xlab(expression(paste("Pacific & Atlantic ", italic("H. titia")," split (Mya)"))) +
-  labs(fill = "Read mapping method") +
+  labs(fill = "Reference alignment") +
   theme(axis.title = element_text(size = 8)) +
   xlim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)))) +
   ylim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit))))
