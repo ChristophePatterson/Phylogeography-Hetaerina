@@ -12,7 +12,7 @@ library(patchwork)
 SNP.library.name <- "ipyrad"
 # snap_Am_ti_default_div_est_N3 OR snap_Am_ti_Amdg_default_div_est_N3
 # SNAPP.model <- "snap_Am_ti_default_div_est_N3"
-dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/")
+dir.path <- paste0("4_Manuscript/data/SNP_libraries/",SNP.library.name,"/SNAPP/")
 plot.dir <- paste0("4_Manuscript/plots/",SNP.library.name,"/")
 num_samples <-3
 dir.create(plot.dir)
@@ -197,17 +197,5 @@ colMeans(trace)
 
 trace.df <- as.data.frame(trace)
 
-
-ggplot(trace.df) +
-  geom_point(aes(split.post.tit.tit, split.post.cal.am, col = split.post.cal.am<split.post.tit.tit)) +
-  geom_abline(slope = 1, intercept = 0)
-
-ggplot(trace.df) +
-  geom_histogram(aes(split.post.cal.am-split.post.tit.tit, fill = split.post.cal.am<split.post.tit.tit))
-
-summary(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
-
-sum(trace.df$split.post.cal.am>=trace.df$split.post.tit.tit)/length(trace.df$split.post.tit.tit)
-HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
 
 

@@ -184,15 +184,6 @@ colMeans(trace)
 
 trace.df <- as.data.frame(trace)
 
-ggplot(trace.df) +
-  geom_point(aes(split.post.tit.tit, split.post.cal.am, col = split.post.cal.am<split.post.tit.tit)) +
-  geom_abline(slope = 1, intercept = 0)
-
-ggplot(trace.df) +
-  geom_histogram(aes(split.post.cal.am-split.post.tit.tit, fill = split.post.cal.am<split.post.tit.tit))
-
-summary(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
-
 sum(trace.df$split.post.cal.am>=trace.df$split.post.tit.tit)/length(trace.df$split.post.tit.tit)
 HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
 
@@ -243,26 +234,26 @@ genome_labels <- c(expression(paste(italic("H. americana"))), expression(paste(i
 ti.am.hist <- ggplot(SNAPP_data, aes(x = ti.am, fill = genome)) +
   geom_density(data = data.frame(x = rnorm(1000000, mean = 33.08, sd = 5.53)), aes(x), fill = "grey", alpha = 0.3, show.legend = F) +
   geom_histogram(aes(y = after_stat(density)), alpha=0.6, position = 'identity') +
-  ggtitle(expression(italic("H. titia & H. americana/calverti"))) +
+  ggtitle(expression(paste(italic("H. titia")," & ", italic("H. americana/calverti")))) +
   theme_bw() +
   #theme(legend.position = "none") +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "") +
+  labs(fill = "Read mapping method") +
   scale_x_reverse(limits = c(max(SNAPP_data$ti.am),0))
 
 # amer and calverti splot
 am.cal.hist <- ggplot(SNAPP_data, aes(x = am.cal, fill = genome)) +
   geom_density(data = data.frame(x = rnorm(1000000, mean = 3.76, sd = 1.87)), aes(x), fill = "grey", alpha = 0.3, show.legend = F) +
   geom_histogram(aes(y = after_stat(density)), alpha=0.6, position = 'identity') +
-  ggtitle(expression(italic("H. americana & H. calverti"))) +
+  ggtitle(expression(paste(italic("H. americana")," & ", italic("H. calverti")))) +
   theme_bw() +
   # theme(legend.position = "none") +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "") +
+  labs(fill = "Read mapping method") +
   scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
 
 # titia pac and atl
@@ -274,27 +265,28 @@ tit.tit.hist <- ggplot(SNAPP_data, aes(x = tit.tit, fill = genome)) +
   scale_fill_manual(labels = genome_labels, values = genome_colours) +
   xlab("Mya") +
   ylab("freq") +
-  labs(fill = "") +
+  labs(fill = "Read mapping method") +
   scale_x_reverse(limits = c(max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)),0))
 
+# Divergence 
 div.time.comp.plot <- ggplot(SNAPP_data, aes(x = tit.tit, y = am.cal, col = genome)) +
   geom_point(alpha=0.2, show.legend = F) +
-  ggtitle(expression(paste("Pacific & Atlantic ",italic("H. titia")))) +
+  ggtitle("Divergence difference") +
   geom_abline(slope = 1, intercept = 0) +
   theme_bw() +
   scale_color_manual(labels = genome_labels, values = genome_colours) +
-  ylab(expression(paste(italic("H. calveri & H. americana "),"split (mya)"))) +
-  xlab(expression(paste("Pacific and Atlantic ", italic("H. titia")," split (mya)"))) +
-  labs(fill = "") +
+  ylab(expression(paste(italic("H. americana")," & ", italic("H. calverti"), " split (Mya)"))) +
+  xlab(expression(paste("Pacific & Atlantic ", italic("H. titia")," split (Mya)"))) +
+  labs(fill = "Read mapping method") +
   theme(axis.title = element_text(size = 8)) +
   xlim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit)))) +
   ylim(c(0, max(c(SNAPP_data$am.cal, SNAPP_data$tit.tit))))
   
 
 hist.plots <- (ti.am.hist + am.cal.hist  + tit.tit.hist + div.time.comp.plot) + 
-  plot_layout(guides = "collect",ncol = 1) & theme(legend.position = "bottom") 
+  plot_layout(ncol = 1) 
 all.snapp.data.plot <- p + hist.plots + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
-  plot_layout(widths = c(2,1))
+  plot_layout(widths = c(2,1), guides = "collect") & theme(legend.position = "bottom", legend.text.align = 0) 
 
 ggsave("4_Manuscript/plots/ipyrad/SNAPP_all_genome_dataset_comparison.png", all.snapp.data.plot, width = 10, height = 10)
 ggsave("4_Manuscript/plots/ipyrad/SNAPP_all_genome_dataset_comparison.pdf", all.snapp.data.plot, width = 10, height = 10)
