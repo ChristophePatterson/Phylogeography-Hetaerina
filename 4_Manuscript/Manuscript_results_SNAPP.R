@@ -227,7 +227,8 @@ ggplot(SNAPP_data) +
   geom_point(aes(am.cal, tit.tit, col = genome)) +
   geom_abline(slope = 1, intercept = 0)
 
-genome_colours <- c("#548A39", "#AF0F09","deepskyblue")
+# genome_colours <- c("#548A39", "#AF0F09","deepskyblue")
+genome_colours <- c("grey0","grey50","deepskyblue")
 genome_labels <- c(expression(paste(italic("H. americana"))), expression(paste(italic("H. titia"))), "denovo")
 # Histograms
 # amer and titia splot
