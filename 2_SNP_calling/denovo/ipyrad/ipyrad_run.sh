@@ -23,13 +23,13 @@ conda activate ipyrad
 
 # MAKE SURE PARAM FILE HAS BEEN FULLING CONFIG
 
-#ipyrad -p params-denovo_N$select_N.txt -s 123 -c $SLURM_CPUS_PER_TASK -d -f
+ipyrad -p params-denovo_N$select_N.txt -s 123 -c $SLURM_CPUS_PER_TASK -d -f
 
-#ipyrad -p params-denovo_N$select_N.txt -s 4567 -c $SLURM_CPUS_PER_TASK -d
+ipyrad -p params-denovo_N$select_N.txt -s 4567 -c $SLURM_CPUS_PER_TASK -d
 
 # Subset samples to only titia and americana
 ipyrad -p params-denovo_N$select_N.txt -b params-denovo_N${select_N}_titia.txt $dir_output/samples_${select_N}_titia.txt
-ipyrad -p params-denovo_N$select_N.txt -b params-denovo_N${select_N}_americana.txt $dir_output/samples_${select_N}_ameri.txt
+ipyrad -p params-denovo_N$select_N.txt -b params-denovo_N${select_N}_americana.txt $dir_output/samples_${select_N}_americana.txt
 
 # Create new output files
 ipyrad -p params-denovo_N${select_N}_titia.txt -s 7 -c $SLURM_CPUS_PER_TASK -d

@@ -40,6 +40,8 @@ conda activate ipyrad
 
 # Create new ipyrad dataset
 ## NEEDS TO BE THEN CUSTOM SET
+# Copy over the info from the below file (ignore direct path info on first two lines)
+# /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/denovo/ipyrad/ipyrad_config.txt
 ipyrad -n denovo_N$select_N
 
 conda deactivate
