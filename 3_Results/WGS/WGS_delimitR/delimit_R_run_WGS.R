@@ -27,7 +27,7 @@ observedSFS <- args[8]
 traitsfile <- "all_traits.txt"
 
 #guide tree
-observedtree <- '((0,1),2);'
+observedtree <- c('((1,2),0);', '((0,2),1);', '((0,1),2);')
 
 #migration matrix (must be symmetrical)
 migmatrix <- matrix(c(FALSE, TRUE, TRUE,
@@ -43,7 +43,7 @@ seccontact <- TRUE
 
 #what is the maximum number of migration events to consider on your guide tree?
 # maxedges <- 2
-maxedges <- 3
+maxedges <- 1
 
 #how many species are in your guide tree?
 obsspecies<- 3
