@@ -103,6 +103,6 @@ slurm_submit_gphocs <- function(prefix,models,pathtogphocs,ncores){
   }
 }
 
-# slurm_submit_gphocs(prefix = paste0(output_dir,"/"), models = model.names, pathtogphocs = "/nobackup/tmjj24/apps/G-PhoCS/bin/G-PhoCS", ncores = 24)
+slurm_submit_gphocs(prefix = paste0(output_dir,"/"), models = model.names, pathtogphocs = "/nobackup/tmjj24/apps/G-PhoCS/bin/G-PhoCS", ncores = 24)
 
 

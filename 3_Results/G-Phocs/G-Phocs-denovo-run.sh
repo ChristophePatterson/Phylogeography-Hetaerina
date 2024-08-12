@@ -4,10 +4,9 @@
 #SBATCH --mem=50G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:50G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
-
 #SBATCH --output=slurm-%x.%j.out
 
-spp=("americana")
+spp=("titia")
 
 sample_N=("3")
 # File inputs and output lociation
@@ -33,7 +32,6 @@ echo $num_loci > $output_dir/ipyrad_${spp}_N${sample_N}_N${sample_N}.gphocs
 grep -f $output_dir/high_cov_loci.txt --no-group-separator -A 10 $loci_file.gphocs >> $output_dir/ipyrad_${spp}_N${sample_N}_N${sample_N}.gphocs
 # Replace "-" with "N"
 sed -i 's/-/N/g' $output_dir/ipyrad_${spp}_N${sample_N}_N${sample_N}.gphocs
-
 
 ## Run G-Phocs
 ## Copy over pop assign file
