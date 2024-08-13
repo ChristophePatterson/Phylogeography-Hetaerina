@@ -79,8 +79,6 @@ write.csv(as.matrix(prediction), file=paste0(obsprefix,"_prediction.csv"))
 write.table(myRF$model.rf$confusion.matrix, file = paste0(obsprefix,"_out_of_bag_error.txt"))
 
 
-pca <- prcomp(ReducedPrior, scale. = T)
-pca.data <- data.frame(cbind(pca.1 = pca$x[,1], pca.2 = pca$x[,2], model = rep(1:13, each = 10000)))
 
 
 

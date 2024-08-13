@@ -57,4 +57,15 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 #  Once this has been created results plotted using this script
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
-cd ~
+## Plot each demographic scenario using demographic plots
+mkdir -p demo_plots/
+
+num_scenarios=$(find $dir_path/$output_dir -type f -name "*.tpl" | wc -l)
+num_scenarios=$(find . -type f -name "*.tpl" | wc -l)
+
+for i in $(seq 1 ${num_scenarios})
+do
+    echo "${library}_${i}/${library}_${i}_1.par"
+    Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/ParFileViewer.r ${library}_${i}/${library}_${i}_1.par 
+    mv ${library}_${i}/${library}_${i}_1.par.pdf demo_plots/${library}_${i}_1.par.pdf
+done
