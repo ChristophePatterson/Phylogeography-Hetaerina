@@ -822,6 +822,7 @@ if (max(numInstBot)>0) {
 }
 
 #--- Draw all migration events  (10.03.21)
+print("Draw all migration events")
 for (i in 1:numDemes) if (numMigEvents[i]) {
   for (j in 1:numMigEvents[i]) {
     curRadius=interpolRadius(getPopSize(timeMigEvent[j,i], i, popSizes, popSizeTimeChange, numPopSizes), minPopSize, maxPopSize, minRadius, maxRadius, drawLogPopSize)
@@ -843,9 +844,10 @@ for (i in 1:numDemes) if (numMigEvents[i]) {
     text(posTextX, timeMigEvent[j,i], labels=format(sizeMigr[j,i], digits=3), cex=timeProp, col=admixCol, pos=3)
   }
 }
-
+print("Draw all gene flow arrows")
 #--- Draw all gene flow arrows (11.03.21)
-if (numMigmatChanges) {
+print("numMigmatChanges")
+if (numMigmatChanges>1) {
   for (i in 1:numMigmatChanges) {
     if (i<numMigmatChanges) time2DrawArrows=(timeMigMatChanges[i+1]+timeMigMatChanges[i])/2 else {
       time2DrawArrows=(timeMigMatChanges[i]+yTimeLimit)/2 
@@ -888,7 +890,7 @@ if (numMigmatChanges) {
   }
 }
 
-
+print("Draw all events on the population tree")
 #--- Draw all events on the population tree
 lastTime=0
 activePops=1:numSamples
@@ -937,9 +939,11 @@ if (numHistEvents) {
   }
 }
 
+print("Draw last branch")
 #-- Draw last branch
 if (popSizeTimeChange[numPopSizes[lastDeme], lastDeme]<maxTimeToPlot) segments(lastDeme,popSizeTimeChange[numPopSizes[lastDeme], lastDeme], lastDeme, yTimeLimit)
 
+print("Draw sample ages")
 #-- Draw sample ages 
 for (i in 1:numDemes) {
   if (sampTimes[i]==0) {
