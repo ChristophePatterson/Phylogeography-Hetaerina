@@ -6,6 +6,10 @@
 #SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --output=slurm-%x.%j.out
 
+# Load modules
+module load r/4.2.1
+
+# Which species to run the programme on. Can either be "titia" or "americana"
 spp=("titia")
 
 sample_N=("3")
