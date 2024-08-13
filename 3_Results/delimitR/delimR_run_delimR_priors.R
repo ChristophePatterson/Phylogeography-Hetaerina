@@ -74,18 +74,13 @@ prediction <- RF_predict_abcrf(myRF, myobserved, ReducedPrior, FullPrior, 1000)
 prediction
 
 #write results to file
-write.csv(as.matrix(prediction), file=paste0(SNP.library,"_prediction.csv"))
+write.csv(as.matrix(prediction), file=paste0(obsprefix,"_prediction.csv"))
 # Save out of bag error rate
-write.table(myRF$model.rf$confusion.matrix, file = paste0(SNP.library,"_out_of_bag_error.txt"))
+write.table(myRF$model.rf$confusion.matrix, file = paste0(obsprefix,"_out_of_bag_error.txt"))
 
 
 pca <- prcomp(ReducedPrior, scale. = T)
 pca.data <- data.frame(cbind(pca.1 = pca$x[,1], pca.2 = pca$x[,2], model = rep(1:13, each = 10000)))
 
-p <- ggplot(pca.data) +
-  geom_point(aes(pca.1, pca.2, col = as.factor(model)), shape = 3) +
-  geom_point(data = data.frame(predict(pca, myobserved)), aes(PC1, PC2, col = "observed"), size = 5, col = "black") +
-  labs(col = "Model", x = "pca1", y = "pca2")
 
-ggsave("PCA_plot.png", p , width = 10, height = 10)
 

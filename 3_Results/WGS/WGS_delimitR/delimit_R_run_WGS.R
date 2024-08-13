@@ -43,7 +43,7 @@ seccontact <- TRUE
 
 #what is the maximum number of migration events to consider on your guide tree?
 # maxedges <- 2
-maxedges <- 1
+maxedges <- 0
 
 #how many species are in your guide tree?
 obsspecies<- 3
@@ -62,7 +62,7 @@ obsprefix <- args[8]
 #The user must specify priors on population sizes
 #The first vector is for population 0, the second for population 1, and the third for population 2
 #Note that these are in terms of the number of haploid individuals (as specified in the fsc2 documentation)
-obspopsizeprior <- list(c(100,10000),c(100,10000),c(100,10000))
+obspopsizeprior <- list(c(10,1000),c(10,1000),c(10,1000))
 
 #priors for divergence times given in terms of the number of generations and must be supplied as a list of vectors
 #Divergence time priors should be provided in order of coalescent interval
@@ -121,5 +121,5 @@ count <- count + 1
 # Run fastsimcoal as slurm jobs
 fastsimcoalsim_sbatch(prefix=obsprefix,
                 pathtofsc='/nobackup/tmjj24/apps/fsc26_linux64/fsc26',
-                nreps=10000)
+                nreps=100)
 
