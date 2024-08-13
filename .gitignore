@@ -12,4 +12,5 @@
 slurm-*.out
 *.trace
 /4_Manuscript/data/SNP_libraries/WGS/
+/4_Manuscript/data/SNP_libraries/WGS_titia/VCF_chrom_r10000/delimitR/
 /slurm_out/
