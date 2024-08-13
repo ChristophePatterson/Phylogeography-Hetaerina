@@ -37,7 +37,7 @@ cp $VCF.vcf.gz $dir_path/SFS/$VCF.vcf.gz
 ## Subset vcf to only contain samples that have LEA assignment
 ## Created three distinct population files based on LEA snmf ancestory estimate
 ## Estimate proporstion of missing data
-# easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file -a -f --preview > $dir_path/SFS/SFS_projection_preview.txt
+#### easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file -a -f --preview > $dir_path/SFS/SFS_projection_preview.txt
 
 # Assign values to sp1, sp2, and sp3 based on the value of library
 
@@ -54,8 +54,8 @@ echo "sp3: $sp_3"
 mkdir -p $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 
 ## Run SFS
-easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
- -a -f --proj $sp_0,$sp_1,$sp_2 -o $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
+### easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
+###  -a -f --proj $sp_0,$sp_1,$sp_2 -o $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 #
 conda deactivate
 #
@@ -68,7 +68,7 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 ## Create directory to run delimitR
 #
 mkdir -p delimitR/
-output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps100_MIG0_trees_3_sbatch)
+output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps300_MIG0_trees_3_sbatch)
 mkdir -p $output_dir
 #
 #mkdir -p $dir_path/$output_dir
