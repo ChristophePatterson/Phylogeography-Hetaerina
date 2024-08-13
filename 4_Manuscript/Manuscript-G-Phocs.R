@@ -12,9 +12,13 @@ input.dir.top <- "4_Manuscript/data/G-Phocs/"
 N_select <- 2000
 model.names <- paste0(c("americana_dg/G-Phocs-a1-b20-titia-Iso-N","titia_dg/G-Phocs-a1-b20-americana-Iso-N",
                  "americana_dg/G-Phocs-a1-b20-titia-migR-N","titia_dg/G-Phocs-a1-b20-americana-migR-N"),N_select) 
+model.names <- c(model.names, c("denovo/G-Phocs-a1-b20-titia-Iso-N3","denovo/G-Phocs-a1-b20-americana-Iso-N3",
+                                "denovo/G-Phocs-a1-b20-titia-migR-N3","denovo/G-Phocs-a1-b20-americana-migR-N3"))
+
+
 u = 2.8*10^-9 
 plot.dir <- "4_Manuscript/plots/G-Phocs/"
-run <- "americana_dg/G-Phocs-a1-b20-titia-Iso-N3"
+run <- "denovo/G-Phocs-a1-b200-titia-Iso-N3"
 # Blank lists for filling in data
 p <- list()
 effect.size <- list()
