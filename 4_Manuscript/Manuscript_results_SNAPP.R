@@ -65,17 +65,7 @@ SNAPP.tree.nex[1:10]
 SNAPP.tree.nex <- SNAPP.tree.nex[round(length(SNAPP.tree.nex)*burn.in):length(SNAPP.tree.nex)]
 SNAPP.tree.nex[1]
 # Go through each tree in turn and get the height
-split.post.ti.am <- list()
-
-max(phytools::nodeheight(SNAPP.tree.nex[[1]], node = 3))
-
-for(i in 1:length(SNAPP.tree.nex)){
-  # split.post.ti.am[[i]] <- max(phytools::nodeHeights(SNAPP.tree.nex[[i]])[,2])
-  split.post.ti.am[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 1)
-}
-
-#  Merge into one
-split.post.ti.am <- do.call("c", split.post.ti.am)
+split.post.ti.am <- do.call("c",lapply(SNAPP.tree.nex, function(x) phytools::nodeheight(x, node = 1)))
 
 #Plot as a histogram next to the proir
 ti.am <- ggplot() +
@@ -91,14 +81,7 @@ ti.am <- ggplot() +
   scale_x_reverse(limits = c(max(split.post.ti.am),0))
 
 #  Extract node height for split between H. am and H. cal
-split.post.cal.am <- list()
-for(i in 1:length(SNAPP.tree.nex)){
-  split.post.cal.am[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 8)
-}
-split.post.cal.am
-#  Merge into one
-split.post.cal.am <- do.call("c", split.post.cal.am)
-plot(split.post.ti.am-split.post.cal.am)
+split.post.cal.am <- do.call("c",lapply(SNAPP.tree.nex, function(x) phytools::nodeheight(x, node = 8)))
 
 # Plot 
 am.cal <- ggplot() +
@@ -113,25 +96,11 @@ am.cal <- ggplot() +
   labs(fill = "") +
   scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
-
-# Get divergence times for Pac and atlantic titia
 plot(SNAPP.tree.nex[i][[1]])
 tiplabels()
 nodelabels()
-split.post.tit.tit <- list()
-for(i in 1:length(SNAPP.tree.nex)){
-  split.post.tit.tit[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 10)
-}
-
-#  Merge into one
-split.post.tit.tit <- do.call("c", split.post.tit.tit)
-plot(split.post.ti.am-split.post.tit.tit)
-
-lines(split.post.ti.am-split.post.tit.tit)
-
-#Mean and SD of  split
-median(split.post.ti.am-split.post.tit.tit)
-sd(split.post.ti.am-split.post.tit.tit)
+# Get divergence times for Pac and atlantic titia
+split.post.tit.tit <- do.call("c",lapply(SNAPP.tree.nex, function(x) phytools::nodeheight(x, node = 10)))
 
 #plot
 tit.tit <- ggplot() +
@@ -146,7 +115,21 @@ tit.tit <- ggplot() +
   labs(fill = "") +
   scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
-split.post.ti.am
+# Get divergence times for Pac and atlantic titia
+split.post.am.am <- do.call("c",lapply(SNAPP.tree.nex, function(x) phytools::nodeheight(x, node = 9)))
+
+#plot
+am.am <- ggplot() +
+  #geom_histogram(aes(rnorm(length(split.post.ti.am), mean = 3.76, sd = 1.87), fill = "prior"), alpha = 0.5, ) +
+  geom_histogram(aes(split.post.ti.am-split.post.am.am, fill = "posterior"), alpha = 0.5, show.legend = F) +
+  ggtitle(expression(paste("North and South ",italic("H. americana")))) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  scale_fill_manual(values = c("deepskyblue", "grey50")) +
+  xlab("mya") +
+  ylab("freq") +
+  labs(fill = "") +
+  scale_x_reverse(limits = c(max(split.post.ti.am-split.post.cal.am),0))
 
 
 # Merge into one plot with tree
@@ -157,23 +140,17 @@ ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, "SNAPP_", SNAPP.model,".pn
 ggsave(plot = SNAPP.plot, filename = paste0(plot.dir, "SNAPP_", SNAPP.model, ".pdf"), width = 11, height = 8)
 
 ## Final split between titia NA and titia SA
-split.post.titN.titS <- list()
-for(i in 1:length(SNAPP.tree.nex)){
-  split.post.titN.titS[[i]] <- phytools::nodeheight(SNAPP.tree.nex[i][[1]], node = 11)
-}
-
-#  Merge into one
-split.post.titN.titS <- do.call("c", split.post.titN.titS)
-plot(split.post.ti.am-split.post.titN.titS)
+split.post.titN.titS <- do.call("c",lapply(SNAPP.tree.nex, function(x) phytools::nodeheight(x, node = 11)))
 
 
 ### Calculate ESS
 library(coda)
 # Create trace file, need to minus tree height to get node age
 trace <- mcmc(cbind(split.post.ti.am  = split.post.ti.am, 
-                    split.post.cal.am = split.post.ti.am-split.post.cal.am, 
+                    split.post.cal.am = split.post.ti.am-split.post.cal.am,
+                    split.post.am.am  = split.post.am.am-split.post.cal.am,
                     split.post.tit.tit= split.post.ti.am-split.post.tit.tit,
-                    split.post.titN.titS= split.post.ti.am-split.post.titN.titS))
+                    split.post.titN.titS = split.post.ti.am-split.post.titN.titS))
               
 coda::effectiveSize(trace)
 coda::traceplot(trace)
@@ -184,7 +161,10 @@ colMeans(trace)
 
 trace.df <- as.data.frame(trace)
 
+# Proporation of trees where americana/calverti split was older than Pac and Atlantic H. titia split
 sum(trace.df$split.post.cal.am>=trace.df$split.post.tit.tit)/length(trace.df$split.post.tit.tit)
+# Mean and HPD time difference between split
+mean(trace.df$split.post.cal.am-trace.df$split.post.tit.tit)
 HPDinterval(mcmc(trace.df$split.post.cal.am-trace.df$split.post.tit.tit))
 
 #### Ploting divergence times between all three vcf types
@@ -226,6 +206,12 @@ SNAPP_data <- SNAPP_data[sample(1:dim(SNAPP_data)[1], size = dim(SNAPP_data)[1])
 ggplot(SNAPP_data) +
   geom_point(aes(am.cal, tit.tit, col = genome)) +
   geom_abline(slope = 1, intercept = 0)
+
+## Compare stats between mapping datasets
+group_by(SNAPP_data, by = genome) %>%
+  summarise(mean.am.cal = mean(am.cal), mean.tit.tit = mean(am.cal),
+            mean.am.cal.div = mean(am.cal-tit.tit),
+            prop.am.cal.older = sum(am.cal>tit.tit)/length(am.cal)*100)
 
 # genome_colours <- c("#548A39", "#AF0F09","deepskyblue")
 genome_colours <- c("grey0","grey50","deepskyblue")
