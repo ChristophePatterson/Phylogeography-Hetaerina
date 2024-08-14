@@ -4,8 +4,10 @@
 #SBATCH --mem=30G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:30G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 70:00:00         # time limit in format dd-hh:mm:ss
-#SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
+#SBATCH --array=3,5   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
+
+## 3,4,5,6
 
 module load r/4.2.1
 module load bioinformatics
@@ -47,6 +49,16 @@ case "$library" in
     "Hetaerina_titia_ddRAD_titia_dg")
         sp_0=26
         sp_1=50
+        sp_2=20
+        ;;
+    "Hetaerina_americana_ddRAD_americana_dg")
+        sp_0=10
+        sp_1=12
+        sp_2=18
+        ;;
+    "Hetaerina_titia_ddRAD_americana_dg")
+        sp_0=20
+        sp_1=25
         sp_2=20
         ;;
     *)  # Default case if library doesn't match any expected value
@@ -97,6 +109,6 @@ cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt $dir_path/$output_dir/s
 cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/all_traits.txt $dir_path/$output_dir/all_traits.txt
 #
 ## Run delimR - creating a range of fastsimcoal2 config files and then executes them
-### Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
 #
 cd ~
