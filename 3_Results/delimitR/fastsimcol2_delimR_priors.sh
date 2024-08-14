@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH -c 12 
-#SBATCH --mem=200G            # memory required, in units of k,M or G, up to 250G.
-#SBATCH --gres=tmp:200G       # $TMPDIR space required on each compute node, up to 400G.
+#SBATCH --mem=100G            # memory required, in units of k,M or G, up to 250G.
+#SBATCH --gres=tmp:100G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
@@ -51,16 +51,24 @@ pop_file=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results
 cd $output_dir
 
 # Remove previous prior runs
-rm -r Prior/
+### rm -r Prior/
+### rm Binned_Processed_${library}_*_MSFS.obs
+### rm ${library}_*_MSFS.obs
 
 echo "Running Rscript"
 # Rscript that produces reduced priors
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+### Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
 ## Plot each demographic scenario using demographic plots
 mkdir -p demo_plots/
+
+## Plot the demographic scenario whose SFS was most closely aligned to the PCA of the obs data
+best_par=$(cat best_par_file.txt)
+
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/ParFileViewer.r $best_par
+mv $best_par.pdf demo_plots/Best_${library}_par_file.pdf
 
 num_scenarios=$(find $dir_path/$output_dir -type f -name "*.tpl" | wc -l)
 num_scenarios=$(find . -type f -name "*.tpl" | wc -l)
