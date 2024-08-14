@@ -59,6 +59,7 @@ plot(myRF, training = ReducedPrior)
 # Now look at the actual data
 observedSFS <- paste0(args[4],"_MSFS")
 
+print("Running prepobserved")
 myobserved <- prepobserved(
   observedSFS,
   FullPrior,

@@ -56,9 +56,9 @@ case "$library" in
 esac
 
 # Output the values of sp1, sp2, and sp3
-echo "sp1: $sp_1"
-echo "sp2: $sp_2"
-echo "sp3: $sp_3"
+echo "sp1: $sp_0"
+echo "sp2: $sp_1"
+echo "sp3: $sp_2"
 
 mkdir -p $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 
@@ -72,7 +72,7 @@ mkdir -p $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
  -a -f --proj $sp_0,$sp_1,$sp_2 -o $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 #
-#conda deactivate
+conda deactivate
 #
 ### Calculate number of SNPs within the vcf file
 bcftools view -H $dir_path/SFS/$VCF.vcf.gz | wc -l > $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt
@@ -85,6 +85,11 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 mkdir -p delimitR/
 output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps10000_MIG3_divWgene_sbatch)
 mkdir -p $output_dir
+
+echo "Saving output to"
+echo $output_dir
+
+ls $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/fastsimcoal2/
 #
 #mkdir -p $dir_path/$output_dir
 cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/fastsimcoal2/*.obs $dir_path/$output_dir/
@@ -92,6 +97,6 @@ cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt $dir_path/$output_dir/s
 cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/all_traits.txt $dir_path/$output_dir/all_traits.txt
 #
 ## Run delimR - creating a range of fastsimcoal2 config files and then executes them
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
+### Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
 #
 cd ~

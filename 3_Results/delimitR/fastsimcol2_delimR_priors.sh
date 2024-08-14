@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH -c 12 
-#SBATCH --mem=100G            # memory required, in units of k,M or G, up to 250G.
-#SBATCH --gres=tmp:100G       # $TMPDIR space required on each compute node, up to 400G.
-#SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
+#SBATCH --mem=200G            # memory required, in units of k,M or G, up to 250G.
+#SBATCH --gres=tmp:200G       # $TMPDIR space required on each compute node, up to 400G.
+#SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
 #SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
@@ -50,8 +50,10 @@ pop_file=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results
 # Select directory that delimitR has inputed files into
 cd $output_dir
 
-echo "Running Rscript"
+# Remove previous prior runs
+rm -r Prior/
 
+echo "Running Rscript"
 # Rscript that produces reduced priors
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
