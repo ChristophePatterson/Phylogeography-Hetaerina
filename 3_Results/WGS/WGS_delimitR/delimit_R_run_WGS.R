@@ -43,7 +43,7 @@ seccontact <- TRUE
 
 #what is the maximum number of migration events to consider on your guide tree?
 # maxedges <- 2
-maxedges <- 1
+maxedges <- 2
 
 #how many species are in your guide tree?
 obsspecies<- 3
@@ -66,7 +66,7 @@ obspopsizeprior <- list(c(50,10000),c(50,10000),c(50,10000))
 
 #priors for divergence times given in terms of the number of generations and must be supplied as a list of vectors
 #Divergence time priors should be provided in order of coalescent interval
-obsdivtimeprior <- list(c(1,20000),c(1,20000))
+obsdivtimeprior <- list(c(1,100000),c(1,100000))
 
 # Create rules about how divergence dates should be ordered
 myrules <- c('Tdiv2$>Tdiv1$')
@@ -121,5 +121,5 @@ count <- count + 1
 # Run fastsimcoal as slurm jobs
 fastsimcoalsim_sbatch(prefix=obsprefix,
                 pathtofsc='/nobackup/tmjj24/apps/fsc26_linux64/fsc26',
-                nreps=10000)
+                nreps=500)
 
