@@ -23,7 +23,7 @@ sp_0=2
 sp_1=2
 sp_2=4
 
-output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps300_MIG0_trees_3_sbatch)
+output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps1000_MIG1_trees_3_sbatch)
 
 # Select directory that delimitR has inputed files into
 cd $output_dir
@@ -31,15 +31,27 @@ cd $output_dir
 # convert .obs name that delimitR can interpret.
 cp ${VCF}_MSFS.obs ${library}_MSFS.obs
 
+# Remove previous prior runs
+rm -r Prior/
+rm Binned_Processed_${library}_*_MSFS.obs
+rm ${library}_*_MSFS.obs
+
 echo "Running Rscript"
 # Rscript that produces reduced priors
-## Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
 ## Plot each demographic scenario using demographic plots
 mkdir -p demo_plots/
 
+## Plot the demographic scenario whose SFS was most closely aligned to the PCA of the obs data
+best_par=$(cat best_par_file.txt)
+
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/ParFileViewer.r $best_par
+mv $best_par.pdf demo_plots/Best_${library}_par_file.pdf
+
+# PLot all demographic scerenrios
 num_scenarios=$(find $dir_path/$output_dir -type f -name "*.tpl" | wc -l)
 num_scenarios=$(find . -type f -name "*.tpl" | wc -l)
 

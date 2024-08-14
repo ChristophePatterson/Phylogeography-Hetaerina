@@ -54,8 +54,8 @@ echo "sp3: $sp_2"
 mkdir -p $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 
 ## Run SFS
-### easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
-###  -a -f --proj $sp_0,$sp_1,$sp_2 -o $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
+easySFS.py -i $dir_path/SFS/$VCF.vcf.gz -p $pop_file \
+ -a -f --proj $sp_0,$sp_1,$sp_2 -o $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}
 #
 conda deactivate
 #
@@ -68,7 +68,7 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 ## Create directory to run delimitR
 #
 mkdir -p delimitR/
-output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps500_MIG1_trees_3_sbatch)
+output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps10000_MIG1_trees_3_sbatch)
 mkdir -p $output_dir
 #
 #mkdir -p $dir_path/$output_dir
@@ -77,6 +77,6 @@ cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/snp_num.txt $dir_path/$output_dir/s
 cp $dir_path/SFS/SFS_${sp_0}_${sp_1}_${sp_2}/all_traits.txt $dir_path/$output_dir/all_traits.txt
 #
 ## Run delimR - creating a range of fastsimcoal2 config files and then executes them
-## Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_delimitR/delimit_R_run_WGS.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_delimitR/delimit_R_run_WGS.R $sp_0 $sp_1 $sp_2 $dir_path $VCF $output_dir $SLURM_CPUS_PER_TASK $library
 #
 cd ~

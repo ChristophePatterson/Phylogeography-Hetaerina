@@ -121,5 +121,5 @@ count <- count + 1
 # Run fastsimcoal as slurm jobs
 fastsimcoalsim_sbatch(prefix=obsprefix,
                 pathtofsc='/nobackup/tmjj24/apps/fsc26_linux64/fsc26',
-                nreps=500)
+                nreps=10000)
 
