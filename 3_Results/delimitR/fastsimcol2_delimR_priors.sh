@@ -66,9 +66,12 @@ mkdir -p demo_plots/
 
 ## Plot the demographic scenario whose SFS was most closely aligned to the PCA of the obs data
 best_par=$(cat best_par_file.txt)
-
+# Run par demo plot R script
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/ParFileViewer.r $best_par
-mv $best_par.pdf demo_plots/Best_${library}_par_file.pdf
+# Copy output to plot folder
+cat $best_par.pdf > demo_plots/Best_${library}_par_file.pdf
+# Extract and copy over best par file
+cat $best_par > Best_${library}_par_file.par
 
 num_scenarios=$(find $dir_path/$output_dir -type f -name "*.tpl" | wc -l)
 num_scenarios=$(find . -type f -name "*.tpl" | wc -l)
