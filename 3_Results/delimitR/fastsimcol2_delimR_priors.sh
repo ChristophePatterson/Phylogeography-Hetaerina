@@ -4,7 +4,7 @@
 #SBATCH --mem=100G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:100G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
-#SBATCH --array=4,6   # Create 32 tasks, numbers 1 to 32
+#SBATCH --array=3,5   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
 module load r/4.2.1
@@ -35,6 +35,16 @@ case "$library" in
         sp_1=50
         sp_2=20
         ;;
+    "Hetaerina_americana_ddRAD_americana_dg")
+        sp_0=10
+        sp_1=12
+        sp_2=18
+        ;;
+    "Hetaerina_titia_ddRAD_americana_dg")
+        sp_0=20
+        sp_1=25
+        sp_2=20
+        ;;
     *)  # Default case if library doesn't match any expected value
         echo "Unknown library"
         exit 1
@@ -51,13 +61,13 @@ pop_file=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results
 cd $output_dir
 
 # Remove previous prior runs
-### rm -r Prior/
-### rm Binned_Processed_${library}_*_MSFS.obs
-### rm ${library}_*_MSFS.obs
+rm -r Prior/
+rm Binned_Processed_${library}_*_MSFS.obs
+rm ${library}_*_MSFS.obs
 
 echo "Running Rscript"
 # Rscript that produces reduced priors
-### Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
