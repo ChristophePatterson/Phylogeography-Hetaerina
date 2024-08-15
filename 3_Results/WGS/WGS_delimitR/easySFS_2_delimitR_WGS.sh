@@ -17,22 +17,25 @@ conda activate easySFS
 
 # Input VCF file
 # Get library name
-library=(VCF_chrom_r10000)
-dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/$library/)
-species="titia"
+
+library="WGS_titia_PAC"
+link_filt="10000"
+
+dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${library}_r$link_filt/)
 cd $dir_path
 # Make output for SFS
 mkdir -p $dir_path/SFS
 
 ## Use the VCF that contains only biallic SNPs and excludes samples from CUAJ created within the custom R script 7_SNP_filtering_vcfR.R
-VCF=(WGS_titia_chr1-12_filtered)
+VCF=(${library}_chr1-12_filtered)
 # Create popfile
-echo -e  "CUAJa03_R\nRLPEb01_R\nZANAa07_R\nZANAa05\n" > $dir_path/SFS/samples_names.txt
-echo -e  "CUAJ01\nRLPE02\nZANA01\nZANA01\n" > $dir_path/SFS/samples_sites.txt
-paste $dir_path/SFS/samples_names.txt $dir_path/SFS/samples_sites.txt > $dir_path/SFS/popfile_Pacific_${species}.txt
+echo -e  "CUAJa03\nRLPEb01\nZANAa07\nZANAa05\n" > $dir_path/SFS/${library}_samples_names.txt
+echo -e  "CUAJ01\nRLPE02\nZANA01\nZANA01\n" > $dir_path/SFS/${library}_samples_sites.txt
 
-pop_file=($dir_path/SFS/popfile_Pacific_${species}.txt)
-
+# Convert to popfile
+pop_file=($dir_path/SFS/${library}_popfile.txt)
+paste $dir_path/SFS/${library}_samples_names.txt $dir_path/SFS/${library}_samples_sites.txt > $pop_file
+# Copy over vcf for ease
 cp $VCF.vcf.gz $dir_path/SFS/$VCF.vcf.gz
 ## Subset vcf to only contain samples that have LEA assignment
 ## Created three distinct population files based on LEA snmf ancestory estimate
