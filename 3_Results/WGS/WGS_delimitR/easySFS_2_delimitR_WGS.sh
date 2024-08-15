@@ -68,7 +68,7 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 ## Create directory to run delimitR
 #
 mkdir -p delimitR/
-output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps500_MIG2_trees_3_sbatch)
+output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps1000_MIG3_trees_3_sbatch)
 mkdir -p $output_dir
 #
 #mkdir -p $dir_path/$output_dir
