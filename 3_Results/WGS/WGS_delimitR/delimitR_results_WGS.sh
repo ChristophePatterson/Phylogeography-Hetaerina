@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -c 1 
+#SBATCH -c 24 
 #SBATCH --mem=10G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:10G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 24:00:00         # time limit in format dd-hh:mm:ss
@@ -23,7 +23,7 @@ sp_0=2
 sp_1=2
 sp_2=4
 
-output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps1000_MIG1_trees_3_sbatch)
+output_dir=(delimitR/${sp_0}_${sp_1}_${sp_2}_nreps1000_MIG3_trees_3_sbatch)
 
 # Select directory that delimitR has inputed files into
 cd $output_dir
@@ -47,8 +47,9 @@ mkdir -p demo_plots/
 
 ## Plot the demographic scenario whose SFS was most closely aligned to the PCA of the obs data
 best_par=$(cat best_par_file.txt)
-
+# Script for plotting
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/ParFileViewer.r $best_par
+# Move to plot folder for ease of access
 mv $best_par.pdf demo_plots/Best_${library}_par_file.pdf
 
 # PLot all demographic scerenrios

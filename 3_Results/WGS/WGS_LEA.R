@@ -9,18 +9,20 @@ library(tidyverse)
 library(introgress)
 library(patchwork)
 ## Read in data
-
-input_dir <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/"
-output_dir <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/results/"
-plot.dir <- "/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/"
-
 # Get system arguments
-#args <- commandArgs(trailingOnly = TRUE)
-#input_dir <- args[1]
+args <- commandArgs(trailingOnly = TRUE)
+
+SNP.library.name <- args[1]
+# SNP.library.name <- "VCF_chrom_r10000"
+input_dir <- args[2]
+output_dir <- paste0(input_dir,"/results/")
+plot.dir <- paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/",SNP.library.name,"/")
+
+ncores <- args[3]
 
 dir.create(output_dir)
 dir.create(plot.dir)
-vcf <- read.vcfR(paste0(input_dir ,"WGS_titia_chr1-12.vcf"))
+vcf <- read.vcfR(paste0(input_dir ,SNP.library.name,"_chr1-12.vcf"))
 
 # Reformat names
 gsub("^.*/","",colnames(vcf@gt))
@@ -42,7 +44,7 @@ sample_map <- colnames(vcf@gt)[-1]
 vcf@gt[1:10,]
 vcf.bi <- vcf[is.biallelic(vcf)]
 vcf.ply <- vcf.bi[is.polymorphic(vcf.bi, na.omit = T)]
-vcf.ply@gt[1:10,1:6]
+## vcf.ply@gt[1:10,1:6]
 # Convert to geno
 X_chrom <- "HetTit1.0.p.scaff-12-96647824"
 
@@ -69,15 +71,15 @@ if(any(is.only.het)){geno.mat <- geno.mat[,-which(is.only.het)]}
 
 geno.mat[is.na(geno.mat)] <- 9
 
-write.table(x = geno.mat, file = paste0(output_dir, "WGS_titia.geno"),
+write.table(x = geno.mat, file = paste0(output_dir, SNP.library.name, ".geno"),
             col.names = F, row.names = F, quote = F, sep = "")
 
 #Conduct PCA
-geno2lfmm(paste0(output_dir, "WGS_titia.geno"),
-          paste0(output_dir, "WGS_titia.geno.lfmm"))
+geno2lfmm(paste0(output_dir, SNP.library.name, ".geno"),
+          paste0(output_dir, SNP.library.name, ".geno.lfmm"))
 
 #PCA
-pc <- pca(paste0(output_dir, "WGS_titia.geno.lfmm"), scale = TRUE)
+pc <- pca(paste0(output_dir, SNP.library.name, ".geno.lfmm"), scale = TRUE)
 
 pc.sum <- summary(pc)
 
@@ -88,9 +90,9 @@ pca.data$samples <- colnames(vcf.bi@gt)[2:dim(vcf.bi@gt)[2]]
 
 ## Conduct snmf
 max.K <- 4
-obj.at <- snmf(paste0(output_dir, "WGS_titia.geno"), K = 1:max.K, ploidy = 2, entropy = T,
-              CPU = 3, project = "new", repetitions = 20, alpha = 100)
-titia.snmf <- load.snmfProject(file = paste0(output_dir, "WGS_titia.snmfProject"))
+obj.at <- snmf(paste0(output_dir, SNP.library.name, ".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+              CPU = as.numeric(ncores), project = "new", repetitions = 20, alpha = 100)
+titia.snmf <- load.snmfProject(file = paste0(output_dir, SNP.library.name, ".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
 # Cross entropy plot
@@ -109,7 +111,7 @@ ce.plot <- ggplot(ce) +
   ylab("Cross-entropy") +
   theme_bw()
 
-ggsave(paste0(plot.dir,"WGS_cross_entropy.pdf"), plot = ce.plot)
+ggsave(paste0(plot.dir,SNP.library.name,"_cross_entropy.pdf"), plot = ce.plot)
 
 # Choose best K
 K = 2
@@ -137,7 +139,7 @@ p.bar <- ggplot(qtable)+
   theme_bw() +
   theme(text = element_text(size = 20), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") 
 # theme(axis.text.x = element_text(size=6))
-ggsave(paste0(plot.dir, "snmf_K", K, "_bar_WGS_plot.pdf"), p.bar)
+ggsave(paste0(plot.dir, SNP.library.name, "snmf_K", K, "_bar__plot.pdf"), p.bar)
 
 pca.data$assign <- apply(pca.data,MARGIN=1, function(x) which.max(qtable$Q[which(qtable$sample==x["samples"])]))
 ## PCA plot
@@ -150,9 +152,9 @@ p <- ggplot(pca.data) +
   theme_bw() +
   theme(text = element_text(size = 20))
 
-ggsave(paste0(plot.dir, "PCA_WGS_plot.pdf"), p)
+ggsave(paste0(plot.dir, "PCA_",SNP.library.name,"_plot.pdf"), p)
 
-ggsave(paste0(plot.dir, "PCA_sNMF_WGS_plot.pdf"), p / p.bar, width = 10, height = 10)
+ggsave(paste0(plot.dir, "PCA_sNMF_",SNP.library.name,"_plot.pdf"), p / p.bar, width = 10, height = 10)
 
 ##### introgression
 ## install.packages("genetics")
@@ -161,6 +163,8 @@ ggsave(paste0(plot.dir, "PCA_sNMF_WGS_plot.pdf"), p / p.bar, width = 10, height 
 ## download.file(url = url, destfile = pkgFile)
 ## install.packages(pkgs=pkgFile, type="source", repos=NULL)
 library(introgress)
+
+print("Starting introgression analysis.")
 
 ## Relevent sample sites
 Atl.sites <- c("CT", "TXRS", "CUAJ", "MIXT")
@@ -272,7 +276,7 @@ hi.index.sim<-est.h(introgress.data=count.matrix,loci.data=locus.info,
 #saveRDS(hi.index.sim, paste0(output_dir, "hi.index.sim.rds")
 #readRDS("results/hi.index.sim.rds")
 
-png(paste0(plot.dir, "hybrid_geno_count_WGS_plot.png"), width = 2000, height = 1000, units = "px")
+png(paste0(plot.dir, "hybrid_geno_count_",SNP.library.name,"_plot.png"), width = 2000, height = 1000, units = "px")
 mk.image(introgress.data=count.matrix, loci.data=locus.info,
          hi.index=hi.index.sim, ylab.image="Individuals",
          xlab.h="population of Pacific ancestry", pdf=F,
@@ -321,8 +325,8 @@ p.h <- ggplot(locus.geno.type) +
   theme(legend.key=element_rect(colour="black"), text = element_text(size = 20)) +
   labs(fill = "Genotype")
 
-ggsave(filename = paste0(plot.dir,"WGS_introgress_grid_titia_chr1-12_r10000.png"), plot = p.h, width = 10, height = 6)
-ggsave(filename = paste0(plot.dir,"WGS_introgress_grid_titia_chr1-12_r10000.pdf"), plot = p.h, width = 10, height = 6)
+ggsave(filename = paste0(plot.dir,SNP.library.name,"_introgress_grid_titia_chr1-12_r10000.png"), plot = p.h, width = 10, height = 6)
+ggsave(filename = paste0(plot.dir,SNP.library.name,"_introgress_grid_titia_chr1-12_r10000.pdf"), plot = p.h, width = 10, height = 6)
 
 #p.h
 # Just X chromosome
@@ -336,7 +340,7 @@ p.x <- ggplot(locus.geno.type[locus.geno.type$lg=="X",]) +
   theme(legend.key=element_rect(colour="black"), text = element_text(size = 20)) +
   labs(fill = "Genotype",x = "X") 
 
-ggsave(file = paste0(plot.dir,"introgress_X_chrom.png"), p.x, width = 6.5, height = 6)
+ggsave(file = paste0(plot.dir,SNP.library.name,"_introgress_X_chrom.png"), p.x, width = 6.5, height = 6)
 
 # Are any sites from CUAJa02 X chromosome heterozgous
 # locus.geno.type$locus.name[locus.geno.type$sample=="CUAJa02"&locus.geno.type$lg=="X"&locus.geno.type$genotype=="0/1"]
@@ -374,14 +378,14 @@ q <- ggplot(hybrid.sites) +
   theme_bw() +
   theme(legend.position = "none", text = element_text(size = 20))
 
-ggsave(file = paste0(plot.dir,"introgress_tri_plot_v2.png"), q, width = 6.5, height = 6)
+ggsave(file = paste0(plot.dir,SNP.library.name,"_introgress_tri_plot_v2.png"), q, width = 6.5, height = 6)
 
 # Merge into single figure
 plot1 <- (p.h) / (p.bar + p + q) + plot_annotation(tag_levels = "a", tag_prefix = "(", tag_suffix = ")") 
-ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.png"), plot1, width = 25, height = 15)
-ggsave(file = paste0(plot.dir,"WGS_introgression_LEA_PCA.pdf"), plot1, width = 21, height = 15)
+ggsave(file = paste0(plot.dir,SNP.library.name,"_introgression_LEA_PCA.png"), plot1, width = 25, height = 15)
+ggsave(file = paste0(plot.dir,SNP.library.name,"_introgression_LEA_PCA.pdf"), plot1, width = 21, height = 15)
 
-write.table(hybrid.sites, file = paste0(plot.dir,"Hybrid_stats.txt"))
+write.table(hybrid.sites, file = paste0(plot.dir,SNP.library.name,"_Hybrid_stats.txt"))
 
 #### CONVERTED CODE NOT TESTED FROM HERE
 
@@ -432,7 +436,7 @@ dp.plot <- ggplot(depth_CUAJ[depth_CUAJ$chrom%in%1:12&!is.na(depth_CUAJ$is_het),
   theme_bw() +
   theme(legend.position = "bottom")
 
-ggsave(filename = paste0(plot.dir, "Depth_WGS_titia_chr1-12_r10000_CUAJa02.png"), plot = dp.plot)
+ggsave(filename = paste0(plot.dir, "Depth_",SNP.library.name,"_chr1-12_r10000_CUAJa02.png"), plot = dp.plot)
 
 dp_all <- ggplot(depth_het) +
   geom_jitter(aes(x = chrom, y = depth_var, col = is_het), shape = 19, height = 0, width = 0.2, size = 0.2) +
@@ -445,7 +449,7 @@ dp_all <- ggplot(depth_het) +
   theme(legend.position = "bottom")
 
 
-ggsave(filename = "scripts/WGS_titia/WGS_all_samples_coverage_WGS_titia_chr1-12_r10000.png", plot = dp_all)
+# ggsave(filename = paste0(plot.dir, "Depth_",SNP.library.name,"_all_samples_coverage_WGS_titia_chr1-12_r10000.png"), plot = dp_all)
 
 
 # What is the average hetero zgousity of each individual

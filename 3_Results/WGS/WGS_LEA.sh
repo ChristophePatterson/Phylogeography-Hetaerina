@@ -12,11 +12,13 @@
 
 #Modules
 module load r/4.2.1
-module load bioinformatics
-module load bcftools
+
+# Library
+Library_name="WGS_titia_PAC"
+link_filt="10000"
 
 ## Input directory
-input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/)
+input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r$link_filt/)
 cd $input_dir
 
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_LEA.R $input_dir
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_LEA.R $Library_name $input_dir $SLURM_CPUS_PER_TASK

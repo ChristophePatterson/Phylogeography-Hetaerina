@@ -29,7 +29,7 @@ echo "$line_num"
 
 # Get library and genome names
 
-Library_name="WGS_titia_PAC"
+Library_name="WGS_titia"
 genome=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/draft_genomes/HetTit1.0.p.genome.fasta)
 
 # Get chrom names
@@ -39,7 +39,7 @@ chromosome=$(sed -n "${line_num}p" chrom_names.txt)
 
 echo "Processing database $Library_name using $genome"
 
-# List of BamFiles to use
+# List of BamFiles to use (custom by removing if needed)
 
 # ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/*.bam > /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
 # ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/*.bam >> /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
@@ -138,6 +138,5 @@ bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.r
 bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.bcf > $BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.vcf.gz
 
 ## Then outside of slurm concat all the vcf files using 
-
-# bcftools concat $output_dir/*vcf > $output_dir/WGS_titia_chr1-12.vcf
-# bcftools concat `ls /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r${link_filt}/*.vcf.gz` > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r${link_filt}/WGS_titia_chr1-12.vcf
+# cd $output_dir/
+# bcftools concat `ls *.vcf.gz` > ${Library_name}_chr1-12.vcf
