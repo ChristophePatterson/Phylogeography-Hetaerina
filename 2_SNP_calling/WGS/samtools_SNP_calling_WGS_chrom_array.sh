@@ -138,5 +138,5 @@ bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.r
 bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.bcf > $BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.vcf.gz
 
 ## Then outside of slurm concat all the vcf files using 
-# cd $output_dir/
-# bcftools concat `ls *.vcf.gz` > ${Library_name}_chr1-12.vcf
+## cd $output_dir/
+## bcftools concat `ls *.vcf.gz` > ${Library_name}_chr1-12.vcf

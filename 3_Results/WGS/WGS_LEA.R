@@ -48,6 +48,12 @@ vcf.ply <- vcf.bi[is.polymorphic(vcf.bi, na.omit = T)]
 # Convert to geno
 X_chrom <- "HetTit1.0.p.scaff-12-96647824"
 
+print("Writing out filtered vcf.")
+vcf.ply
+# Write out filtered vcf
+write.vcf(vcf.ply[vcf.ply@fix[,1]!=X_chrom,], file = paste0(input_dir ,SNP.library.name,"_chr1-12_filtered.vcf.gz"))
+
+
 table(vcf.ply@fix[,1]!=X_chrom)
 # remove X chrom
 geno <- extract.gt(vcf.ply[vcf.ply@fix[,1]!=X_chrom])
@@ -90,8 +96,8 @@ pca.data$samples <- colnames(vcf.bi@gt)[2:dim(vcf.bi@gt)[2]]
 
 ## Conduct snmf
 max.K <- 4
-obj.at <- snmf(paste0(output_dir, SNP.library.name, ".geno"), K = 1:max.K, ploidy = 2, entropy = T,
-              CPU = as.numeric(ncores), project = "new", repetitions = 20, alpha = 100)
+### obj.at <- snmf(paste0(output_dir, SNP.library.name, ".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+###               CPU = as.numeric(ncores), project = "new", repetitions = 20, alpha = 100)
 titia.snmf <- load.snmfProject(file = paste0(output_dir, SNP.library.name, ".snmfProject"))
 titia.snmf.sum <- summary(titia.snmf)
 
@@ -154,7 +160,7 @@ p <- ggplot(pca.data) +
 
 ggsave(paste0(plot.dir, "PCA_",SNP.library.name,"_plot.pdf"), p)
 
-ggsave(paste0(plot.dir, "PCA_sNMF_",SNP.library.name,"_plot.pdf"), p / p.bar, width = 10, height = 10)
+### ggsave(paste0(plot.dir, "PCA_sNMF_",SNP.library.name,"_plot.pdf"), p / p.bar, width = 10, height = 10)
 
 ##### introgression
 ## install.packages("genetics")

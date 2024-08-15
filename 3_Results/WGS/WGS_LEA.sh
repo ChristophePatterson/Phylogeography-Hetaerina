@@ -14,7 +14,7 @@
 module load r/4.2.1
 
 # Library
-Library_name="WGS_titia_PAC"
+Library_name="WGS_titia"
 link_filt="10000"
 
 ## Input directory
