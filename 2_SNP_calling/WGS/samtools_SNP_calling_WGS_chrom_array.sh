@@ -29,7 +29,7 @@ echo "$line_num"
 
 # Get library and genome names
 
-Library_name="WGS_titia"
+Library_name="WGS_titia_PAC"
 genome=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/draft_genomes/HetTit1.0.p.genome.fasta)
 
 # Get chrom names
@@ -43,10 +43,12 @@ echo "Processing database $Library_name using $genome"
 
 # ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/*.bam > /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
 # ls /nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/*.bam >> /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt
-bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_bam_list.txt)
+bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/${Library_name}_bam_list.txt)
+# linkage filter
+link_filt=("10000")
 
 #Output directory
-output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/)
+output_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r${link_filt}/)
 
 #Make output directories
 mkdir -p $output_dir
@@ -130,12 +132,12 @@ bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2
 
 ##### Use output from above to determine appropreate filtering step
 
-echo '6. SNPS randomly thinned to one per 10000 bases'
-bcftools +prune -n 1 -N rand -w 10000bp $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf
-bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf | grep -v -c '^#'
-bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.bcf > $BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand10000.vcf.gz
+echo '6. SNPS randomly thinned to one per ${link_filt} bases'
+bcftools +prune -n 1 -N rand -w ${link_filt}bp $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.bcf -Ob -o $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.bcf
+bcftools view -H $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.bcf | grep -v -c '^#'
+bcftools view -O z $TMPDIR/$BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.bcf > $BCF_FILE.snps.NOGTDP5.MEANGTDP5_200.Q60.SAMP0.8.MAF2.rand${link_filt}.vcf.gz
 
 ## Then outside of slurm concat all the vcf files using 
 
 # bcftools concat $output_dir/*vcf > $output_dir/WGS_titia_chr1-12.vcf
-# bcftools concat `ls /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/*.vcf.gz` > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/WGS_titia_chr1-12.vcf
+# bcftools concat `ls /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r${link_filt}/*.vcf.gz` > /nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r${link_filt}/WGS_titia_chr1-12.vcf

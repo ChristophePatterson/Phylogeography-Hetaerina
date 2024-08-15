@@ -1,0 +1,4 @@
+/nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/E008.bam
+/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/CUAJa03_R.bam
+/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/RLPEb01_R.bam
+/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/ZANAa07_R.bam
