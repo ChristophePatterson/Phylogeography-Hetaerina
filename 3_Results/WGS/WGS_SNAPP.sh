@@ -10,9 +10,15 @@
 module load r/4.2.1
 module load bioinformatics
 #Name of output SNP library
+# Library
+Library_name="WGS_titia"
+link_filt="10000"
+
 ## Input directory
-input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/VCF_chrom_r10000/)
-model_name=(WGS_titia_chr1-12)
+input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r$link_filt/)
+cd $input_dir
+
+model_name=(${Library_name}_chr1-12)
 
 cd $input_dir
 
