@@ -11,10 +11,10 @@ module load r/4.2.1
 
 # Path to working directory
 # Get library name
-library=(VCF_chrom_r10000)
-VCF=(WGS_titia_chr1-12_filtered)
-dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/$library/)
-species="titia"
+library="WGS_titia_PAC"
+link_filt="10000"
+dir_path=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${library}_r$link_filt/)
+VCF=(${library}_chr1-12_filtered)
 
 cd $dir_path
 
@@ -40,7 +40,7 @@ echo "Running Rscript"
 # Rscript that produces reduced priors
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimR_run_delimR_priors.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 #  Once this has been created results plotted using this script
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/delimitR/delimitR_plot_results_WGS.R $dir_path $output_dir $SLURM_CPUS_PER_TASK $library
 
 ## Plot each demographic scenario using demographic plots
 mkdir -p demo_plots/
@@ -52,7 +52,7 @@ Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/d
 # Move to plot folder for ease of access
 mv $best_par.pdf demo_plots/Best_${library}_par_file.pdf
 
-# PLot all demographic scerenrios
+# PLot all demographic scerenrios (using first par file)
 num_scenarios=$(find $dir_path/$output_dir -type f -name "*.tpl" | wc -l)
 num_scenarios=$(find . -type f -name "*.tpl" | wc -l)
 
