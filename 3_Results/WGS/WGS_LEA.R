@@ -13,7 +13,8 @@ library(patchwork)
 args <- commandArgs(trailingOnly = TRUE)
 
 SNP.library.name <- args[1]
-# SNP.library.name <- "VCF_chrom_r10000"
+# SNP.library.name <- "WGS_titia"
+# input_dir <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/WGS_titia_r10000/"
 input_dir <- args[2]
 output_dir <- paste0(input_dir,"/results/")
 plot.dir <- paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/",SNP.library.name,"/")
@@ -160,7 +161,7 @@ p <- ggplot(pca.data) +
 
 ggsave(paste0(plot.dir, "PCA_",SNP.library.name,"_plot.pdf"), p)
 
-### ggsave(paste0(plot.dir, "PCA_sNMF_",SNP.library.name,"_plot.pdf"), p / p.bar, width = 10, height = 10)
+ggsave(paste0(plot.dir, "PCA_sNMF_",SNP.library.name,"_plot.pdf"), plot = (p / p.bar), width = 10, height = 10)
 
 ##### introgression
 ## install.packages("genetics")
