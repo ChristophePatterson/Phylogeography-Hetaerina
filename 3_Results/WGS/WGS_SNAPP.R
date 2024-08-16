@@ -1,8 +1,7 @@
 # Get system arguments
-.libPaths("/nobackup/tmjj24/apps/R/x86_64-pc-linux-gnu-library/4.2.1/")
+.libPaths("/nobackup/tmjj24/apps/R/x86_64-pc-linux-gnu-library/4.2/")
 
 library(vcfR)
-library(LEA)
 library(poppr)
 library(tidyverse)
 library(ape)

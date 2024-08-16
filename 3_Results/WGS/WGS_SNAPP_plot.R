@@ -17,7 +17,7 @@ SNP.library.location <- args[1]
 
 dir.path.SNAPP <- paste0(SNP.library.location, "/results/SNAPP/")
 
-dir.plot <- "/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/"
+dir.plot <- paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/",SNP.library.location, "/")
 
 SNAPP.model <- list.files(dir.path.SNAPP)
 SNAPP.model <- SNAPP.model[grep(pattern = ".trees.Anon", SNAPP.model)]
