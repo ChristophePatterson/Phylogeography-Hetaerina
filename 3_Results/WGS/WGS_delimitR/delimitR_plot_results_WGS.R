@@ -14,12 +14,12 @@ upper_dir <- args[1]
 lower_dir <- args[2]
 ncores <- args[3]
 SNP.library <- args[4]
-# SNP.library <-"WGS_titia_PAC"
+# SNP.library <-"Hetaerina_titia_ddRAD_titia_dg"
 
 str(ncores)
 print(paste("Using",ncores, "cores"))
 ncores <- as.numeric(ncores)
-# dir_output <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/WGS_titia_PAC_r10000/delimitR/2_2_4_nreps1000_MIG3_trees_3_sbatch"
+# dir_output <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/Hetaerina_titia_ddRAD_titia_dg/delimitR/82_174_76_nreps10000_MIG3_divWgene_sbatch"
 dir_output <- paste0(upper_dir, lower_dir)
 
 #Change working directory

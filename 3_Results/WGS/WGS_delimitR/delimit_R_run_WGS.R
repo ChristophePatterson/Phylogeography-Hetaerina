@@ -26,28 +26,14 @@ observedSFS <- args[8]
 #location of our traits file (2 column file which maps alleles to species, must be in wd)
 traitsfile <- "all_traits.txt"
 
-#how many species are in your guide tree?
-if(observedSFS=="WGS_titia_PAC"){
-  obsspecies<- 3
-}
-if(observedSFS=="WGS_titia"){
-  obsspecies<- 5
-}
+#guide tree
+observedtree <- c('((1,2),0);', '((0,2),1);', '((0,1),2);')
 
-#guide tree for each combination
-if(observedSFS=="WGS_titia"){
-  observedtree <- c('((1,2),0);', '((0,2),1);', '((0,1),2);')
-}
-if(observedSFS=="WGS_titia"){
-  observedtree <- c('(((3,4),2),(0,1));','(((2,4),3),(0,1));', '(((3,2),4),(0,1));')
-}
-#migration matrix (must be symmetrical) Code that creates matrix with only diagonal equal to F
-migmatrix <- matrix(TRUE, nrow = obsspecies, ncol = obsspecies, byrow = TRUE)
-for(i in 1:obsspecies){
-  migmatrix[i,i] <- F
-}
-migmatrix
-
+#migration matrix (must be symmetrical)
+migmatrix <- matrix(c(FALSE, TRUE, TRUE,
+                    TRUE, FALSE, TRUE,
+                    TRUE, TRUE, FALSE),
+                    nrow = 3, ncol = 3, byrow = TRUE)
 #test divergence with gene flow?
 # divwgeneflow <- FALSE
 divwgeneflow <- TRUE
@@ -57,11 +43,14 @@ seccontact <- TRUE
 
 #what is the maximum number of migration events to consider on your guide tree?
 # maxedges <- 2
-maxedges <- 1
+maxedges <- 3
+
+#how many species are in your guide tree?
+obsspecies<- 3
 
 #the number of "alleles" retained after downsampling SFS
 # obssamplesize <- as.numeric(c(86,174, 82))
-obssamplesize <- as.numeric(readLines("projections.txt"))
+obssamplesize <- as.numeric(c(sp_0,sp_1, sp_2))
 
 #The user must specify the number of linkage blocks to simulate
 #For unlinked SNPs, this is equal to the number of SNPs used to build your observed SFS
@@ -73,24 +62,14 @@ obsprefix <- args[8]
 #The user must specify priors on population sizes
 #The first vector is for population 0, the second for population 1, and the third for population 2
 #Note that these are in terms of the number of haploid individuals (as specified in the fsc2 documentation)
-obspopsizeprior <- list()
-for(i in 1:obsspecies){
-  obspopsizeprior[[i]] <- c(20,500)
-}
+obspopsizeprior <- list(c(50,10000),c(50,10000),c(50,10000))
 
 #priors for divergence times given in terms of the number of generations and must be supplied as a list of vectors
 #Divergence time priors should be provided in order of coalescent interval
-obsdivtimeprior <- list()
-for(i in 1:(obsspecies-1)){
-  obsdivtimeprior[[i]] <- c(1,10000)
-}
+obsdivtimeprior <- list(c(1,100000),c(1,100000))
 
 # Create rules about how divergence dates should be ordered
-myrules <- list()
-for(i in 1:(obsspecies-1)){
-  myrules[[i]] <- paste0("Tdiv",i+1,"$>Tdiv", i, "$")
-}
-myrules 
+myrules <- c('Tdiv2$>Tdiv1$')
 
 #prior on migration rates, program only allows one prior for all migration rates in the default model sets
 obsmigrateprior <- list(c(0.005,0.1))
@@ -123,7 +102,7 @@ fastsimcoalsim_sbatch <- function(prefix,pathtofsc,nreps){
   listofest <- c(listofest, estlist)
   count <- 1
   for(j in 1:length(listoftpl)){
-    # Creates a sbatch file for each model
+    # Creates a sbatch file for each of the individu
     sbatch_file <- c("#!/bin/bash",
                       "#SBATCH -c 1" ,
                       "#SBATCH --mem=10G",
@@ -133,7 +112,7 @@ fastsimcoalsim_sbatch <- function(prefix,pathtofsc,nreps){
                       "",
                       print(paste(pathtofsc, " -t ", prefix, "_", count, ".tpl",  " -e ", prefix, "_", count, ".est -n 1 --msfs -q --multiSFS -x -E" ,nreps, sep = "")))
   writeLines(sbatch_file, paste(prefix, "_", count , "_run.sh", sep = ""))
-  # system(paste(paste("sbatch ", prefix, "_", count , "_run.sh", sep = "")), wait = F)
+  system(paste(paste("sbatch ", prefix, "_", count , "_run.sh", sep = "")), wait = F)
   Sys.sleep(5)
 count <- count + 1
   }
