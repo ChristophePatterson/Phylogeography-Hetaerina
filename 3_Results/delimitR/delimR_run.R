@@ -27,10 +27,10 @@ observedSFS <- args[8]
 traitsfile <- "all_traits.txt"
 
 #guide tree (different for titia and americana because of alphabetical ordering of populations names)
-if(grepl("Hetaerina_titia", observerdSFS)){
+if(grepl("Hetaerina_titia", observedSFS)){
   observedtree <- '((0,1),2);'
 }
-if(grepl("Hetaerina_americana", observerdSFS)){
+if(grepl("Hetaerina_americana", observedSFS)){
   observedtree <- '((0,2),1);'
 }
 
