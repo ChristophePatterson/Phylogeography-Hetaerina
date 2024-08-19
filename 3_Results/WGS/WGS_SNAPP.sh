@@ -40,4 +40,4 @@ ruby /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/SNAP
 cd ~
 
 ## Plot WGS
-Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_SNAPP_plot.R $input_dir $model_name
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_SNAPP_plot.R $input_dir $model_name $Library_name

@@ -13,11 +13,13 @@ args <- commandArgs(trailingOnly = TRUE)
 SNP.library.name <- args[2]
 # SNP.library.name <- "Hetaerina_all_ddRAD_americana_dg"
 SNP.library.location <- args[1]
+SNP_plot_name <- args[3]
 # SNP.library.location  <- "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_v2/"
 
 dir.path.SNAPP <- paste0(SNP.library.location, "/results/SNAPP/")
 
-dir.plot <- paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/WGS_titia/",SNP.library.location, "/")
+dir.plot <- paste0("/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/4_Manuscript/plots/",
+                    SNP_plot_name,"/", SNP_plot_name,"/")
 
 SNAPP.model <- list.files(dir.path.SNAPP)
 SNAPP.model <- SNAPP.model[grep(pattern = ".trees.Anon", SNAPP.model)]
