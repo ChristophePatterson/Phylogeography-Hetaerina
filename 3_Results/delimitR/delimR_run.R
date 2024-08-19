@@ -26,8 +26,14 @@ observedSFS <- args[8]
 #location of our traits file (2 column file which maps alleles to species, must be in wd)
 traitsfile <- "all_traits.txt"
 
-#guide tree
-observedtree <- '((0,1),2);'
+#guide tree (different for titia and americana because of alphabetical ordering of populations names)
+if(grepl("Hetaerina_titia", observerdSFS)){
+  observedtree <- '((0,1),2);'
+}
+if(grepl("Hetaerina_americana", observerdSFS)){
+  observedtree <- '((0,2),1);'
+}
+
 
 #migration matrix (must be symmetrical)
 migmatrix <- matrix(c(FALSE, TRUE, TRUE,
