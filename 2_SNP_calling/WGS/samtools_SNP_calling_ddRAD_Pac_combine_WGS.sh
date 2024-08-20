@@ -71,7 +71,7 @@ BCF_FILE=(${Library_name}.all)
 
 echo "$BCF_FILE processing"
 
-cd $output_dir
+cd $output_dir/ddRAD_temp
 
 # Indexs file, Im not sure if this is nessacary tbh
 bcftools index $BCF_FILE.bcf
@@ -124,7 +124,7 @@ bcftools view -O z $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf >
 # Requires SNP library to have been created
 
 # Go to new directory
-cd $output_dir
+cd $output_dir/ddRAD_temp
 
 mkdir ld_decay
 # move into it
@@ -147,7 +147,7 @@ plink --vcf $output_dir/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.vcf.gz --doub
 
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/6_LD_dist_calc_plot.R
 
-cd $output_dir
+cd $output_dir/ddRAD_temp
 
 #convert to Plink
 
