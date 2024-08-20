@@ -20,7 +20,9 @@ module load r/4.2.1
 
 # Script to run SNP calling ddRAD pacific populations and then combine that with the WGS data
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Step 1: SNP call pacific populations for ddRAD data
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # List of Pacific samples bam files
 bamFiles=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/ddRAD_PAC_samples.txt)
@@ -42,7 +44,7 @@ mkdir -p $output_dir
 
 
 #####################
-#### SNP Calling ####
+#SNP Calling ####
 #####################
 
 cd $output_dir
@@ -63,7 +65,7 @@ bcftools call -v -m -P 1e-6 -f GQ -G - \
 
 
 #######################
-#### SNP Filtering ####
+#SNP Filtering ####
 #######################
 
 #Name of output SNP library
@@ -119,7 +121,7 @@ bcftools view -O z $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf >
 
 
 ##########################
-##### LD calculation #####
+##LD calculation #####
 ##########################
 # Requires SNP library to have been created
 
@@ -172,13 +174,47 @@ plink --file plink/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2 --chr
 
 echo "$BCF_FILE Complete"
 
-cd ~
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Step 2: Extract position of SNPs
-#SNP_POS=($BCF_FILE_SNP_position)
-#zcat $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.vcf.gz | bioawk -c vcf '{print $chrom "\t" $pos}' > $SNP_POS.txt
-#awk '{gsub("_", "\.");print}' $SNP_POS.txt > $SNP_POS.dot.txt
-# tr -s '\n'  '\t'< $SNP_POS.txt > $SNP_POS.tab.txt
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+cd $output_dir/ddRAD_temp
 
+SNP_POS=(BCF_FILE_SNP_position)
+zcat $BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.vcf.gz | bioawk -c vcf '{print $chrom "\t" $pos}' > $SNP_POS.txt
+awk '{gsub("_", "\.");print}' $SNP_POS.txt > $output_dir/$SNP_POS.dot.txt
+tr -s '\n'  '\t'< $SNP_POS.txt > $output_dir/$SNP_POS.tab.txt
+
+# Move back into main directory
+cd $output_dir/
+mkdir -p WGS_temp
+cd $output_dir/WGS_temp
+
+# Pacific samples with WGS data
+bamFiles_Pac=(/home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/2_SNP_calling/WGS/WGS_titia_PAC_bam_list.txt)
+# Conduct SNP calling on WGS files
+bcftools mpileup -Ou \
+--max-depth 10000 -q 20 -Q 20 \
+ -P ILLUMINA -a FORMAT/DP,FORMAT/AD \
+ -R $output_dir/$SNP_POS.dot.txt \
+-f $genome \
+-b $bamFiles_Pac | \
+bcftools call -m -P 1e-6 -f GQ -G - \
+-O b -o $Library_name.WGS.bcf
+
+# Index
+bcftools index $output_dir/WGS_temp/$Library_name.WGS.bcf
+bcftools index $output_dir/ddRAD_temp/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf
+# Convert to vcf.gz
+bcftools view -O z $Library_name.WGS.bcf > $Library_name.WGS.vcf.gz
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Step 3: Combine into single vcf
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+cd $output_dir
+
+bcftools merge WGS_temp/$Library_name.WGS.bcf ddRAD_temp/$BCF_FILE.snps.NOGTDP10.MEANGTDP10_200.Q60.SAMP0.8.MAF2.bcf -O z > $output_dir/$Library_name.vcf.gz
+
+# Limit to one every 10000 RAD base pairs
+bcftools +prune -n 1 -N rand -w 10000bp $output_dir/$Library_name.vcf.gz -O z -o $output_dir/$Library_name.rand10000.vcf.gz
 
 
