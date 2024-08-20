@@ -21,4 +21,8 @@ link_filt="10000"
 input_dir=(/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/${Library_name}_r$link_filt/)
 cd $input_dir
 
+# Run LEA (sNMF and PCA and introgression)
 Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_LEA.R $Library_name $input_dir $SLURM_CPUS_PER_TASK
+
+# Basic stats Fst
+Rscript /home/tmjj24/scripts/Github/Thesis-Phylogeographic-Hetaerina/3_Results/WGS/WGS_pop_stats.R $Library_name $input_dir $SLURM_CPUS_PER_TASK
