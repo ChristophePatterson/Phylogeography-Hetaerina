@@ -4,7 +4,7 @@
 #SBATCH --mem=100G            # memory required, in units of k,M or G, up to 250G.
 #SBATCH --gres=tmp:100G       # $TMPDIR space required on each compute node, up to 400G.
 #SBATCH -t 48:00:00         # time limit in format dd-hh:mm:ss
-#SBATCH --array=3,5   # Create 32 tasks, numbers 1 to 32
+#SBATCH --array=3,4,5,6   # Create 32 tasks, numbers 1 to 32
 #SBATCH --output=slurm-%x.%j.out
 
 module load r/4.2.1
