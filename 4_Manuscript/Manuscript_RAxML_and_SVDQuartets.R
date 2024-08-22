@@ -73,14 +73,14 @@ min(tree.plot$data$x)
 tree.plot.3 <- tree.plot +
   geom_segment(aes(x = x, xend = max(x)+max(x*0.02), y=y, yend=y), col = tree.plot$data$assign_spp.col) +
   geom_tippoint(aes(x = max(x)+max(x*0.02), col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
-                shape =15, size = 2) +
+                shape =15, size = 3) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
   geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
   geom_text(data = titia_cluster_label, aes(x = mn.x, y = mn.y, label = assign_spp_name),
-            angle= -90, size = 10) +
+            angle= -90, size = 8) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -158,14 +158,14 @@ americana_cluster_label <- group_by(tree.plot$data, assign_spp_name) %>%
 tree.plot.4 <- tree.plot +
   geom_segment(aes(x = x, xend = max(x)+max(x)*0.02, y=y, yend=y), col = tree.plot$data$assign_spp.col) +
   geom_tippoint(aes(x = max(x)+max(x)*0.02, col = assign_spp),col = tree.plot$data$assign_spp.col[tree.plot$data$isTip],
-                shape =15, size = 2) +
+                shape =15, size = 3) +
   #geom_nodepoint(aes(colour = support, alpha = support), shape = 19, size = 4) +
   #geom_tiplab(aes(label=label), align = T, linetype = "dotted") +
   #geom_tiplab(data = tree.plot$data, aes(colour = species_drainage),offset = 0, size = 2,show.legend = FALSE) 
   #geom_tippoint(aes(colour = species_drainage)) +
   geom_text(aes(label = support.100), nudge_x = -0.002, nudge_y = 0, color = "deepskyblue", size = 15) +
   geom_text(data = americana_cluster_label, aes(x = mn.x, y = mn.y, label = assign_spp_name),
-            angle= -90, size = 10, parse = T) +
+            angle= -90, size = 8, parse = T) +
   # scale_fill_manual(values = cbPalette) +
   scale_colour_gradient(low = "white", high = "black") +
   coord_cartesian(clip = 'off') +
@@ -196,10 +196,87 @@ crs_text <- "+proj=laea +x_0=0 +y_0=0 +lon_0=-74 +lat_0=40"
 crs_text <- paste0("+proj=laea +x_0=0 +y_0=0 +lon_0=",360+mean(sites$Long), " +lat_0=",mean(sites$Lat))
 worldmap_proj <- st_transform(worldmap, crs = crs_text)
 
+# Get list of unique populations
+pop <- unique(qtable$site.sub.county.drain)
+
+#Number of unique sites
+Npop = length(pop)
+
 qtable$species.fig <- qtable$species
 qtable$species.fig[qtable$species.fig=="titia"] <- "H. titia"
 qtable$species.fig[qtable$species.fig=="americana"] <- "H. americana/cavlerti"
 
+qmap <- as.data.frame(matrix(NA, nrow = Npop, ncol = length(unique(qtable$assign_spp)) + 1))
+colnames(qmap) <- c("pop", unique(qtable$assign_spp))
+qmap[,1] <- pop
+spp <- unique(qtable$assign_spp)
+
+# get counts of species for each population
+tmp.count <- vector()
+assign.count <- apply(qmap, MARGIN = 1, function(x) {
+  for(i in 1:length(spp)){
+    tmp.spp <- spp[i]
+    qtmp <- qtable[qtable$site.sub.county.drain==x[1],]
+    tmp.count[i] <- length(which(qtmp$assign_spp==tmp.spp))
+    }
+  return(tmp.count)
+  })
+# Combine
+assign.count <- cbind(pop, t(assign.count))
+colnames(assign.count) <- c("pop", spp)
+assign.count <- as.data.frame(assign.count)
+# Calculate mean lat and lon
+assign.count$Lat <- apply(assign.count, MARGIN = 1, function(x) mean(qtable$Lat[qtable$site.sub.county.drain==x[1]]))
+assign.count$Lon <- apply(assign.count, MARGIN = 1, function(x) mean(qtable$Lon[qtable$site.sub.county.drain==x[1]]))
+# COnvert to numeric
+for(colspp in which(colnames(assign.count)%in%spp)){
+  assign.count[,colspp] <- as.numeric(assign.count[,colspp])
+}
+
+## Split into titia and americana
+assign.count.titia <- assign.count[,c(1, 8, 9 , grep("titia", colnames(assign.count)))]
+assign.count.titia$num_samples <- rowSums(assign.count.titia[,grep("titia", colnames(assign.count.titia))])
+#
+assign.count.ameri <- assign.count[,c(1, 8, 9 , grep("ameri", colnames(assign.count)))]
+assign.count.ameri$num_samples <- rowSums(assign.count.ameri[,grep("ameri", colnames(assign.count.ameri))])
+
+p.tit <- ggplot() +
+  geom_sf(data = worldmap_proj, fill = "#FFE6D4", col = "black") +
+  geom_scatterpie(data = assign.count.titia, aes(x = Lon, y = Lat, r = (sqrt(num_samples)/pi)*2), cols = paste0("titia_",1:3), show.legend = F) +
+  scale_fill_manual(values = het.cols$cols[match(paste0("titia_",1:3), het.cols$assign)]) +
+  theme(strip.text = element_text(face = "italic"),
+      legend.text = element_text(face = "italic")) +
+  labs(x = "Longitude", y = "Latitude", col = "Species") +
+  theme(panel.background = element_rect(fill = NA),
+        panel.ontop = TRUE) +
+  theme(panel.grid.major = element_line(color = rgb(0,0,0,alpha = 0.1)),
+        panel.grid.minor = element_line(color = rgb(0,0,0,alpha = 0.1))) +
+  theme(legend.position = "none") +
+  coord_sf(xlim = range(qtable$Long)+c(-5,+5), ylim =range(qtable$Lat)+c(-2,+2),default_crs = st_crs(4326))+
+  # facet_wrap(~species.fig, drop = T, nrow = 2) +
+  theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
+        strip.text.x = element_text(size = 20)) +
+  ggtitle(label = expression(paste(italic("H. titia"))))
+
+p.am <- ggplot() +
+  geom_sf(data = worldmap_proj, fill = "#FFE6D4", col = "black") +
+  geom_scatterpie(data = assign.count.ameri, aes(x = Lon, y = Lat, r = (sqrt(num_samples)/pi)*2), cols = paste0("americana_",1:3), show.legend = F) +
+  scale_fill_manual(values = het.cols$cols[match(paste0("americana_",1:3), het.cols$assign)]) +
+  theme(strip.text = element_text(face = "italic"),
+        legend.text = element_text(face = "italic")) +
+  labs(x = "Longitude", y = "Latitude", col = "Species") +
+  theme(panel.background = element_rect(fill = NA),
+        panel.ontop = TRUE) +
+  theme(panel.grid.major = element_line(color = rgb(0,0,0,alpha = 0.1)),
+        panel.grid.minor = element_line(color = rgb(0,0,0,alpha = 0.1))) +
+  theme(legend.position = "none") +
+  coord_sf(xlim = range(qtable$Long)+c(-5,+5), ylim =range(qtable$Lat)+c(-2,+2),default_crs = st_crs(4326))+
+  # facet_wrap(~species.fig, drop = T, nrow = 2) +
+  theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
+        strip.text.x = element_text(size = 20)) +
+  ggtitle(label = expression(paste(italic("H. americana/calverti"))))
+  
+  
 b <- ggplot() +
   geom_sf(data = worldmap_proj, fill = "#FFE6D4", col = "black") +
   geom_point(data = qtable, aes(Long, Lat, fill = assign_spp), size = 5, shape = 21) +
@@ -213,12 +290,17 @@ b <- ggplot() +
         panel.grid.minor = element_line(color = rgb(0,0,0,alpha = 0.1))) +
   theme(legend.position = "none") +
   coord_sf(xlim = range(qtable$Long)+c(-5,+5), ylim =range(qtable$Lat)+c(-2,+2),default_crs = st_crs(4326))+
-    facet_wrap(~species.fig, drop = T, nrow = 2) +
+    facet_wrap(~species.fig, drop = T, nrow = 1) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         strip.text.x = element_text(size = 20))
 b
-RAxML_plot <-b+(tree.plot.4/tree.plot.3) + plot_layout(width = c(1,2)) + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
+
+tree.plot.4.p <- tree.plot.4 + theme(title = element_blank())
+tree.plot.3.p <- tree.plot.3 + theme(title = element_blank())
+
+RAxML_plot <- (tree.plot.3.p + tree.plot.4.p)/ (p.tit + p.am) + plot_layout(heights = c(3,1), width = c(1,1)) + #+ plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
+theme(text=element_text(size = 10))
 
 # plot.tree.insert <- tree.plot.2 + inset_element(b, left = 0.05, bottom = 0.6, right = 0.6, top = 0.95) 
-ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 12, width = 15)
-ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 12, width = 15)
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 22, width = 13)
+ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 22, width = 13)
