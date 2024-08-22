@@ -356,7 +356,7 @@ p <- ggplot() +
   #geom_point(data = sites, aes(x = long, y = lat)) +
   #geom_point(data = q.coord.pop, aes(x = long, y = lat)) 
   geom_scatterpie(data = q.coord.pop, aes(x = long, y = lat, group = site, r = (sqrt(num_samples)/pi)*2), cols = LETTERS[1:K]) +
-  geom_text(data = mex.e.e[4,],aes(Long + 3, Lat, label = "(b)"), size = 5) +
+  geom_text(data = mex.e.e[4,],aes(Long + 3, Lat+1, label = "(b)"), size = 5) +
   geom_text(data = CR.e.e[3,],aes(Long + 2, Lat, label = "(c)"), size = 5) +
   #theme_bw()  +
   #xlim(c(-130,-60)) +
@@ -426,7 +426,7 @@ v <- ggplot(qtable)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         axis.title.x = element_blank()) +
-  theme(plot.margin = margin(0, 0, 0, 0, "cm")) +
+  theme(plot.margin = margin(0, 0, 0, 0, "cm"), axis.line=element_blank()) +
   ylab(label = paste("K =", K)) 
 # theme(axis.text.x = element_text(size=6))
 

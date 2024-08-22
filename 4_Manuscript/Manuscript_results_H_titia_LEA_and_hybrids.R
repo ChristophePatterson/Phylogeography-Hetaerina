@@ -17,14 +17,14 @@ library(tidyverse)
 # library(PBSmapping)
 
 
-#######################################################################################################
-#######################################################################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 ###### H titia phylogeographu plots ######
 
-#######################################################################################################
-#######################################################################################################
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Output file location
 SNP.library.name <- "Hetaerina_titia_ddRAD_titia_dg"
@@ -134,7 +134,7 @@ sites[sites$Site.ID=="CUAJ01",]
 #Calculates structure for samples from K=1 to k=10
 max.K <- 10
 # MAY NEED TO PAUSE ONEDRIVE
-#obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
+# obj.at <- snmf(paste0(dir.path, analysis.name,snp_sub_text,".geno"), K = 1:max.K, ploidy = 2, entropy = T,
 #             CPU = 2, project = "new", repetitions = 20, alpha = 100)
 # If swapping between home and work computer need to change the .smfproject file to \\homeblue02\tmjj24\My_Documents\Github\
 #or to 
@@ -204,8 +204,8 @@ SAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="ESRB_Costa Rica_Carribbea
 NAtl.clust <- which.max(q.coord.pop[q.coord.pop$site=="HCAR_United States_Gulf",LETTERS[1:K]])
 
 #Conduct PCA
-geno2lfmm(paste0(dir.path, analysis.name,snp_sub_text,".geno"), 
-          paste0(dir.path, analysis.name,snp_sub_text,".lfmm"), force = TRUE)
+geno2lfmm(input.file = paste0(dir.path, analysis.name,snp_sub_text,".geno"), 
+          output.file = paste0(dir.path, analysis.name,snp_sub_text,".lfmm"), force = TRUE)
 #PCA
 pc <- pca(paste0(dir.path, analysis.name,snp_sub_text,".lfmm"), scale = TRUE)
 
@@ -242,10 +242,9 @@ pc
 dim(geno)
 min(ce$mean)
 
-
-####################
+# # # # # # # # # # #
 ###### PLOTS ######
-####################
+# # # # # # # # # # #
 
 # Outlines for each plot
 world.e <- data.frame(Long = c(-120,-60), Lat = c(8,38))
@@ -442,7 +441,7 @@ q <- ggplot() +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
-  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.1, label = "(Fig.3b)"), size = 5) +
+  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.2, label = "(Fig.5b)"), size = 5) +
   geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/3 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
@@ -551,7 +550,7 @@ v <- ggplot(qtable)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         axis.title.x = element_blank()) +
-  theme(plot.margin = margin(0, 0, 0, 0, "cm")) +
+  theme(plot.margin = margin(0, 0, 0, 0, "cm"),axis.line=element_blank()) +
   ylab(label = paste("K =", K))
 # theme(axis.text.x = element_text(size=6))
 
@@ -559,6 +558,7 @@ v
 
 # Are there any sample that have odd Q assigns
 qtable[qtable$Q>0.2&qtable$Q<0.8,]
+hist(qtable$Q)
 
 # Assign PCA colour based off LEA anaylsis
 qdf <- cbind(sites[,c("samples","Lat","Long")],Q(titia.snmf, K = K, run = best))
@@ -633,7 +633,7 @@ library(patchwork)
 plot1 <- (p+q+r)/v + plot_layout(heights = c(4, 2)) + theme(plot.background = element_blank()) + 
   plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")") + 
   plot_layout(heights = c(1,0.8))
-plot2 <- y + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
+plot2 <- y #+ plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot1, height=7, width=15)
 ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot1, height=7, width=15)
@@ -641,9 +641,9 @@ ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwor
 ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot2, height=6, width=6)
 
 
-############################################
-####### Fst and population structure  ######
-############################################
+# # # # # # # # # # ## # # # # # # # # # #
+####### Fst and population structure  ####
+# # # # # # # # # # ## # # # # # # # # # #
 # install.packages("hierfstat")
 library(hierfstat)
 pca.q.df <- read.table(paste0(dir.path, "LEA_qassign_pca_samples.txt"))
@@ -671,9 +671,9 @@ boxplot(my_stats$Ho)
 boxplot(my_stats$Hs)
 boxplot(my_stats$perloc)
 
-###############################
+# # # # # # # # # # # # # # # #
 ####### Kinship analysis ######
-###############################
+# # # # # # # # # # # # # # # #
 #install.packages("popkin")
 library(popkin)
 
@@ -701,9 +701,9 @@ plot_popkin(
 )
 
 
-###########################
+# # # # # # # # # # # # # # 
 ####### Hybrid index ######
-###########################
+# # # # # # # # # # # # # # 
 library(tidyverse)
 library(shadowtext)
 ## install.packages("genetics")
