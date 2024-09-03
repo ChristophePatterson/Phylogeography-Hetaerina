@@ -177,7 +177,7 @@ tree.plot.4 <- tree.plot +
   geom_treescale(width = 0.05, fontsize = 6, linesize = 1, x = 0.05) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
         plot.margin = unit(c(0,0,0,0), "cm")) +
-  ggtitle(label = expression(paste("(b) ", italic("H. americana & H. calverti"))))
+  ggtitle(label = expression(paste("(b) ", italic("H. americana"), " sensu lato")))
 
 tree.plot.4
 
@@ -248,7 +248,7 @@ p.tit <- ggplot() +
   theme(strip.text = element_text(face = "italic"),
       legend.text = element_text(face = "italic")) +
   labs(x = "Longitude", y = "Latitude", col = "Species") +
-  theme(panel.background = element_rect(fill = NA),
+  theme(panel.background = element_rect(fill = NA, color = "black"),
         panel.ontop = TRUE) +
   theme(panel.grid.major = element_line(color = rgb(0,0,0,alpha = 0.1)),
         panel.grid.minor = element_line(color = rgb(0,0,0,alpha = 0.1))) +
@@ -266,7 +266,7 @@ p.am <- ggplot() +
   theme(strip.text = element_text(face = "italic"),
         legend.text = element_text(face = "italic")) +
   labs(x = "Longitude", y = "Latitude", col = "Species") +
-  theme(panel.background = element_rect(fill = NA),
+  theme(panel.background = element_rect(fill = NA, color = "black"),
         panel.ontop = TRUE) +
   theme(panel.grid.major = element_line(color = rgb(0,0,0,alpha = 0.1)),
         panel.grid.minor = element_line(color = rgb(0,0,0,alpha = 0.1))) +
@@ -298,8 +298,6 @@ b
 
 tree.plot.4.p <- tree.plot.4 + theme(title = element_blank())
 tree.plot.3.p <- tree.plot.3 + theme(title = element_blank())
-
-(tree.plot.3 + tree.plot.4)/ (p.tit + plot_spacer() + p.am + plot_layout(widths = c(5,1,5)))
 
 RAxML_plot <- (tree.plot.3 + tree.plot.4)/ plot_spacer() / (p.tit + p.am) + plot_layout(heights = c(9,0.25,3), width = c(1,1)) # + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 #theme(text=element_text(size = 10))
