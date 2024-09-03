@@ -8,6 +8,7 @@ library(sf)
 library(treeio)
 library(phytools)
 library(phangorn)
+library(scatterpie)
 # Get colour pallettes
 het.cols <- data.frame(assign = c(paste0("americana_",1:3),paste0("titia_",1:3)),
                        cols = c("#726230","#AA9599","#548A39","#AF0F09","#E5D9BA","#3E3C3A"))
@@ -255,8 +256,8 @@ p.tit <- ggplot() +
   coord_sf(xlim = range(qtable$Long)+c(-5,+5), ylim =range(qtable$Lat)+c(-2,+2),default_crs = st_crs(4326))+
   # facet_wrap(~species.fig, drop = T, nrow = 2) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
-        strip.text.x = element_text(size = 20)) +
-  ggtitle(label = expression(paste(italic("H. titia"))))
+        strip.text.x = element_text(size = 20))
+  # ggtitle(label = expression(paste(italic("H. titia"))))
 
 p.am <- ggplot() +
   geom_sf(data = worldmap_proj, fill = "#FFE6D4", col = "black") +
@@ -273,8 +274,8 @@ p.am <- ggplot() +
   coord_sf(xlim = range(qtable$Long)+c(-5,+5), ylim =range(qtable$Lat)+c(-2,+2),default_crs = st_crs(4326))+
   # facet_wrap(~species.fig, drop = T, nrow = 2) +
   theme(title = element_text(size = 25), legend.text = element_text(size=20), legend.title = element_text(size=25),
-        strip.text.x = element_text(size = 20)) +
-  ggtitle(label = expression(paste(italic("H. americana/calverti"))))
+        strip.text.x = element_text(size = 20))
+  #ggtitle(label = expression(paste(italic("H. americana/calverti"))))
   
   
 b <- ggplot() +
@@ -298,8 +299,10 @@ b
 tree.plot.4.p <- tree.plot.4 + theme(title = element_blank())
 tree.plot.3.p <- tree.plot.3 + theme(title = element_blank())
 
-RAxML_plot <- (tree.plot.3.p + tree.plot.4.p)/ (p.tit + p.am) + plot_layout(heights = c(3,1), width = c(1,1)) + #+ plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
-theme(text=element_text(size = 10))
+(tree.plot.3 + tree.plot.4)/ (p.tit + plot_spacer() + p.am + plot_layout(widths = c(5,1,5)))
+
+RAxML_plot <- (tree.plot.3 + tree.plot.4)/ plot_spacer() / (p.tit + p.am) + plot_layout(heights = c(9,0.25,3), width = c(1,1)) # + plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
+#theme(text=element_text(size = 10))
 
 # plot.tree.insert <- tree.plot.2 + inset_element(b, left = 0.05, bottom = 0.6, right = 0.6, top = 0.95) 
 ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 22, width = 13)
