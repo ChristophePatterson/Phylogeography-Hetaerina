@@ -194,12 +194,12 @@ for(run in model.names){
 }
 
 names(p)
-# Heterospecific SNP calling 
+# Heterospecific Loci calling 
 all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) + 
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
   (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
   (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
-  plot_annotation(title = "Heterospecific SNP calling", theme = theme(plot.title = element_text(size = 25)),
+  plot_annotation(title = "Heterospecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
 
@@ -457,7 +457,7 @@ man.plot <- (p[[paste0("G-Phocs-a1-b20-titia-Iso-N", N_select)]]+ xlim(x = c(-8,
                p[[paste0("G-Phocs-a1-b20-americana-Iso-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
   (p[[paste0("G-Phocs-a1-b20-titia-migR-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
      p[[paste0("G-Phocs-a1-b20-americana-migR-N", N_select)]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
-  plot_annotation(title = expression(paste("SNP calling using ", italic("H. titia"), " draft genome")), theme = theme(plot.title = element_text(size = 25)),
+  plot_annotation(title = expression(paste("Loci calling using ", italic("H. titia"), " draft genome")), theme = theme(plot.title = element_text(size = 25)),
 tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
   
 
@@ -697,7 +697,7 @@ man.plot <- (p[[paste0("G-Phocs-a1-b20-titia-Iso-N", N_select)]]+ xlim(x = c(-8,
                p[[paste0("G-Phocs-a1-b20-americana-Iso-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none")) /
   (p[[paste0("G-Phocs-a1-b20-titia-migR-N", N_select)]]+ xlim(x = c(-8,1)) + theme(legend.position="none") + 
      p[[paste0("G-Phocs-a1-b20-americana-migR-N", N_select)]] + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
-  plot_annotation(title = expression(paste("SNP calling using ", italic("H. americana"), " draft genome")), theme = theme(plot.title = element_text(size = 25))
+  plot_annotation(title = expression(paste("Loci calling using ", italic("H. americana"), " draft genome")), theme = theme(plot.title = element_text(size = 25))
     ,tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots_",draft_genome,"-u-",
@@ -936,19 +936,19 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
   (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
   (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
-  plot_annotation(title = "Heterospecific SNP calling", theme = theme(plot.title = element_text(size = 25)),
+  plot_annotation(title = "Heterospecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
 
 man.plot <- ((p[[paste0("G-Phocs-a1-b20-titia-Iso-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) 
-                      + xlim(x = c(-8,1)) + theme(legend.position="none") + 
+                      + xlim(x = c(-8,1)) + theme(legend.position="right") + 
              (p[[paste0("G-Phocs-a1-b20-americana-Iso-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="none")) /
+                      + xlim(x = c(-8,1)) + theme(legend.position="right")) /
              ((p[[paste0("G-Phocs-a1-b20-titia-migR-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="none") + 
+                      + xlim(x = c(-8,1)) + theme(legend.position="right") + 
                (p[[paste0("G-Phocs-a1-b20-americana-migR-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="none")) + 
-  plot_annotation(title = expression(paste(italic("denovo")," SNP calling")), theme = theme(plot.title = element_text(size = 25))
+                      + xlim(x = c(-8,1)) + theme(legend.position="right")) + 
+  plot_annotation(title = expression(paste(italic("denovo")," Loci calling")), theme = theme(plot.title = element_text(size = 25))
     ,tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
 ggsave(plot = man.plot, filename = paste0(plot.dir,"Concat_plots_",draft_genome,"-u-",
@@ -1140,7 +1140,7 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
   (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
   (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
-  plot_annotation(title = "Conspecific SNP calling", theme = theme(plot.title = element_text(size = 25)),
+  plot_annotation(title = "Conspecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
 
