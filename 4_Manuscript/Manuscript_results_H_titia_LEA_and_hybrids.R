@@ -441,7 +441,7 @@ q <- ggplot() +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
-  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.2, label = "(Fig.5b)"), size = 5) +
+  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.2, label = "(Fig.7b)"), size = 5) +
   geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/3 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
