@@ -6,11 +6,8 @@
 4_Manuscript/data/SNP_libraries/*/*.pca/
 4_Manuscript/data/SNP_libraries/*/*.snmf/
 /4_Manuscript/plots/Supplementary/
-/4_Manuscript/data_old/
 /4_Manuscript/data/G-Phocs/titia_dg/
 /4_Manuscript/data/G-Phocs/americana_dg/
 slurm-*.out
 *.trace
-/4_Manuscript/data/SNP_libraries/WGS/
-/4_Manuscript/data/SNP_libraries/WGS_titia/VCF_chrom_r10000/delimitR/
 /slurm_out/
