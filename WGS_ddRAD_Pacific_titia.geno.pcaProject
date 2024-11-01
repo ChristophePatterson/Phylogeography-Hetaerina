@@ -1,6 +1,0 @@
-new("pcaProject", projDir = "/nobackup/tmjj24/ddRAD/Demultiplexed_seq_processing/SNP_libraries_SDC_manuscript/WGS_titia/WGS_ddRAD_Pacific_titia/results/", 
-    pcaDir = "WGS_ddRAD_Pacific_titia.geno.pca/", n = 42L, L = 10510L, 
-    K = 42L, center = TRUE, scale = TRUE, pcaProject.file = "WGS_ddRAD_Pacific_titia.geno.pcaProject", 
-    input.file = "WGS_ddRAD_Pacific_titia.geno.lfmm", eigenvalue.file = "WGS_ddRAD_Pacific_titia.geno.eigenvalues", 
-    eigenvector.file = "WGS_ddRAD_Pacific_titia.geno.eigenvectors", 
-    sdev.file = "WGS_ddRAD_Pacific_titia.geno.sdev", projection.file = "WGS_ddRAD_Pacific_titia.geno.projections")

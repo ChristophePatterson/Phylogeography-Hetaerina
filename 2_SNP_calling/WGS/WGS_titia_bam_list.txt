@@ -1,9 +1,0 @@
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/E008.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/E019.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Erandi/E020.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/CUAJa01_R.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/CUAJa02_R.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/CUAJa03_R.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/MIXTa02_R.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/RLPEb01_R.bam
-/nobackup/tmjj24/ddRAD/WGS_titia/bam/Christophe/ZANAa07_R.bam
