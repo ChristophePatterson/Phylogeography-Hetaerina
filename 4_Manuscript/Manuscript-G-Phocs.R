@@ -165,7 +165,7 @@ for(run in model.names){
     #geom_point(aes(x, y, size = theta)) +
     geom_tiplab(hjust = -0.2) +
     #coord_cartesian(clip = 'off') +
-    geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
+    #geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
     #geom_label(aes(x=x,y = y, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     geom_label(aes(x=-x.theta,y = y.theta, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 3, show.legend=F) +
     #geom_nodelab(aes(x=x, y=y, label=label, colour = "blue")) +
@@ -179,9 +179,10 @@ for(run in model.names){
     xlab("Mya") +
     labs(size = "Effective population\nsize (millions)")
   
+  # Option to add in migration rate to 
   if(dim(trace.mig)[1]>=1){
     p[[trace.name]] <- p[[trace.name]] + geom_segment(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y, xend = -mig.in.x, yend = mig.in.y), arrow = arrow(length = unit(0.2,"cm"))) +
-      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.perc, 7),"%")), size = 2.5)
+     geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
@@ -197,8 +198,8 @@ names(p)
 # Heterospecific Loci calling 
 all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) + 
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
-  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
-  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
+  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Migration")))) +
+  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Migration")))) +
   plot_annotation(title = "Heterospecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
@@ -395,7 +396,7 @@ for(run in model.names){
     #geom_point(aes(x, y, size = theta)) +
     geom_tiplab(hjust = -0.2) +
     #coord_cartesian(clip = 'off') +
-    geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
+    # geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
     #geom_label(aes(x=x,y = y, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     geom_label(aes(x=-x.theta,y = y.theta, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     #geom_nodelab(aes(x=x, y=y, label=label, colour = "blue")) +
@@ -412,7 +413,7 @@ for(run in model.names){
   
   if(dim(trace.mig)[1]>=1){
     p[[trace.name]] <- p[[trace.name]] + geom_segment(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y, xend = -mig.in.x, yend = mig.in.y), arrow = arrow(length = unit(0.2,"cm"))) +
-      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.perc, 7),"%")), size = 2.5)
+      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
@@ -635,7 +636,7 @@ for(run in model.names){
     #geom_point(aes(x, y, size = theta)) +
     geom_tiplab(hjust = -0.2) +
     #coord_cartesian(clip = 'off') +
-    geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
+    # geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
     #geom_label(aes(x=x,y = y, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     geom_label(aes(x=-x.theta,y = y.theta, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     #geom_nodelab(aes(x=x, y=y, label=label, colour = "blue")) +
@@ -652,7 +653,7 @@ for(run in model.names){
   
   if(dim(trace.mig)[1]>=1){
     p[[trace.name]] <- p[[trace.name]] + geom_segment(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y, xend = -mig.in.x, yend = mig.in.y), arrow = arrow(length = unit(0.2,"cm"))) +
-      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.perc, 7),"%")), size = 2.5)
+      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
@@ -874,7 +875,7 @@ for(run in model.names){
     #geom_point(aes(x, y, size = theta)) +
     geom_tiplab(hjust = -0.2) +
     #coord_cartesian(clip = 'off') +
-    geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
+    # geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
     #geom_label(aes(x=x,y = y, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     geom_label(aes(x=-x.theta,y = y.theta, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     #geom_nodelab(aes(x=x, y=y, label=label, colour = "blue")) +
@@ -891,7 +892,7 @@ for(run in model.names){
   
   if(dim(trace.mig)[1]>=1){
     p[[trace.name]] <- p[[trace.name]] + geom_segment(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y, xend = -mig.in.x, yend = mig.in.y), arrow = arrow(length = unit(0.2,"cm"))) +
-      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.perc, 7),"%")), size = 2.5)
+      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
@@ -934,8 +935,8 @@ group_by(trace.df[trace.df$species=="americana",], mig.type) %>%
 
 all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) + 
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
-  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
-  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
+  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Migration")))) +
+  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Migration")))) +
   plot_annotation(title = "Heterospecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
@@ -944,9 +945,9 @@ man.plot <- ((p[[paste0("G-Phocs-a1-b20-titia-Iso-N3")]] + ggtitle(expression(pa
                       + xlim(x = c(-8,1)) + theme(legend.position="right") + 
              (p[[paste0("G-Phocs-a1-b20-americana-Iso-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration"))))
                       + xlim(x = c(-8,1)) + theme(legend.position="right")) /
-             ((p[[paste0("G-Phocs-a1-b20-titia-migR-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration"))))
+             ((p[[paste0("G-Phocs-a1-b20-titia-migR-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - Migration"))))
                       + xlim(x = c(-8,1)) + theme(legend.position="right") + 
-               (p[[paste0("G-Phocs-a1-b20-americana-migR-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration"))))
+               (p[[paste0("G-Phocs-a1-b20-americana-migR-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Migration"))))
                       + xlim(x = c(-8,1)) + theme(legend.position="right")) + 
   plot_annotation(title = expression(paste(italic("denovo")," Loci calling")), theme = theme(plot.title = element_text(size = 25))
     ,tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
@@ -1113,7 +1114,7 @@ for(run in model.names){
     #geom_point(aes(x, y, size = theta)) +
     geom_tiplab(hjust = -0.2) +
     #coord_cartesian(clip = 'off') +
-    geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
+    # geom_nodelab(aes(x=x, label= paste(sprintf("%.1f", round(-x, digits = 1)))),size = 5, hjust= -0.4,vjust = 0.2,show.legend=F) +
     #geom_label(aes(x=x,y = y, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     geom_label(aes(x=-x.theta,y = y.theta, label= paste0("Ne=",sprintf("%.1f", round(theta,1)))), size = 2.5, show.legend=F) +
     #geom_nodelab(aes(x=x, y=y, label=label, colour = "blue")) +
@@ -1129,7 +1130,7 @@ for(run in model.names){
   
   if(dim(trace.mig)[1]>=1){
     p[[trace.name]] <- p[[trace.name]] + geom_segment(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y, xend = -mig.in.x, yend = mig.in.y), arrow = arrow(length = unit(0.2,"cm"))) +
-      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.perc, 7),"%")), size = 2.5)
+      geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
   p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
@@ -1138,8 +1139,8 @@ for(run in model.names){
 
 all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) + 
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
-  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Recent Migration")))) +
-  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Recent Migration")))) +
+  (p[[3]] + ggtitle(expression(paste(italic("H. titia"), " - Migration")))) +
+  (p[[4]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Migration")))) +
   plot_annotation(title = "Conspecific Loci calling", theme = theme(plot.title = element_text(size = 25)),
                   tag_levels = "a", tag_prefix = "(", tag_suffix = ")") +
   plot_layout(ncol = 2)
