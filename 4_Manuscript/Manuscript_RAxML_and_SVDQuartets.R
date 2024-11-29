@@ -131,8 +131,8 @@ het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub==
 het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="STDM"][1])] <- "#548A39"
 het.cols$cols[het.cols$assign==paste0("americana_",sites$assign[sites$site.sub=="TN"][1])] <- "#726230"
 sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="RG")][1])] <- "italic(H.~calverti)"
-sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="STDM")][1])] <- "South~italic(H.~americana)"
-sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="TN")][1])] <- "North~italic(H.~americana)"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="STDM")][1])] <- "~italic(H.~americana)~South"
+sites$assign_spp_name[sites$assign_spp==(sites$assign_spp[which(sites$site.sub=="TN")][1])] <- "~italic(H.~americana)~North"
 
 
 
@@ -305,3 +305,4 @@ RAxML_plot <- (tree.plot.3 + tree.plot.4)/ plot_spacer() / (p.tit + p.am) + plot
 # plot.tree.insert <- tree.plot.2 + inset_element(b, left = 0.05, bottom = 0.6, right = 0.6, top = 0.95) 
 ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.png"), height = 22, width = 13)
 ggsave(plot = RAxML_plot, filename = paste0(plot.dir,"RAxML_tree_LEA_assignment.pdf"), height = 22, width = 13)
+
