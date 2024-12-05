@@ -885,7 +885,7 @@ for(run in model.names){
     theme_tree2(plot.margin = margin(1,1,1,1, "cm")) +
     theme(panel.grid.major=element_line(colour = "grey70"),
           panel.grid.major.y = element_blank()) +
-    expand_limits(x = c(1,-10.2)) +
+    expand_limits(x = c(1,-5)) +
     xlab("Mya") +
     ggtitle(gsub(trace.name, pattern = "-run0", replacement = "")) +
     labs(size = "Effective population\nsize (millions)")
@@ -895,14 +895,15 @@ for(run in model.names){
       geom_label(data = trace.mig, aes(x = -mig.out.x, y = mig.out.y.label, label = paste0(round(mig.rate.num.ind.per.gen, 3))), size = 2.5)
   }
   
-  p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1),
-                                                                 labels = abs(seq(20, 0, -1)))
+  p[[trace.name]] <- revts(p[[trace.name]]) + scale_x_continuous(breaks = seq(-20, 0, 1), labels = abs(seq(20, 0, -1)))
   
   ggsave(plot = (p[[trace.name]]), filename = paste0(plot.dir,run,"-u-",
                                                      gsub(u, replacement = "-", pattern ="\\."),".png"),
          width =12, height = 6)
   
 }
+
+
 
 # Merge all tau
 trace.df <- trace.df[row.names(trace.df)!=1,]
@@ -942,13 +943,13 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   plot_layout(ncol = 2)
 
 man.plot <- ((p[[paste0("G-Phocs-a1-b20-titia-Iso-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) 
-                      + xlim(x = c(-8,1)) + theme(legend.position="right") + 
+                      + xlim(x = c(-6,0.5)) + theme(legend.position="right") + 
              (p[[paste0("G-Phocs-a1-b20-americana-Iso-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="right")) /
+                      + xlim(x = c(-6,1)) + theme(legend.position="right")) /
              ((p[[paste0("G-Phocs-a1-b20-titia-migR-N3")]] + ggtitle(expression(paste(italic("H. titia"), " - Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="right") + 
+                      + xlim(x = c(-6,1)) + theme(legend.position="right") + 
                (p[[paste0("G-Phocs-a1-b20-americana-migR-N3")]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - Migration"))))
-                      + xlim(x = c(-8,1)) + theme(legend.position="right")) + 
+                      + xlim(x = c(-6,1)) + theme(legend.position="right")) + 
   plot_annotation(title = expression(paste(italic("denovo")," Loci calling")), theme = theme(plot.title = element_text(size = 25))
     ,tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
