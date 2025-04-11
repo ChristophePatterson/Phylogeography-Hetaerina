@@ -441,7 +441,7 @@ q <- ggplot() +
   geom_sf(data = hydrorivers_geo, col = "#5C2700", lineend = "round") +
   geom_segment(aes(x = q.coord.pop.Mx$long , y = q.coord.pop.Mx$lat , xend = q.coord.pop.Mx$long.new, yend = q.coord.pop.Mx$lat.new),
                linewidth = 1.2, lineend =  "round") +
-  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.2, label = "(Fig.7b)"), size = 5) +
+  geom_text(data = mex.e.zoom.e[4,],aes(Long+.8, Lat+.2, label = "(Fig.6b)"), size = 5) +
   geom_scatterpie(data = q.coord.pop.Mx, aes(x = long.new, y = lat.new, r = (sqrt(num_samples)/pi)/3 , group = site), cols = LETTERS[1:K]) +
   theme(legend.position="none") +
   #theme_bw()  +
@@ -526,6 +526,12 @@ qtable <- cbind(rep(sites$samples,K), rep(sites$Lat,K), rep(1:K, each = length(s
 qtable <-  data.frame(qtable)
 colnames(qtable) <- c("sample","lat","Qid", "Q")
 
+# Assign colours to ancetory
+qtable$Qanc[qtable$Qid==Pac.clust] <- "Pacific"
+qtable$Qanc[qtable$Qid==SAtl.clust] <- "South Atlantic"
+qtable$Qanc[qtable$Qid==NAtl.clust] <- "North Atlantic"
+# Create order of lables
+assign.labs <- c("Pacific", "South Atlantic", "North Atlantic")[match(1:3, c(Pac.clust, SAtl.clust, NAtl.clust))]
 
 # New ocean drainage 
 sites$Ocean.drainage.new <- sites$Ocean.drainage
@@ -545,16 +551,15 @@ v <- ggplot(qtable)+
                    x = CUAJ_sample_position[1], xend = CUAJ_sample_position[2]),
                linewidth =2) +
   #geom_text(aes(y = -0.04, x = mean(CUAJ_sample_position), label = "CUAJ")) +
-  scale_fill_manual(values = het.cols) +
+  scale_fill_manual(values = het.cols, labels=c(assign.labs)) +
+  labs(fill = "") +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+  theme(legend.position = "bottom", axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         axis.title.x = element_blank()) +
   theme(plot.margin = margin(0, 0, 0, 0, "cm"),axis.line=element_blank()) +
   ylab(label = paste("K =", K))
 # theme(axis.text.x = element_text(size=6))
-
-v
 
 # Are there any sample that have odd Q assigns
 qtable[qtable$Q>0.2&qtable$Q<0.8,]
@@ -635,8 +640,8 @@ plot1 <- (p+q+r)/v + plot_layout(heights = c(4, 2)) + theme(plot.background = el
   plot_layout(heights = c(1,0.8))
 plot2 <- y #+ plot_annotation(tag_levels = 'a',tag_prefix = "(", tag_suffix = ")")
 
-ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot1, height=7, width=15)
-ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot1, height=7, width=15)
+ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot1, height=8, width=15)
+ggsave(paste0(plot.dir,"LEA_K",K,"snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot1, height=8, width=15)
 ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.pdf"), plot=plot2, height=6, width=6)
 ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwork_BES_poster_v4.png"), plot=plot2, height=6, width=6)
 

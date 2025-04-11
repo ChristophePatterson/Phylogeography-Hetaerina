@@ -53,7 +53,7 @@ BZ5206 titia-SAtl
 CA0103 titia-Pac
 CA0104 titia-Pac
 CUAJa01 titia-SAtl
-CUAJa02 titia-Pac
+CUAJa02 titia-SAtl
 CUAJa04 titia-SAtl
 CUAJb04 titia-SAtl
 CUAJb05 titia-SAtl
