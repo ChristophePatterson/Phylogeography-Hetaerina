@@ -26,6 +26,7 @@ effect.size <- list()
 run.df <- list()
 p.map <- list()
 HPD.trace.list <- list()
+trace.raw.list <- list()
 trace.df <- data.frame("tau_amer" = NA, "tau_amer.calv" = NA, "tau_titia.Atl" = NA,"tau_titia" = NA,
                        "theta_amer.N" = NA,"theta_amer.S"=NA, "theta_calv.1"= NA,
                        "theta_titia.Pac"=NA, "theta_titia.NAtl"=NA, "theta_titia.SAtl"=NA)
@@ -58,6 +59,7 @@ for(run in model.names){
   
   # Raw means
   trace.raw <- trace
+  trace.raw.list[[trace.name]] <- trace.raw
   trace.means.raw <- colMeans(trace.raw[,-1], na.rm = T)
   
   # Migration rates
@@ -158,7 +160,7 @@ for(run in model.names){
   # Plot tree
   
   p[[trace.name]] <- tree.plot +
-    geom_tree(aes(linewidth = theta)) +
+    geom_tree(aes(linewidth = theta), col = "grey50") +
     #geom_rootedge(size = as.numeric(tree.plot$data$theta[4]*10),rootedge = 2) +
     #geom_segment(range = 'height_0.95_HPD', col = "deepskyblue", size = 4, alpha = .5) +
     geom_segment(aes(x = -lower, xend = -upper, y = , yend = y),col = "deepskyblue", linewidth = 10, alpha = .5,show.legend=F) +
@@ -195,6 +197,80 @@ for(run in model.names){
 }
 
 names(p)
+
+## Extract theta 
+theta.plots <- list()
+theta.trace <- list()
+for(run in model.names){
+  run <- run
+  tmp.trace <- trace.raw.list[[run]]
+  if(any(grepl(colnames(tmp.trace), pattern="theta"))){
+    theta.trace[[run]] <- tmp.trace[,grepl(colnames(tmp.trace), pattern="theta|Sample")]
+    theta.trace[[run]] <- pivot_longer(theta.trace[[run]], cols = colnames(theta.trace[[run]])[-1], names_to = "Pop", values_to = "theta")
+    theta.trace[[run]]$run <- run
+  }
+}
+theta.trace <- do.call("rbind", theta.trace)
+#Convert in millions of individuals
+theta.trace$theta_ind <- ((theta.trace$theta/1000)/(4*u))*10^-6
+
+pop.labels <- cbind(unique(theta.trace$Pop), c((paste0(("H. titia"), " Pacific")), (paste0(("H. titia")," North Atl")),
+                                 (paste0(("H. titia"), " North Atl")),(paste0(("H. titia"), " ancestral Atl")),
+                                 (paste0(("H. titia"), " ancestral")), (paste0(("H. calverti"))),
+                                 (paste0(("H. americana"), " North")), (paste0(("H. americana"), " South")),
+                                 (paste0(("H. americana"), " ancestral")), (paste0(("H. americana/calverti"), " ancestral"))))
+
+theta.trace$Pop.read <- pop.labels[,2][match(theta.trace$Pop, pop.labels[,1])]
+theta.trace$run <- gsub("-N3|-N2000", "", x = theta.trace$run)
+
+theta.plots <- ggplot(theta.trace) +
+  geom_histogram(aes(theta_ind, fill = run), binwidth = 0.02) +
+  facet_wrap(~Pop.read, ncol = 2, scales = "free_y") +
+  scale_fill_manual(values = cbPalette[1:8]) +
+  xlim(c(0, max(theta.trace$theta_ind))) +
+  labs(x = "Effective Population size (Millions)", y = "Count",
+       fill = "Run") +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill=guide_legend(nrow=4,byrow=TRUE))
+
+
+# Extract migration rate histograms
+mig.plots <- list()
+mig.trace <- list()
+for(run in model.names){
+  tmp.trace <- trace.raw.list[[run]]
+  if(any(grepl(colnames(tmp.trace), pattern="m_"))){
+    mig.trace[[run]] <- tmp.trace[,grepl(colnames(tmp.trace), pattern="m_")]
+    mig.trace[[run]] <- pivot_longer(mig.trace[[run]], cols = colnames(mig.trace[[run]]), names_to = "mig.dir", values_to = "mig.rate")
+    mig.trace[[run]]$run <- run
+    }
+}
+mig.trace <- do.call("rbind", mig.trace)
+mig.trace$mig.rate.prop <- ((mig.trace$mig.rate/0.001)*u)*100
+mig.trace$run <- gsub("-N3|-N2000", "", x = mig.trace$run)
+
+cbPalette <- c("#F0E442","#D55E00","#0072B2","#999999", "#E69F00" , "#56B4E9", "#009E73", "#CC79A7", "black")
+mig.plots <- ggplot(mig.trace) +
+  geom_histogram(aes(mig.rate.prop, fill = mig.dir)) +
+  facet_wrap(~run) +
+  scale_fill_manual(values = cbPalette[1:4], 
+                    labels = 
+                      c(expression(paste(italic("H. americana"), " North into ", italic("H. americana"), " South")),
+                        expression(paste(italic("H. americana"), " South into ", italic("H. americana"), " North")),
+                        expression(paste(italic("H. titia"), " North into ", italic("H. titia"), " South")),
+                        expression(paste(italic("H. titia"), " South into ", italic("H. titia"), " North")))
+                    ) +
+  theme_bw() +
+  labs(x = "Migration rate (Percentage of effective population size)", y = "Count",
+       fill = "Migration Direction") +
+  theme(legend.position = "bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE))
+
+
+trace.plots <- theta.plots / mig.plots + plot_annotation(tag_levels = "a",tag_prefix = "(", tag_suffix = ")") +
+  plot_layout(heights = c(2,1))
+
 # Heterospecific Loci calling 
 all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migration")))) + 
   (p[[2]] + ggtitle(expression(paste(italic("H. americana/calverti"), " - No Migration")))) + 
@@ -205,8 +281,9 @@ all_plot <- (p[[1]] + ggtitle(expression(paste(italic("H. titia"), " - No Migrat
   plot_layout(ncol = 2)
 
 ggsave(file = paste0(plot.dir, "Hetero_g-phocs-plots.png"), all_plot, height = 10, width = 12) 
-ggsave(file = paste0(plot.dir, "Hetero_g-phocs-plots.pdf"), all_plot, height = 10, width = 12) 
-
+ggsave(file = paste0(plot.dir, "Hetero_g-phocs-plots.pdf"), all_plot, height = 10, width = 12)
+ggsave(file = paste0(plot.dir, "all_trace_plots.pdf"), trace.plots, height = 15, width = 10) 
+ggsave(file = paste0(plot.dir, "all_trace_plots.png"), trace.plots, height = 15, width = 10) 
 
 # Merge all tau
 trace.df <- trace.df[row.names(trace.df)!=1,]
