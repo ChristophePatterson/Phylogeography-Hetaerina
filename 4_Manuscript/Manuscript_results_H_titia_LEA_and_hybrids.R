@@ -650,12 +650,22 @@ ggsave(paste0(plot.dir,"PCA1-2_snp",snp_sub_text,"_complete_DP10_basins_patchwor
 ####### Fst and population structure  ####
 # # # # # # # # # # ## # # # # # # # # # #
 # install.packages("hierfstat")
+
 library(hierfstat)
 pca.q.df <- read.table(paste0(dir.path, "LEA_qassign_pca_samples.txt"))
+
+Pac.clust <- pca.q.df$assign[pca.q.df$samples=="ZANAa04"]
+SAtl.clust <- pca.q.df$assign[pca.q.df$samples=="ESRBa10"]
+NAtl.clust <- pca.q.df$assign[pca.q.df$samples=="HCARa02"]
+
+pca.q.df$assign.pop[pca.q.df$assign==Pac.clust] <- "Pacific"
+pca.q.df$assign.pop[pca.q.df$assign==SAtl.clust] <- "South Atl"
+pca.q.df$assign.pop[pca.q.df$assign==NAtl.clust] <- "North Atl"
+
 # ASsign populations
 # Two different versions being considered
 pca.q.df$samples==rownames(my_genind_ti_SNPs@tab)
-my_genind_ti_SNPs@pop <- as.factor(pca.q.df$assign)
+my_genind_ti_SNPs@pop <- as.factor(pca.q.df$assign.pop)
 #my_genind_ti_SNPs@pop <- as.factor(paste(pca.q.df$assign, pca.q.df$Country_Ocean, sep = "_"))
 
 # Calcultes Fst values between populations
@@ -668,13 +678,38 @@ pop.diff
 ## pop.diff.site <- genet.dist(my_genind_ti_SNPs, diploid = T, method = "WC84")
 ## pop.diff.site
 
-pop.diff
-my_stats <- basic.stats(my_genind_ti_SNPs)
-my_stats$overall
+my_stats <- list()
+for(pop in unique(pca.q.df$assign.pop)){
+  my_stats[[pop]] <- basic.stats(my_genind_ti_SNPs[my_genind_ti_SNPs@pop==pop])
+}
 
-boxplot(my_stats$Ho)
-boxplot(my_stats$Hs)
-boxplot(my_stats$perloc)
+my_stats[["All"]] <-  basic.stats(my_genind_ti_SNPs)
+
+my_over_all <- list()
+## Amount of genetic diversity within samples
+for(pop in names(my_stats)){
+  my_over_all[[pop]] <- my_stats[[pop]]$overall
+}
+
+my_over_all <- do.call("rbind", my_over_all)
+
+my_over_all
+pi.pops <- list()
+for(pop in unique(pca.q.df$assign.pop)){
+  pi.pops[[pop]] <- pi.dosage(my_genind_ti_SNPs[my_genind_ti_SNPs@pop==pop], L = dim(my_genind_ti_SNPs@tab)[2])
+}
+
+pi.pops[["All"]] <- pi.dosage(my_genind_ti_SNPs, L = dim(my_genind_ti_SNPs@tab)[2])
+
+
+theta.pops <- list()
+for(pop in unique(pca.q.df$assign.pop)){
+  theta.pops[[pop]] <- theta.Watt.dosage(my_genind_ti_SNPs[my_genind_ti_SNPs@pop==pop], L = dim(my_genind_ti_SNPs@tab)[2])
+}
+
+theta.pops[["All"]] <- theta.Watt.dosage(my_genind_ti_SNPs, L = dim(my_genind_ti_SNPs@tab)[2])
+
+cbind.data.frame(my_over_all, theta = do.call("rbind",theta.pops), pi = do.call("rbind",pi.pops))
 
 # # # # # # # # # # # # # # # #
 ####### Kinship analysis ######
