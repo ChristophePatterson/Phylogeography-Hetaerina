@@ -610,7 +610,7 @@ pca.label[SAtl.clust] <- "South Atlantic"
 
 y <- ggplot(pca.q.df) +
   geom_point(aes(as.numeric(pca1), as.numeric(pca2), fill = assign), size = 6, shape = 21, color = "black") +
-  scale_fill_manual(values = het.cols, name = "Ancestory assignment", labels = pca.label) +
+  scale_fill_manual(values = het.cols, name = "Ancestry assignment", labels = pca.label) +
   xlab(pca.labs[1]) +
   ylab(pca.labs[2]) +
   theme(legend.position = c(0.3, 0.85), text = element_text(size = 15), axis.title = element_text(size = 25))
